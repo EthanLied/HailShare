@@ -120,13 +120,13 @@ h3:active{
 }
 
 /* When menu is expanded, show a contrasting color on the current page loaded to indicate current page open (controlled by nth-child)*/
-.navbarItem:nth-child(2){
+.navbarItem:nth-child(3){
     background-color: rgb(216, 216, 216);
 }
 
 /* Div for the main contents of the page*/
 #content{
-    margin-left: 55px; padding: 50px;
+    margin-left: 55px; padding: 50px; padding-bottom: 10px;
     height: 100vh;
     box-sizing: border-box;
     display: flex; flex-direction: column;
@@ -137,6 +137,7 @@ h3:active{
 #content.expand{
     margin-left: 280px;
 }
+
 /* Define input box dimensions */
 #addressInputs > input{
     width: 100%;
@@ -145,142 +146,33 @@ h3:active{
 
 /* Spacing for input labels */
 #addressInputs > p{
-    margin-top: 15px; margin-bottom: 5px;
+    margin-top: 15px;; margin-bottom: 5px;
 }
 
-/* Spacing for title */
-#ridesTitle{
-    margin-top: 30px; margin-bottom: 10px;
+/* Rest of attributes will be stored in a grid container */
+#gridAttributeContainer{
+    margin-top: 15px; margin-right: 35px;
+    display: grid;
+    grid-template-columns: 30% 30% 20% 20%;
+    gap: 5px 15px;
 }
 
-/* Spacing and sizing for search btn */
-#searchBtn{
-    margin-top: 10px;
-    height: 40px; width: 80px;
-    padding: 7px;
-    font-size: 15px; font-weight: 535;
+/* Time selection will use an additional div */
+#timeSelector {
+    display: flex; align-items: center; gap: 5px; 
 }
 
-table{
-    font-size: 12px;
-}
-
-/* Hover effect on table rows and icons inside tables */
-tr{
-    transition: 0.3s cubic-bezier(.42,.94,.31,.99);
-}
-
-tr:hover{
-    background-color: rgb(247, 247, 247);
-}
-
-/* Set all columns to be centered, except 1 and 2 */
-tr > :nth-child(1),
-tr > :nth-child(2) {
-    text-align: left;
-}
-
-tr > td:nth-child(1), tr > td:nth-child(2){
-    font-size: 12px;
-    vertical-align: top;
-}
-
-tr > :nth-child(n+3) {
-  text-align: center;
-}
-
-/* Makes header sticky*/
-th{
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 1;
-    font-size: 15px;
-}
-
-/* Define width allocation for each column of the table */
-th:nth-child(1),th:nth-child(2)  {
-  width: 25%;
-}
-
-th:nth-child(3), th:nth-child(4) {
-  width: 12%;
-}
-
-th:nth-child(5) {
-  width: 11%;
-}
-
-th:nth-child(6), th:nth-child(7) {
-  width: 7%;
-}
-
-th:nth-child(8), th:nth-child(9){
-  width: 1%;
-}
-
-td{
-    font-size: 15px;
-}
-
-/* Defines message and join button behavior*/
-td > span{
-    transition: 0.3s cubic-bezier(.42,.94,.31,.99);
-    padding: 10px;
-    line-height: 0;
-    border-radius: 10px;
-}
-
-td > span:hover{
-    scale: 0.95;
-    background-color: rgb(230, 230, 230);
-    cursor: pointer;
-}
-
-td > span:active{
-    scale: 0.9;
-    background-color: rgb(236, 236, 236);
-}
-
-td > p{
-    text-align: justify;
-}
-
-/* Mini scrollbar for table*/
-#tableContainer{
-    border-radius: 10px;
-    border: solid 0.05rem rgb(208, 208, 208);
-    overflow-y: auto;
-}
-
-#pagination{
-    display: flex; flex-direction: row;
-    align-items: center;
-    margin-top: 20px;
-}
-
-#pagination > input{
-    max-width: 20px;
+#timeSelector select {
+    width: 100%;
     text-align: center;
 }
 
-#paginationLabel{
-    font-weight: 500;
-    margin-bottom: 1px;
-}
-
-.paginationBtn{
-    display: flex;
-    border: none;  
-    font-size: 15px; 
-    padding:5px;
-    align-items: center; justify-content: center; /* Centering */        
+#createRideBtn{
+    height: 50px; width: 300px;
+    margin-top: 25px;
+    font-size: 15px; font-weight: 700;
+    align-self: center;
     cursor: pointer;
-}
-
-.paginationBtn p{
-    margin: 0;              
-    line-height: 0;
 }
 
 /* Mobile View */
@@ -315,6 +207,3 @@ td > p{
     /* Re-adjust position of the profile component in navbar*/
     #navbar div:nth-child(6) { top:92vh; }
 }
-
-
-
