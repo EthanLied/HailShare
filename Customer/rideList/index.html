@@ -1,0 +1,350 @@
+<!doctype html>
+<html>
+
+<head>
+    <!--Imports-->
+    <link rel="stylesheet" href="../shadCNTemplate.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Ride List</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Google SVG Imports-->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+
+    <!--Navbar-->
+    <div id="navbar">
+
+        <!--Hamburger menu and Logo-->
+        <div class="navbarItem">
+            <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()"> menu
+            </span> <!-- "Onclick" triggers menu expansion / shrinking-->
+            <a href="">
+                <h3>Hailshare</h3>
+            </a>
+        </div>
+
+        <!--Ride List Icon-->
+        <div class="navbarItem">
+            <a href="">
+                <span class="material-symbols-outlined">list_alt</span>
+                <p>Ride List</p>
+            </a>
+        </div>
+
+        <!--Ride List Icon-->
+        <div class="navbarItem">
+            <a href="../createRide/index.html">
+                <span class="material-symbols-outlined"> add_circle</span>
+                <p>Create Ride</p>
+            </a>
+        </div>
+
+        <!--My Rides Icon-->
+        <div class="navbarItem">
+            <a href="">
+                <span class="material-symbols-outlined"> event_available</span>
+                <p>My Rides</p>
+            </a>
+        </div>
+
+        <!--Live Chat Icon-->
+        <div class="navbarItem">
+            <a href="">
+                <span class="material-symbols-outlined">support_agent</span>
+                <p>Live Chat</p>
+            </a>
+        </div>
+
+        <!--My Profile Icon-->
+        <div class="navbarItem">
+            <a href="">
+                <span class="material-symbols-outlined"> account_circle</span>
+                <p>My Profile</p>
+            </a>
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="addressInputs">
+            <h1>Ride List</h1>
+            <p>From:</p>
+            <input name="fromAddress">
+            <p>To:</p>
+            <input name="toAddress">
+        </div>
+        <button class="btnStrong" id="searchBtn">Search</button>
+        <h2 id="ridesTitle">Rides</h2>
+        <div id="tableContainer">
+            <table>
+                <tr class="tableHeaderRow">
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Distance to Pickup</th>
+                    <th>Distance From Dropoff</th>
+                    <th>Pickup Time</th>
+                    <th>Capacity</th>
+                    <th>Price</th>
+                    <th>Chat</th>
+                    <th>Join</th>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            Lot No. 241, Level 2Menara, Petronas Twin Tower, Kuala Lumpur City Centre, 50088 Kuala
+                            Lumpur, Wilayah Persekutuan Kuala Lumpur
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            2 Jalan Punchak, Off, Jalan P. Ramlee, 50250 Kuala Lumpur
+                        </p>
+                    </td>
+                    <td>
+                        62m
+                    </td>
+                    <td>23m</td>
+                    <td>10:42PM</td>
+                    <td>1 / 4</td>
+                    <td>RM<s>12</s> 6</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td class="tablCelleMessageBtn">
+                        <span class="material-symbols-outlined ">
+                            chat
+                        </span>
+                    </td>
+                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
+                            directions_car
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="pagination">
+            <p id="paginationLabel">Page:&nbsp;</p>
+
+            <button class="btnNormal paginationBtn" onclick="updatePagination(-1)">
+                <span class="material-symbols-outlined">chevron_backward</span>
+                <p>Previous&nbsp;&nbsp;</p>
+            </button>
+
+            <input id="paginationSelector" value="1" oninput="processPagination(this.value)">
+
+            <p> &nbsp;/&nbsp;
+            <p id="paginationTotal">20</p>
+            </p>
+
+            <button class="btnNormal paginationBtn" onclick="updatePagination(1)">
+                <p>&nbsp;&nbsp;Next</p>
+                <span class="material-symbols-outlined">chevron_forward</span>
+            </button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
