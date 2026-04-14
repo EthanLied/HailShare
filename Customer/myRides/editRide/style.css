@@ -123,7 +123,7 @@ a > .navbarItem:active {
 }
 
 /* When menu is expanded, show a contrasting color on the current page loaded to indicate current page open (controlled by nth-child)*/
-a:nth-of-type(2) > .navbarItem{
+a:nth-of-type(3) > .navbarItem{
     background-color: rgb(216, 216, 216);
 }
 
@@ -139,6 +139,13 @@ a:nth-of-type(2) > .navbarItem{
 /* When the navbar is expanded, push content div to the right*/
 #content.expand{
     margin-left: 280px;
+}
+
+#goBackBtn{
+    display: flex; flex-direction: row;
+    justify-content: center; align-items: center;
+    padding: 5px; padding-right: 10px;
+    margin-top: 10px;
 }
 
 /* Define input box dimensions */
@@ -176,6 +183,14 @@ a:nth-of-type(2) > .navbarItem{
     font-size: 15px; font-weight: 700;
     align-self: center;
     cursor: pointer;
+}
+
+#notice{
+    align-self: center; margin-top: auto;
+    color: red; 
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 20px;
 }
 
 /* Mobile View */

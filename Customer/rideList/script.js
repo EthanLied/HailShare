@@ -1,4 +1,6 @@
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Calls functions when page loads

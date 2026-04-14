@@ -3,7 +3,7 @@
 
 <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../shadCNTemplate.css">
+    <link rel="stylesheet" href="../../shadCNTemplate.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
     <title>Create Ride</title>
@@ -30,7 +30,7 @@
         </div>
 
         <!--Ride List Icon-->
-        <a href="../rideList/index.html">
+        <a href="../../rideList/index.html">
             <div class="navbarItem" href="">
                 <span class="material-symbols-outlined">list_alt</span>
                 <p>Ride List</p>
@@ -38,7 +38,7 @@
         </a>
 
         <!--Create Ride Icon-->
-        <a>
+        <a href="../../createRide/index.html">
             <div class="navbarItem">
                 <span class="material-symbols-outlined"> add_circle</span>
                 <p>Create Ride</p>
@@ -46,7 +46,7 @@
         </a>
 
         <!--My Rides Icon-->
-        <a href="../myRides/index.html">
+        <a href="../../myRides/index.html">
             <div class="navbarItem">
                 <span class="material-symbols-outlined"> event_available</span>
                 <p>My Rides</p>
@@ -54,7 +54,7 @@
         </a>
 
         <!--Customer Support Icon-->
-        <a href="../customerSupport/index.html">
+        <a href="../../customerSupport/index.html">
             <div class="navbarItem">
                 <span class="material-symbols-outlined">support_agent</span>
                 <p>Customer Support</p>
@@ -62,7 +62,7 @@
         </a>
 
         <!--My Profile Icon-->
-        <a href="../myProfile/index.html">
+        <a href="../../myProfile/index.html">
             <div class="navbarItem">
                 <span class="material-symbols-outlined"> account_circle</span>
                 <p>My Profile</p>
@@ -72,7 +72,12 @@
 
     <div id="content">
         <div id="addressInputs">
-            <h1>Create Ride</h1>
+            <h1>Edit Ride</h1>
+            <a href="../../myRides/index.html">
+                <button class="btnNormal" id="goBackBtn"><span class="material-symbols-outlined">
+                        chevron_left
+                    </span>Go Back </button>
+            </a>
             <p>From:</p>
             <input name="fromAddress">
             <p>To:</p>
@@ -394,6 +399,8 @@
         </div>
 
         <button class="btnStrong" id="createRideBtn">Create Ride</button>
+
+        <h4 id="notice">Note: you can only modify ride details if no one has joined it yet!</h4>
     </div>
 
 </body>

@@ -46,6 +46,7 @@ description{
 }
 
 .btnNormal:hover, .btnStrong:hover{
+    cursor: pointer;
     transform: scale(0.95);
 }
 

@@ -4,10 +4,22 @@
     margin: 0;
 }
 
+body{
+    overflow-y: hidden;
+}
+
+input{
+    box-sizing: border-box;
+}
+
 /* Removes blue text and underline from hyperlinks*/
 a{
     text-decoration: none;
     color: inherit;
+}
+
+#navbar, #navbar.expand, #navbar > a, #content, #tabList > a, .navbarItem {
+    transition: 0.3s cubic-bezier(.42, .94, .31, .99);
 }
 
 /* Shrinks and slightly fades when hovering logo and navbar items*/
@@ -25,37 +37,27 @@ h3:active{
 
 /* Flex box column for navbar*/
 #navbar{
-    position: absolute; z-index: 5; /* Acts like an overlay */
-    left: 0; top: 0; /* Moves to top left */
-    display: flex; flex-direction: column;
+    position: absolute; z-index: 5; left: 0; top: 0; /* Acts like an overlay */
+    display: flex; flex-direction: column; align-items:baseline; /* Alignment */
     width: 55px; height: 100vh;
-    border-right: solid 1px rgb(236, 236, 236); 
+    background-color: rgb(255, 255, 255); border-right: solid 1px rgb(236, 236, 236); 
     box-sizing: border-box; /* Includes border size in width / height calculation */
-    align-items:baseline; /* Center align*/
-    background-color: rgb(255, 255, 255);
-    transition: 
-        background-color 0.3s cubic-bezier(.42, .94, .31, .99),
-        width 0.3s cubic-bezier(.42, .94, .31, .99);
     user-select: none;
 }
-
-/* Vertically center text */
-#navbar p {
-    display: flex; align-items: center;
-}
-
-/* Sets vertical position of each icon*/
-#navbar > a:nth-child(2) { position: absolute; top: 100px; }
-#navbar > a:nth-child(3) { position: absolute; top: 150px; }
-#navbar > a:nth-child(4) { position: absolute; top: 200px; }
-#navbar > a:nth-child(5) { position: absolute; top: 250px; }
-#navbar > a:nth-child(6) { position: absolute; bottom: 10px; }
 
 /* When navbar is expanded*/
 #navbar.expand{
     width: 280px;
     background-color: rgb(248, 248, 248);
 }
+
+/* Sets vertical position of each icon*/
+#navbar > a { position: absolute;}
+#navbar > a:nth-child(2) { top: 100px; }
+#navbar > a:nth-child(3) { top: 150px; }
+#navbar > a:nth-child(4) { top: 200px; }
+#navbar > a:nth-child(5) { top: 250px; }
+#navbar > a:nth-child(6) { bottom: 10px; }
 
 /* Hamburger menu icon*/
 #hamburgerMenuNavbarIcon{
@@ -64,46 +66,23 @@ h3:active{
     padding: 10px;
 }
 
-/* Hamburger menu icon hovered*/
-#hamburgerMenuNavbarIcon:hover{
-    background-color: rgb(232, 232, 232);
+/* Hamburger menu and every navbarItem div EXCEPT the Hailshare Logo  hovered*/
+#hamburgerMenuNavbarIcon:hover, a > .navbarItem:hover{
+    background-color: rgb(232, 232, 232) !important;
     cursor: pointer;
 }
 
 /* Each item inside the navbar has an <a> containing a long horizontal div called navbarItem, containing both icon and text*/
 .navbarItem{
-    margin-top: 10px; margin-bottom: 10px; margin-left: 5px; 
-    border-radius: 5px;
-    transition: background-color 0.2s, width 0.2s, transform 0.2s;
-    display: flex; flex-direction: row; /* Flexbox config */
-    align-items: center;
+    margin: 10px 0 10px 5px; border-radius: 5px;
+    display: flex;  align-items: center;/* Flexbox config */
     width: 33px; height: 40px;
-}
-
-/* All text in any navbar item */
-.navbarItem > p,
-.navbarItem > a > h3 /* Logo accessed differently*/{
-    white-space: nowrap;
-    transition: 0.15s ease-out;
-    color: rgba(255, 255, 255, 0); /* Hides text color when not expanded */
-    margin-left: 15px;
-}
-
-/* Hailshare Logo */
-.navbarItem >  a > h3{
-    margin-left: 5px; 
 }
 
 /* Every navbarItem div EXCEPT the Hailshare Logo */
 a > .navbarItem{
     transition: 0.15s ease-out;
     padding-left: 10px;
-}
-
-/* Every navbarItem div EXCEPT the Hailshare Logo when hovered */
-a > .navbarItem:hover {
-    background-color: rgb(232, 232, 232) !important;
-    cursor: pointer;
 }
 
 /* Decrease scale on click */
@@ -116,6 +95,20 @@ a > .navbarItem:active {
     width: 250px;
 }
 
+/* All text in any navbar item */
+.navbarItem > p,
+.navbarItem > a > h3 /* Logo accessed differently*/{
+    white-space: nowrap;
+    transition: 0.15s ease-out;
+    color: transparent; /* Hides text color when not expanded */
+    margin-left: 15px;
+}
+
+/* Hailshare Logo */
+.navbarItem >  a > h3{
+    margin-left: 5px; 
+}
+
 /* Reveal text in navbarItem when expanded */
 .navbarItem.expand > p, 
 .navbarItem.expand > a > h3 {
@@ -123,7 +116,7 @@ a > .navbarItem:active {
 }
 
 /* When menu is expanded, show a contrasting color on the current page loaded to indicate current page open (controlled by nth-child)*/
-a:nth-of-type(2) > .navbarItem{
+a:nth-of-type(5) > .navbarItem{
     background-color: rgb(216, 216, 216);
 }
 
@@ -134,6 +127,11 @@ a:nth-of-type(2) > .navbarItem{
     box-sizing: border-box;
     display: flex; flex-direction: column;
     transition: 0.3s cubic-bezier(.42,.94,.31,.99);
+    overflow-y: scroll;
+}
+
+#content > h2{
+    margin-top: 20px; margin-bottom: 10px;
 }
 
 /* When the navbar is expanded, push content div to the right*/
@@ -141,41 +139,46 @@ a:nth-of-type(2) > .navbarItem{
     margin-left: 280px;
 }
 
-/* Define input box dimensions */
-#addressInputs > input{
-    width: 100%;
-    height: 30px;
+/* Back and overall rating components */
+#topContent{
+    margin-top: 10px;
+    display: flex; flex-direction: row;
+    align-items: center; justify-content: space-between;
 }
 
-/* Spacing for input labels */
-#addressInputs > p{
-    margin-top: 15px;; margin-bottom: 5px;
+#backBtn{
+    display: flex; flex-direction: row;
+    justify-content: center; align-items: center;
+    padding: 5px; padding-right: 10px;
 }
 
-/* Rest of attributes will be stored in a grid container */
-#gridAttributeContainer{
-    margin-top: 15px; margin-right: 35px;
-    display: grid;
-    grid-template-columns: 30% 30% 20% 20%;
-    gap: 5px 15px;
+#myRating{
+    background-color: rgb(241, 241, 241); border-radius: 10px;
+    padding: 10px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
 }
 
-/* Time selection will use an additional div */
-#timeSelector {
-    display: flex; align-items: center; gap: 5px; 
+/* Container to store all ratings container */
+#ratingRecieved{
+    height: 70%;
+    margin-top: 10px; 
+    background-color:  rgb(241, 241, 241); border-radius: 10px;
+    padding: 10px;
+    overflow-y: auto;
 }
 
-#timeSelector select {
-    width: 100%;
+.ratingItem{
+    background-color: rgb(233, 233, 233);
+    border-radius: 10px;
+    display: flex; flex-direction: row;
+    padding: 20px;margin-top: 10px; margin-bottom: 10px;
+    align-items: center; justify-content: space-between;
+    height: 40px;
+}
+
+.ratingItem > p{
     text-align: center;
-}
-
-#createRideBtn{
-    height: 50px; width: 300px;
-    margin-top: 25px;
-    font-size: 15px; font-weight: 700;
-    align-self: center;
-    cursor: pointer;
 }
 
 /* Mobile View */
@@ -185,19 +188,11 @@ a:nth-of-type(2) > .navbarItem{
     #navbar{
         border-color: transparent;
         background-color: transparent;
-        transition: 
-            background-color 0.3s cubic-bezier(.42, .94, .31, .99),
-            width 0.3s cubic-bezier(.42, .94, .31, .99);
-
     }
 
     /* No need to move content as navbar is now an overlay*/
     #content, #content.expand{
         margin-left: 0px;
-    }
-
-    .navbarItem{
-        transition: 0.3s cubic-bezier(.42, .94, .31, .99);
     }
 
     /* No need to hide text */
@@ -215,7 +210,6 @@ a:nth-of-type(2) > .navbarItem{
     #navbar > a{
         -webkit-tap-highlight-color: transparent;
         transform: translateX(-350%);
-        transition: transform 0.3s cubic-bezier(.42, .94, .31, .99);
     }
 
     /* Slides in navbar*/

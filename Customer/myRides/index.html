@@ -1,0 +1,271 @@
+<!doctype html>
+<html>
+
+<head>
+    <!--Imports-->
+    <link rel="stylesheet" href="../shadCNTemplate.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="table.css">
+    <script src="script.js" defer></script>
+    <title>My Rides</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Google SVG Imports-->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+
+    <!--Navbar-->
+    <div id="navbar">
+
+        <!--Hamburger menu and Logo-->
+        <div class="navbarItem">
+            <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()"> menu
+            </span> <!-- "Onclick" triggers menu expansion / shrinking-->
+            <a href="">
+                <h3>Hailshare</h3>
+            </a>
+        </div>
+
+        <!--Ride List Icon-->
+        <a href="../rideList/index.html">
+            <div class="navbarItem" href="">
+                <span class="material-symbols-outlined">list_alt</span>
+                <p>Ride List</p>
+            </div>
+        </a>
+
+        <!--Create Ride Icon-->
+        <a href="../createRide/index.html">
+            <div class="navbarItem">
+                <span class="material-symbols-outlined"> add_circle</span>
+                <p>Create Ride</p>
+            </div>
+        </a>
+
+        <!--My Rides Icon-->
+        <a>
+            <div class="navbarItem">
+                <span class="material-symbols-outlined"> event_available</span>
+                <p>My Rides</p>
+            </div>
+        </a>
+
+        <!--Customer Support Icon-->
+        <a href="../customerSupport/index.html">
+            <div class="navbarItem">
+                <span class="material-symbols-outlined">support_agent</span>
+                <p>Customer Support</p>
+            </div>
+        </a>
+
+        <!--My Profile Icon-->
+        <a href="../myProfile/index.html">
+            <div class="navbarItem">
+                <span class="material-symbols-outlined"> account_circle</span>
+                <p>My Profile</p>
+            </div>
+        </a>
+    </div>
+
+    <div id="content">
+        <h1>My Rides</h1>
+
+        <div id="tabList">
+            <a id="hostedRidesTab" onclick="switchTab(1)">Hosted Rides</a>
+            <a id="joinedRidesTab" onclick="switchTab(2)">Joined Rides</a>
+        </div>
+
+        <div id="recordRowContainer">
+            <div id="recordColumnContainer">
+                <h2>Ongoing Rides</h2>
+                <div id="ongoingRidesContainer">
+
+                    <div class="ongoingRidesItem tab1">
+                        <div class="leftSideItems">
+                            <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                            <p>Time: <span>12:00 PM</span></p>
+                            <p>Capacity: <span>3 / 5</span></p>
+                            <p>Price: <span>RM 10</span></p>
+                            <p>From: <span class="address">Lot No. 241, Level 2 Menara, Petronas Twin Tower, Kuala
+                                    Lumpur
+                                    City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</span>
+                            </p>
+                        </div>
+                        <div class="rightSideItems">
+                            <a href="editRide/index.html">
+                                <button class="btnNormal">Edit Ride <span
+                                        class="material-symbols-outlined">edit</span></button>
+                            </a>
+                            <a href="chatRoom/index.html">
+                                <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                        chat
+                                    </span></button>
+                            </a>
+                            <p>To: <span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250 Kuala Lumpur</span></p>
+                        </div>
+                    </div>
+                    <div class="ongoingRidesItem tab1">
+                        <div class="leftSideItems">
+                            <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                            <p>Time: <span>12:00 PM</span></p>
+                            <p>Capacity: <span>3 / 5</span></p>
+                            <p>Price: <span>RM 10</span></p>
+                            <p>From: <span class="address">Lot No. 241, Level 2 Menara, Petronas Twin Tower, Kuala
+                                    Lumpur
+                                    City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</span>
+                            </p>
+                        </div>
+                        <div class="rightSideItems">
+                            <a href="editRide/index.html">
+                                <button class="btnNormal">Edit Ride <span
+                                        class="material-symbols-outlined">edit</span></button>
+                            </a>
+                            <a href="chatRoom/index.html">
+                                <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                        chat
+                                    </span></button>
+                            </a>
+                            <p>To: <span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250 Kuala Lumpur</span></p>
+                        </div>
+                    </div>
+                    <div class="ongoingRidesItem tab1">
+                        <div class="leftSideItems">
+                            <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                            <p>Time: <span>12:00 PM</span></p>
+                            <p>Capacity: <span>3 / 5</span></p>
+                            <p>Price: <span>RM 10</span></p>
+                            <p>From: <span class="address">Lot No. 241, Level 2 Menara, Petronas Twin Tower, Kuala
+                                    Lumpur
+                                    City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</span>
+                            </p>
+                        </div>
+                        <div class="rightSideItems">
+                            <a href="editRide/index.html">
+                                <button class="btnNormal">Edit Ride <span
+                                        class="material-symbols-outlined">edit</span></button>
+                            </a>
+                            <a href="chatRoom/index.html">
+                                <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                        chat
+                                    </span></button>
+                            </a>
+                            <p>To: <span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250 Kuala Lumpur</span></p>
+                        </div>
+                    </div>
+                    <div class="ongoingRidesItem tab1">
+                        <div class="leftSideItems">
+                            <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                            <p>Time: <span>12:00 PM</span></p>
+                            <p>Capacity: <span>3 / 5</span></p>
+                            <p>Price: <span>RM 10</span></p>
+                            <p>From: <span class="address">Lot No. 241, Level 2 Menara, Petronas Twin Tower, Kuala
+                                    Lumpur
+                                    City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</span>
+                            </p>
+                        </div>
+                        <div class="rightSideItems">
+                            <a href="editRide/index.html">
+                                <button class="btnNormal">Edit Ride <span
+                                        class="material-symbols-outlined">edit</span></button>
+                            </a>
+                            <a href="chatRoom/index.html">
+                                <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                        chat
+                                    </span></button>
+                            </a>
+                            <p>To: <span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250 Kuala Lumpur</span></p>
+                        </div>
+                    </div>
+                    <div class="ongoingRidesItem tab2">
+                        <div class="leftSideItems">
+                            <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                            <p>Time: <span>12:00 PM</span></p>
+                            <p>Capacity: <span>3 / 5</span></p>
+                            <p>Price: <span>RM 10</span></p>
+                            <p>From: <span class="address">Lot No. 241, Level 2 Menara, Petronas Twin Tower, Kuala
+                                    Lumpur
+                                    City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</span>
+                            </p>
+                        </div>
+                        <div class="rightSideItems">
+                            <a>
+                                <button class="btnNormal leaveRideBtn">Leave Ride <span
+                                        class="material-symbols-outlined">
+                                        logout
+                                    </span></button>
+                            </a>
+                            <a href="chatRoom/index.html">
+                                <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                        chat
+                                    </span></button>
+                            </a>
+                            <p>To: <span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250 Kuala Lumpur</span></p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div id="recordColumnContainer">
+                <h2>Ride History</h2>
+                <div id="rideHistoryContainer">
+                    <div class="rideHistoryItem tab1">
+                        <div class="leftSideItems">
+                            <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                            <p>Capacity: <span>3 / 5</span></p>
+                            <p>Price: <span>RM 10</span></p>
+                            <p>From: <span class="address">Lot No. 241, Level 2 Menara, Petronas Twin Tower, Kuala
+                                    Lumpur
+                                    City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</span>
+                            </p>
+                        </div>
+                        <div class="rightSideItems">
+                            <a href="chatRoom/index.html">
+                                <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                        chat
+                                    </span></button>
+                            </a>
+                            <p>Time Hosted: <span>12:00 PM</span></p>
+                            <p>Time Ended: <span>1:00 PM</span></p>
+                            <p>To: <span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250 Kuala Lumpur</span></p>
+                        </div>
+                    </div>
+
+                    <div class="rideHistoryItem tab2">
+                        <div class="leftSideItems ">
+                            <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                            <p>Capacity: <span>3 / 5</span></p>
+                            <p>Price: <span>RM 10</span></p>
+                            <p>From: <span class="address">Lot No. 241, Level 2 Menara, Petronas Twin Tower, Kuala
+                                    Lumpur
+                                    City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</span>
+                            </p>
+                        </div>
+                        <div class="rightSideItems">
+                            <a href="chatRoom/index.html">
+                                <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                        chat
+                                    </span></button>
+                            </a>
+                            <a href="giveRating/index.html">
+                                <button class="btnNormal">Give Rating <span class="material-symbols-outlined">
+                                        star
+                                    </span></button>
+                            </a>
+                            <p>Time Hosted: <span>12:00 PM</span></p>
+                            <p>Time Ended: <span>1:00 PM</span></p>
+                            <p>To: <span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250 Kuala Lumpur</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>
