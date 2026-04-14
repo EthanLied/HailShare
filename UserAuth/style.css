@@ -15,14 +15,14 @@ body {
   display: flex;
   padding: 15px 40px;
   background-color: #ddd;
-  border-radius: 10px; /* FIX */
+  border-radius: 10px; 
   margin: 5px 10px;
 }
 
 .nav-left,
 .nav-right {
   font-size: 20px;
-  flex: 1;   /* equal expansion */
+  flex: 1;   
 }
 
 /* Align text */
@@ -32,8 +32,8 @@ body {
 
 .nav-right {
   display: flex;
-  justify-content: space-between; /* spreads Con evenly */
-  align-items: center; /* or right if you prefer */
+  justify-content: space-between; 
+  align-items: center; 
 }
 
 /* ===== COMMON FORM STYLES ===== */
@@ -58,8 +58,8 @@ h2 {
 .btn {
   width: 100%;
   padding: 20px;
-  background-color: #9E9E9E; /* FIX color */
-  border: none;           /* REMOVE border */
+  background-color: #9E9E9E; 
+  border: none;           
   border-radius: 10px;
   margin-top: 15px;
   color: white;
@@ -81,7 +81,7 @@ h2 {
 .container {
   display: flex;
   width: 100%;
-  height: calc(100vh - 70px); /* 100% viewport height minus navbar */
+  height: calc(100vh - 70px); 
   margin: 0;
 }
 
