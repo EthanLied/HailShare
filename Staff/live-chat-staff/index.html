@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Chat – HailShare Staff</title>
+    <link rel="stylesheet" href="shadCNTemplate.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <aside class="sidebar" id="sidebar">
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+                <span class="brand-name">HailShare</span>
+            </button>
+            <nav class="sidebar-nav">
+                <a href="C:\test 17\HailShare\Staff\ride-list-staff\index.html" class="nav-item" title="Ride List"><svg
+                        width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="9" y1="6" x2="20" y2="6" />
+                        <line x1="9" y1="12" x2="20" y2="12" />
+                        <line x1="9" y1="18" x2="20" y2="18" />
+                        <circle cx="4" cy="6" r="1.5" fill="currentColor" stroke="none" />
+                        <circle cx="4" cy="12" r="1.5" fill="currentColor" stroke="none" />
+                        <circle cx="4" cy="18" r="1.5" fill="currentColor" stroke="none" />
+                    </svg><span class="nav-label">Ride List</span></a>
+                <a href="C:\test 17\HailShare\Staff\business-analytics-staff\index.html" class="nav-item"
+                    title="Analytics"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="12" width="4" height="10" />
+                        <rect x="9" y="7" width="4" height="15" />
+                        <rect x="16" y="3" width="4" height="19" />
+                    </svg><span class="nav-label">Analytics</span></a>
+                <a href="C:\test 17\HailShare\Staff\live-chat-staff\index.html" class="nav-item active"
+                    title="Live Chat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z" />
+                        <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                    </svg><span class="nav-label">Live Chat</span></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a href="C:\test 17\HailShare\Staff\profile-staff\index.html" class="nav-item" title="Profile"><svg
+                        width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg><span class="nav-label">Profile</span></a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <!-- ── View: Inbox ────────────────────────────────── -->
+            <div id="inboxView">
+                <div class="page-header">
+                    <h1 class="page-title">Live Chat Inbox</h1>
+                </div>
+
+                <div class="controls-bar">
+                    <div class="control-group">
+                        <label for="sortChat">Sort By:</label>
+                        <select id="sortChat">
+                            <option value="">— select —</option>
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="status">Status</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="filterChat">Filter By:</label>
+                        <select id="filterChat">
+                            <option value="">All</option>
+                            <option value="Active">Active</option>
+                            <option value="Waiting">Waiting</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="chat-list" id="chatList"></div>
+            </div>
+
+            <!-- ── View: Chatroom ─────────────────────────────── -->
+            <div id="chatroomView" class="hidden">
+                <div class="page-header chatroom-header">
+                    <button class="btnNormal btn-back" id="backToInbox">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                        Back to Inbox
+                    </button>
+                    <div class="chatroom-actions">
+                        <button class="btnNormal take-over-btn" id="takeOverBtn">Take Over Chat</button>
+                        <button class="btnStrong2 end-btn" id="endConvoBtn">End Conversation</button>
+                    </div>
+                </div>
+
+                <div class="chatroom-card">
+                    <div class="staff-info-bar" id="staffInfoBar">
+                        <span>Current Staff Assigned: <strong id="assignedStaff">—</strong></span>
+                        <span class="chat-id-label" id="chatroomChatId"></span>
+                    </div>
+
+                    <div class="messages-area" id="messagesArea"></div>
+
+                    <div class="message-input-bar">
+                        <input type="text" id="msgInput" placeholder="Type a message..." autocomplete="off" />
+                        <button class="btnStrong send-btn" id="sendBtn" aria-label="Send message">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
