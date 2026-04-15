@@ -16,8 +16,8 @@ body {
   display: flex;
   padding: 15px 40px;
   background-color: #ddd;
-  border-radius: 10px;
-  margin: 10px 13px;
+  border-radius: 0 0 15px 15px;
+  margin: 0;
 }
 
 .nav-left,
@@ -75,7 +75,7 @@ h2 {
   background-color: #7a7a7a;
   border: none;
   border-radius: 10px;
-  color: black;
+  color: white;
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 18px;
@@ -105,7 +105,7 @@ h2 {
 .container {
   display: flex;
   width: 100%;
-  height: calc(100vh - 75px); /* 75px is the navbar height */
+  height: calc(100vh - 53px); 
   overflow: hidden;
 }
 
