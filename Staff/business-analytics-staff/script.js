@@ -1,5 +1,4 @@
 // business-analytics.js
-
 const records = [
     { id: 'R-001', from: 'KLCC', to: 'Bukit Bintang', date: '2026-04-01', people: 3, revenue: 15.00, status: 'Completed' },
     { id: 'R-002', from: 'PJ', to: 'Subang Jaya', date: '2026-04-02', people: 5, revenue: 40.00, status: 'Completed' },
@@ -15,7 +14,6 @@ const records = [
     { id: 'R-012', from: 'Wangsa Maju', to: 'KLCC', date: '2026-04-12', people: 2, revenue: 12.00, status: 'Active' },
 ];
 
-/* Chart.js data by metric + period */
 const chartData = {
     ridesHosted: {
         thisMonth: { labels: ['Wk 1', 'Wk 2', 'Wk 3', 'Wk 4'], values: [14, 22, 18, 26] },
@@ -39,123 +37,75 @@ const chartData = {
 
 const ROWS_PER_PAGE = 5;
 let currentPage = 1;
-
 let chart = null;
 
-function getKey(selectVal) {
-    return selectVal.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
-}
-
-/* ── Draw chart ─────────────────────────────────── */
 function drawChart() {
     const metric = document.getElementById('metricSelect').value;
-    const period = getKey(document.getElementById('periodSelect').value);
+    const period = document.getElementById('periodSelect').value;
     const dataset = chartData[metric][period];
-
     const ctx = document.getElementById('analyticsChart').getContext('2d');
     if (chart) chart.destroy();
-
     chart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: dataset.labels,
-            datasets: [{
-                data: dataset.values,
-                backgroundColor: 'rgba(0,0,0,0.75)',
-                borderRadius: 4,
-                borderSkipped: false,
-            }]
+            datasets: [{ data: dataset.values, backgroundColor: 'rgba(0,0,0,0.75)', borderRadius: 4, borderSkipped: false }]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
+            responsive: true, maintainAspectRatio: false,
             plugins: {
                 legend: { display: false },
-                tooltip: {
-                    callbacks: {
-                        label: ctx => metric === 'revenue'
-                            ? ` RM ${ctx.raw.toFixed(2)}`
-                            : ` ${ctx.raw}`
-                    }
-                }
+                tooltip: { callbacks: { label: ctx => metric === 'revenue' ? ` RM ${ctx.raw.toFixed(2)}` : ` ${ctx.raw}` } }
             },
             scales: {
                 x: { grid: { display: false }, ticks: { font: { size: 12 } } },
-                y: {
-                    grid: { color: 'rgba(0,0,0,0.05)' },
-                    ticks: { font: { size: 12 } },
-                    beginAtZero: true,
-                }
+                y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 12 } }, beginAtZero: true }
             }
         }
     });
 }
 
-/* ── Render records table ───────────────────────── */
 function renderTable() {
-    const tbody = document.getElementById('recordsTbody');
-    const total = records.length;
-    const pages = Math.ceil(total / ROWS_PER_PAGE);
-
+    const pages = Math.ceil(records.length / ROWS_PER_PAGE);
     const slice = records.slice((currentPage - 1) * ROWS_PER_PAGE, currentPage * ROWS_PER_PAGE);
-
-    tbody.innerHTML = slice.map(r => `
+    document.getElementById('recordsTbody').innerHTML = slice.map(r => `
     <tr>
-      <td>${r.id}</td>
-      <td>${r.from}</td>
-      <td>${r.to}</td>
-      <td>${r.date}</td>
-      <td>${r.people}</td>
-      <td>RM ${r.revenue.toFixed(2)}</td>
+      <td>${r.id}</td><td>${r.from}</td><td>${r.to}</td><td>${r.date}</td>
+      <td>${r.people}</td><td>RM ${r.revenue.toFixed(2)}</td>
       <td><span class="status-badge status-${r.status}">${r.status}</span></td>
     </tr>
   `).join('');
-
     document.getElementById('pageInfo').textContent = `Page ${currentPage} / ${pages}`;
     document.getElementById('prevPage').disabled = currentPage === 1;
     document.getElementById('nextPage').disabled = currentPage === pages;
 }
 
-/* ── CSV download ───────────────────────────────── */
 function downloadCSV() {
-    const metric = document.getElementById('metricSelect').options[document.getElementById('metricSelect').selectedIndex].text;
-    const period = document.getElementById('periodSelect').options[document.getElementById('periodSelect').selectedIndex].text;
-
     const header = ['Ride ID', 'From', 'To', 'Date', 'People', 'Revenue (RM)', 'Status'];
     const rows = records.map(r => [r.id, r.from, r.to, r.date, r.people, r.revenue.toFixed(2), r.status]);
-
     const csv = [header, ...rows].map(r => r.join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `hailshare-analytics-${metric.replace(/ /g, '-')}-${period.replace(/ /g, '-')}.csv`;
-    a.click();
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'hailshare-analytics.csv'; a.click();
     showToast('CSV downloaded.');
 }
 
-/* ── Event listeners ────────────────────────────── */
 document.getElementById('metricSelect').addEventListener('change', drawChart);
 document.getElementById('periodSelect').addEventListener('change', drawChart);
 document.getElementById('downloadCsv').addEventListener('click', downloadCSV);
-
-document.getElementById('prevPage').addEventListener('click', () => {
-    if (currentPage > 1) { currentPage--; renderTable(); }
-});
+document.getElementById('prevPage').addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); } });
 document.getElementById('nextPage').addEventListener('click', () => {
     if (currentPage < Math.ceil(records.length / ROWS_PER_PAGE)) { currentPage++; renderTable(); }
 });
 
-document.getElementById('sidebarToggle').addEventListener('click', () => {
-    document.getElementById('sidebar').classList.toggle('expanded');
-});
-
+function toggleNavbar() {
+    const navbar = document.getElementById('navbar'), content = document.getElementById('content'), items = document.querySelectorAll('.navbarItem');
+    navbar.classList.toggle('expand'); content.classList.toggle('expand'); items.forEach(i => i.classList.toggle('expand'));
+}
 function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
+    const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-/* ── Init ───────────────────────────────────────── */
 drawChart();
 renderTable();

@@ -1,162 +1,22 @@
 /* profile.css */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    background: #f7f7f7;
+    background: #fff;
     color: #111;
     font-size: 14px;
-    min-height: 100vh;
 }
 
-.app-shell {
-    display: flex;
-    min-height: 100vh;
-}
-
-.sidebar {
-    width: 60px;
-    min-height: 100vh;
-    background: #fff;
-    border-right: 1px solid rgb(218, 218, 218);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 12px 0 16px;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    transition: width 0.22s cubic-bezier(.17, .67, .31, .99);
-    z-index: 100;
-    flex-shrink: 0;
-}
-
-.sidebar.expanded {
-    width: 200px;
-    align-items: flex-start;
-}
-
-.sidebar-toggle {
-    width: 100%;
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    color: #333;
-    margin-bottom: 12px;
-    flex-shrink: 0;
-    transition: background 0.15s;
-    overflow: hidden;
-}
-
-.sidebar-toggle:hover {
-    background: #f0f0f0;
-}
-
-.brand-name {
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: -0.3px;
-    color: #111;
-    white-space: nowrap;
-    max-width: 0;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: max-width 0.22s cubic-bezier(.17, .67, .31, .99), opacity 0.18s;
-}
-
-.sidebar.expanded .brand-name {
-    max-width: 160px;
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    width: 100%;
-    padding: 0 8px;
-    flex: 1;
-}
-
-.sidebar-bottom {
-    width: 100%;
-    padding: 0 8px;
-    border-top: 1px solid rgb(218, 218, 218);
-    padding-top: 12px;
-}
-
-.nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 10px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #555;
-    font-size: 13px;
-    white-space: nowrap;
-    transition: background 0.15s, color 0.15s;
-    width: 100%;
-}
-
-.nav-item:hover {
-    background: #f0f0f0;
-    color: #111;
-}
-
-.nav-item.active {
-    background: #f0f0f0;
-    color: #111;
-    font-weight: 500;
-}
-
-.nav-item svg {
-    flex-shrink: 0;
-}
-
-.nav-label {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s;
-}
-
-.sidebar.expanded .nav-label {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* Main */
-.main-content {
-    flex: 1;
-    padding: 28px 32px;
-    max-width: 640px;
-}
-
-.page-header {
-    margin-bottom: 20px;
+/* Active nav — Profile is the 4th <a> */
+#navbar>a:nth-of-type(4)>.navbarItem {
+    background-color: rgb(216, 216, 216);
 }
 
 .page-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    color: #111;
+    margin-bottom: 20px;
     letter-spacing: -0.3px;
 }
 
-/* Cards */
 .form-card {
     background: #fff;
     border: 1px solid rgb(218, 218, 218);
@@ -177,7 +37,6 @@ body {
     margin-bottom: 18px;
 }
 
-/* Form groups */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -204,7 +63,6 @@ body {
     gap: 14px;
 }
 
-/* DOB */
 .dob-row {
     display: flex;
     gap: 8px;
@@ -212,11 +70,8 @@ body {
 
 .dob-row select {
     flex: 1;
-    font-size: 13px;
-    height: 34px;
 }
 
-/* Password eye */
 .input-with-icon {
     position: relative;
     display: flex;
@@ -245,7 +100,6 @@ body {
     color: #333;
 }
 
-/* Divider */
 .form-divider {
     border: none;
     border-top: 1px solid rgb(218, 218, 218);
@@ -258,23 +112,20 @@ body {
     color: #aaa;
 }
 
-/* Actions */
 .form-actions {
     margin-top: 18px;
     padding-top: 14px;
     border-top: 1px solid rgb(218, 218, 218);
 }
 
-.save-btn {
+.form-actions .btnStrong {
     padding: 7px 20px;
     font-size: 13px;
     cursor: pointer;
 }
 
-/* Logout */
 .logout-section {
-    padding-top: 4px;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
 }
 
 .logout-btn {
@@ -289,7 +140,6 @@ body {
     background: #fff5f5 !important;
 }
 
-/* Toast */
 .toast {
     position: fixed;
     bottom: 28px;
@@ -312,9 +162,5 @@ body {
 @media (max-width: 600px) {
     .form-row-2 {
         grid-template-columns: 1fr;
-    }
-
-    .main-content {
-        padding: 16px;
     }
 }

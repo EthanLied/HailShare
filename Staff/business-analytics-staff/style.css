@@ -1,163 +1,28 @@
 /* business-analytics.css */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    background: #f7f7f7;
+    background: #fff;
     color: #111;
     font-size: 14px;
-    min-height: 100vh;
 }
 
-.app-shell {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* Sidebar – identical across all pages */
-.sidebar {
-    width: 60px;
-    min-height: 100vh;
-    background: #fff;
-    border-right: 1px solid rgb(218, 218, 218);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 12px 0 16px;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    transition: width 0.22s cubic-bezier(.17, .67, .31, .99);
-    z-index: 100;
-    flex-shrink: 0;
-}
-
-.sidebar.expanded {
-    width: 200px;
-    align-items: flex-start;
-}
-
-.sidebar-toggle {
-    width: 100%;
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    color: #333;
-    margin-bottom: 12px;
-    flex-shrink: 0;
-    transition: background 0.15s;
-    overflow: hidden;
-}
-
-.sidebar-toggle:hover {
-    background: #f0f0f0;
-}
-
-.brand-name {
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: -0.3px;
-    color: #111;
-    white-space: nowrap;
-    max-width: 0;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: max-width 0.22s cubic-bezier(.17, .67, .31, .99), opacity 0.18s;
-}
-
-.sidebar.expanded .brand-name {
-    max-width: 160px;
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    width: 100%;
-    padding: 0 8px;
-    flex: 1;
-}
-
-.sidebar-bottom {
-    width: 100%;
-    padding: 0 8px;
-    border-top: 1px solid rgb(218, 218, 218);
-    padding-top: 12px;
-}
-
-.nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 10px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #555;
-    font-size: 13px;
-    white-space: nowrap;
-    transition: background 0.15s, color 0.15s;
-    width: 100%;
-}
-
-.nav-item:hover {
-    background: #f0f0f0;
-    color: #111;
-}
-
-.nav-item.active {
-    background: #f0f0f0;
-    color: #111;
-    font-weight: 500;
-}
-
-.nav-item svg {
-    flex-shrink: 0;
-}
-
-.nav-label {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s;
-}
-
-.sidebar.expanded .nav-label {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* Main */
-.main-content {
-    flex: 1;
-    padding: 28px 32px;
-    max-width: 960px;
-}
-
-.page-header {
-    margin-bottom: 20px;
+/* Active nav — Analytics is the 2nd <a> */
+#navbar>a:nth-of-type(2)>.navbarItem {
+    background-color: rgb(216, 216, 216);
 }
 
 .page-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    color: #111;
+    margin-bottom: 20px;
     letter-spacing: -0.3px;
 }
 
-/* Analytics card */
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
 .analytics-card {
     background: #fff;
     border: 1px solid rgb(218, 218, 218);
@@ -177,7 +42,6 @@ body {
 .analytics-toolbar select {
     font-size: 13px;
     height: 32px;
-    padding: 5px 8px;
     min-width: 150px;
     cursor: pointer;
 }
@@ -186,7 +50,7 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 12px;
+    padding: 5px 12px;
     font-size: 13px;
     cursor: pointer;
     height: 32px;
@@ -198,53 +62,16 @@ body {
     height: 240px;
 }
 
-/* Records */
 .records-section {
     background: #fff;
     border: 1px solid rgb(218, 218, 218);
     border-radius: 8px;
     padding: 20px;
-}
-
-.section-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 14px;
+    margin-bottom: 40px;
 }
 
 .table-wrap {
     overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-}
-
-th {
-    font-weight: 500;
-    font-size: 12px;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 8px 12px;
-    border-bottom: 1px solid rgb(218, 218, 218);
-    text-align: left;
-}
-
-td {
-    font-size: 13px;
-    padding: 10px 12px;
-    border-bottom: 1px solid rgb(234, 234, 234);
-}
-
-tr:last-child td {
-    border-bottom: none;
-}
-
-tr:hover td {
-    background: #fafafa;
 }
 
 .status-badge {
@@ -275,7 +102,6 @@ tr:hover td {
     color: #b91c1c;
 }
 
-/* Pagination */
 .pagination {
     display: flex;
     align-items: center;
@@ -299,7 +125,6 @@ tr:hover td {
     cursor: not-allowed;
 }
 
-/* Toast */
 .toast {
     position: fixed;
     bottom: 28px;
