@@ -1,4 +1,5 @@
 /* ===== STYLE ===== */
+
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +16,7 @@ body {
   display: flex;
   padding: 15px 40px;
   background-color: #ddd;
-  border-radius: 10px; 
+  border-radius: 10px;
   margin: 5px 10px;
 }
 
@@ -32,8 +33,19 @@ body {
 
 .nav-right {
   display: flex;
-  justify-content: space-between; 
+  justify-content: flex-end; 
   align-items: center; 
+  gap: 20px;
+}
+
+.nav-right a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+.nav-right a:hover {
+  text-decoration: underline;
 }
 
 /* ===== COMMON FORM STYLES ===== */
@@ -58,11 +70,22 @@ h2 {
 .btn {
   width: 100%;
   padding: 20px;
-  background-color: #9E9E9E; 
-  border: none;           
+  margin-bottom: 10px;
+  margin-top: 20px;
+  background-color: #7a7a7a;
+  border: none;
   border-radius: 10px;
-  margin-top: 15px;
-  color: white;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #5e5e5e;
+}
+
+.btn:active {
+  transform: scale(0.97);
 }
 
 /* ===== LINKS ===== */
@@ -81,37 +104,47 @@ h2 {
 .container {
   display: flex;
   width: 100%;
-  height: calc(100vh - 70px); 
-  margin: 0;
+  height: calc(100vh - 70px); /* 70px is the navbar height */
+  overflow: hidden;
 }
 
 .left {
-  width: 50%;
-  height: 100%;
-  border: 4px solid #ccc;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 4px solid #ccc;
+  height: 100%;
   font-size: 20px;
   color: #000;
 }
 
+
 .right {
-  width: 50%;
-  height: 100%;
-  padding: 60px;
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;   /* vertical center */
-  align-items: center;
+  justify-content: center;   /* vertical center FIX */
+  align-items: center;       /* horizontal center */
+
+  padding: 1rem;              
+  overflow: hidden;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  margin-top: 20px;   
 }
 
 .form-box {
+  width: 100%;
+  max-width: 22rem;
   display: flex;
   flex-direction: column;
-  gap: 50px;
-  width: 100%;        /* fills parent */
-  max-width: 450px;
+  gap: 2rem;
+  transform: scale(0.92);              
+  transform-origin: center;
 }
 
 .links {
@@ -128,7 +161,7 @@ h2 {
 
 /* ===== REGISTRATION PAGES ===== */
 .steps {
-  position: absolute;
+  position: fixed;
   left: 80px;
   top: 50%;
   transform: translateY(-50%);
@@ -159,13 +192,20 @@ h2 {
 
 .sub-title {
   font-weight: normal;
+  text-align: center;
+  margin: 30px 0 30px;
+}
+
+h2 {
+  text-align: center;
+  margin: 20px 0 40px;  /* add this */
 }
 
 .reg-container {
-  width: 700px;
-  margin: 60px auto;
-  padding: 50px;
-  border-radius: 8px;
+  width: 100%;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 40px;
 }
 
 .reg-container .form-group {
@@ -175,7 +215,7 @@ h2 {
 /* Form row */
 .form-row {
   display: flex;
-  gap: 30px;
+  gap: 2rem;
   margin-bottom: 30px;
 }
 
@@ -200,14 +240,66 @@ h2 {
 }
 
 /* Smaller button for registration */
-.button-row .btn {
-  width: 180px;
+.btnRegNormal {
+  width: 100%;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 10px;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.reg-container .btn {
+.btnRegNormal:hover {
+  background-color: #f2f2f2;
+}
+
+.btnRegStrong {
+  width: 100%;
+  padding: 15px;
+  background-color: #d3d3d3;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnRegStrong:hover {
+  background-color: #c0c0c0;
+}
+
+.btnRegNormal:active,
+.btnRegStrong:active {
+  transform: scale(0.97);
+}
+
+.button-row .btnRegNormal,
+.button-row .btnRegStrong {
+  margin-bottom: 30px;
+  margin-top: 10px; 
   width: 180px;
-  padding: 22px;
-  display: block;
-  margin: 22px auto 0;
+  padding: 20px;
+}
+
+.btnReg1Strong {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: #d3d3d3;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnReg1Strong:hover {
+  background-color: #c0c0c0;
+}
+
+.btnReg1Strong:active {
+  transform: scale(0.97);
 }
 
