@@ -105,7 +105,7 @@ h2 {
 .container {
   display: flex;
   width: 100%;
-  height: calc(100vh - 53px); 
+  height: calc(100vh - 55px); 
   overflow: hidden;
 }
 
