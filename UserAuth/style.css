@@ -194,6 +194,7 @@ h2 {
 .sub-title {
   font-weight: normal;
   text-align: center;
+  font-size: 22px;
   margin: 30px 0 30px;
 }
 
@@ -205,12 +206,13 @@ h2 {
 .reg-container {
   width: 100%;
   max-width: 700px;
-  margin: 40px auto;
-  padding: 40px;
+  margin: 30px auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .reg-container .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 /* Form row */
@@ -218,6 +220,7 @@ h2 {
   display: flex;
   gap: 2rem;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 .form-row .form-group {
