@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account List - Hailshare Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<div id="navbar">
+    <div class="navbarItem">
+        <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
+        <a href="#"><h3>Hailshare Admin</h3></a>
+    </div>
+    <a href="index.html"><div class="navbarItem"><span class="material-symbols-outlined">dashboard</span><p>Dashboard</p></div></a>
+    <a href="accountList.html"><div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Accounts</p></div></a>
+    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">directions_car</span><p>Rides</p></div></a>
+    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">analytics</span><p>Reports</p></div></a>
+    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">settings</span><p>Settings</p></div></a>
+    <a href="adminProfile.html"><div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Admin Profile</p></div></a>
+</div>
+
+<div id="content">
+    <h1 style="margin-bottom: 20px;">Account List</h1>
+
+    <!-- Sort & Filter Controls -->
+    <div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+        <select style="width: auto; min-width: 150px;">
+            <option>Sort by: Name (A-Z)</option>
+            <option>Sort by: Name (Z-A)</option>
+            <option>Sort by: Account Type</option>
+            <option>Sort by: Recent Activity</option>
+        </select>
+        <select style="width: auto; min-width: 150px;">
+            <option>Filter: All Accounts</option>
+            <option>Filter: Customer</option>
+            <option>Filter: Driver</option>
+            <option>Filter: Admin</option>
+        </select>
+        <input type="text" placeholder="Search accounts..." style="width: auto; flex: 1; min-width: 200px;">
+        <button class="btnStrong" style="width: auto;">Apply</button>
+    </div>
+
+    <!-- Accounts Table -->
+    <table>
+        <thead>
+            <tr><th>Name</th><th>Account Type</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Alex Chen</td><td>Customer</td><td>alex.c@email.com</td><td><span style="color:green;">● Active</span></td><td><span class="material-symbols-outlined" style="cursor:pointer;">edit</span> <span class="material-symbols-outlined" style="cursor:pointer; margin-left:10px;">more_vert</span></td></tr>
+            <tr><td>Maria Garcia</td><td>Driver</td><td>maria.g@email.com</td><td><span style="color:green;">● Active</span></td><td><span class="material-symbols-outlined" style="cursor:pointer;">edit</span> <span class="material-symbols-outlined" style="cursor:pointer; margin-left:10px;">more_vert</span></td></tr>
+            <tr><td>James Wilson</td><td>Customer</td><td>jwilson@email.com</td><td><span style="color:orange;">● Pending</span></td><td><span class="material-symbols-outlined" style="cursor:pointer;">edit</span> <span class="material-symbols-outlined" style="cursor:pointer; margin-left:10px;">more_vert</span></td></tr>
+            <tr><td>Linda Brown</td><td>Admin</td><td>l.brown@hailshare.com</td><td><span style="color:green;">● Active</span></td><td><span class="material-symbols-outlined" style="cursor:pointer;">edit</span> <span class="material-symbols-outlined" style="cursor:pointer; margin-left:10px;">more_vert</span></td></tr>
+            <tr><td>Robert Taylor</td><td>Driver</td><td>rtaylor@email.com</td><td><span style="color:red;">● Suspended</span></td><td><span class="material-symbols-outlined" style="cursor:pointer;">edit</span> <span class="material-symbols-outlined" style="cursor:pointer; margin-left:10px;">more_vert</span></td></tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination placeholder -->
+    <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btnNormal">Previous</button>
+        <button class="btnStrong">1</button>
+        <button class="btnNormal">2</button>
+        <button class="btnNormal">3</button>
+        <button class="btnNormal">Next</button>
+    </div>
+</div>
+
+</body>
+</html>

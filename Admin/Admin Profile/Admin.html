@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile - Hailshare</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<div id="navbar">
+    <div class="navbarItem">
+        <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
+        <a href="#"><h3>Hailshare Admin</h3></a>
+    </div>
+    <a href="index.html"><div class="navbarItem"><span class="material-symbols-outlined">dashboard</span><p>Dashboard</p></div></a>
+    <a href="accountList.html"><div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Accounts</p></div></a>
+    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">directions_car</span><p>Rides</p></div></a>
+    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">analytics</span><p>Reports</p></div></a>
+    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">settings</span><p>Settings</p></div></a>
+    <a href="adminProfile.html"><div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Admin Profile</p></div></a>
+</div>
+
+<div id="content">
+    <span class="adminBadge"><span class="material-symbols-outlined" style="font-size:18px;">verified</span> System Administrator</span>
+    <h1 style="margin-bottom: 30px;">Admin Profile</h1>
+
+    <div style="max-width: 700px;">
+        <!-- Profile Form -->
+        <div class="card" style="margin-bottom: 20px;">
+            <h3 style="margin-bottom: 20px;">Personal Information</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div><label>First Name</label><input value="Admin" placeholder="First Name"></div>
+                <div><label>Last Name</label><input value="User" placeholder="Last Name"></div>
+                <div><label>Email</label><input value="admin@hailshare.com" placeholder="Email"></div>
+                <div><label>Phone Number</label><input value="+1 (555) 123-4567" placeholder="Phone"></div>
+            </div>
+            <div style="margin-top: 15px;">
+                <label>Date of Birth</label>
+                <div style="display: flex; gap: 10px;">
+                    <select style="width: auto;"><option>1</option><option>15</option></select>
+                    <select style="width: auto;"><option>January</option><option>June</option></select>
+                    <select style="width: auto;"><option>1990</option><option>1985</option></select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Section -->
+        <div class="card" style="margin-bottom: 20px;">
+            <h3 style="margin-bottom: 20px;">Security Information</h3>
+            <div><label>Password</label><input type="password" value="********" placeholder="Password"></div>
+            <div style="margin-top: 15px;"><label>Security Question</label>
+                <select><option>What is your pet's name?</option><option>What is your mother's maiden name?</option></select>
+            </div>
+            <div style="margin-top: 15px;"><label>Security Answer</label><input placeholder="Answer"></div>
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+                <label style="font-weight: 600;">Enter current password to change security info</label>
+                <input type="password" placeholder="Current Password" style="margin-top: 8px;">
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 15px; justify-content: space-between;">
+            <button class="btnStrong" style="flex:1;">Save Changes</button>
+            <button class="btnNormal" style="flex:1; color:red; border-color:#ffcccc;">Logout</button>
+        </div>
+        <p style="margin-top: 10px; font-size:12px; color:#666;">*Admin account deletion requires super admin approval.</p>
+    </div>
+</div>
+
+</body>
+</html>
