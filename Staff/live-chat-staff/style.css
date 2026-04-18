@@ -5,7 +5,6 @@ body {
     font-size: 14px;
 }
 
-/* Active nav — Live Chat is the 3rd <a> */
 #navbar>a:nth-of-type(3)>.navbarItem {
     background-color: rgb(216, 216, 216);
 }
@@ -25,7 +24,7 @@ body {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .control-group {
@@ -46,6 +45,31 @@ body {
     cursor: pointer;
 }
 
+/* ── Scrollable list container ── */
+.list-scroll-container {
+    max-height: 520px;
+    overflow-y: auto;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 8px;
+    padding: 10px;
+    background: #fafafa;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(200, 200, 200) transparent;
+}
+
+.list-scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.list-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.list-scroll-container::-webkit-scrollbar-thumb {
+    background: rgb(200, 200, 200);
+    border-radius: 99px;
+}
+
 .chat-item {
     background: #fff;
     border: 1px solid rgb(218, 218, 218);
@@ -54,8 +78,12 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     transition: box-shadow 0.15s;
+}
+
+.chat-item:last-child {
+    margin-bottom: 0;
 }
 
 .chat-item:hover {
@@ -139,10 +167,31 @@ body {
     color: #111;
 }
 
-.btn-open-chat .material-symbols-outlined {
-    font-size: 18px;
+/* ── Pagination ── */
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #555;
 }
 
+.pag-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pag-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* ── Chatroom ── */
 .chatroom-header {
     display: flex;
     align-items: center;
@@ -209,6 +258,21 @@ body {
     flex-direction: column;
     gap: 12px;
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(200, 200, 200) transparent;
+}
+
+.messages-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages-area::-webkit-scrollbar-thumb {
+    background: rgb(200, 200, 200);
+    border-radius: 99px;
 }
 
 .msg {

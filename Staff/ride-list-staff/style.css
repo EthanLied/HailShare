@@ -5,7 +5,6 @@ body {
     font-size: 14px;
 }
 
-/* Active nav — Ride List is the 1st <a> in #navbar */
 #navbar>a:nth-of-type(1)>.navbarItem {
     background-color: rgb(216, 216, 216);
 }
@@ -40,7 +39,7 @@ body {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 22px;
+    margin-bottom: 14px;
 }
 
 .control-group {
@@ -62,6 +61,31 @@ body {
     cursor: pointer;
 }
 
+/* ── Scrollable list container ── */
+.list-scroll-container {
+    max-height: 520px;
+    overflow-y: auto;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 8px;
+    padding: 10px;
+    background: #fafafa;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(200, 200, 200) transparent;
+}
+
+.list-scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.list-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.list-scroll-container::-webkit-scrollbar-thumb {
+    background: rgb(200, 200, 200);
+    border-radius: 99px;
+}
+
 .ride-card {
     background: #fff;
     border: 1px solid rgb(218, 218, 218);
@@ -70,8 +94,12 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     transition: box-shadow 0.15s;
+}
+
+.ride-card:last-child {
+    margin-bottom: 0;
 }
 
 .ride-card:hover {
@@ -167,6 +195,31 @@ body {
     font-size: 18px;
 }
 
+/* ── Pagination ── */
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #555;
+}
+
+.pag-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pag-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* ── Modify form ── */
 .btn-back {
     padding: 6px 12px;
     font-size: 13px;
@@ -206,6 +259,25 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 12px;
     margin-bottom: 16px;
+}
+
+/* ── Time dual-dropdown ── */
+.time-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.time-row select {
+    width: auto;
+    flex: 1;
+}
+
+.time-sep {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1;
 }
 
 .form-actions {

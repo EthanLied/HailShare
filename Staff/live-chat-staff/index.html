@@ -25,7 +25,7 @@
                 <p>Ride List</p>
             </div>
         </a>
-        <a href="../business-analytics-staff/index.html">
+        <a href="../business-analytics/index.html">
             <div class="navbarItem"><span class="material-symbols-outlined">bar_chart</span>
                 <p>Analytics</p>
             </div>
@@ -35,15 +35,17 @@
                 <p>Live Chat</p>
             </div>
         </a>
-        <a href="../profile-staff/index.html">
+        <a href="../profile/index.html">
             <div class="navbarItem"><span class="material-symbols-outlined">account_circle</span>
                 <p>Profile</p>
             </div>
         </a>
     </div>
+
     <div id="content">
         <div class="content-wrapper">
 
+            <!-- Inbox View -->
             <div id="inboxView">
                 <h1 class="page-title">Live Chat Inbox</h1>
                 <div class="controls-bar">
@@ -66,9 +68,20 @@
                         </select>
                     </div>
                 </div>
-                <div id="chatList"></div>
+
+                <!-- scrollable container -->
+                <div class="list-scroll-container">
+                    <div id="chatList"></div>
+                </div>
+
+                <div class="pagination">
+                    <span id="chatPageInfo">Page 1 / 1</span>
+                    <button class="btnNormal pag-btn" id="chatPrevPage" disabled>&#8249;</button>
+                    <button class="btnNormal pag-btn" id="chatNextPage">&#8250;</button>
+                </div>
             </div>
 
+            <!-- Chatroom View -->
             <div id="chatroomView" class="hidden">
                 <div class="chatroom-header">
                     <button class="btnNormal btn-back" id="backToInbox">&#8249; Back to Inbox</button>
@@ -94,6 +107,7 @@
 
         </div>
     </div>
+
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 

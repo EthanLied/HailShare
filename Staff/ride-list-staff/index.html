@@ -45,6 +45,7 @@
     <div id="content">
         <div class="content-wrapper">
 
+            <!-- Ride List View -->
             <div id="rideListView">
                 <h1 class="page-title">Ride List</h1>
                 <div class="controls-bar">
@@ -70,9 +71,20 @@
                         </select>
                     </div>
                 </div>
-                <div id="rideList"></div>
+
+                <!-- scrollable container -->
+                <div class="list-scroll-container">
+                    <div id="rideList"></div>
+                </div>
+
+                <div class="pagination">
+                    <span id="pageInfo">Page 1 / 1</span>
+                    <button class="btnNormal pag-btn" id="prevPage" disabled>&#8249;</button>
+                    <button class="btnNormal pag-btn" id="nextPage">&#8250;</button>
+                </div>
             </div>
 
+            <!-- Modify Ride View -->
             <div id="modifyRideView" class="hidden">
                 <div class="page-header-row">
                     <button class="btnNormal btn-back" id="backToList">&#8249; Back</button>
@@ -93,9 +105,14 @@
                                 <label for="modifyDate">Date:</label>
                                 <select id="modifyDate"></select>
                             </div>
+                            <!-- TIME: two dropdowns (hour + minute) -->
                             <div class="form-group">
-                                <label for="modifyTime">Time:</label>
-                                <select id="modifyTime"></select>
+                                <label>Time:</label>
+                                <div class="time-row">
+                                    <select id="modifyHour" aria-label="Hour"></select>
+                                    <span class="time-sep">:</span>
+                                    <select id="modifyMinute" aria-label="Minute"></select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="modifyCapacity">Capacity:</label>
