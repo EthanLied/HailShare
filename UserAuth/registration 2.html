@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account - Step 2</title>
+
+ <!-- Link to CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="nav-left">HailShare</div>
+    <div class="nav-right">
+        <a href="login.html">Login</a>
+  <a href="registration 1.html">Register</a>
+</div>
+  </div>
+
+  <!-- SAME Step Indicator -->
+  <div class="steps">
+    <div class="step active"></div>
+    <div class="line"></div>
+    <div class="step active"></div>
+    <div class="line"></div>
+    <div class="step"></div>
+  </div>
+
+  <!-- Form -->
+  <div class="reg-container">
+    <h2>Create Your Account</h2>
+
+    <!-- Password + DOB -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password">
+      </div>
+
+      <div class="form-group">
+        <label>Date Of Birth</label>
+        <div class="dob">
+          <select><option>Day</option></select>
+          <select><option>Month</option></select>
+          <select><option>Year</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Question -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Security Question</label>
+        <select required>
+          <option value="" disabled selected hidden></option>
+          <option>What is your pet's name?</option>
+          <option>What is your school name?</option>
+          <option>What is your favorite food?</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Security Question Answer</label>
+        <input type="text">
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-row">
+      <button class="btnRegNormal" onclick="window.location.href='registration 1.html'">Back</button>
+      <button class="btnRegStrong" onclick="window.location.href='registration 4.html'">Next</button>
+    </div>
+
+    <div class="bottom-link">
+      <a href="login.html">I have an account</a>
+    </div>
+  </div>
+
+</body>
+</html>
