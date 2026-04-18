@@ -4,22 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account List - Hailshare Admin</title>
-    <link rel="stylesheet" href="admin.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../Admin.css">
+    <script src="../script.js" defer></script>
 </head>
 <body>
 
+<!-- Sidebar with two items -->
 <div id="navbar">
     <div class="navbarItem">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
         <a href="#"><h3>Hailshare Admin</h3></a>
     </div>
-    <a href="index.html"><div class="navbarItem"><span class="material-symbols-outlined">dashboard</span><p>Dashboard</p></div></a>
-    <a href="accountList.html"><div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Accounts</p></div></a>
-    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">directions_car</span><p>Rides</p></div></a>
-    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">analytics</span><p>Reports</p></div></a>
-    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">settings</span><p>Settings</p></div></a>
-    <a href="adminProfile.html"><div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Admin Profile</p></div></a>
+    
+    <!-- Account List (current page) -->
+    <a href="AccountList.html">
+        <div class="navbarItem">
+            <span class="material-symbols-outlined">group</span>
+            <p>Account List</p>
+        </div>
+    </a>
+    
+    <!-- Link to Admin Profile -->
+    <a href="../Admin%20Profile/Admin.html">
+        <div class="navbarItem">
+            <span class="material-symbols-outlined">admin_panel_settings</span>
+            <p>Admin Profile</p>
+        </div>
+    </a>
 </div>
 
 <div id="content">
@@ -57,7 +68,7 @@
         </tbody>
     </table>
 
-    <!-- Pagination placeholder -->
+    <!-- Pagination -->
     <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px;">
         <button class="btnNormal">Previous</button>
         <button class="btnStrong">1</button>
@@ -67,5 +78,6 @@
     </div>
 </div>
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </body>
 </html>

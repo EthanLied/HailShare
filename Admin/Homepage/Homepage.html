@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<!-- Navbar (same as other admin pages) -->
+<!-- Navbar (same as other admin pages, retractable via hamburger) -->
 <div id="navbar">
     <div class="navbarItem">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
@@ -24,29 +24,9 @@
 </div>
 
 <div id="content">
-    <!-- ===== TOP DASHBOARD BAR ===== -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-        <h1 style="margin: 0;">Dashboard</h1>
-        <div style="display: flex; gap: 12px;">
-            <button class="btnNormal" style="display: flex; align-items: center; gap: 6px;">
-                <span class="material-symbols-outlined">calendar_today</span> Date Range
-            </button>
-            <button class="btnNormal" style="display: flex; align-items: center; gap: 6px;">
-                <span class="material-symbols-outlined">download</span> Export
-            </button>
-            <button class="btnStrong" style="display: flex; align-items: center; gap: 6px;">
-                <span class="material-symbols-outlined">add</span> New
-            </button>
-        </div>
-    </div>
-
-    <!-- ===== "CON" BLOCKS (5 stat cards) ===== -->
-    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-bottom: 40px;">
-        <div class="statCard"><span class="material-symbols-outlined">group</span><div><h3>1,284</h3><p>Total Users</p></div></div>
-        <div class="statCard"><span class="material-symbols-outlined">directions_car</span><div><h3>342</h3><p>Active Rides</p></div></div>
-        <div class="statCard"><span class="material-symbols-outlined">report</span><div><h3>8</h3><p>Reports</p></div></div>
-        <div class="statCard"><span class="material-symbols-outlined">payments</span><div><h3>$12.4K</h3><p>Revenue</p></div></div>
-        <div class="statCard"><span class="material-symbols-outlined">trending_up</span><div><h3>+12%</h3><p>Growth</p></div></div>
+    <!-- ===== TOP BAR (Title only) ===== -->
+    <div style="margin-bottom: 40px;">
+        <h1 style="margin: 0; font-size: 36px; font-weight: 600;">Hailshare</h1>
     </div>
 
     <!-- ===== CTA SECTION 1 ===== -->
@@ -91,7 +71,7 @@
     </div>
 </div>
 
-<!-- Additional style for active feature button (can be toggled with JS later) -->
+<!-- Style for active feature button -->
 <style>
 .feature-btn.active {
     background: #000;
