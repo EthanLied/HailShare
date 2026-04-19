@@ -61,7 +61,7 @@ body {
     cursor: pointer;
 }
 
-/* ── Scrollable list container ── */
+/* Scrollable list container */
 .list-scroll-container {
     max-height: 520px;
     overflow-y: auto;
@@ -92,7 +92,7 @@ body {
     border-radius: 8px;
     padding: 14px 16px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
     margin-bottom: 8px;
     transition: box-shadow 0.15s;
@@ -125,10 +125,50 @@ body {
     margin-top: 2px;
 }
 
-.ride-route .booked-by {
+/* In Ride row */
+.in-ride-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.in-ride-label {
     font-size: 11px;
-    color: #999;
-    margin-top: 3px;
+    font-weight: 600;
+    color: #888;
+    white-space: nowrap;
+    padding-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.passenger-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.passenger-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #444;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 99px;
+}
+
+.host-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    background: #111;
+    padding: 1px 5px;
+    border-radius: 99px;
+    letter-spacing: 0.2px;
 }
 
 .ride-meta {
@@ -139,6 +179,7 @@ body {
     font-size: 13px;
     color: #444;
     flex-wrap: wrap;
+    padding-top: 2px;
 }
 
 .status-badge {
@@ -195,7 +236,7 @@ body {
     font-size: 18px;
 }
 
-/* ── Pagination ── */
+/* Pagination */
 .pagination {
     display: flex;
     align-items: center;
@@ -219,7 +260,7 @@ body {
     cursor: not-allowed;
 }
 
-/* ── Modify form ── */
+/* Modify form */
 .btn-back {
     padding: 6px 12px;
     font-size: 13px;
@@ -261,7 +302,7 @@ body {
     margin-bottom: 16px;
 }
 
-/* ── Time dual-dropdown ── */
+/* Time dual-dropdown */
 .time-row {
     display: flex;
     align-items: center;
