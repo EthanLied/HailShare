@@ -1,84 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Hailshare</title>
-    <link rel="stylesheet" href="admin.css">
-    <script src="script.js" defer></script>
+    <title>Hailshare – Ride Sharing Made Simple</title>
+    <link rel="stylesheet" href="shadCNTemplate.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-family: "Geist", sans-serif;
+        }
+
+        /* Sticky video container */
+        .sticky-video {
+            position: sticky;
+            top: 20px;
+            z-index: 2;
+            margin-bottom: 40px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 10px 0;
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            border-radius: 16px;
+            background: #e0e0e0;
+        }
+
+        /* Spacer to allow scrolling while video is sticky */
+        .scroll-spacer {
+            height: 200vh;
+        }
+
+        .feature-btn.active {
+            background: #000;
+            color: white;
+            border-color: #000;
+        }
+
+        .card {
+            background: #f4f4f4;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .btnNormal {
+            background-color: white;
+            color: black;
+            border: solid 1px #dadada;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btnNormal:hover {
+            background-color: #f7f7f7;
+            transform: scale(0.98);
+        }
+
+        .btnStrong {
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btnStrong:hover {
+            background-color: #333;
+            transform: scale(0.98);
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 
-<!-- Navbar (same as other admin pages, retractable via hamburger) -->
-<div id="navbar">
-    <div class="navbarItem">
-        <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-        <a href="#"><h3>Hailshare Admin</h3></a>
-    </div>
-    <a href="index.html"><div class="navbarItem"><span class="material-symbols-outlined">dashboard</span><p>Dashboard</p></div></a>
-    <a href="accountList.html"><div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Accounts</p></div></a>
-    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">directions_car</span><p>Rides</p></div></a>
-    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">analytics</span><p>Reports</p></div></a>
-    <a href="#"><div class="navbarItem"><span class="material-symbols-outlined">settings</span><p>Settings</p></div></a>
-    <a href="adminProfile.html"><div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Admin Profile</p></div></a>
-</div>
+    <h1 style="font-size: 36px; font-weight: 600; margin-bottom: 40px;">Hailshare</h1>
 
-<div id="content">
-    <!-- ===== TOP BAR (Title only) ===== -->
-    <div style="margin-bottom: 40px;">
-        <h1 style="margin: 0; font-size: 36px; font-weight: 600;">Hailshare</h1>
-    </div>
-
-    <!-- ===== CTA SECTION 1 ===== -->
+    <!-- CTA Section 1 -->
     <div style="background: linear-gradient(135deg, #000 0%, #333 100%); border-radius: 16px; padding: 40px; margin-bottom: 40px; color: white; text-align: center;">
-        <h2 style="font-size: 32px; margin-bottom: 16px; color: white;">Ready to scale your operations?</h2>
-        <p style="font-size: 18px; margin-bottom: 24px; opacity: 0.9;">Join hundreds of admins managing rides efficiently with Hailshare.</p>
-        <button class="btnStrong" style="background: white; color: black; font-size: 18px; padding: 14px 32px;">Get Started →</button>
+        <h2 style="font-size: 32px; margin-bottom: 16px; color: white;">Share rides, save money, make friends</h2>
+        <p style="font-size: 18px; margin-bottom: 24px; opacity: 0.9;">Join Hailshare today and start sharing rides with people going your way.</p>
+        <a href="rideList/index.html"><button class="btnStrong" style="background: white; color: black; font-size: 18px; padding: 14px 32px;">Find a Ride →</button></a>
     </div>
 
-    <!-- ===== SCROLL-BASED VIDEO SECTION ===== -->
-    <div style="margin-bottom: 40px;">
-        <h2 style="margin-bottom: 20px;">Scroll-Based Video</h2>
-        <div style="background: #e0e0e0; border-radius: 16px; height: 400px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 18px;">
-            <span class="material-symbols-outlined" style="font-size: 48px; margin-right: 12px;">play_circle</span>
-            Video plays as you scroll (placeholder)
+    <!-- Sticky Scroll-Based Video -->
+    <div class="sticky-video">
+        <h2 style="margin-bottom: 20px;">See How It Works</h2>
+        <div class="video-container">
+            <video id="scrollVideo" muted preload="auto">
+                <source src="sample-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
-        <p style="text-align: center; margin-top: 12px; color: #666;">Scroll down to see the video progress effect</p>
+        <p style="text-align: center; margin-top: 12px; color: #666;">Scroll to play the video</p>
     </div>
 
-    <!-- ===== FEATURES SECTION WITH BUTTONS ===== -->
+    <!-- Spacer for scroll effect -->
+    <div class="scroll-spacer"></div>
+
+    <!-- Features Section -->
     <div style="margin-bottom: 40px;">
-        <h2 style="margin-bottom: 20px;">Features</h2>
+        <h2 style="margin-bottom: 20px;">Why Choose Hailshare?</h2>
         <div style="display: flex; gap: 16px; margin-bottom: 30px; flex-wrap: wrap;">
-            <button class="btnNormal feature-btn active" style="padding: 12px 24px; font-weight: 500;">All Features</button>
-            <button class="btnNormal feature-btn" style="padding: 12px 24px; font-weight: 500;">Analytics</button>
-            <button class="btnNormal feature-btn" style="padding: 12px 24px; font-weight: 500;">User Management</button>
-            <button class="btnNormal feature-btn" style="padding: 12px 24px; font-weight: 500;">Ride Tracking</button>
-            <button class="btnNormal feature-btn" style="padding: 12px 24px; font-weight: 500;">Security</button>
+            <button class="btnNormal feature-btn active" style="padding: 12px 24px;">All Features</button>
+            <button class="btnNormal feature-btn" style="padding: 12px 24px;">For Riders</button>
+            <button class="btnNormal feature-btn" style="padding: 12px 24px;">For Drivers</button>
+            <button class="btnNormal feature-btn" style="padding: 12px 24px;">Safety</button>
         </div>
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-            <div class="card"><span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 12px;">bar_chart</span><h3>Advanced Analytics</h3><p>Track KPIs and user behavior in real-time.</p></div>
-            <div class="card"><span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 12px;">manage_accounts</span><h3>User Control</h3><p>Manage permissions and account statuses easily.</p></div>
-            <div class="card"><span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 12px;">location_on</span><h3>Live Ride Map</h3><p>Monitor active rides and driver locations.</p></div>
+            <div class="card"><span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 12px;">payments</span><h3>Affordable Rides</h3><p>Split costs with fellow travelers and save up to 50% on every trip.</p></div>
+            <div class="card"><span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 12px;">groups</span><h3>Community Driven</h3><p>Connect with verified users and build trust through ratings and reviews.</p></div>
+            <div class="card"><span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 12px;">shield</span><h3>Safe & Secure</h3><p>Every ride is insured and we offer 24/7 customer support for peace of mind.</p></div>
         </div>
     </div>
 
-    <!-- ===== CTA SECTION 2 ===== -->
+    <!-- Bottom CTA (Product-focused) -->
     <div style="background: #f5f5f5; border-radius: 16px; padding: 40px; text-align: center; border: 1px solid #e0e0e0;">
-        <h2 style="font-size: 28px; margin-bottom: 16px;">Need help managing your fleet?</h2>
-        <p style="margin-bottom: 24px; color: #555;">Our support team is available 24/7 for admins.</p>
-        <button class="btnStrong" style="font-size: 16px; padding: 12px 32px;">Contact Support</button>
+        <h2 style="font-size: 28px; margin-bottom: 16px;">Ready to hit the road?</h2>
+        <p style="margin-bottom: 24px; color: #555;">Join thousands of happy riders and drivers already using Hailshare.</p>
+        <a href="createRide/index.html"><button class="btnStrong" style="font-size: 16px; padding: 12px 32px;">Sign Up Now</button></a>
     </div>
-</div>
 
-<!-- Style for active feature button -->
-<style>
-.feature-btn.active {
-    background: #000;
-    color: white;
-    border-color: #000;
-}
-</style>
+    <script>
+        // Scroll-controlled video playback
+        const video = document.getElementById('scrollVideo');
+        if (video) {
+            video.addEventListener('loadedmetadata', () => {
+                window.addEventListener('scroll', () => {
+                    const videoRect = video.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    const visibleRatio = Math.max(0, Math.min(1, (windowHeight - videoRect.top) / (windowHeight + videoRect.height)));
+                    if (video.duration) {
+                        video.currentTime = visibleRatio * video.duration;
+                    }
+                });
+            });
+        }
 
+        // Feature button toggle
+        document.querySelectorAll('.feature-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.feature-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>

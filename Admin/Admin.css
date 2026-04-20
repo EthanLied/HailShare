@@ -17,7 +17,7 @@ a {
     color: inherit;
 }
 
-/* === Navbar Styles (same as customer, but admin-specific links) === */
+/* === Navbar === */
 #navbar, #navbar.expand, #navbar > a, #content, #navbar .navbarItem {
     transition: 0.3s cubic-bezier(.42, .94, .31, .99);
 }
@@ -29,12 +29,13 @@ a {
     top: 0;
     display: flex;
     flex-direction: column;
-    align-items: baseline;
+    align-items: flex-start;
     width: 55px;
     height: 100vh;
     background-color: #ffffff;
     border-right: solid 1px #ececec;
     user-select: none;
+    padding-top: 10px;
 }
 
 #navbar.expand {
@@ -43,14 +44,9 @@ a {
 }
 
 #navbar > a {
-    position: absolute;
+    display: block;
+    width: 100%;
 }
-#navbar > a:nth-child(2) { top: 100px; }
-#navbar > a:nth-child(3) { top: 150px; }
-#navbar > a:nth-child(4) { top: 200px; }
-#navbar > a:nth-child(5) { top: 250px; }
-#navbar > a:nth-child(6) { top: 300px; }
-#navbar > a:nth-child(7) { bottom: 10px; }
 
 #hamburgerMenuNavbarIcon {
     transition: background-color 0.2s;
@@ -65,7 +61,7 @@ a > .navbarItem:hover {
 }
 
 .navbarItem {
-    margin: 10px 0 10px 5px;
+    margin: 5px 0 5px 5px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -118,9 +114,6 @@ a > .navbarItem:hover {
     background-color: #f7f7f7;
     transform: scale(0.98);
 }
-.btnNormal:active {
-    background-color: #ebebeb;
-}
 
 .btnStrong {
     background-color: #000;
@@ -150,12 +143,8 @@ input:focus, select:focus {
     border-color: #a0a0a0;
     box-shadow: 0 0 0 2px #dadada;
 }
-input[readonly] {
-    background-color: #f5f5f5;
-    color: #666;
-}
 
-/* === Tables (for Account List) === */
+/* === Tables === */
 table {
     width: 100%;
     border-collapse: separate;
@@ -181,37 +170,11 @@ tr:hover td {
     background-color: #f7f7f7;
 }
 
-/* === Cards & Containers === */
+/* === Cards === */
 .card {
     background: #f4f4f4;
     border-radius: 10px;
     padding: 20px;
-}
-
-.statGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.statCard {
-    background: #f4f4f4;
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.statCard span {
-    font-size: 32px;
-}
-.statCard h3 {
-    font-size: 24px;
-    font-weight: 600;
-}
-.statCard p {
-    color: #666;
 }
 
 /* === Admin Badge === */
@@ -227,7 +190,7 @@ tr:hover td {
     margin-bottom: 20px;
 }
 
-/* Mobile */
+/* === Mobile === */
 @media (max-width: 768px) {
     #navbar {
         background-color: transparent;
@@ -248,8 +211,5 @@ tr:hover td {
     }
     #hamburgerMenuNavbarIcon:hover {
         background-color: transparent;
-    }
-    .statGrid {
-        grid-template-columns: 1fr;
     }
 }

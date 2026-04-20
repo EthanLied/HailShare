@@ -8,7 +8,7 @@ function toggleNavbar() {
     if (content) content.classList.toggle('expand');
 }
 
-// Highlight current page (optional)
+// Highlight current page in navbar
 document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname;
     const links = document.querySelectorAll('#navbar a');
