@@ -95,6 +95,12 @@ let currentPage = 1;
 let currentRideId = null;
 let filteredRides = [...rides];
 
+// Working copy of passengers for the modify form (deep copy, not a reference)
+let workingPassengers = [];
+
+/* ══════════════════════════════════════
+   RIDE LIST
+══════════════════════════════════════ */
 function renderRides() {
     const sortVal = document.getElementById('sortBy').value;
     const filterVal = document.getElementById('filterBy').value;
@@ -155,10 +161,16 @@ function renderPage() {
     document.getElementById('nextPage').disabled = currentPage === totalPages;
 }
 
+/* ══════════════════════════════════════
+   MODIFY RIDE — OPEN
+══════════════════════════════════════ */
 function openModify(id) {
     const ride = rides.find(r => r.id === id);
     if (!ride) return;
     currentRideId = id;
+
+    // Deep-copy passengers so edits don't affect the list until Save
+    workingPassengers = ride.passengers.map(p => ({ ...p }));
 
     document.getElementById('rideListView').classList.add('hidden');
     document.getElementById('modifyRideView').classList.remove('hidden');
@@ -167,6 +179,7 @@ function openModify(id) {
     document.getElementById('modifyTo').value = ride.to;
     document.getElementById('modifyPrice').value = ride.price;
 
+    // Date dropdown
     const dateEl = document.getElementById('modifyDate');
     dateEl.innerHTML = '';
     const dates = [];
@@ -174,6 +187,7 @@ function openModify(id) {
     for (let d = 1; d <= 31; d++) dates.push(`2026-05-${String(d).padStart(2, '0')}`);
     dates.forEach(v => dateEl.appendChild(new Option(v, v, v === ride.date, v === ride.date)));
 
+    // Hour dropdown
     const [rideHour, rideMin] = ride.time.split(':');
     const hourEl = document.getElementById('modifyHour');
     hourEl.innerHTML = '';
@@ -182,6 +196,7 @@ function openModify(id) {
         hourEl.appendChild(new Option(v, v, v === rideHour, v === rideHour));
     }
 
+    // Minute dropdown (00–59)
     const minEl = document.getElementById('modifyMinute');
     minEl.innerHTML = '';
     for (let m = 0; m < 60; m++) {
@@ -191,17 +206,119 @@ function openModify(id) {
 
     document.getElementById('modifyCapacity').value = ride.capacity;
     document.getElementById('modifyStatus').value = ride.status;
+
+    renderPassengerEditor();
 }
 
-document.getElementById('backToList').addEventListener('click', () => {
-    document.getElementById('modifyRideView').classList.add('hidden');
-    document.getElementById('rideListView').classList.remove('hidden');
+/* ══════════════════════════════════════
+   PASSENGER EDITOR
+══════════════════════════════════════ */
+function renderPassengerEditor() {
+    const container = document.getElementById('passengerList');
+    container.innerHTML = '';
+
+    workingPassengers.forEach((p, idx) => {
+        const row = document.createElement('div');
+        row.className = 'passenger-row';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'pax-name';
+        nameSpan.textContent = p.name;
+
+        const actions = document.createElement('div');
+        actions.className = 'pax-actions';
+
+        if (p.host) {
+            // Host badge (no Make Host button)
+            const badge = document.createElement('span');
+            badge.className = 'host-badge';
+            badge.textContent = 'Host';
+            actions.appendChild(badge);
+        } else {
+            // Make Host button
+            const makeHostBtn = document.createElement('button');
+            makeHostBtn.type = 'button';
+            makeHostBtn.className = 'btn-make-host';
+            makeHostBtn.textContent = 'Make Host';
+            makeHostBtn.setAttribute('aria-label', `Make ${p.name} the host`);
+            makeHostBtn.addEventListener('click', () => {
+                workingPassengers.forEach(x => x.host = false);
+                workingPassengers[idx].host = true;
+                renderPassengerEditor();
+            });
+            actions.appendChild(makeHostBtn);
+        }
+
+        // Remove button
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'btn-remove-pax';
+        removeBtn.setAttribute('aria-label', `Remove ${p.name}`);
+        removeBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px">close</span>';
+        removeBtn.addEventListener('click', () => {
+            if (workingPassengers.length <= 1) {
+                showToast('There must be at least 1 person in the ride.');
+                return;
+            }
+            const wasHost = workingPassengers[idx].host;
+            workingPassengers.splice(idx, 1);
+            // If the removed person was host, auto-assign host to first remaining person
+            if (wasHost && workingPassengers.length > 0) {
+                workingPassengers[0].host = true;
+                showToast(`Host removed — "${workingPassengers[0].name}" is now the host.`);
+            }
+            renderPassengerEditor();
+        });
+        actions.appendChild(removeBtn);
+
+        row.appendChild(nameSpan);
+        row.appendChild(actions);
+        container.appendChild(row);
+    });
+}
+
+/* ── Add Person ────────────────────────────────── */
+document.getElementById('addPersonBtn').addEventListener('click', () => {
+    const input = document.getElementById('newPersonName');
+    const name = input.value.trim();
+    if (!name) {
+        showToast('Please enter a name before adding.');
+        input.focus();
+        return;
+    }
+    const duplicate = workingPassengers.some(p => p.name.toLowerCase() === name.toLowerCase());
+    if (duplicate) {
+        showToast(`"${name}" is already in the ride.`);
+        input.focus();
+        return;
+    }
+    workingPassengers.push({ name, host: false });
+    input.value = '';
+    input.focus();
+    renderPassengerEditor();
 });
 
+// Allow pressing Enter in the name input to add
+document.getElementById('newPersonName').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('addPersonBtn').click();
+    }
+});
+
+/* ══════════════════════════════════════
+   SAVE CHANGES
+══════════════════════════════════════ */
 document.getElementById('modifyForm').addEventListener('submit', e => {
     e.preventDefault();
     const ride = rides.find(r => r.id === currentRideId);
     if (!ride) return;
+
+    if (workingPassengers.length === 0) {
+        showToast('There must be at least 1 person in the ride.');
+        return;
+    }
+
     ride.from = document.getElementById('modifyFrom').value.trim();
     ride.to = document.getElementById('modifyTo').value.trim();
     ride.date = document.getElementById('modifyDate').value;
@@ -209,10 +326,21 @@ document.getElementById('modifyForm').addEventListener('submit', e => {
     ride.capacity = parseInt(document.getElementById('modifyCapacity').value);
     ride.price = parseFloat(document.getElementById('modifyPrice').value) || 0;
     ride.status = document.getElementById('modifyStatus').value;
+    ride.passengers = workingPassengers.map(p => ({ ...p }));
+    ride.people = ride.passengers.length;
+
     showToast('Ride updated successfully.');
     document.getElementById('modifyRideView').classList.add('hidden');
     document.getElementById('rideListView').classList.remove('hidden');
     renderRides();
+});
+
+/* ══════════════════════════════════════
+   NAVIGATION & UTILITIES
+══════════════════════════════════════ */
+document.getElementById('backToList').addEventListener('click', () => {
+    document.getElementById('modifyRideView').classList.add('hidden');
+    document.getElementById('rideListView').classList.remove('hidden');
 });
 
 document.getElementById('sortBy').addEventListener('change', renderRides);
@@ -230,6 +358,7 @@ function toggleNavbar() {
     document.getElementById('content').classList.toggle('expand');
     document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand'));
 }
+
 function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg; t.classList.add('show');

@@ -45,7 +45,7 @@
     <div id="content">
         <div class="content-wrapper">
 
-            <!-- Ride List View -->
+            <!-- ── Ride List View ── -->
             <div id="rideListView">
                 <h1 class="page-title">Ride List</h1>
                 <div class="controls-bar">
@@ -71,12 +71,9 @@
                         </select>
                     </div>
                 </div>
-
-                <!-- scrollable container -->
                 <div class="list-scroll-container">
                     <div id="rideList"></div>
                 </div>
-
                 <div class="pagination">
                     <span id="pageInfo">Page 1 / 1</span>
                     <button class="btnNormal pag-btn" id="prevPage" disabled>&#8249;</button>
@@ -84,7 +81,7 @@
                 </div>
             </div>
 
-            <!-- Modify Ride View -->
+            <!-- ── Modify Ride View ── -->
             <div id="modifyRideView" class="hidden">
                 <div class="page-header-row">
                     <button class="btnNormal btn-back" id="backToList">&#8249; Back</button>
@@ -105,7 +102,6 @@
                                 <label for="modifyDate">Date:</label>
                                 <select id="modifyDate"></select>
                             </div>
-                            <!-- TIME: two dropdowns (hour + minute) -->
                             <div class="form-group">
                                 <label>Time:</label>
                                 <div class="time-row">
@@ -139,6 +135,23 @@
                                 </select>
                             </div>
                         </div>
+
+                        <!-- Passenger Editor -->
+                        <div class="form-group">
+                            <label class="section-label">In Ride:</label>
+                            <div class="passenger-editor">
+                                <div class="add-person-row">
+                                    <input type="text" id="newPersonName" placeholder="Enter name to add…"
+                                        autocomplete="off" />
+                                    <button type="button" class="btnStrong btn-add-person" id="addPersonBtn">
+                                        <span class="material-symbols-outlined">person_add</span>
+                                        Add Person
+                                    </button>
+                                </div>
+                                <div id="passengerList"></div>
+                            </div>
+                        </div>
+
                         <div class="form-actions">
                             <button type="submit" class="btnStrong">Save Changes</button>
                         </div>
