@@ -1,102 +1,138 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
-*{
+* {
     font-family: "Geist", sans-serif;
 }
 
-title{
+title {
     display: block;
     font-weight: 500;
 }
 
-description{
+description {
     display: block;
     font-weight: 350;
     color: gray;
 }
 
-.btnNormal{
-    background-color: white; color: black;
-    border: solid 1px rgb(218, 218, 218); border-radius: 6px;
-    transition: 0.2s cubic-bezier(.17,.67,.31,.99)
+.btnNormal {
+    background-color: white;
+    color: black;
+    border: solid 1px rgb(218, 218, 218);
+    border-radius: 6px;
+    transition: 0.2s cubic-bezier(.17, .67, .31, .99)
 }
 
-.btnNormal:hover{
+.btnNormal:hover {
     background-color: rgb(247, 247, 247);
 }
 
-.btnNormal:active{
+.btnNormal:active {
     background-color: rgb(235, 235, 235);
 }
 
-.btnNormal2{
-    transition: 0.2s cubic-bezier(.17,.67,.31,.99);
+.btnNormal2 {
+    transition: 0.2s cubic-bezier(.17, .67, .31, .99);
     background-color: white;
-    border: solid 1px rgb(255, 255, 255); border-radius: 6px;
+    border: solid 1px rgb(255, 255, 255);
+    border-radius: 6px;
 }
 
-.btnNormal2:hover{
+.btnNormal2:hover {
     background-color: rgb(240, 240, 240);
 }
 
-.btnStrong, .btnStrong2{
-    transition: 0.4s cubic-bezier(.17,.67,.31,.99);
-    background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);
-    border: solid 1px black; border-radius: 6px;
+.btnStrong,
+.btnStrong2 {
+    transition: 0.4s cubic-bezier(.17, .67, .31, .99);
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border: solid 1px black;
+    border-radius: 6px;
 }
 
-.btnNormal:hover, .btnStrong:hover{
+.btnNormal:hover,
+.btnStrong:hover {
     cursor: pointer;
     transform: scale(0.95);
 }
 
-.btnNormal:active, .btnStrong:active{
+.btnNormal:active,
+.btnStrong:active {
     transform: scale(0.9);
 }
 
-.btnStrong2:hover{
+.btnStrong2:hover {
     border: solid 1px rgb(86, 86, 86);
     background-color: rgb(86, 86, 86);
 }
 
-.btnStrong2:active{
+.btnStrong2:active {
     transform: translateY(1px);
 }
 
-input, select{
-    border: solid 1px rgb(208, 208, 208); border-radius: 6px;
+input,
+select {
+    border: solid 1px rgb(208, 208, 208);
+    border-radius: 6px;
     padding: 4px 2px 4px 8px;
-    transition: 0.2s cubic-bezier(.17,.67,.31,.99);
+    transition: 0.2s cubic-bezier(.17, .67, .31, .99);
 }
 
 input::placeholder {
-    color: #7e7e7e; 
+    color: #7e7e7e;
 }
 
-input:focus{
+input:focus {
     outline: none;
     border: solid 1px rgb(160, 160, 160);
     box-shadow: 0px 0px 0px 2px rgb(218, 218, 218);
 }
 
-select:focus{
+select:focus {
     outline: none;
     border: solid 1px rgb(160, 160, 160);
     box-shadow: 0px 0px 0px 2px rgb(218, 218, 218);
 }
 
-table{
+table {
     border-collapse: separate;
     border-spacing: 0;
 }
 
-th{
+th {
     font-weight: 500;
 }
 
-th, td{
+th,
+td {
     border-bottom: solid 0.05rem rgb(208, 208, 208);
     padding: 10px;
     width: 10px;
 }
 
+@media screen and (max-width: 768px) {
+    .btnNormal:hover, .btnStrong:hover {
+        cursor: auto;
+        transform: scale(1);
+    }
+
+    .btnNormal:active,
+    .btnStrong:active {
+        transform: scale(0.9);
+    }
+
+    .btnNormal2:hover {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .btnStrong2:hover {
+        border: solid 1px black;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .btnStrong2:active {
+    transform: translateY(1px);
+    }
+
+}

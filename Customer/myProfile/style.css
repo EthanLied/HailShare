@@ -139,11 +139,32 @@ a:nth-of-type(5) > .navbarItem{
     margin-left: 280px;
 }
 
-#profileContainer{
+#ratingsContainer{
+    background-color: rgb(244, 244, 244);
+    width: 70%; 
+    align-self: center;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border-radius: 10px;
+    padding: 20px; margin-top: 30px; margin-bottom: 30px; gap: 20px;
+    
+}
+
+#viewMoreRatings{
     width: 100%;
+    display: flex; justify-content: center;
+}
+
+#viewMoreRatingsBtn{
+    height: 50px; width: 100%;
+}
+
+#profileContainer{
+    width: 70%;
     display: flex; flex-direction: column;
     align-items: center; justify-content: baseline;
-    gap: 15px;
+    gap: 30px;
+    align-self: center;
 }
 
 #profileContainer h4{
@@ -151,45 +172,40 @@ a:nth-of-type(5) > .navbarItem{
 }
 
 #nonSensitiveInfoContainer, #sensitiveInfoContainer{
-    align-items: center; justify-content: center;
-    display: flex; flex-direction: row;
-    width: 100%; gap: 5%;
-    padding: 20px;
-}
-
-/* Left and right side of non-sensitive info container */
-#nonSensitiveLeft, #nonSensitiveRight{
-    align-items: center; justify-content:baseline;
+    align-items: baseline; justify-content: center;
     display: flex; flex-direction: column;
-    width: 50%;  height: 100%;
+    width: 100%; gap: 5px; height: auto;
+    padding: 20px;
+    background-color: rgb(244, 244, 244);
+    border-radius: 10px;
 }
 
-/* Ensure all child items has max width */
-#nonSensitiveLeft *, #nonSensitiveRight *{
-    width: 100%; 
+#namesContainer{
+    display: flex; flex-direction: row;
+    width: 100%;
+    gap: 5%;
 }
 
-#nonSensitiveLeft > h4, #nonSensitiveRight > h4{
-    margin-top: 2%;
-    margin-bottom: 5px;
+#firstName, #lastName {
+    min-width: 47.5%;
+}
+
+#firstName > input, #lastName > input{
+    width: 100%;
+}
+
+#emailInput, #phoneNumberInput, #newPasswordInput, #securityQuestionDropdown, #securityAnswerInput, #sensitiveNotice, #currentPasswordInput{
+    width: 100%;
 }
 
 #dobDropdowns{
     display: flex; flex-direction: row;
-    gap: 2%
+    gap: 2%;
+    width: 100%;
 }
 
-#viewMoreRatings{
-    height: 15%; min-width: 87%;
-}
-
-#viewMoreRatingsBtn{
-    height: 100%;
-}
-
-#sensitiveInfoContainer{
-    background-color: rgb(244, 244, 244);
-    border-radius: 10px;
+#dobDropdowns > select{
+    width: 100%;
 }
 
 #sensitiveNotice{
@@ -197,8 +213,8 @@ a:nth-of-type(5) > .navbarItem{
 }
 
 .saveChangesBtn{
-    height: 70px;
-    margin-top: 30px;
+    height: 50px; width: 100%;
+    margin-top: 10px;
     font-weight: 600 !important; font-size: 15px;
 }
 

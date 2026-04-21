@@ -1,0 +1,496 @@
+/* ride-list-staff.css */
+body {
+    background: #fff;
+    color: #111;
+    font-size: 14px;
+}
+
+#navbar>a:nth-of-type(1)>.navbarItem {
+    background-color: rgb(216, 216, 216);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.page-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #111;
+    letter-spacing: -0.3px;
+}
+
+.page-header-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.ride-id-tag {
+    font-size: 14px;
+    font-weight: 400;
+    color: #888;
+}
+
+.controls-bar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-group label {
+    font-size: 13px;
+    color: #555;
+    white-space: nowrap;
+}
+
+.control-group select {
+    font-size: 13px;
+    height: 32px;
+    min-width: 160px;
+    cursor: pointer;
+}
+
+/* Scrollable list container */
+.list-scroll-container {
+    max-height: 520px;
+    overflow-y: auto;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 8px;
+    padding: 10px;
+    background: #fafafa;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(200, 200, 200) transparent;
+}
+
+.list-scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.list-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.list-scroll-container::-webkit-scrollbar-thumb {
+    background: rgb(200, 200, 200);
+    border-radius: 99px;
+}
+
+/* Ride card */
+.ride-card {
+    background: #fff;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 8px;
+    transition: box-shadow 0.15s;
+}
+
+.ride-card:last-child {
+    margin-bottom: 0;
+}
+
+.ride-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ride-route {
+    flex: 1;
+    min-width: 0;
+}
+
+.ride-route .from,
+.ride-route .to {
+    font-size: 13px;
+    color: #111;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ride-route .to {
+    color: #555;
+    margin-top: 2px;
+}
+
+.in-ride-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.in-ride-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    white-space: nowrap;
+    padding-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.passenger-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.passenger-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #444;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 99px;
+}
+
+.host-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    background: #111;
+    padding: 1px 5px;
+    border-radius: 99px;
+    letter-spacing: 0.2px;
+}
+
+.ride-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    font-size: 13px;
+    color: #444;
+    flex-wrap: wrap;
+    padding-top: 2px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.status-Active {
+    background: #e6f4ec;
+    color: #1a7a3c;
+}
+
+.status-Pending {
+    background: #fff4e0;
+    color: #b45309;
+}
+
+.status-Completed {
+    background: #eff1f5;
+    color: #4a4f5e;
+}
+
+.status-Cancelled {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.btn-info {
+    background: none;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #555;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+    padding: 0;
+}
+
+.btn-info:hover {
+    background: #f0f0f0;
+    color: #111;
+}
+
+.btn-info .material-symbols-outlined {
+    font-size: 18px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #555;
+}
+
+.pag-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pag-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* ── Modify form ── */
+.btn-back {
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    height: 32px;
+}
+
+.form-card {
+    background: #fff;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    font-size: 13px;
+    height: 34px;
+    width: 100%;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+/* Time dual-dropdown */
+.time-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.time-row select {
+    width: auto;
+    flex: 1;
+}
+
+.time-sep {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1;
+}
+
+.form-actions {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgb(218, 218, 218);
+}
+
+.form-actions .btnStrong {
+    padding: 8px 22px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* ── Passenger editor ── */
+.section-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.passenger-editor {
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 8px;
+    background: #fafafa;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+/* Add person row */
+.add-person-row {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    background: #fff;
+}
+
+.add-person-row input {
+    flex: 1;
+    font-size: 13px;
+    height: 32px;
+}
+
+.btn-add-person {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 14px;
+    height: 32px;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-add-person .material-symbols-outlined {
+    font-size: 16px;
+}
+
+/* Passenger rows list */
+#passengerList {
+    padding: 6px 0;
+}
+
+.passenger-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    gap: 10px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    transition: background 0.12s;
+}
+
+.passenger-row:last-child {
+    border-bottom: none;
+}
+
+.passenger-row:hover {
+    background: #f5f5f5;
+}
+
+.pax-name {
+    flex: 1;
+    font-size: 13px;
+    color: #111;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pax-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.host-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    background: #111;
+    padding: 2px 8px;
+    border-radius: 99px;
+    letter-spacing: 0.2px;
+}
+
+.btn-make-host {
+    font-size: 12px;
+    padding: 3px 10px;
+    height: 26px;
+    cursor: pointer;
+    border-radius: 99px;
+    border: 1px solid rgb(180, 180, 180);
+    background: #fff;
+    color: #333;
+    transition: background 0.15s, border-color 0.15s;
+    white-space: nowrap;
+}
+
+.btn-make-host:hover {
+    background: #f0f0f0;
+    border-color: #111;
+    color: #111;
+}
+
+.btn-remove-pax {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid rgb(218, 218, 218);
+    background: #fff;
+    color: #888;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn-remove-pax:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+    color: #b91c1c;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    font-size: 13px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: #111;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    z-index: 999;
+}
+
+.toast.show {
+    opacity: 1;
+}

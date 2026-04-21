@@ -85,9 +85,3 @@ td > p{
     text-align: justify;
 }
 
-/* Mini scrollbar for table*/
-#tableContainer{
-    border-radius: 10px;
-    border: solid 0.05rem rgb(208, 208, 208);
-    overflow-y: auto;
-}

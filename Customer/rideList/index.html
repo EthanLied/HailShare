@@ -4,8 +4,10 @@
 <head>
     <!--Imports-->
     <link rel="stylesheet" href="../shadCNTemplate.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="desktop.css">
     <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="mobile.css">
     <script src="script.js" defer></script>
     <title>Ride List</title>
 
@@ -17,6 +19,73 @@
 </head>
 
 <body>
+
+    <div id="header" class="mobileComponent">
+        <a>
+            <h2>Hailshare</h2>
+        </a>
+    </div>
+
+    <div id="popupMenu">
+        <div id="popupMenuLocations">
+            <div id="pickupDropoffLogoContainer">
+                <span class="material-symbols-outlined">
+                    directions_car
+                </span>
+                <div id="pickupDropoffLogoLine"></div>
+                <span class="material-symbols-outlined">
+                    location_on
+                </span>
+            </div>
+            <div id="pickupCard">
+                <p>PICKUP</p>
+                <p class="specificLocationName" id="popupPickupSpecific">Petronas Twin Tower</p>
+                <p id="popupPickupGeneral">KLCC, 50088 KL</p>
+            </div>
+            <div id="dropoffCard">
+                <p>DROPOFF</p>
+                <p class="specificLocationName" id="popupDropoffSpecific">Jalan Punchak</p>
+                <p id="popupDropoffGeneral">Off Jln P. Ramlee, 50250 KL</p>
+            </div>
+        </div>
+        <div id="popupMenuDetailsContainer">
+            <div class="popupMenuDetails">
+                <p>Walk to Pickup</p>
+                <p><span class="menuDetailsImportant" id="popupPickupDistance">63</span>&ensp;m</p>
+            </div>
+            <div class="popupMenuDetails">
+                <p>Pickup Time</p>
+                <p><span class="menuDetailsImportant" id="popupTime">10:42</span>&ensp;pm</p>
+            </div>
+            <div class="popupMenuDetails">
+                <p>Drop-off Walk</p>
+                <p><span class="menuDetailsImportant" id="popupDropoffDistance">23</span>&ensp;m</p>
+            </div>
+            <div class="popupMenuDetails">
+                <p>Seats Taken</p>
+                <p><span class="menuDetailsImportant" id="popupSeats">1 / 4</span>&ensp;seats</p>
+            </div>
+        </div>
+        <div id="popupMenuPriceAndSeats">
+            <div id="yourFareContainer">
+                <p>Price</p>
+                <p><span id="fareDetailsImportant">RM <s class="negativePrice" id="popupNormalPrice">12</s> <span class="positivePrice" id="popupDiscountedPrice">6.00</span></span></p>
+            </div>
+            <div id="seatsAvailable"></div>
+        </div>
+        <div id="popupMenuBtns">
+            <button class="btnNormal" onclick="closePopup()"><span class="material-symbols-outlined">
+                    close
+                </span>&ensp;Close</button>
+            <button class="btnNormal"><span class="material-symbols-outlined">
+                    chat
+                </span>&ensp;Chat</button>
+            <button class="btnStrong" id="joinRideBtn"><span class="material-symbols-outlined">
+                    directions_car
+                </span>&ensp;Join Ride</button>
+        </div>
+    </div>
+    <div id="darkenOverlay" onclick="closePopup()"></div>
 
     <!--Navbar-->
     <div id="navbar">
@@ -31,8 +100,8 @@
         </div>
 
         <!--Ride List Icon-->
-        <a href="">
-            <div class="navbarItem" href="">
+        <a>
+            <div class="navbarItem">
                 <span class="material-symbols-outlined">list_alt</span>
                 <p>Ride List</p>
             </div>
@@ -63,7 +132,7 @@
         </a>
 
         <!--My Profile Icon-->
-        <a href="">
+        <a href="../myProfile/index.html">
             <div class="navbarItem">
                 <span class="material-symbols-outlined"> account_circle</span>
                 <p>My Profile</p>
@@ -73,7 +142,7 @@
 
     <div id="content">
         <div id="addressInputs">
-            <h1>Ride List</h1>
+            <h1 id="rideListTitle">Ride List</h1>
             <p>From:</p>
             <input name="fromAddress">
             <p>To:</p>
@@ -81,8 +150,296 @@
         </div>
         <button class="btnStrong" id="searchBtn">Search</button>
         <h2 id="ridesTitle">Rides</h2>
+        <h4 class="mobileComponent">Sort By:</h4>
+        <select class="mobileComponent" id="sortByDropdown">
+            <option>Time (Eariler)</option>
+            <option>Time (Later)</option>
+            <option>Pickup Distance (Ascending)</option>
+            <option>Pickup Distance (Decending)</option>
+            <option>Dropoff Distance (Decending)</option>
+            <option>Dropoff Distance (Decending)</option>
+            <option>Price (Cheaper)</option>
+        </select>
         <div id="tableContainer">
-            <table>
+            <div class="rideItemMobile mobileComponent" 
+            data-pickup-specific="Petronas Twin Tower" data-pickup-general="KLCC, 50088 KL"
+            data-dropoff-specific="Jalan Puncak" data-dropoff-general="Off Jln P. Ramlee, 50250 KL"
+            data-pickup-distance="63" data-dropoff-distance="23"
+            data-time="10:42,PM" data-seats="1"
+            data-price="12">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <div class="rideItemMobile mobileComponent">
+                <div class="rideItemMobileRow1">
+                    <div class="rideItemMobileRowLeft">
+                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
+                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
+                    </div>
+                    <div class="rideItemMobileRowRight">
+                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
+                            Kuala Lumpur</p>
+                    </div>
+                </div>
+                <div class="rideItemMobileRow2">
+                    <p><span class="material-symbols-outlined">
+                            schedule
+                        </span><span>&ensp;</span>10:10PM</p>
+                    <p><span class="material-symbols-outlined">
+                            attach_money
+                        </span>RM5</p>
+                </div>
+                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+            </div>
+            <table class="desktopComponent">
                 <tr class="tableHeaderRow">
                     <th>From</th>
                     <th>To</th>

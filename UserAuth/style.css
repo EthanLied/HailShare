@@ -72,7 +72,7 @@ h2 {
   padding: 15px;
   margin-bottom: 10px;
   margin-top: 20px;
-  background-color: #7a7a7a;
+  background-color: #111;
   border: none;
   border-radius: 10px;
   color: white;
@@ -82,7 +82,7 @@ h2 {
 }
 
 .btn:hover {
-  background-color: #5e5e5e;
+  background-color: #333;
 }
 
 .btn:active {
@@ -248,7 +248,7 @@ h2 {
   width: 100%;
   padding: 15px;
   background-color: #fff;
-  border: 1px solid black;
+  border: 1px solid #111;
   border-radius: 10px;
   color: black;
   cursor: pointer;
@@ -257,23 +257,23 @@ h2 {
 }
 
 .btnRegNormal:hover {
-  background-color: #f2f2f2;
+  background-color: #f5f5f5;
 }
 
 .btnRegStrong {
   width: 100%;
   padding: 15px;
-  background-color: #d3d3d3;
+  background-color: #111;
   border: none;
   border-radius: 10px;
-  color: black;
+  color: white;
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 17px;
 }
 
 .btnRegStrong:hover {
-  background-color: #c0c0c0;
+  background-color: #333;
 }
 
 .btnRegNormal:active,
@@ -293,17 +293,17 @@ h2 {
   width: 100%;
   padding: 15px;
   margin-bottom: 30px;
-  background-color: #d3d3d3;
+  background-color: #111;
   border: none;
   border-radius: 10px;
-  color: black;
+  color: white;
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 17px;
 }
 
 .btnReg1Strong:hover {
-  background-color: #c0c0c0;
+  background-color: #333;
 }
 
 .btnReg1Strong:active {
