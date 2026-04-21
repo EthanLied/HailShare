@@ -17,6 +17,9 @@
     <a href="AccountList.html">
         <div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Account List</p></div>
     </a>
+    <a href="../Admin%20Profile/Admin.html">
+        <div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Admin Profile</p></div>
+    </a>
 </div>
 
 <div id="content" style="display: flex; flex-direction: column; align-items: center;">
@@ -29,6 +32,7 @@
         <h1 style="margin-bottom: 20px;">Modify Account</h1>
         <p style="margin-bottom: 20px; color: #666;">Editing account: <strong id="accountName">Alex Chen</strong> (<span id="accountEmail">alex.c@email.com</span>)</p>
 
+        <!-- Account Information Card -->
         <div class="card" style="margin-bottom: 20px;">
             <h3>Account Information</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
@@ -37,28 +41,63 @@
                 <div><label>Email</label><input id="email" value="alex.c@email.com"></div>
                 <div><label>Phone Number</label><input id="phone" value="+1 (555) 987-6543"></div>
             </div>
+            <!-- Date of Birth -->
+            <div style="margin-top: 15px;">
+                <label>Date of Birth</label>
+                <div style="display: flex; gap: 10px;">
+                    <select id="dobDay" style="width: auto;">
+                        <option>1</option><option>2</option>...<option>31</option>
+                    </select>
+                    <select id="dobMonth" style="width: auto;">
+                        <option>January</option><option>February</option>...<option>December</option>
+                    </select>
+                    <select id="dobYear" style="width: auto;">
+                        <option>1990</option><option>1991</option>...<option>2010</option>
+                    </select>
+                </div>
+            </div>
             <div style="margin-top: 15px;">
                 <label>Account Type</label>
                 <select id="accountType">
-                    <option selected>Customer</option>
-                    <option>Driver</option>
-                    <option>Admin</option>
+                    <option selected>Customer</option><option>Driver</option><option>Admin</option>
                 </select>
             </div>
             <div style="margin-top: 15px;">
                 <label>Account Status</label>
                 <select id="accountStatus">
-                    <option selected>Active</option>
-                    <option>Suspended</option>
-                    <option>Pending</option>
+                    <option selected>Active</option><option>Suspended</option><option>Pending</option>
                 </select>
             </div>
         </div>
 
+        <!-- Security Information Card (NEW) -->
+        <div class="card" style="margin-bottom: 20px;">
+            <h3>Security Information</h3>
+            <div style="margin-top: 15px;">
+                <label>Security Question</label>
+                <select id="securityQuestion">
+                    <option>What is your pet's name?</option>
+                    <option>What is your mother's maiden name?</option>
+                    <option>What city were you born in?</option>
+                </select>
+            </div>
+            <div style="margin-top: 15px;">
+                <label>Security Answer</label>
+                <input id="securityAnswer" placeholder="Answer">
+            </div>
+        </div>
+
+        <!-- Reset Password Card (Direct reset, no email) -->
         <div class="card" style="margin-bottom: 20px;">
             <h3>Reset Password</h3>
-            <p style="margin: 10px 0; color: #666;">Generate a temporary password or set a new one.</p>
-            <button class="btnNormal" id="resetPasswordBtn" style="width: auto;">Send Password Reset Email</button>
+            <div style="margin-top: 15px;">
+                <label>New Password</label>
+                <input type="password" id="newPassword" placeholder="Enter new password">
+            </div>
+            <div style="margin-top: 15px;">
+                <label>Confirm New Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm new password">
+            </div>
         </div>
 
         <div style="display: flex; gap: 15px; justify-content: flex-end;">
@@ -69,22 +108,18 @@
 </div>
 
 <script>
-    // Get email from URL
     const params = new URLSearchParams(window.location.search);
     const email = params.get('email');
-    if (email) {
-        document.getElementById('accountEmail').textContent = email;
-        // In a real app, fetch account data and populate fields
-    }
+    if (email) document.getElementById('accountEmail').textContent = email;
 
-    // Demo save action
     document.getElementById('saveChangesBtn').addEventListener('click', function() {
+        const newPass = document.getElementById('newPassword').value;
+        const confirmPass = document.getElementById('confirmPassword').value;
+        if (newPass && newPass !== confirmPass) {
+            alert('Passwords do not match.');
+            return;
+        }
         alert('Changes saved (demo).');
-        // window.location.href = 'AccountList.html';
-    });
-
-    document.getElementById('resetPasswordBtn').addEventListener('click', function() {
-        alert('Password reset email sent (demo).');
     });
 </script>
 
