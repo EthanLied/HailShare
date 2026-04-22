@@ -1,0 +1,122 @@
+/* Mobile View */
+@media screen and (max-width: 768px) {
+
+    /* Reveals back mobile components */
+    .mobileComponent {
+        display: block;
+    }
+
+    /* Hides desktop components */
+    .desktopComponent {
+        display: none;
+    }
+
+    #header {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.511);
+        backdrop-filter: blur(20px);
+        width: 100%;
+        height: 60px;
+        border-bottom: solid 1px rgb(207, 207, 207);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Removes border when unexpanded (cleaner) */
+    #navbar{
+        border-color: transparent;
+        background-color: transparent;
+        transition: 
+            background-color 0.3s cubic-bezier(.42, .94, .31, .99),
+            width 0.3s cubic-bezier(.42, .94, .31, .99);
+
+    }
+
+    /* Only allow href events when navbar is revealed */
+    #navbar > a{
+        pointer-events: none;
+    }
+
+    #navbar.expand > a{
+        pointer-events: all;
+    }
+
+    /* Readjust content pading for mobile */
+    #content {
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 90px;
+        padding-bottom: 20px;
+    }
+
+    /* No need to move content as navbar is now an overlay*/
+    #content, #content.expand{
+        margin-left: 0px;
+    }
+
+    .navbarItem{
+        transition: 0.3s cubic-bezier(.42, .94, .31, .99);
+    }
+
+    /* No need to hide text */
+    .navbarItem > p{
+        color: black;
+    }
+
+    /* Adds mini sidebar (if needed) and reintroduces border*/
+    #navbar.expand{
+        overflow-y: auto; overflow-x: hidden;
+        border-right: solid 1px rgb(236, 236, 236); 
+    }
+
+    /* Preps navbar movement by tucking contents to the left + remove blue box on mobile tap*/
+    #navbar > a{
+        -webkit-tap-highlight-color: transparent;
+        transform: translateX(-350%);
+        transition: transform 0.3s cubic-bezier(.42, .94, .31, .99);
+        opacity: 0;
+    }
+
+    /* Slides in navbar*/
+    #navbar.expand > a{
+        transform: translateX(0%);
+        opacity: 1;
+        
+    }
+
+    /* Clear hover effects on hamburger menu (unusable on mobile) */
+    #hamburgerMenuNavbarIcon:hover{
+        background-color: rgba(255, 255, 255, 0);
+    }
+    
+    /* Re-adjust position of the profile component in navbar*/
+    #navbar > a:nth-child(6) { position: absolute; top:92vh; }
+
+    #addressInputs{
+        align-items: center; justify-content: center;
+    }
+
+    #addressInputs > input{
+        max-width: 97%;
+    }
+
+    #attributeDropdownsContainer {
+        display: flex; flex-direction: column;
+        width: 100%;
+        gap: 5px;
+    }
+
+    #attributeDropdownsContainer > select {
+        width: 100%;
+    }
+
+    #attributeDropdownsContainer > *:nth-child(1) { order: 1; } /* Date label */
+    #attributeDropdownsContainer > *:nth-child(5) { order: 2; } /* date select */
+    #attributeDropdownsContainer > *:nth-child(2) { order: 3; } /* Time label */
+    #attributeDropdownsContainer > *:nth-child(6) { order: 4; } /* timeSelector */
+    #attributeDropdownsContainer > *:nth-child(3) { order: 5; } /* Capacity label */
+    #attributeDropdownsContainer > *:nth-child(7) { order: 6; } /* capacity select */
+    #attributeDropdownsContainer > *:nth-child(4) { order: 7; } /* Price label */
+    #attributeDropdownsContainer > *:nth-child(8) { order: 8; } /* price select */
+}
