@@ -1,0 +1,72 @@
+/* Removes default spacing*/
+*{
+    padding: 0;
+    margin: 0;
+}
+
+/* Removes blue text and underline from hyperlinks*/
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Hides mobile components in desktop mode */
+.mobileComponent{
+    display: none;
+}
+
+#goBackBtn{
+    display: flex; flex-direction: row;
+    justify-content: center; align-items: center;
+    padding: 5px; padding-right: 10px;
+    margin-top: 10px;
+}
+
+/* Define input box dimensions */
+#addressInputs > input{
+    width: 100%;
+    height: 30px;
+}
+
+/* Spacing for input labels */
+#addressInputs > p{
+    margin-top: 15px;; margin-bottom: 5px;
+}
+
+/* Rest of attributes will be stored in a grid container */
+#attributeDropdownsContainer{
+    margin-top: 15px; margin-right: 35px;
+    display: grid;
+    grid-template-columns: 30% 30% 20% 20%;
+    gap: 5px 15px;
+}
+
+/* Time selection will use an additional div */
+#timeSelector {
+    display: flex; align-items: center; gap: 5px; 
+}
+
+#timeSelector select {
+    width: 100%;
+    text-align: center;
+}
+
+#createRideBtn{
+    min-height: 50px; width: 300px;
+    margin-top: 25px; margin-bottom: 25px;
+    font-size: 15px; font-weight: 700;
+    align-self: center;
+    cursor: pointer;
+}
+
+#notice{
+    align-self: center; 
+    background-color: #fff1f2; color: #7f1d1d;  
+    margin-top: 20px; margin-bottom: 20px; padding: 15px;
+    text-align: center; font-weight: 450; font-size: 10px;
+    font-size: 20px;
+    border: 1.5px solid #fecaca; border-radius: 10px;
+}
+
+
+
