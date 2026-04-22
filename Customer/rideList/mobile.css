@@ -25,6 +25,7 @@
 
     /* Removes border when unexpanded (cleaner) */
     #navbar {
+        height: 100svh;
         border-color: transparent;
         background-color: transparent;
         transition:
