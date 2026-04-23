@@ -310,3 +310,252 @@ h2 {
   transform: scale(0.97);
 }
 
+/* ===== MOBILE RESPONSIVE (≤ 768px) ===== */
+@media (max-width: 768px) {
+
+  body {
+    background-color: white;
+  }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    background-color: transparent;
+  }
+
+  .nav-right {
+    display: none; /* remove Login/Register */
+  }
+
+  .nav-left {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    flex-direction: column;
+    height: auto; /* adjust for taller navbar */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left {
+    display: none; /* remove image */
+  }
+
+  .right {
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ===== FORM ===== */
+  .form-box {
+    width: 100%;
+    max-width: 320px;
+    gap: 40px;
+    transform: none;
+  }
+
+  h2 {
+    font-size: 32px;
+    text-align: center;
+    margin: 10px 0 20px;
+  }
+
+  /* ===== INPUTS ===== */
+  input, select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 15px;
+    border: 1px solid #000;
+    font-size: 16px;
+  }
+
+  /* ===== BUTTON ===== */
+  .btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 15px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  /* ===== LINKS ===== */
+  .links {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .links a {
+    display: block;
+    margin: 10px 0;
+    font-size: 16px;
+    text-decoration: underline;
+    color: black;
+  }
+
+  .bottom-link {
+    text-align: center;
+  }
+
+  .bottom-link a {
+    font-size: 16px;
+    text-decoration: underline;
+    color: black;
+  }
+}
+
+/* ===== REGISTRATION MOBILE ONLY (≤ 768px) ===== */
+@media (max-width: 768px) {
+
+  /* Only target registration page */
+  .reg-container {
+
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .reg-container h2 {
+    font-size: 28px;
+    text-align: center;
+    margin: 15px 0 30px;
+  }
+
+  /* Stack form fields */
+  .reg-container .form-row {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* Inputs styling (ONLY inside reg-container) */
+  .reg-container input,
+  .reg-container select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #000;
+    font-size: 16px;
+  }
+
+  /* DOB row */
+  .reg-container .dob {
+    display: flex;
+    gap: 15px;
+  }
+
+  .reg-container .dob select {
+    flex: 1;
+  }
+
+  /* Buttons row */
+  .reg-container .button-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .reg-container .button-row .btnRegNormal,
+  .reg-container .button-row .btnRegStrong {
+    width: 48%;
+    height: 50px;
+    border-radius: 15px;
+  }
+
+  /* Single button (Next button in step 1) */
+  .reg-container .btnReg1Strong {
+    width: 100%;
+    height: 50px;
+    border-radius: 15px;
+  }
+
+  /* Step indicator → bottom horizontal */
+  .steps {
+    position: absolute;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 200px;
+    gap: 10px;
+  }
+
+  .steps {
+  position: absolute;
+  bottom: 70px; /* adjust this if needed */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+  .line {
+    width: 40px;
+    height: 2px;
+  }
+
+  .step {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Bottom link */
+  .reg-container .bottom-link {
+    text-align: center;
+    margin-top: 91px;
+  }
+
+  .reg-container .button-row + .bottom-link {
+    margin-top: 69px;
+    text-align: center;
+  }
+}
+/* ===== REGISTRATION 4 ONLY ===== */
+@media (max-width: 768px) {
+
+  /* Only apply to reg4 page */
+  .reg-container:has(.sub-title) {
+
+    /* optional: adjust spacing if needed */
+    padding-top: 10px;
+  }
+  .reg-container:has(.sub-title) h2 {
+    font-size: 28px;       /* adjust size */
+    margin: 24px 0 40px;   /* spacing control */
+    text-align: center;
+    font-weight: 600;
+  }
+
+  /* Optional: make dropdown feel more "button-like" */
+  .reg-container:has(.sub-title) select option {
+    font-weight: normal;
+  }
+
+  /* Improve "What type..." title spacing */
+  .reg-container:has(.sub-title) .sub-title {
+    font-weight: normal;
+    font-size: 28px;
+    margin: 15px 0 50px;
+    text-align: center;
+  }
+
+    .reg-container:has(.sub-title) .steps {
+    bottom: 110px; /* move step indicator higher/lower */
+  }
+
+  .reg-container:has(.sub-title) .bottom-link {
+    margin-top: 154px;  /* adjust link spacing */
+    text-align: center;
+  }
+}
+
+
