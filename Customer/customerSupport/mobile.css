@@ -1,3 +1,5 @@
+
+
 /* Mobile View */
 @media screen and (max-width: 768px) {
 
@@ -25,7 +27,7 @@
         background-color: transparent;
     }
 
-    /* Readjust content pading for mobile */
+     /* Readjust content pading for mobile */
     #content{
         padding-left: 20px; padding-right: 20px; padding-top: 90px;
     }
@@ -57,7 +59,6 @@
     #navbar.expand > a{
         transform: translateX(0%);
         opacity: 1;
-        
     }
 
     /* Clear hover effects on hamburger menu (unusable on mobile) */

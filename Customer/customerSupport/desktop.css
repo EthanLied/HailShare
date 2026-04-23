@@ -20,6 +20,22 @@ a{
 }
 
 
+#navbar, #navbar.expand, #navbar > a, #content, #tabList > a, .navbarItem {
+    transition: 0.3s cubic-bezier(.42, .94, .31, .99);
+}
+
+/* Shrinks and slightly fades when hovering logo and navbar items*/
+h3:hover, .navbarItem:not(:first-child):active{
+    transition: 0.2s;
+    opacity: 0.75;
+    transform: scale(0.95);
+}
+
+/* Shrinks and slightly fades further on logo only*/
+h3:active{
+    opacity: 0.5;
+    transform: scale(0.9);
+}
 /* Div for the main contents of the page*/
 #content{
     margin-left: 55px; padding: 50px; padding-bottom: 10px;
@@ -36,6 +52,24 @@ a{
 /* When the navbar is expanded, push content div to the right*/
 #content.expand{
     margin-left: 280px;
+}
+
+#supportRequestBtn{
+    height: 70px; width: 100%;
+    margin-top: 20px; margin-bottom: 20px;
+    font-size: 20px; font-weight: 600;
+    display: flex; flex-direction: row;
+    justify-content: center; align-items: center;
+    gap: 10px;
+}
+
+#supportRequestBtn:hover{
+    transform: scale(0.975);
+    cursor: pointer;
+}
+
+#supportRequestBtn:active{
+    transform: scale(0.95);
 }
 
 #tabList{
@@ -66,41 +100,17 @@ a{
     scale: 0.98;
 }
 
-#ongoingPastSelectorContainer{
-    display: flex; flex-direction: row;
-    align-items: center; justify-content: center;
-    width: 100%; min-height: 50px;
-    margin-top: 15px;
-}
-
-#ongoingPastSelectorContainer > a{
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    width: 49.5%; height: 100%;
-    text-align: center;
-    cursor: pointer;
-}
-
-#ongoingPastSelectorContainer > a > p{
-    margin-top: auto; margin-bottom: auto;
-}
-
-#ongoingIndicatorBar, #pastIndicatorBar{
-    width: 98%; height: 3px;
-    border-radius: 10px;
-    background-color: grey;
-}
-
 /* Contains all ride items */
-#rideRecordContainer{
+#recordRowContainer{
     margin-top: 20px; padding: 10px;
     display: flex; flex-direction: column;
-    height: auto; width: 100%;
-    align-self: center; align-items: center; justify-content: center; 
+    height: auto;
+    align-items: center;
     gap: 30px;
 }
 
-.ongoingRidesItem, .rideHistoryItem{
+/* Individual container */
+.chatItem{
     width: 98%;     
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(236, 236, 236); border-radius: 10px;
@@ -109,18 +119,18 @@ a{
     gap: 10px;
 }
 
-/* left and right side items for each individual ride container */ 
-.leftSideItems, .rightSideItems{
-    display: flex; flex-direction: column;
-    width: 50%;
+/* Defines left and ride side contents of each individual container */
+.leftSideItems{
+    gap: 5px;
 }
 
 .rightSideItems{
     gap: 10px;
 }
 
-.leftSideItems{
-    gap: 5px;
+.leftSideItems, .rightSideItems{
+    display: flex; flex-direction: column;
+    width: 50%;
 }
 
 .leftSideItems > p > span, .rightSideItems > p > span{
@@ -137,13 +147,14 @@ a{
     font-size: 20px; font-weight: 600;
 }
 
-.address{
+/* Handles multiline contents for additional notes */
+.additionalNotes{
     overflow-wrap: break-word; 
     word-break:keep-all;
     font-size: 12px;
 }
 
-.leaveRideBtn, .leaveRideBtn:hover{
+.closeChatBtn, .closeChatBtn:hover{
     background-color: red; color: white;
 }
 
@@ -177,9 +188,5 @@ a{
     margin: 0;              
     line-height: 0;
 }
-
-
-
-
 
 

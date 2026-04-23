@@ -4,8 +4,9 @@
 <head>
     <!--Imports-->
     <link rel="stylesheet" href="../shadCNTemplate.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="desktop.css">
+    <link rel="stylesheet" href="mobile.css">
     <script src="script.js" defer></script>
     <title>Customer Support</title>
 
@@ -17,6 +18,12 @@
 </head>
 
 <body>
+
+    <div id="header" class="mobileComponent">
+        <a>
+            <h2>Hailshare</h2>
+        </a>
+    </div>
 
     <!--Navbar-->
     <div id="navbar">
@@ -83,69 +90,316 @@
             </button>
         </a>
 
+        <div id="tabList">
+            <a id="ongoingChatsTab" onclick="switchTab('ongoing')">Ongoing Chats</a>
+            <a id="pastChatsTab" onclick="switchTab('past')">Past Chats</a>
+        </div>
 
         <div id="recordRowContainer">
-            <div id="recordColumnContainer">
-                <h2>Ongoing Chats</h2>
-                <div id="ongoingChatsContainer">
 
-                    <div class="ongoingChatsItem">
-                        <div class="leftSideItems">
-                            <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
-                            <p>Issue Type: <span>Joining Rides</span></p>
-                            <p>Time Opened: <span>1:00PM</span></p>
-                            <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
-                            </p>
-                            <p>Agent assigned: <span>Mr James</span></p>
-                        </div>
-                        <div class="rightSideItems">
+            <div class="chatItem ongoing">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Opened: <span>1:00PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+                <div class="rightSideItems">
 
-                            <a href="chatroom/index.html">
-                                <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
-                                        chat
-                                    </span></button>
-                            </a>
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+                    </a>
 
-                            <a>
-                                <button class="btnNormal closeChatBtn">Close Chat <span
-                                        class="material-symbols-outlined">
-                                        cancel
-                                    </span></button>
-                            </a>
-                        </div>
-                    </div>
+                    <a>
+                        <button class="btnNormal closeChatBtn">Close Chat <span
+                                class="material-symbols-outlined">
+                                cancel
+                            </span></button>
+                    </a>
+                </div>
+            </div>
+    
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
+                </div>
+            </div>
+            <div class="chatItem past">
+                <div class="leftSideItems">
+                    <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
+                    <p>Issue Type: <span>Joining Rides</span></p>
+                    <p>Time Closed: <span>1:30 PM</span></p>
+                    <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
+                    </p>
+                </div>
+                <div class="rightSideItems">
+                    <a href="chatroom/index.html">
+                        <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
+                                chat
+                            </span></button>
+
+                    </a>
+                    <p>Agent assigned: <span>Mr James</span></p>
                 </div>
             </div>
 
-            <div id="recordColumnContainer">
-                <h2>Past Chats</h2>
-                <div id="rideChatContainer">
-                    <div class="rideChatItem">
-                        <div class="leftSideItems">
-                            <p class="rideIDLabel">Ride ID: <span>#018232</span></p>
-                            <p>Issue Type: <span>Joining Rides</span></p>
-                            <p>Time Closed: <span>1:30 PM</span></p>
-                            <p>Additional Notes: <span class="additionalNotes">Can't find the person</span>
-                            </p>
-                        </div>
-                        <div class="rightSideItems">
-                            <a href="chatroom/index.html">
-                                <button class="btnNormal">Chatroom <span class="material-symbols-outlined">
-                                        chat
-                                    </span></button>
-
-                            </a>
-                            <p>Agent assigned: <span>Mr James</span></p>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
         </div>
+
+        <div id="pagination">
+            <p id="paginationLabel">Page:&nbsp;</p>
+
+            <button class="btnNormal paginationBtn" onclick="updatePagination(-1)">
+                <span class="material-symbols-outlined">chevron_backward</span>
+                <p>Previous&nbsp;&nbsp;</p>
+            </button>
+
+            <input id="paginationSelector" value="1" oninput="processPagination(this.value)">
+
+            <p> &nbsp;/&nbsp;
+            <p id="paginationTotal">20</p>
+            </p>
+
+            <button class="btnNormal paginationBtn" onclick="updatePagination(1)">
+                <p>&nbsp;&nbsp;Next</p>
+                <span class="material-symbols-outlined">chevron_forward</span>
+            </button>
+        </div>
+
+        
     </div>
-
-
 
 </body>
 
