@@ -1,0 +1,170 @@
+/* Removes default spacing*/
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    overflow-y: hidden;
+}
+
+input{
+    box-sizing: border-box;
+}
+
+/* Removes blue text and underline from hyperlinks*/
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Hides mobile components in desktop mode */
+.mobileComponent{
+    display: none;
+}
+
+#navbar, #navbar.expand, #navbar > a, #content, #tabList > a, .navbarItem {
+    transition: 0.3s cubic-bezier(.42, .94, .31, .99);
+}
+
+/* Shrinks and slightly fades when hovering logo and navbar items*/
+h3:hover, .navbarItem:not(:first-child):active{
+    transition: 0.2s;
+    opacity: 0.75;
+    transform: scale(0.95);
+}
+
+/* Shrinks and slightly fades further on logo only*/
+h3:active{
+    opacity: 0.5;
+    transform: scale(0.9);
+}
+
+/* Div for the main contents of the page*/
+#content{
+    margin-left: 55px; padding: 50px; padding-bottom: 10px;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+    transition: 0.3s cubic-bezier(.42,.94,.31,.99);
+    overflow-y: scroll;
+}
+
+#content > h2{
+    margin-top: 20px; margin-bottom: 10px;
+}
+
+/* When the navbar is expanded, push content div to the right*/
+#content.expand{
+    margin-left: 280px;
+}
+
+#ratingsContainer{
+    background-color: rgb(244, 244, 244);
+    width: 90%; 
+    align-self: center;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border-radius: 10px;
+    padding: 20px; margin-top: 30px; margin-bottom: 30px; gap: 20px;
+    
+}
+
+#viewMoreRatings{
+    width: 100%;
+    display: flex; justify-content: center;
+}
+
+#viewMoreRatingsBtn{
+    height: 50px; width: 100%;
+}
+
+#profileContainer{
+    width: 90%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: baseline;
+    gap: 30px;
+    align-self: center;
+}
+
+#profileContainer h4{
+    font-weight: 450;
+}
+
+#nonSensitiveInfoContainer, #sensitiveInfoContainer{
+    align-items: baseline; justify-content: center;
+    display: flex; flex-direction: column;
+    width: 100%; gap: 5px; height: auto;
+    padding: 20px;
+    background-color: rgb(244, 244, 244);
+    border-radius: 10px;
+}
+
+#namesContainer{
+    display: flex; flex-direction: row;
+    width: 100%;
+    gap: 5%;
+}
+
+#firstName, #lastName {
+    min-width: 47.5%;
+}
+
+#firstName > input, #lastName > input{
+    width: 100%;
+}
+
+#emailInput, #phoneNumberInput, #newPasswordInput, #securityQuestionDropdown, #securityAnswerInput, #sensitiveNotice, #currentPasswordInput{
+    width: 100%;
+}
+
+#dobDropdowns{
+    display: flex; flex-direction: row;
+    gap: 2%;
+    width: 100%;
+}
+
+#dobDropdowns > select{
+    width: 100%;
+}
+
+#sensitiveNotice{
+    font-weight: 600 !important;
+}
+
+.saveChangesBtn{
+    height: 50px; width: 100%;
+    margin-top: 10px;
+    font-weight: 600 !important; font-size: 15px;
+}
+
+/* Logout and del account btn */
+#importantBtns{
+    margin-top: 15px; margin-bottom: 10px;
+    display: flex; flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+    min-height: 50px; width: 100%;
+}
+
+#logoutBtn, #deleteAccountBtn{
+    height: 100%; width: 45%;
+    align-self: center;
+    font-size: 15px; font-weight: 600;
+}
+
+#logoutBtn{
+    color: rgb(255, 0, 0);
+    background-color: white;
+    border: solid 1px rgb(216, 216, 216);
+}
+
+#deleteAccountBtn{
+    background-color: rgb(255, 0, 0);
+    border: none;
+}
+
+
+
+
+
