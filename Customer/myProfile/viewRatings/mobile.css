@@ -29,9 +29,7 @@
     /* Readjust content pading for mobile */
     #content{
         padding-left: 20px; padding-right: 20px; padding-top: 90px;
-        margin-left: 0px;
     }
-
 
     /* No need to move content as navbar is now an overlay*/
     #content, #content.expand{
@@ -52,7 +50,7 @@
     /* Preps navbar movement by tucking contents to the left + remove blue box on mobile tap*/
     #navbar > a{
         -webkit-tap-highlight-color: transparent; pointer-events: none;
-                transform: translateX(-350%);
+        transform: translateX(-350%);
         opacity: 0;
     }
 
@@ -70,7 +68,7 @@
     /* Re-adjust position of the profile component in navbar*/
     #navbar > a:nth-child(6) { position: absolute; top:92vh; }
 
-    textarea{
-        font-size: 20px;
+    #ratingRecieved{
+        height: 100%;
     }
 }

@@ -48,14 +48,14 @@
 
     /* Preps navbar movement by tucking contents to the left + remove blue box on mobile tap*/
     #navbar > a{
-        -webkit-tap-highlight-color: transparent;
-        transform: translateX(-350%);
+        -webkit-tap-highlight-color: transparent; pointer-events: none;
+                transform: translateX(-350%);
         opacity: 0;
     }
 
     /* Slides in navbar*/
     #navbar.expand > a{
-        transform: translateX(0%);
+        transform: translateX(0%); pointer-events: all;
         opacity: 1;
         
     }

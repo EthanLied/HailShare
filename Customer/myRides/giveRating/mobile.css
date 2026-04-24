@@ -32,10 +32,9 @@
         margin-left: 0px;
     }
 
-
     /* No need to move content as navbar is now an overlay*/
     #content, #content.expand{
-        margin-left: 0px;
+        margin-left: 0px !important;
     }
 
     /* No need to hide text */
@@ -52,14 +51,15 @@
     /* Preps navbar movement by tucking contents to the left + remove blue box on mobile tap*/
     #navbar > a{
         -webkit-tap-highlight-color: transparent; pointer-events: none;
-                transform: translateX(-350%);
+        transform: translateX(-350%);
         opacity: 0;
     }
 
     /* Slides in navbar*/
     #navbar.expand > a{
-        transform: translateX(0%); pointer-events: all;
+        transform: translateX(0%); pointer-events: all; 
         opacity: 1;
+        
     }
 
     /* Clear hover effects on hamburger menu (unusable on mobile) */
@@ -70,7 +70,7 @@
     /* Re-adjust position of the profile component in navbar*/
     #navbar > a:nth-child(6) { position: absolute; top:92vh; }
 
-    textarea{
-        font-size: 20px;
+    #submitRatingBtn{
+        width: 70%;
     }
 }

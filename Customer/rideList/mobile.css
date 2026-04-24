@@ -69,12 +69,14 @@
         transform: translateX(-350%);
         transition: transform 0.3s cubic-bezier(.42, .94, .31, .99);
         opacity: 0;
+        pointer-events: none;
     }
 
     /* Slides in navbar*/
     #navbar.expand>a {
         transform: translateX(0%);
         opacity: 1;
+        pointer-events: all;
     }
 
     /* Clear hover effects on hamburger menu (unusable on mobile) */

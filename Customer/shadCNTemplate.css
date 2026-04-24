@@ -114,6 +114,7 @@ td {
 @media screen and (max-width: 768px) {
     .btnNormal:hover, .btnStrong:hover {
         cursor: auto;
+        background-color: transparent;
         transform: scale(1);
     }
 

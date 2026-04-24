@@ -2,7 +2,7 @@
 /* Mobile View */
 @media screen and (max-width: 768px) {
 
-    /* Reveals back mobile components */
+     /* Reveals back mobile components */
     .mobileComponent {
         display: block;
     }
@@ -29,9 +29,7 @@
     /* Readjust content pading for mobile */
     #content{
         padding-left: 20px; padding-right: 20px; padding-top: 90px;
-        margin-left: 0px;
     }
-
 
     /* No need to move content as navbar is now an overlay*/
     #content, #content.expand{

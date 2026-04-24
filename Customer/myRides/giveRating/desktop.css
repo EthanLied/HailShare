@@ -1,0 +1,95 @@
+/* Removes default spacing*/
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    overflow-y: hidden;
+}
+
+/* Removes blue text and underline from hyperlinks*/
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+#navbar, #navbar.expand, #navbar > a, #content, #tabList > a, .navbarItem {
+    transition: 0.3s cubic-bezier(.42, .94, .31, .99);
+}
+
+/* Shrinks and slightly fades when hovering logo and navbar items*/
+h3:hover, .navbarItem:not(:first-child):active{
+    transition: 0.2s;
+    opacity: 0.75;
+    transform: scale(0.95);
+}
+
+/* Shrinks and slightly fades further on logo only*/
+h3:active{
+    opacity: 0.5;
+    transform: scale(0.9);
+}
+
+/* Hides mobile components in desktop mode */
+.mobileComponent{
+    display: none;
+}
+
+
+/* Div for the main contents of the page*/
+#content{
+    margin-left: 55px; padding: 50px; padding-bottom: 10px;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+    transition: 0.3s cubic-bezier(.42,.94,.31,.99);
+}
+
+/* When the navbar is expanded, push content div to the right*/
+#content.expand{
+    margin-left: 280px;
+}
+
+#content > h2{
+    align-self: center;
+    margin-top: 20px; margin-bottom: 10px;
+}
+
+#backBtn{
+    display: flex; flex-direction: row;
+    justify-content: center; align-items: center;
+    padding: 5px; padding-right: 10px;
+    margin-top: 10px;
+}
+
+/* Stars SVGs */
+#ratingContainer{
+    margin-top: 30px;
+    align-self: center;
+    display: flex; flex-direction: row;
+    gap: 10px;
+}
+
+#ratingContainer > span{
+    zoom: 2;
+    cursor: pointer;
+    transition: font-variation-settings 0.1s;
+    font-variation-settings: 'FILL' 0;
+}
+
+#ratingContainer > span.filled {
+    font-variation-settings: 'FILL' 1;
+}
+
+#submitRatingBtn{
+    justify-content: center; align-items: center ;justify-self: center;
+    display: flex; flex-direction: row;
+    width: 30%;
+    padding: 10px; gap: 10px; margin-top: 50px;
+    font-size: 15px; font-weight: 550;
+}
+
+
+
+
