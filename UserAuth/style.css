@@ -105,7 +105,8 @@ h2 {
 .container {
   display: flex;
   width: 100%;
-  height: calc(100vh - 55px); 
+  min-height: calc(100vh - 55px); 
+  display: flex;
   overflow: hidden;
 }
 
@@ -115,7 +116,7 @@ h2 {
   justify-content: center;
   align-items: center;
   border: 4px solid #ccc;
-  height: 100%;
+  align-self: stretch;
   font-size: 20px;
   color: #000;
 }
@@ -143,8 +144,7 @@ h2 {
   max-width: 22rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  transform: scale(0.92);              
+  gap: 2rem;           
   transform-origin: center;
 }
 
@@ -162,7 +162,7 @@ h2 {
 
 /* ===== REGISTRATION PAGES ===== */
 .steps {
-  position: fixed;
+  position: absolute;
   left: 80px;
   top: 50%;
   transform: translateY(-50%);
@@ -322,7 +322,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px 0;
+    padding: 10px 0;
     background-color: transparent;
   }
 
@@ -360,14 +360,14 @@ h2 {
   .form-box {
     width: 100%;
     max-width: 320px;
-    gap: 40px;
+    gap: 35px;
     transform: none;
   }
 
   h2 {
-    font-size: 32px;
+    font-size: 28px;
     text-align: center;
-    margin: 10px 0 20px;
+    margin: 0px 0 10px;
   }
 
   /* ===== INPUTS ===== */
@@ -398,7 +398,7 @@ h2 {
 
   .links a {
     display: block;
-    margin: 10px 0;
+    margin: 15px 0;
     font-size: 16px;
     text-decoration: underline;
     color: black;
@@ -406,12 +406,18 @@ h2 {
 
   .bottom-link {
     text-align: center;
+    margin-top: 70px;
   }
 
   .bottom-link a {
     font-size: 16px;
     text-decoration: underline;
     color: black;
+  }
+
+    .container .right .form-box .links {
+    margin-top: 140px;  /* adjust this */
+    text-align: center;
   }
 }
 
@@ -512,7 +518,7 @@ h2 {
   /* Bottom link */
   .reg-container .bottom-link {
     text-align: center;
-    margin-top: 160px;
+    margin-top: 159px;
   }
 
   .reg-container .button-row + .bottom-link {
@@ -554,7 +560,7 @@ h2 {
   }
 
   .reg-container:has(.sub-title) .bottom-link {
-    margin-top: 232px;  /* adjust link spacing */
+    margin-top: 231px;  /* adjust link spacing */
     text-align: center;
   }
 }
