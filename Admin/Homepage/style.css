@@ -1,0 +1,338 @@
+/* ============ SIDEBAR + CONTENT (copy to all Admin style.css) ============ */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+#navbar, #navbar.expand, #navbar > a, #content, #navbar .navbarItem {
+    transition: 0.3s cubic-bezier(.42, .94, .31, .99);
+}
+
+#navbar {
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 55px;
+    height: 100vh;
+    background-color: #ffffff;
+    border-right: solid 1px #ececec;
+    user-select: none;
+    padding-top: 10px;
+    outline: none;                /* removes any browser focus line */
+}
+
+#navbar.expand {
+    width: 280px;
+    background-color: #f8f8f8;
+}
+
+#navbar > a {
+    display: block;
+    width: 100%;
+}
+
+#hamburgerMenuNavbarIcon {
+    transition: background-color 0.2s;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: none;                 /* prevents button border from showing */
+    outline: none;                /* prevents focus outline */
+}
+
+#hamburgerMenuNavbarIcon:hover,
+a > .navbarItem:hover {
+    background-color: #e8e8e8 !important;
+}
+
+.navbarItem {
+    margin: 5px 0 5px 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    width: 33px;
+    height: 40px;
+    padding-left: 10px;
+}
+
+.navbarItem.expand {
+    width: 250px;
+}
+
+.navbarItem > p,
+.navbarItem > a > h3 {
+    white-space: nowrap;
+    transition: 0.15s ease-out;
+    color: transparent;
+    margin-left: 15px;
+}
+
+.navbarItem.expand > p,
+.navbarItem.expand > a > h3 {
+    color: #000000;
+}
+
+/* ============ CONTENT ============ */
+#content {
+    margin-left: 55px;
+    padding: 40px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: margin-left 0.3s cubic-bezier(.42,.94,.31,.99);
+    box-sizing: border-box;
+    max-width: calc(100vw - 55px);   /* never wider than viewport */
+    background-color: white;
+}
+
+#content.expand {
+    margin-left: 280px;
+    max-width: calc(100vw - 280px);
+}
+@media (max-width: 768px) {
+    #navbar {
+        background-color: transparent;
+        border-color: transparent;
+    }
+    #navbar.expand {
+        background-color: white;
+        border-right: solid 1px #ececec;
+    }
+    #content, #content.expand {
+        margin-left: 0;
+        max-width: 100vw;
+    }
+    #navbar > a {
+        transform: translateX(-350%);
+    }
+    #navbar.expand > a {
+        transform: translateX(0);
+    }
+    #hamburgerMenuNavbarIcon:hover {
+        background-color: transparent;
+    }
+}
+
+/* ============ PAGE-SPECIFIC STYLES ============ */
+/* Feature buttons */
+.feature-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s cubic-bezier(.17,.67,.31,.99);
+}
+
+.feature-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.feature-btn.active {
+    background-color: #000;
+    color: white;
+    border-color: #000;
+}
+
+/* Feature cards */
+.card {
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: 0.2s cubic-bezier(.17,.67,.31,.99);
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: #ccc;
+}
+
+.card span {
+    color: #000;
+}
+
+.card h3 {
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.card p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* No purple focus outlines */
+#navbar a,
+#navbar a:visited {
+    text-decoration: none;
+    color: inherit;
+    outline: none !important;
+}
+
+#hamburgerMenuNavbarIcon,
+#hamburgerMenuNavbarIcon:focus {
+    outline: none !important;
+}
+
+/* ============ SCROLL-BASED PHOTO ANIMATIONS ============ */
+
+.scroll-photo-section {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin: 40px 0;
+}
+
+.photo-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.photo-card.visible {
+    opacity: 1;
+}
+
+/* Fade from left animation */
+.photo-card[data-animation="fade-left"] {
+    transform: translateX(-50px);
+}
+
+.photo-card[data-animation="fade-left"].visible {
+    transform: translateX(0);
+}
+
+/* Fade from right animation */
+.photo-card[data-animation="fade-right"] {
+    transform: translateX(50px);
+}
+
+.photo-card[data-animation="fade-right"].visible {
+    transform: translateX(0);
+}
+
+/* Alternate layout for right cards */
+.photo-card:nth-child(even) {
+    direction: rtl;
+}
+
+.photo-card:nth-child(even) > * {
+    direction: ltr;
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 350px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.photo-description {
+    padding: 20px 0;
+}
+
+.photo-description h3,
+.photo-description h4 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #000;
+    margin-top: 0;
+}
+
+.photo-description p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+}
+
+/* Benefits grid styling */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.benefit-card {
+    background: white;
+    border-left: 4px solid #000;
+    padding: 20px;
+    border-radius: 8px;
+    transition: 0.2s cubic-bezier(.17,.67,.31,.99);
+}
+
+.benefit-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .photo-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        direction: ltr !important;
+    }
+
+    .photo-card > * {
+        direction: ltr !important;
+    }
+
+    .photo-placeholder {
+        height: 250px;
+    }
+
+    .photo-description h3 {
+        font-size: 20px;
+    }
+
+    .photo-description p {
+        font-size: 14px;
+    }
+}
