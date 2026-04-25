@@ -8,7 +8,14 @@
 }
 
 body {
+  margin: 0;
   background-color: #fff;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* ===== NAVIGATION BAR ===== */
@@ -102,11 +109,17 @@ h2 {
 }
 
 /* ===== LOGIN & PASSWORD-RECOVERY PAGES ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* prevent sideways scroll only */
+}
+
 .container {
   display: flex;
   width: 100%;
-  min-height: calc(100vh - 55px); 
-  display: flex;
+  min-height: calc(100vh - 55px) ; 
   overflow: hidden;
 }
 
@@ -129,7 +142,7 @@ h2 {
   align-items: center;       /* horizontal center */
 
   padding: 1rem;              
-  overflow: hidden;
+  overflow: auto;
 }
 
 h2 {
@@ -145,7 +158,6 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 2rem;           
-  transform-origin: center;
 }
 
 .links {
@@ -162,13 +174,14 @@ h2 {
 
 /* ===== REGISTRATION PAGES ===== */
 .steps {
-  position: absolute;
-  left: 80px;
+  position: fixed;
+  left: 40px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 10;
 }
 
 .step {
