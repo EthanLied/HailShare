@@ -120,7 +120,6 @@ html, body {
   display: flex;
   width: 100%;
   min-height: calc(100vh - 55px) ; 
-  overflow: hidden;
 }
 
 .left {
@@ -578,4 +577,43 @@ h2 {
   }
 }
 
+/* ===== DESKTOP & TABLET ONLY (LOGIN / RECOVERY) ===== */
+@media (min-width: 769px) {
 
+  /* lock page height */
+  html, body {
+    height: 100vh;
+    overflow-y: hidden;
+  }
+
+  /* ONLY affect login layout (exclude registration) */
+  .container:not(.reg-container) {
+    height: calc(100vh - 55px);
+    align-items: center;
+  }
+
+  /* prevent inner scroll */
+  .container:not(.reg-container) .right {
+    overflow: hidden;
+  }
+
+  /* tighten layout so it fits at 125% */
+  .container:not(.reg-container) .form-box {
+    gap: 1.2rem;
+    max-width: 20rem;
+  }
+
+  .container:not(.reg-container) input,
+  .container:not(.reg-container) select {
+    padding: 10px;
+  }
+
+  .container:not(.reg-container) .btn {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .container:not(.reg-container) h2 {
+    margin: 10px 0 20px;
+  }
+}
