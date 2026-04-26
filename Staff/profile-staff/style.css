@@ -1,4 +1,9 @@
 /* profile.css */
+html,
+body {
+    overflow-x: hidden;
+}
+
 body {
     background: #fff;
     color: #111;
@@ -9,8 +14,15 @@ body {
     background-color: rgb(216, 216, 216);
 }
 
+#navbar>a:nth-child(5) {
+    position: absolute;
+    top: auto;
+    bottom: 10px;
+}
+
 .content-wrapper {
     max-width: 640px;
+    margin: 0 auto;
 }
 
 .page-title {
@@ -169,10 +181,6 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    .content-wrapper {
-        max-width: 100%;
-    }
-
     .form-row-2 {
         grid-template-columns: 1fr;
     }
@@ -194,7 +202,6 @@ body {
         margin-bottom: 14px;
     }
 
-    /* Touch-safe — remove hover color change */
     .toggle-pw:hover {
         color: #888;
     }
