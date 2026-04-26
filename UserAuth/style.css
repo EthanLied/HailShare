@@ -63,7 +63,7 @@ html, body {
 
 input, select {
   width: 100%;
-  padding: 12px;
+  padding: clamp(8px, 1vw, 12px);
   border-radius: 10px;
   border: 1px solid #000;
 }
@@ -119,11 +119,11 @@ html, body {
 .container {
   display: flex;
   width: 100%;
-  min-height: calc(100vh - 55px) ; 
+  min-height: calc(100vh - 55px);
+  flex-wrap: wrap;
 }
 
 .left {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -135,13 +135,18 @@ html, body {
 
 
 .right {
-  flex: 1;
   display: flex;
   justify-content: center;   /* vertical center FIX */
   align-items: center;       /* horizontal center */
 
   padding: 1rem;              
-  overflow: auto;
+  overflow: hidden;
+}
+
+.left,
+.right {
+  flex: 1 1 400px;
+  min-width: 300px;
 }
 
 h2 {
@@ -153,10 +158,8 @@ h2 {
 
 .form-box {
   width: 100%;
-  max-width: 22rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;           
+  max-width: clamp(16rem, 30vw, 22rem);
+  gap: clamp(1rem, 2vw, 2rem);
 }
 
 .links {
@@ -212,14 +215,14 @@ h2 {
 
 h2 {
   text-align: center;
-  margin: 20px 0 40px;  /* add this */
+  margin: 10px 0 20px;  /* add this */
 }
 
 .reg-container {
   width: 100%;
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 20px;
+  max-width: clamp(320px, 80vw, 700px);;
+  margin: 10px auto;
+  padding: clamp(10px, 2vw, 20px);
   box-sizing: border-box;
 }
 
@@ -231,7 +234,7 @@ h2 {
 .form-row {
   display: flex;
   gap: 2rem;
-  margin-bottom: 30px;
+  margin-bottom: clamp(10px, 2vh, 20px);
   flex-wrap: wrap;
 }
 
@@ -251,8 +254,8 @@ h2 {
 .button-row {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
+  gap: 15px;
+  margin-top: 15px;
 }
 
 /* Smaller button for registration */
@@ -580,10 +583,9 @@ h2 {
 /* ===== DESKTOP & TABLET ONLY (LOGIN / RECOVERY) ===== */
 @media (min-width: 769px) {
 
-  /* lock page height */
   html, body {
-    height: 100vh;
-    overflow-y: hidden;
+    min-height: 100vh;
+    overflow-y: auto;
   }
 
   /* ONLY affect login layout (exclude registration) */
