@@ -5,11 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile – HailShare Staff</title>
-    <link rel="stylesheet" href="shadCNTemplate.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../profile-staff/shadCNTemplate.css" />
+    <link rel="stylesheet" href="../profile-staff/mobile.css" />
+    <link rel="stylesheet" href="../profile-staff/style.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="script.js" defer></script>
+    <script src="../profile-staff/script.js" defer></script>
 </head>
 
 <body>
@@ -44,20 +45,27 @@
     <div id="content">
         <div class="content-wrapper">
             <h1 class="page-title">Profile</h1>
-
             <div class="form-card">
                 <h2 class="card-title">Personal Information</h2>
                 <form id="personalForm" novalidate>
                     <div class="form-row-2">
-                        <div class="form-group"><label for="firstName">First Name</label><input type="text"
-                                id="firstName" placeholder="First name" /></div>
-                        <div class="form-group"><label for="lastName">Last Name</label><input type="text" id="lastName"
-                                placeholder="Last name" /></div>
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="First name" autocomplete="given-name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Last name" autocomplete="family-name" />
+                        </div>
                     </div>
-                    <div class="form-group"><label for="email">Email</label><input type="email" id="email"
-                            placeholder="email@example.com" /></div>
-                    <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone"
-                            placeholder="+60 1X-XXXXXXXX" /></div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="email@example.com" autocomplete="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+60 1X-XXXXXXXX" autocomplete="tel" />
+                    </div>
                     <div class="form-group">
                         <label>Date of Birth</label>
                         <div class="dob-row">
@@ -66,10 +74,11 @@
                             <select id="dobYear" aria-label="Year"></select>
                         </div>
                     </div>
-                    <div class="form-actions"><button type="submit" class="btnStrong">Update Info</button></div>
+                    <div class="form-actions">
+                        <button type="submit" class="btnStrong save-btn">Update Info</button>
+                    </div>
                 </form>
             </div>
-
             <div class="form-card">
                 <h2 class="card-title">Security</h2>
                 <p class="card-hint">Enter your current password to update security information.</p>
@@ -81,7 +90,7 @@
                                 autocomplete="new-password" />
                             <button type="button" class="toggle-pw" data-target="newPassword"
                                 aria-label="Show password">
-                                <span class="material-symbols-outlined" style="font-size:17px">visibility</span>
+                                <span class="material-symbols-outlined eye-icon">visibility</span>
                             </button>
                         </div>
                     </div>
@@ -96,9 +105,11 @@
                             <option>What was the name of your primary school?</option>
                         </select>
                     </div>
-                    <div class="form-group"><label for="securityAnswer">Security Answer</label><input type="text"
-                            id="securityAnswer" placeholder="Your answer" autocomplete="off" /></div>
-                    <hr class="form-divider" />
+                    <div class="form-group">
+                        <label for="securityAnswer">Security Answer</label>
+                        <input type="text" id="securityAnswer" placeholder="Your answer" autocomplete="off" />
+                    </div>
+                    <div class="form-divider"></div>
                     <div class="form-group">
                         <label for="currentPassword">Current Password <span class="required-hint">(required to
                                 save)</span></label>
@@ -107,14 +118,15 @@
                                 autocomplete="current-password" />
                             <button type="button" class="toggle-pw" data-target="currentPassword"
                                 aria-label="Show password">
-                                <span class="material-symbols-outlined" style="font-size:17px">visibility</span>
+                                <span class="material-symbols-outlined eye-icon">visibility</span>
                             </button>
                         </div>
                     </div>
-                    <div class="form-actions"><button type="submit" class="btnStrong">Update Security</button></div>
+                    <div class="form-actions">
+                        <button type="submit" class="btnStrong save-btn">Update Security</button>
+                    </div>
                 </form>
             </div>
-
             <div class="logout-section">
                 <button class="btnNormal logout-btn" id="logoutBtn">Logout</button>
             </div>

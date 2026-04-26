@@ -5,15 +5,19 @@ body {
     font-size: 14px;
 }
 
-/* Active nav — Profile is the 4th <a> */
 #navbar>a:nth-of-type(4)>.navbarItem {
     background-color: rgb(216, 216, 216);
+}
+
+.content-wrapper {
+    max-width: 640px;
 }
 
 .page-title {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 20px;
+    color: #111;
     letter-spacing: -0.3px;
 }
 
@@ -70,6 +74,8 @@ body {
 
 .dob-row select {
     flex: 1;
+    font-size: 13px;
+    height: 34px;
 }
 
 .input-with-icon {
@@ -80,7 +86,7 @@ body {
 
 .input-with-icon input {
     flex: 1;
-    padding-right: 36px;
+    padding-right: 40px;
 }
 
 .toggle-pw {
@@ -98,6 +104,10 @@ body {
 
 .toggle-pw:hover {
     color: #333;
+}
+
+.eye-icon {
+    font-size: 18px;
 }
 
 .form-divider {
@@ -118,20 +128,19 @@ body {
     border-top: 1px solid rgb(218, 218, 218);
 }
 
-.form-actions .btnStrong {
+.save-btn {
     padding: 7px 20px;
     font-size: 13px;
-    cursor: pointer;
 }
 
 .logout-section {
-    margin-bottom: 40px;
+    padding-top: 4px;
+    padding-bottom: 40px;
 }
 
 .logout-btn {
     padding: 7px 20px;
     font-size: 13px;
-    cursor: pointer;
     color: #b91c1c !important;
     border-color: #fca5a5 !important;
 }
@@ -159,8 +168,45 @@ body {
     opacity: 1;
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 768px) {
+    .content-wrapper {
+        max-width: 100%;
+    }
+
     .form-row-2 {
         grid-template-columns: 1fr;
+    }
+
+    .dob-row {
+        flex-wrap: wrap;
+    }
+
+    .dob-row select {
+        min-width: calc(33% - 6px);
+    }
+
+    .form-card {
+        padding: 16px;
+    }
+
+    .page-title {
+        font-size: 18px;
+        margin-bottom: 14px;
+    }
+
+    /* Touch-safe — remove hover color change */
+    .toggle-pw:hover {
+        color: #888;
+    }
+
+    .toggle-pw:active {
+        color: #333;
+    }
+
+    .toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        text-align: center;
     }
 }
