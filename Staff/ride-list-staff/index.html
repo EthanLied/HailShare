@@ -5,11 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ride List – HailShare Staff</title>
-    <link rel="stylesheet" href="shadCNTemplate.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../profile-staff/shadCNTemplate.css" />
+    <link rel="stylesheet" href="../ride-list-staff/mobile.css" />
+    <link rel="stylesheet" href="../ride-list-staff/style.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="script.js" defer></script>
+    <script src="../ride-list-staff/script.js" defer></script>
 </head>
 
 <body>
@@ -41,11 +42,8 @@
             </div>
         </a>
     </div>
-
     <div id="content">
         <div class="content-wrapper">
-
-            <!-- ── Ride List View ── -->
             <div id="rideListView">
                 <h1 class="page-title">Ride List</h1>
                 <div class="controls-bar">
@@ -80,8 +78,6 @@
                     <button class="btnNormal pag-btn" id="nextPage">&#8250;</button>
                 </div>
             </div>
-
-            <!-- ── Modify Ride View ── -->
             <div id="modifyRideView" class="hidden">
                 <div class="page-header-row">
                     <button class="btnNormal btn-back" id="backToList">&#8249; Back</button>
@@ -135,8 +131,6 @@
                                 </select>
                             </div>
                         </div>
-
-                        <!-- Passenger Editor -->
                         <div class="form-group">
                             <label class="section-label">In Ride:</label>
                             <div class="passenger-editor">
@@ -151,17 +145,14 @@
                                 <div id="passengerList"></div>
                             </div>
                         </div>
-
                         <div class="form-actions">
                             <button type="submit" class="btnStrong">Save Changes</button>
                         </div>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
-
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 

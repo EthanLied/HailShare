@@ -1,13 +1,19 @@
 // profile.js
+function toggleNavbar() {
+    document.getElementById('navbar').classList.toggle('expand');
+    document.getElementById('content').classList.toggle('expand');
+    document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand'));
+}
+
 function populateDOB() {
     const dayEl = document.getElementById('dobDay');
-    const monEl = document.getElementById('dobMonth');
-    const yrEl = document.getElementById('dobYear');
+    const monthEl = document.getElementById('dobMonth');
+    const yearEl = document.getElementById('dobYear');
     for (let d = 1; d <= 31; d++) dayEl.add(new Option(String(d).padStart(2, '0'), d));
     ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-        .forEach((m, i) => monEl.add(new Option(m, i + 1)));
-    const y = new Date().getFullYear();
-    for (let yr = y; yr >= 1950; yr--) yrEl.add(new Option(yr, yr));
+        .forEach((m, i) => monthEl.add(new Option(m, i + 1)));
+    const yr = new Date().getFullYear();
+    for (let y = yr; y >= 1950; y--) yearEl.add(new Option(y, y));
 }
 
 function loadProfile() {
@@ -27,21 +33,21 @@ document.getElementById('personalForm').addEventListener('submit', e => {
     const last = document.getElementById('lastName').value.trim();
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
-    if (!first || !last || !email || !phone) { showToast('Please fill in all fields.'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Please enter a valid email.'); return; }
+    if (!first || !last || !email || !phone) { showToast('Please fill in all personal info fields.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Please enter a valid email address.'); return; }
     showToast('Personal information updated successfully.');
 });
 
 document.getElementById('securityForm').addEventListener('submit', e => {
     e.preventDefault();
-    const cur = document.getElementById('currentPassword').value;
-    const nw = document.getElementById('newPassword').value;
-    const q = document.getElementById('securityQuestion').value;
-    const ans = document.getElementById('securityAnswer').value.trim();
-    if (!cur) { showToast('Current password is required.'); return; }
-    if (cur !== 'password123') { showToast('Incorrect current password. (Hint: password123)'); return; }
-    if (nw && nw.length < 8) { showToast('New password must be at least 8 characters.'); return; }
-    if (q && !ans) { showToast('Please provide a security answer.'); return; }
+    const currentPw = document.getElementById('currentPassword').value;
+    const newPw = document.getElementById('newPassword').value;
+    const question = document.getElementById('securityQuestion').value;
+    const answer = document.getElementById('securityAnswer').value.trim();
+    if (!currentPw) { showToast('Current password is required to save security changes.'); return; }
+    if (currentPw !== 'password123') { showToast('Current password is incorrect.'); return; }
+    if (newPw && newPw.length < 8) { showToast('New password must be at least 8 characters.'); return; }
+    if (question && !answer) { showToast('Please provide a security answer.'); return; }
     document.getElementById('currentPassword').value = '';
     showToast('Security information updated successfully.');
 });
@@ -49,9 +55,11 @@ document.getElementById('securityForm').addEventListener('submit', e => {
 document.querySelectorAll('.toggle-pw').forEach(btn => {
     btn.addEventListener('click', () => {
         const input = document.getElementById(btn.dataset.target);
-        const hidden = input.type === 'password';
-        input.type = hidden ? 'text' : 'password';
-        btn.querySelector('.material-symbols-outlined').textContent = hidden ? 'visibility_off' : 'visibility';
+        const isHidden = input.type === 'password';
+        input.type = isHidden ? 'text' : 'password';
+        const icon = btn.querySelector('.eye-icon');
+        if (icon) icon.textContent = isHidden ? 'visibility_off' : 'visibility';
+        btn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
     });
 });
 
@@ -62,14 +70,6 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
     }
 });
 
-function toggleNavbar() {
-    const n = document.getElementById('navbar'), c = document.getElementById('content'), i = document.querySelectorAll('.navbarItem');
-    n.classList.toggle('expand'); c.classList.toggle('expand'); i.forEach(x => x.classList.toggle('expand'));
-}
-function showToast(msg) {
-    const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2800);
-}
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2800); }
 
-populateDOB();
-loadProfile();
+populateDOB(); loadProfile();

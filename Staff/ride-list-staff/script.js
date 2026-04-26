@@ -356,9 +356,8 @@ document.getElementById('nextPage').addEventListener('click', () => {
 function toggleNavbar() {
     document.getElementById('navbar').classList.toggle('expand');
     document.getElementById('content').classList.toggle('expand');
-    document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand'));
+    document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand')); // ← add this
 }
-
 function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg; t.classList.add('show');
