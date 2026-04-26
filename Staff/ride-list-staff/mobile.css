@@ -1,8 +1,10 @@
 /* mobile.css — touch overrides */
+
 html,
 body {
     overflow-x: hidden;
     max-width: 100%;
+    width: 100%;
 }
 
 @media screen and (max-width: 768px) {
@@ -35,15 +37,20 @@ body {
         background-color: transparent;
     }
 
+    /* THE KEY FIX:
+     navbar.css makes #content a block with margin-left:55px.
+     A block element is still 100vw wide — so it bleeds 55px off the right.
+     width: calc(100vw - 55px) shrinks it to fit the remaining space. */
     #content,
     #content.expand {
         margin-left: 55px !important;
         width: calc(100vw - 55px) !important;
         max-width: calc(100vw - 55px) !important;
         padding: 20px 16px 40px 16px !important;
-        overflow-x: hidden;
-        box-sizing: border-box;
-        height: auto;
+        /* equal left+right = 16px each */
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+        height: auto !important;
         min-height: 100vh;
     }
 
@@ -51,6 +58,13 @@ body {
         width: 100% !important;
         max-width: 100% !important;
         overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+    /* Prevent any child from exceeding container width */
+    #content * {
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
 }
