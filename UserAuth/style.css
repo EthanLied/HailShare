@@ -152,7 +152,7 @@ html, body {
 h2 {
   text-align: center;
   font-size: 1.8rem;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   margin-top: 20px;   
 }
 
@@ -380,7 +380,7 @@ h2 {
   }
 
   h2 {
-    font-size: 28px;
+    font-size: 25px;
     text-align: center;
     margin: 0px 0 10px;
   }
@@ -590,7 +590,7 @@ h2 {
 
   /* ONLY affect login layout (exclude registration) */
   .container:not(.reg-container) {
-    height: calc(100vh - 55px);
+    min-height: calc(100vh - 55px);
     align-items: center;
   }
 
@@ -616,6 +616,11 @@ h2 {
   }
 
   .container:not(.reg-container) h2 {
-    margin: 10px 0 20px;
+    margin: 0px 0 10px;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
   }
+}
+
+.container:not(.reg-container) {
+  overflow: hidden;
 }
