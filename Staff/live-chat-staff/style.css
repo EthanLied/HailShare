@@ -1,4 +1,9 @@
 /* live-chat.css */
+html,
+body {
+    overflow-x: hidden;
+}
+
 body {
     background: #fff;
     color: #111;
@@ -9,12 +14,19 @@ body {
     background-color: rgb(216, 216, 216);
 }
 
+#navbar>a:nth-child(5) {
+    position: absolute;
+    top: auto;
+    bottom: 10px;
+}
+
 .hidden {
     display: none !important;
 }
 
 .content-wrapper {
     max-width: 860px;
+    margin: 0 auto;
 }
 
 .page-title {
@@ -51,7 +63,6 @@ body {
     min-width: 150px;
 }
 
-/* Chat items */
 .chat-item {
     background: #fff;
     border: 1px solid rgb(218, 218, 218);
@@ -145,7 +156,6 @@ body {
     color: #111;
 }
 
-/* Chatroom */
 .chatroom-header {
     display: flex;
     align-items: center;
@@ -310,10 +320,6 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    .content-wrapper {
-        max-width: 100%;
-    }
-
     .controls-bar {
         flex-direction: column;
         gap: 10px;
@@ -363,7 +369,6 @@ body {
         max-width: 90%;
     }
 
-    /* Custom button touch resets */
     .btn-open-chat:hover {
         background: none;
         color: #555;

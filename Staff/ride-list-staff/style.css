@@ -1,4 +1,9 @@
 /* ride-list-staff.css */
+html,
+body {
+    overflow-x: hidden;
+}
+
 body {
     background: #fff;
     color: #111;
@@ -7,6 +12,12 @@ body {
 
 #navbar>a:nth-of-type(1)>.navbarItem {
     background-color: rgb(216, 216, 216);
+}
+
+#navbar>a:nth-child(5) {
+    position: absolute;
+    top: auto;
+    bottom: 10px;
 }
 
 .hidden {
@@ -61,7 +72,6 @@ body {
     cursor: pointer;
 }
 
-/* Scrollable list container */
 .list-scroll-container {
     max-height: 520px;
     overflow-y: auto;
@@ -86,7 +96,6 @@ body {
     border-radius: 99px;
 }
 
-/* Ride card */
 .ride-card {
     background: #fff;
     border: 1px solid rgb(218, 218, 218);
@@ -236,7 +245,6 @@ body {
     font-size: 18px;
 }
 
-/* Pagination */
 .pagination {
     display: flex;
     align-items: center;
@@ -260,7 +268,6 @@ body {
     cursor: not-allowed;
 }
 
-/* ── Modify form ── */
 .btn-back {
     padding: 6px 12px;
     font-size: 13px;
@@ -302,7 +309,6 @@ body {
     margin-bottom: 16px;
 }
 
-/* Time dual-dropdown */
 .time-row {
     display: flex;
     align-items: center;
@@ -333,7 +339,6 @@ body {
     cursor: pointer;
 }
 
-/* ── Passenger editor ── */
 .section-label {
     font-size: 13px;
     font-weight: 500;
@@ -349,7 +354,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* Add person row */
 .add-person-row {
     display: flex;
     gap: 8px;
@@ -380,7 +384,6 @@ body {
     font-size: 16px;
 }
 
-/* Passenger rows list */
 #passengerList {
     padding: 6px 0;
 }
@@ -419,63 +422,6 @@ body {
     flex-shrink: 0;
 }
 
-.host-badge {
-    font-size: 11px;
-    font-weight: 600;
-    color: #fff;
-    background: #111;
-    padding: 2px 8px;
-    border-radius: 99px;
-    letter-spacing: 0.2px;
-}
-
-.btn-make-host {
-    font-size: 12px;
-    padding: 3px 10px;
-    height: 26px;
-    cursor: pointer;
-    border-radius: 99px;
-    border: 1px solid rgb(180, 180, 180);
-    background: #fff;
-    color: #333;
-    transition: background 0.15s, border-color 0.15s;
-    white-space: nowrap;
-}
-
-.btn-make-host:hover {
-    background: #f0f0f0;
-    border-color: #111;
-    color: #111;
-}
-
-.btn-remove-pax {
-    width: 26px;
-    height: 26px;
-    border-radius: 6px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: 1px solid rgb(218, 218, 218);
-    background: #fff;
-    color: #888;
-    transition: background 0.15s, color 0.15s;
-}
-
-.btn-remove-pax:hover {
-    background: #fee2e2;
-    border-color: #fca5a5;
-    color: #b91c1c;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: #999;
-    font-size: 13px;
-}
-
 .toast {
     position: fixed;
     bottom: 28px;
@@ -493,4 +439,65 @@ body {
 
 .toast.show {
     opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .controls-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .control-group {
+        width: 100%;
+    }
+
+    .control-group select {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .ride-card {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .ride-meta {
+        width: 100%;
+        flex-shrink: unset;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .ride-route .from,
+    .ride-route .to {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        word-break: break-word;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-card {
+        padding: 16px;
+    }
+
+    .btn-info:hover {
+        background: none;
+        color: #555;
+    }
+
+    .btn-info:active {
+        background: #f0f0f0;
+        color: #111;
+    }
+
+    .toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        text-align: center;
+    }
 }

@@ -1,4 +1,10 @@
 /* mobile.css — touch overrides */
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 @media screen and (max-width: 768px) {
 
     .btnNormal:hover,
@@ -25,57 +31,26 @@
         transform: translateY(1px);
     }
 
-    #navbar {
-        position: fixed;
-        top: auto;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 56px;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        border-right: none;
-        border-top: solid 1px rgb(218, 218, 218);
-        padding: 0;
+    #hamburgerMenuNavbarIcon:hover {
+        background-color: transparent;
     }
 
-    #navbar.expand {
-        width: 100%;
-        height: 56px;
-    }
-
-    #navbar .navbarItem {
-        flex-direction: column;
-        justify-content: center;
-        gap: 2px;
-        padding: 6px 8px;
-        width: auto;
-        flex: 1;
-        text-align: center;
-    }
-
-    #navbar p {
-        font-size: 10px;
-        opacity: 1;
-    }
-
-    #navbar h3 {
-        display: none;
-    }
-
-    #navbar .navbarItem:first-child {
-        display: none;
-    }
-
-    #content {
-        margin-left: 0;
-        margin-bottom: 56px;
-        padding: 16px;
-    }
-
+    #content,
     #content.expand {
-        margin-left: 0;
+        margin-left: 55px !important;
+        width: calc(100vw - 55px) !important;
+        max-width: calc(100vw - 55px) !important;
+        padding: 20px 16px 40px 16px !important;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        height: auto;
+        min-height: 100vh;
     }
+
+    .content-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden;
+    }
+
 }
