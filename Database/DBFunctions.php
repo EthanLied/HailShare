@@ -93,10 +93,24 @@
             body: JSON.stringify({ query })
         });
 
-
-        // Output responses
+        // Grab result
         const result = await response.json();
-        console.log(result);
+
+        // If SQL query error
+        if (!result.success) {
+            console.error("SQL Error:", result.error);
+        return null;
+    }
+
+        // IF it's a SELECT query (has data)
+        if (result.data !== undefined) {
+            console.log("SQL Query Result:", result.data);     
+            console.log("Record count:", result.count);
+            return result.data;
+        }
+
+        // INSERT/UPDATE/DELETE return affected_rows
+        console.log("Rows affected:", result.affected_rows);
 
         // Save changed data 
         saveDB()
