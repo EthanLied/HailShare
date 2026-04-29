@@ -10,11 +10,38 @@ if ($database->connect_error) {
     exit;
 }
 
+
+$result = $database->query($input['query']);
+
 // If error on query sending
-if (!$database->query($input['query'])) {
+if (!$result) {
     echo json_encode(["success" => false, "error" => $database->error]);
     exit;
 }
 
-echo json_encode(["success" => true]);
+if ($result === true) {
+    // Non-SELECT query (INSERT, UPDATE, DELETE, etc.)
+
+    // Returns write feedback
+    echo json_encode([
+        "success"       => true,
+        "affected_rows" => $database->affected_rows
+    ]);
+
+} else {
+    // SELECT query 
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Returns record data
+    echo json_encode([
+        "success" => true,
+        "data"    => $rows,
+        "count"   => count($rows)
+    ]);
+
+    // Clears result
+    $result->free();
+}
+
+$database->close();
 ?>
