@@ -123,7 +123,6 @@ INSERT INTO `users` (`user_id`, `role_id`, `first_name`, `last_name`, `email`, `
 INSERT INTO `rides` (`ride_id`, `user_id`, `pickup_location`, `dropoff_location`, `price`, `carplate_number`, `vehicle_model`, `pickup_time`, `available_seats`, `status`, `completed_at`, `created_at`, `updated_at`) VALUES ('1', '1', 'Sunway Pyramid, Petaling Jaya', 'KL Sentral, Kuala Lumpur', '8.00', 'WXY 1234', 'Perodua Myvi 2022', '2026-05-01 08:30:00', '3', 'active', NULL, '2026-04-28 18:18:53', NULL);
 
 INSERT INTO `ride_participants` (`participant_id`, `ride_id`, `user_id`, `status`, `joined_at`, `completed_at`) VALUES ('1', '1', '1', 'active', '2026-04-28 09:00:00', NULL);
-INSERT INTO `ride_participants` (`participant_id`, `ride_id`, `user_id`, `status`, `joined_at`, `completed_at`) VALUES ('7', '1', '2', 'active', '2026-04-28 09:00:00', NULL);
 
 INSERT INTO `ratings` (`rating_id`, `ride_id`, `rater_user_id`, `rated_user_id`, `rating_score`, `description`, `created_at`) VALUES ('1', '1', '1', '2', '5', 'Very punctual and friendly driver. Car was clean and comfortable.', '2026-04-28 18:18:53');
 
