@@ -1,0 +1,312 @@
+<?php header("Content-type: text/css"); ?>
+
+
+/* Mobile View */
+@media screen and (max-width: 768px) {
+
+    /* Reveals back mobile components */
+    .mobileComponent {
+        display: block;
+    }
+
+    /* Hides desktop components */
+    .desktopComponent {
+        display: none;
+    }
+
+    #header {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.511);
+        backdrop-filter: blur(20px);
+        width: 100%;
+        height: 60px;
+        border-bottom: solid 1px rgb(207, 207, 207);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Removes border when unexpanded (cleaner) */
+    #navbar {
+        border-color: transparent;
+        background-color: transparent;
+        transition:
+            background-color 0.3s cubic-bezier(.42, .94, .31, .99),
+            width 0.3s cubic-bezier(.42, .94, .31, .99);
+
+    }
+
+    /* Readjust content pading for mobile */
+    #content {
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 90px;
+        padding-bottom: 20px;
+    }
+
+    /* No need to move content as navbar is now an overlay*/
+    #content,
+    #content.expand {
+        margin-left: 0px;
+    }
+
+    .navbarItem {
+        transition: 0.3s cubic-bezier(.42, .94, .31, .99);
+    }
+
+    /* No need to hide text */
+    .navbarItem>p {
+        color: black;
+    }
+
+    /* Adds mini sidebar (if needed) and reintroduces border*/
+    #navbar.expand {
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-right: solid 1px rgb(236, 236, 236);
+    }
+
+    /* Preps navbar movement by tucking contents to the left + remove blue box on mobile tap*/
+    #navbar>a {
+        -webkit-tap-highlight-color: transparent;
+        transform: translateX(-350%);
+        transition: transform 0.3s cubic-bezier(.42, .94, .31, .99);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Slides in navbar*/
+    #navbar.expand>a {
+        transform: translateX(0%);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    /* Clear hover effects on hamburger menu (unusable on mobile) */
+    #hamburgerMenuNavbarIcon:hover {
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+    /* Re-adjust position of the profile component in navbar*/
+    #navbar>a:nth-child(6) {
+        position: absolute;
+        top: 92vh;
+    }
+
+    #rideListTitle {
+        font-weight: 600;
+    }
+
+    #sortByDropdown {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #tableContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 5px;
+    }
+
+    /* Each ride item */
+    .rideItemMobile {
+        width: 90%; height: auto;
+        border-radius: 10px;
+        background-color: rgba(221, 221, 221, 0);
+        margin-bottom: 10px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 2%;
+        padding: 10px;
+        border: solid 2px rgba(0, 0, 0, 0.062);
+    }
+
+    /* Row for From and To labels */
+    .rideItemMobileRow1{
+        width: 100%; height: auto;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* From and to containers */
+    .rideItemMobileRowLeft,
+    .rideItemMobileRowRight {
+        display: flex;
+        align-items: baseline;
+        width: 50%; height: 100%;
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+    /* Smaller text for addresses */
+    .rideItemMobileRowLeft > p, .rideItemMobileRowRight > p{
+        font-size: 0.8rem;
+    }
+
+    .rideItemMobileLabel{
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    /* Price and time */
+    .rideItemMobileRow2{
+        align-self: baseline;
+        display: flex; flex-direction: row;
+        height: auto;
+        align-items: center; justify-content:left; 
+        gap: 10%;
+        margin-top: 5px; margin-bottom: 5px;
+    }
+
+    .rideItemMobileRow2 > p{
+        display: flex; flex-direction: row;
+        align-items: center; justify-content: center;
+    }
+
+    /* Show more btn */
+    .rideItemMobileBtn {
+        font-size: 15px; font-weight: 550;
+        width: 100%; height: 60px;
+    }
+
+    /* To darken rest on content on popup */
+    #darkenOverlay{
+        width: 100vw; height: 100vh;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0);
+        pointer-events: none;
+        transition: 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+        z-index: 1;
+    }
+
+    /* Popup menu itself */
+    #popupMenu{
+        transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+        position: absolute;
+        width: 90%; height: auto;
+        bottom: 0%;
+        border-radius: 10px;
+        background-color: rgb(255, 255, 255);
+        transform: translateY(100%);
+        z-index: 3;
+        display: flex; flex-direction: column;
+        padding-left: 5%; padding-right: 5%; padding-top: 20px; padding-bottom: 20px;
+        gap: 10px;
+    }
+
+    #popupMenuLocations{
+        display: grid;
+        height: 30%;
+        grid-template-columns: 10% 90%; grid-template-rows: 1fr 1fr;
+        row-gap: 5%;
+    }
+
+    #pickupDropoffLogoContainer{
+        grid-row: 1 / 3; grid-column: 1;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 2%;
+        padding: 10px;
+    }
+
+    #pickupDropoffLogoLine{
+        width: 15%; height: 100%;
+        border-radius: 10px;
+        background-color: rgb(158, 158, 158);
+    }
+
+    #pickupCard {
+        grid-row: 1;
+        grid-column: 2;
+    }
+
+    #dropoffCard {
+        grid-row: 2;
+        grid-column: 2;
+    }
+
+    #pickupCard, #dropoffCard{
+        padding: 10px;
+        background-color: #F5F5F5;
+        border: solid 1px #EBEBEB; border-radius: 10px;
+        display: flex; flex-direction: column;
+    }
+
+    #pickupCard > p, #dropoffCard > p{
+        font-size: 12px;
+    }
+
+    .specificLocationName{
+        font-weight: 600;
+    }
+
+    #popupMenuDetailsContainer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        grid-template-rows: repeat(2, 1fr);    
+        height: 36%;
+        gap: 10px;   
+        margin-top: 10px;
+    }
+
+    .popupMenuDetails {
+        background-color: #F5F5F5;
+        border: solid 1px #EBEBEB; border-radius: 10px;
+        padding: 10px;
+        display: flex; flex-direction: column;
+        align-items: baseline; justify-content: center;
+    }
+
+    .popupMenuDetails > p{
+        font-size: 10px;
+    }
+
+    .menuDetailsImportant{
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    #popupMenuPriceAndSeats, #popupMenuBtns{
+        width: 100%; height: 12%;
+        display: flex; flex-direction: row;
+        align-items: center;
+    }
+
+    #yourFareContainer{
+        display: flex; flex-direction: column;
+        gap: 20%;
+        margin-top: 5%; margin-bottom: 5%;
+    }
+    
+    #fareDetailsImportant{
+        word-spacing: 3px;
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    #popupMenuBtns{
+        display: flex; flex-direction: row;
+        align-items: center; justify-content: center;
+        gap: 2%;
+    }
+
+    #popupMenuBtns > button{
+        display: flex; flex-direction: row;
+        align-items: center; justify-content: center;
+        padding: 4%; padding-top: 2.5%; padding-bottom: 2.5%;
+        /* Prevent line breaks for buttons */
+        white-space: nowrap; overflow: hidden;
+        font-size: 3.2vw;
+    }
+
+    #joinRideBtn{
+        padding-left: 10% !important;
+        padding-right: 10% !important;
+    }
+        
+}
