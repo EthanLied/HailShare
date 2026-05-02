@@ -1,4 +1,4 @@
-
+<?php header("Content-type: text/css"); ?>
 @media screen and (max-width: 768px) {
     /* Container to keep dropdowns in your existing CSS Grid */
     .custom-select-container {

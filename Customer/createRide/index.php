@@ -3,12 +3,13 @@
 
 <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../shadCNTemplate.css">
-    <link rel="stylesheet" href="desktop.css">
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="mobile.css">
-    <link rel="stylesheet" href="mobileDropdown.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../shadCNTemplate.php">
+    <link rel="stylesheet" href="desktop.php">
+    <link rel="stylesheet" href="navbar.php">
+    <link rel="stylesheet" href="mobile.php">
+    <link rel="stylesheet" href="mobileDropdown.php">
+    <script src="script.php" defer></script>
+    <script src="../../Database/DBfunctions.php" defer></script>
     <title>Create Ride</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,9 +84,37 @@
         <div id="addressInputs">
             <h1>Create Ride</h1>
             <p>From:</p>
-            <input name="fromAddress">
+            <div class="addressDropdownWrapper">
+                <input name="fromAddress" id="fromInput" onfocus="resolveAddress('from', this.value)" oninput="resolveAddress('from', this.value)" onblur="toggleAddressDropdown('close', 'from', 'offFocus')">
+                <div class="addressDropdown" id="fromAddressDropdown">
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('0', 'from', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('1', 'from', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('2', 'from', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('3', 'from', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('4', 'from', this.innerText)">
+                    </div>
+                </div>
+            </div>
             <p>To:</p>
-            <input name="toAddress">
+            <div class="addressDropdownWrapper">
+                <input name="toAddress" id="toInput" onfocus="resolveAddress('to', this.value)" oninput="resolveAddress('to', this.value)" onblur="toggleAddressDropdown('close', 'to', 'offFocus')">
+                <div class="addressDropdown" id="toAddressDropdown">
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('0', 'to', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('1', 'to', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('2', 'to', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('3', 'to', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('4', 'to', this.innerText)">
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="attributeDropdownsContainer">
             <p>Date:</p>
@@ -97,7 +126,7 @@
 
             </select>
             <div id="timeSelector">
-                <select name="hour">
+                <select name="hour" id="hourInput">
                     <option value="12AM">12 AM</option>
                     <option value="1AM">1 AM</option>
                     <option value="2AM">2 AM</option>
@@ -123,7 +152,7 @@
                     <option value="10PM">10 PM</option>
                     <option value="11PM">11 PM</option>
                 </select><strong>:</strong>
-                <select name="minute">
+                <select name="minute" id="minuteInput">
                     <option value="00">00</option>
                     <option value="01">01</option>
                     <option value="02">02</option>
@@ -186,7 +215,7 @@
                     <option value="59">59</option>
                 </select>
             </div>
-            <select name="capacity People">
+            <select name="capacity People" id="capacityInput">
                 <option value="1 People">1 People </option>
                 <option value="2 People">2 People </option>
                 <option value="3 People">3 People </option>
@@ -198,7 +227,7 @@
                 <option value="9 People">9 People </option>
                 <option value="10 People">10 People </option>
             </select>
-            <select name="price">
+            <select name="price" id="priceInput">
                 <option value="1">RM 1</option>
                 <option value="2">RM 2</option>
                 <option value="3">RM 3</option>
@@ -401,8 +430,8 @@
                 <option value="200">RM 200</option>
             </select>
         </div>
-
-        <button class="btnStrong" id="createRideBtn">Create Ride</button>
+        <p id="alert"></p>
+        <button class="btnStrong" id="createRideBtn" onclick="submitRide()">Create Ride</button>
     </div>
 
 </body>

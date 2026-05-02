@@ -3,7 +3,7 @@
 
 <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../shadCNTemplate.css">
+    <link rel="stylesheet" href="../shadCNTemplate.php">
     <link rel="stylesheet" href="desktopCSS.php">
     <link rel="stylesheet" href="tableCSS.php">
     <link rel="stylesheet" href="navbarCSS.php">
