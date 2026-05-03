@@ -60,28 +60,42 @@ th:nth-child(8), th:nth-child(9){
 
 td{
     font-size: 15px;
+    vertical-align: middle !Important;
 }
 
 /* Defines message and join button behavior*/
-td > span{
+td > a > span{
     transition: 0.3s cubic-bezier(.42,.94,.31,.99);
     padding: 10px;
     line-height: 0;
     border-radius: 10px;
 }
 
-td > span:hover{
+td > a > span:hover{
     scale: 0.95;
     background-color: rgb(230, 230, 230);
     cursor: pointer;
 }
 
-td > span:active{
+td > a > span:active{
     scale: 0.9;
     background-color: rgb(236, 236, 236);
 }
 
 td > p{
     text-align: justify;
+}
+
+/* Empty Table */
+#emptyState{
+    height: 60vh;
+}
+
+#emptyState td {
+    text-align: center;
+    vertical-align: middle;
+    height: 200%;
+    color: grey;
+    font-size: 20px;
 }
 

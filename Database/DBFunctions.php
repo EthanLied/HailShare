@@ -101,8 +101,8 @@ async function queryDB(query) {
     // If SQL query error
     if (!result.success) {
         console.error("SQL Error:", result.error);
-    return null;
-}
+        return null;
+    }
 
     // IF it's a SELECT query (has data)
     if (result.data !== undefined) {

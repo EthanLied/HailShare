@@ -77,6 +77,7 @@ h3:active{
     transition: 0.15s ease-out;
     color: rgba(255, 255, 255, 0); /* Hides text color when not expanded */
     margin-left: 15px;
+    pointer-events: none;
 }
 
 /* Hailshare Logo */

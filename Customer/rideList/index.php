@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="navbarCSS.php">
     <link rel="stylesheet" href="mobileCSS.php">
     <script src="script.php" defer></script>
+    <script src="../../Database/DBfunctions.php" defer></script>
     <title>Ride List</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,19 +52,19 @@
         <div id="popupMenuDetailsContainer">
             <div class="popupMenuDetails">
                 <p>Walk to Pickup</p>
-                <p><span class="menuDetailsImportant" id="popupPickupDistance">63</span>&ensp;m</p>
+                <p><span class="menuDetailsImportant" id="popupPickupDistance">63</span>&ensp;</p>
             </div>
             <div class="popupMenuDetails">
                 <p>Pickup Time</p>
-                <p><span class="menuDetailsImportant" id="popupTime">10:42</span>&ensp;pm</p>
+                <p><span class="menuDetailsImportant" id="popupTime">10:42</span>&ensp;</p>
             </div>
             <div class="popupMenuDetails">
                 <p>Drop-off Walk</p>
-                <p><span class="menuDetailsImportant" id="popupDropoffDistance">23</span>&ensp;m</p>
+                <p><span class="menuDetailsImportant" id="popupDropoffDistance">23</span>&ensp;</p>
             </div>
             <div class="popupMenuDetails">
                 <p>Seats Taken</p>
-                <p><span class="menuDetailsImportant" id="popupSeats">1 / 4</span>&ensp;seats</p>
+                <p><span class="menuDetailsImportant" id="popupSeats"></span>&ensp;seats</p>
             </div>
         </div>
         <div id="popupMenuPriceAndSeats">
@@ -77,12 +78,15 @@
             <button class="btnNormal" onclick="closePopup()"><span class="material-symbols-outlined">
                     close
                 </span>&ensp;Close</button>
-            <button class="btnNormal"><span class="material-symbols-outlined">
-                    chat
+            
+            <button class="btnNormal" onclick="window.location.href='../myRides/chatRoom/index.html'"><span class="material-symbols-outlined">
+                        chat
                 </span>&ensp;Chat</button>
-            <button class="btnStrong" id="joinRideBtn"><span class="material-symbols-outlined">
+
+            <button class="btnStrong" id="joinRideBtn" onclick="window.location.href='../myRides/index.html'"><span class="material-symbols-outlined">
                     directions_car
                 </span>&ensp;Join Ride</button>
+
         </div>
     </div>
     <div id="darkenOverlay" onclick="closePopup()"></div>
@@ -144,11 +148,40 @@
         <div id="addressInputs">
             <h1 id="rideListTitle">Ride List</h1>
             <p>From:</p>
-            <input name="fromAddress">
+            <div class="addressDropdownWrapper">
+                <input name="fromAddress" id="fromInput" onfocus="resolveAddress('from', this.value)" oninput="resolveAddress('from', this.value)" onblur="toggleAddressDropdown('close', 'from', 'offFocus')">
+                <div class="addressDropdown" id="fromAddressDropdown">
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('0', 'from', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('1', 'from', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('2', 'from', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('3', 'from', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('4', 'from', this.innerText)">
+                    </div>
+                </div>
+            </div>
             <p>To:</p>
-            <input name="toAddress">
+            <div class="addressDropdownWrapper">
+                <input name="toAddress" id="toInput" onfocus="resolveAddress('to', this.value)" oninput="resolveAddress('to', this.value)" onblur="toggleAddressDropdown('close', 'to', 'offFocus')">
+                <div class="addressDropdown" id="toAddressDropdown">
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('0', 'to', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('1', 'to', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('2', 'to', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('3', 'to', this.innerText)">
+                    </div>
+                    <div class = "addressDropdownItem" onclick="selectDropdownLocation('4', 'to', this.innerText)">
+                    </div>
+                </div>
+            </div>
         </div>
-        <button class="btnStrong" id="searchBtn">Search</button>
+        <button class="btnStrong" id="searchBtn" onclick="searchRides()">Search</button>
+        <p id="alert"></p>
         <h2 id="ridesTitle">Rides</h2>
         <h4 class="mobileComponent">Sort By:</h4>
         <select class="mobileComponent" id="sortByDropdown">
@@ -187,259 +220,7 @@
                 </div>
                 <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
             </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <div class="rideItemMobile mobileComponent">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
-            </div>
-            <table class="desktopComponent">
+            <table class="desktopComponent" id="desktopTable">
                 <tr class="tableHeaderRow">
                     <th>From</th>
                     <th>To</th>
@@ -451,232 +232,8 @@
                     <th>Chat</th>
                     <th>Join</th>
                 </tr>
-                <tr>
-                    <td>
-                        <p>
-                            Lot No. 241, Level 2Menara, Petronas Twin Tower, Kuala Lumpur City Centre, 50088 Kuala
-                            Lumpur, Wilayah Persekutuan Kuala Lumpur
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            2 Jalan Punchak, Off, Jalan P. Ramlee, 50250 Kuala Lumpur
-                        </p>
-                    </td>
-                    <td>
-                        62m
-                    </td>
-                    <td>23m</td>
-                    <td>10:42PM</td>
-                    <td>1 / 4</td>
-                    <td>RM<s>12</s> 6</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td class="tablCelleMessageBtn">
-                        <span class="material-symbols-outlined ">
-                            chat
-                        </span>
-                    </td>
-                    <td class="class=" tablCelleJoinBtn><span class="material-symbols-outlined">
-                            directions_car
-                        </span>
-                    </td>
+                <tr id="emptyState">
+                    <td colspan="9">Nearby rides will appear here!</td>
                 </tr>
             </table>
         </div>
@@ -692,7 +249,7 @@
             <input id="paginationSelector" value="1" oninput="processPagination(this.value)">
 
             <p> &nbsp;/&nbsp;
-            <p id="paginationTotal">20</p>
+            <p id="paginationTotal">1</p>
             </p>
 
             <button class="btnNormal paginationBtn" onclick="updatePagination(1)">

@@ -157,7 +157,7 @@
     .rideItemMobileRow2{
         align-self: baseline;
         display: flex; flex-direction: row;
-        height: auto;
+        height: auto; width: 100%;
         align-items: center; justify-content:left; 
         gap: 10%;
         margin-top: 5px; margin-bottom: 5px;

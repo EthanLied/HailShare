@@ -169,6 +169,16 @@ async function resolveAddress(addressInputType, addressQuery) {
     // Clears previous addresses
     returnedLocations = []
 
+    // Reset based on input type
+    if (addressInputType === "to"){
+        toLat = 0
+        toLong = 0
+    }
+    else{
+        fromLat = 0
+        fromLong = 0
+    }
+
     // Reset 
     clearTimeout(debounceTimer);
 
@@ -275,7 +285,7 @@ function toggleAddressDropdown(mode, type, trigger) {
         // Wait 50ms in case 'select' comes in later
         closeTimer = setTimeout(() => {
             addressDropdown.style.display = mode === 'close' ? 'none' : 'flex';
-        }, 5000);
+        }, 100);
 
     } else {
         // Cancel the delay and run immediately
@@ -286,7 +296,7 @@ function toggleAddressDropdown(mode, type, trigger) {
 }
 
 
-function submitRide() {
+async function submitRide() {
 
     const from = document.getElementById("fromInput").value;
     const to = document.getElementById("toInput").value;
@@ -309,10 +319,19 @@ function submitRide() {
     else {
         alert.innerText = ""
         alert.style.color = "white"
-        const sql = `INSERT INTO \`rides\` (\`user_id\`, \`pickup_location\`, \`pickup_lat\`, \`pickup_long\`, \`dropoff_location\`, \`dropoff_lat\`, \`dropoff_long\`, \`price\`, \`pickup_time\`, \`available_seats\`, \`status\`, \`completed_at\`, \`created_at\`, \`updated_at\`) ` +
-            `VALUES ('1', '${from}', '${fromLat}', '${fromLong}', '${to}', '${toLat}', '${toLong}', '${price}', '${datetime}', '${capacity}', 'active', NULL, NOW(), NULL)`;
-        queryDB(sql);
-        console.log("Sent DB Query: " + sql)
+        const cookies = document.cookie.split('; ');
+        const userID = cookies.find(c => c.startsWith('user_id' + '=')).split('=')[1];
+        const addToRide = `INSERT INTO \`rides\` (\`user_id\`, \`pickup_location\`, \`pickup_lat\`, \`pickup_long\`, \`dropoff_location\`, \`dropoff_lat\`, \`dropoff_long\`, \`price\`, \`pickup_time\`, \`available_seats\`, \`status\`, \`completed_at\`, \`created_at\`, \`updated_at\`) ` +
+            `VALUES ('${userID}', '${from}', '${fromLat}', '${fromLong}', '${to}', '${toLat}', '${toLong}', '${price}', '${datetime}', '${capacity}', 'active', NULL, NOW(), NULL)`;
+        await queryDB(addToRide);
+        console.log("Sent DB Query: " + addToRide)
+
+        const rideIdResult = await queryDB(`SELECT ride_id FROM rides ORDER BY ride_id DESC LIMIT 1`);
+        const rideId = rideIdResult[0].ride_id;
+
+        const addToRideParticipants = `INSERT INTO ride_participants (ride_id, user_id) VALUES ('${rideId}', '${userID}')`;
+        await queryDB(addToRideParticipants);
+        console.log("Sent DB Query: " + addToRideParticipants)
     }
 
 }

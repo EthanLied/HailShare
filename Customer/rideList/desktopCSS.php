@@ -102,6 +102,50 @@ a{
     line-height: 0;
 }
 
+.addressDropdownWrapper{
+    width: 100%;
+    height: 40px;
+}
+
+.addressDropdownWrapper > input{
+    width: 100%; height: 100%;
+    box-sizing: border-box;
+}
+
+.addressDropdown{
+    display: flex; flex-direction: column;
+    position: relative;
+    width: 100%; height: 500%;
+    justify-self: center; align-self: center;
+}
+
+.addressDropdownItem{
+    height: 20%;
+    border: solid 0.7px rgb(208, 208, 208);
+    border-radius: 6px;
+    padding: 4px 2px 4px 8px;
+    background-color: white;
+    display: flex; 
+    align-items: center;
+    z-index: 1;
+
+    /* Hides Overflow*/
+    white-space: nowrap;     
+    overflow: hidden;      
+    text-overflow: ellipsis; 
+}
+
+.addressDropdownItem:hover{
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+#alert{
+    color: red;
+    text-align: center;
+    margin-top: 30px;
+}
+
 
 
 
