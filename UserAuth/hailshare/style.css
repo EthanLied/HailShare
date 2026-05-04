@@ -1,0 +1,626 @@
+/* ===== STYLE ===== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #fff;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== NAVIGATION BAR ===== */
+.navbar {
+  display: flex;
+  padding: 15px 40px;
+  background-color: #ddd;
+  border-radius: 0 0 15px 15px;
+  margin: 0;
+}
+
+.nav-left,
+.nav-right {
+  font-size: 20px;
+  flex: 1;   
+}
+
+/* Align text */
+.nav-left {
+  text-align: left;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center; 
+  gap: 20px;
+}
+
+.nav-right a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+.nav-right a:hover {
+  text-decoration: underline;
+}
+
+/* ===== COMMON FORM STYLES ===== */
+.form-group label {
+  display: block;
+  width: 100%;
+}
+
+input, select {
+  width: 100%;
+  padding: clamp(8px, 1vw, 12px);
+  border-radius: 10px;
+  border: 1px solid #000;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  background-color: #111;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 18px;
+}
+
+.btn:hover {
+  background-color: #333;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* ===== LINKS ===== */
+.bottom-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.bottom-link a {
+  text-decoration: underline;
+  color: black;
+}
+
+/* ===== LOGIN & PASSWORD-RECOVERY PAGES ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* prevent sideways scroll only */
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 55px);
+  flex-wrap: wrap;
+}
+
+.left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid #ccc;
+  align-self: stretch;
+  font-size: 20px;
+  color: #000;
+}
+
+
+.right {
+  display: flex;
+  justify-content: center;   /* vertical center FIX */
+  align-items: center;       /* horizontal center */
+
+  padding: 1rem;              
+  overflow: hidden;
+}
+
+.left,
+.right {
+  flex: 1 1 400px;
+  min-width: 300px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  margin-top: 20px;   
+}
+
+.form-box {
+  width: 100%;
+  max-width: clamp(16rem, 30vw, 22rem);
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.links a {
+  display: block;       
+  margin: 10px 0;
+  text-decoration: underline;
+  color: black;
+}
+
+/* ===== REGISTRATION PAGES ===== */
+.steps {
+  position: fixed;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.step {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #bbb;
+}
+
+.step.active {
+  background-color: #555;
+}
+
+.line {
+  width: 2px;
+  height: 40px;
+  background-color: #ccc;
+  margin: 5px 0;
+}
+
+/* Registration container */
+
+.sub-title {
+  font-weight: normal;
+  text-align: center;
+  font-size: 22px;
+  margin: 30px 0 30px;
+}
+
+h2 {
+  text-align: center;
+  margin: 10px 0 20px;  /* add this */
+}
+
+.reg-container {
+  width: 100%;
+  max-width: clamp(320px, 80vw, 700px);;
+  margin: 10px auto;
+  padding: clamp(10px, 2vw, 20px);
+  box-sizing: border-box;
+}
+
+.reg-container .form-group {
+  margin-bottom: 20px;
+}
+
+/* Form row */
+.form-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: clamp(10px, 2vh, 20px);
+  flex-wrap: wrap;
+}
+
+.form-row .form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* DOB inline */
+.dob {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons row */
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* Smaller button for registration */
+.btnRegNormal {
+  width: 100%;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #111;
+  border-radius: 10px;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 17px;
+}
+
+.btnRegNormal:hover {
+  background-color: #f5f5f5;
+}
+
+.btnRegStrong {
+  width: 100%;
+  padding: 15px;
+  background-color: #111;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 17px;
+}
+
+.btnRegStrong:hover {
+  background-color: #333;
+}
+
+.btnRegNormal:active,
+.btnRegStrong:active {
+  transform: scale(0.97);
+}
+
+.button-row .btnRegNormal,
+.button-row .btnRegStrong {
+  margin-bottom: 30px;
+  margin-top: 10px; 
+  width: 180px;
+  padding: 15px;
+}
+
+.btnReg1Strong {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 30px;
+  background-color: #111;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 17px;
+}
+
+.btnReg1Strong:hover {
+  background-color: #333;
+}
+
+.btnReg1Strong:active {
+  transform: scale(0.97);
+}
+
+/* ===== MOBILE RESPONSIVE (≤ 768px) ===== */
+@media (max-width: 768px) {
+
+  body {
+    background-color: white;
+  }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    background-color: transparent;
+  }
+
+  .nav-right {
+    display: none; /* remove Login/Register */
+  }
+
+  .nav-left {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    flex-direction: column;
+    height: auto; /* adjust for taller navbar */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left {
+    display: none; /* remove image */
+  }
+
+  .right {
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ===== FORM ===== */
+  .form-box {
+    width: 100%;
+    max-width: 320px;
+    gap: 35px;
+    transform: none;
+  }
+
+  h2 {
+    font-size: 25px;
+    text-align: center;
+    margin: 0px 0 10px;
+  }
+
+  /* ===== INPUTS ===== */
+  input, select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 15px;
+    border: 1px solid #000;
+    font-size: 16px;
+  }
+
+  /* ===== BUTTON ===== */
+  .btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 15px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  /* ===== LINKS ===== */
+  .links {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .links a {
+    display: block;
+    margin: 15px 0;
+    font-size: 16px;
+    text-decoration: underline;
+    color: black;
+  }
+
+  .bottom-link {
+    text-align: center;
+    margin-top: 70px;
+  }
+
+  .bottom-link a {
+    font-size: 16px;
+    text-decoration: underline;
+    color: black;
+  }
+
+    .container .right .form-box .links {
+    margin-top: 140px;  /* adjust this */
+    text-align: center;
+  }
+}
+
+/* ===== REGISTRATION MOBILE ONLY (≤ 768px) ===== */
+@media (max-width: 768px) {
+
+  /* Only target registration page */
+  .reg-container {
+
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .reg-container h2 {
+    font-size: 28px;
+    text-align: center;
+    margin: 50px 0 50px;
+  }
+
+  /* Stack form fields */
+  .reg-container .form-row {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* Inputs styling (ONLY inside reg-container) */
+  .reg-container input,
+  .reg-container select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #000;
+    font-size: 16px;
+  }
+
+  /* DOB row */
+  .reg-container .dob {
+    display: flex;
+    gap: 15px;
+  }
+
+  .reg-container .dob select {
+    flex: 1;
+  }
+
+  /* Buttons row */
+  .reg-container .button-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .reg-container .button-row .btnRegNormal,
+  .reg-container .button-row .btnRegStrong {
+    width: 48%;
+    height: 50px;
+    border-radius: 15px;
+  }
+
+  /* Single button (Next button in step 1) */
+  .reg-container .btnReg1Strong {
+    width: 100%;
+    height: 50px;
+    border-radius: 15px;
+    margin-top: 15px;
+  }
+
+  /* Step indicator → bottom horizontal */
+  .steps {
+    position: absolute;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 200px;
+    gap: 10px;
+  }
+
+  .steps {
+  position: absolute;
+  bottom: 70px; /* adjust this if needed */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+  .line {
+    width: 40px;
+    height: 2px;
+  }
+
+  .step {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Bottom link */
+  .reg-container .bottom-link {
+    text-align: center;
+    margin-top: 159px;
+  }
+
+  .reg-container .button-row + .bottom-link {
+    margin-top: 153px;
+    text-align: center;
+  }
+}
+/* ===== REGISTRATION 4 ONLY ===== */
+@media (max-width: 768px) {
+
+  /* Only apply to reg4 page */
+  .reg-container:has(.sub-title) {
+
+    /* optional: adjust spacing if needed */
+    padding-top: 10px;
+  }
+  .reg-container:has(.sub-title) h2 {
+    font-size: 28px;       /* adjust size */
+    margin: 60px 0 55px;   /* spacing control */
+    text-align: center;
+    font-weight: 600;
+  }
+
+  /* Optional: make dropdown feel more "button-like" */
+  .reg-container:has(.sub-title) select option {
+    font-weight: normal;
+  }
+
+  /* Improve "What type..." title spacing */
+  .reg-container:has(.sub-title) .sub-title {
+    font-weight: normal;
+    font-size: 28px;
+    margin: 15px 0 60px;
+    text-align: center;
+  }
+
+    .reg-container:has(.sub-title) .steps {
+    bottom: 110px; /* move step indicator higher/lower */
+  }
+
+  .reg-container:has(.sub-title) .bottom-link {
+    margin-top: 231px;  /* adjust link spacing */
+    text-align: center;
+  }
+}
+
+/* ===== DESKTOP & TABLET ONLY (LOGIN / RECOVERY) ===== */
+@media (min-width: 769px) {
+
+  html, body {
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* ONLY affect login layout (exclude registration) */
+  .container:not(.reg-container) {
+    min-height: calc(100vh - 55px);
+    align-items: center;
+  }
+
+  /* prevent inner scroll */
+  .container:not(.reg-container) .right {
+    overflow: hidden;
+  }
+
+  /* tighten layout so it fits at 125% */
+  .container:not(.reg-container) .form-box {
+    gap: 1.2rem;
+    max-width: 20rem;
+  }
+
+  .container:not(.reg-container) input,
+  .container:not(.reg-container) select {
+    padding: 10px;
+  }
+
+  .container:not(.reg-container) .btn {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .container:not(.reg-container) h2 {
+    margin: 0px 0 10px;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+  }
+}
+
+.container:not(.reg-container) {
+  overflow: hidden;
+}
