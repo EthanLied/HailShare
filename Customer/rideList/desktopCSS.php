@@ -140,6 +140,10 @@ a{
     cursor: pointer;
 }
 
+#sortByDropdown{
+    margin-bottom: 20px;
+}
+
 #alert{
     color: red;
     text-align: center;

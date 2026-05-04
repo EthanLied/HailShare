@@ -184,7 +184,7 @@
         <p id="alert"></p>
         <h2 id="ridesTitle">Rides</h2>
         <h4 class="mobileComponent">Sort By:</h4>
-        <select class="mobileComponent" id="sortByDropdown">
+        <select id="sortByDropdown">
             <option>Time (Eariler)</option>
             <option>Time (Later)</option>
             <option>Pickup Distance (Ascending)</option>
@@ -200,25 +200,6 @@
             data-pickup-distance="63" data-dropoff-distance="23"
             data-time="10:42,PM" data-seats="1"
             data-price="12">
-                <div class="rideItemMobileRow1">
-                    <div class="rideItemMobileRowLeft">
-                        <p><span class="rideItemMobileLabel">From: </span>Lot No. 241, Level 2 Menara, Petronas Twin
-                            Tower, Kuala Lumpur City Centre, 50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</p>
-                    </div>
-                    <div class="rideItemMobileRowRight">
-                        <p><span class="rideItemMobileLabel">To: </span>2 Jalan Punchak, Off, Jalan P. Ramlee, 50250
-                            Kuala Lumpur</p>
-                    </div>
-                </div>
-                <div class="rideItemMobileRow2">
-                    <p><span class="material-symbols-outlined">
-                            schedule
-                        </span><span>&ensp;</span>10:10PM</p>
-                    <p><span class="material-symbols-outlined">
-                            attach_money
-                        </span>RM5</p>
-                </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
             </div>
             <table class="desktopComponent" id="desktopTable">
                 <tr class="tableHeaderRow">
