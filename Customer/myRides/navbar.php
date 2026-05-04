@@ -1,3 +1,5 @@
+<?php header("Content-type: text/css"); ?>
+
 #navbar, #navbar.expand, #navbar > a, #content, #tabList > a, .navbarItem {
     transition: 0.3s cubic-bezier(.42, .94, .31, .99);
 }

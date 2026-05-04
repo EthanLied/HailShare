@@ -3,11 +3,12 @@
 
 <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../shadCNTemplate.css">
-    <link rel="stylesheet" href="desktop.css">
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="mobile.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../shadCNTemplate.php">
+    <link rel="stylesheet" href="desktop.php">
+    <link rel="stylesheet" href="navbar.php">
+    <link rel="stylesheet" href="mobile.php">
+    <script src="script.php" defer></script>
+    <script src="../../Database/DBfunctions.php" defer></script>
     <title>My Rides</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

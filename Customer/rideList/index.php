@@ -200,6 +200,7 @@
             data-pickup-distance="63" data-dropoff-distance="23"
             data-time="10:42,PM" data-seats="1"
             data-price="12">
+                <p>Search results will appear here!</p>
             </div>
             <table class="desktopComponent" id="desktopTable">
                 <tr class="tableHeaderRow">
@@ -214,7 +215,7 @@
                     <th>Join</th>
                 </tr>
                 <tr id="emptyState">
-                    <td colspan="9">Nearby rides will appear here!</td>
+                    <td colspan="9">Search results will appear here!</td>
                 </tr>
             </table>
         </div>

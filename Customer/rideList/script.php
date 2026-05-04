@@ -224,8 +224,8 @@ async function loadRecords() {
     const tableContainer = document.getElementById('tableContainer');
 
     // Completes any rides to be completed
-    await queryDB(`UPDATE rides SET completed_at = DATE(created_at) + INTERVAL 1 DAY WHERE pickup_time <= NOW() - INTERVAL 1 DAY AND completed_at IS NULL`);
-
+    await queryDB(`UPDATE rides SET completed_at = DATE(created_at) + INTERVAL 1 DAY, status = 'completed' WHERE status = 'active' AND pickup_time <= NOW() - INTERVAL 1 DAY AND completed_at IS NULL`);
+    
     // Clear existing records
     while (table.rows.length > 1) {
         table.deleteRow(1);

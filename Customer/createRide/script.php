@@ -321,8 +321,8 @@ async function submitRide() {
         alert.style.color = "white"
         const cookies = document.cookie.split('; ');
         const userID = cookies.find(c => c.startsWith('user_id' + '=')).split('=')[1];
-        const addToRide = `INSERT INTO \`rides\` (\`user_id\`, \`pickup_location\`, \`pickup_lat\`, \`pickup_long\`, \`dropoff_location\`, \`dropoff_lat\`, \`dropoff_long\`, \`price\`, \`pickup_time\`, \`available_seats\`, \`status\`, \`completed_at\`, \`created_at\`, \`updated_at\`) ` +
-            `VALUES ('${userID}', '${from}', '${fromLat}', '${fromLong}', '${to}', '${toLat}', '${toLong}', '${price}', '${datetime}', '${capacity}', 'active', NULL, NOW(), NULL)`;
+       const addToRide = `INSERT INTO \`rides\` (\`user_id\`, \`pickup_location\`, \`pickup_lat\`, \`pickup_long\`, \`dropoff_location\`, \`dropoff_lat\`, \`dropoff_long\`, \`price\`, \`pickup_time\`, \`available_seats\`, \`status\`, \`completed_at\`, \`created_at\`, \`updated_at\`) ` +
+        `VALUES ('${userID}', '${from}', '${fromLat}', '${fromLong}', '${to}', '${toLat}', '${toLong}', '${price}', '${datetime}', '${capacity}', 'active', DATE('${datetime}') + INTERVAL 1 DAY, NOW(), NULL)`;
         await queryDB(addToRide);
         console.log("Sent DB Query: " + addToRide)
 

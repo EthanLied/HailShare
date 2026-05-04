@@ -1,0 +1,10 @@
+- cancel rides from customer's ride list
+- global system to set status = 'completed'
+
+Rf
+- chatroom (both) 
+- ratings
+- edit ride
+- leave ride
+- profile
+- create support request

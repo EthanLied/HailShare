@@ -1,3 +1,6 @@
+<?php header("Content-type: text/css"); ?>
+
+
 /* Mobile View */
 @media screen and (max-width: 768px) {
 
