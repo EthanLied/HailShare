@@ -245,6 +245,9 @@ async function loadRides(){
                     <p>Price: <span>RM ${parseFloat(record.price).toFixed(2)}</span></p>
                 </div>
                 <div class="rightSideItems">
+                    <a>
+                        <button class="btnNormal importantBtn">Close Ride <span class="material-symbols-outlined">close</span></button>
+                    </a>
                     <a href="editRide/index.html">
                         <button class="btnNormal">Edit Ride <span class="material-symbols-outlined">edit</span></button>
                     </a>
@@ -348,7 +351,7 @@ async function loadRides(){
                 </div>
                 <div class="rightSideItems">
                     <a>
-                        <button class="btnNormal leaveRideBtn">Leave Ride <span class="material-symbols-outlined">logout</span></button>
+                        <button class="btnNormal importantBtn">Leave Ride <span class="material-symbols-outlined">logout</span></button>
                     </a>
                     <a href="chatRoom/index.html">
                         <button class="btnNormal" onclick="document.cookie='ride_id=' + this.closest('[data-ride-id]').dataset.rideId">Chatroom <span class="material-symbols-outlined">chat</span></button>

@@ -146,7 +146,7 @@ a{
     font-size: 12px;
 }
 
-.leaveRideBtn, .leaveRideBtn:hover{
+.importantBtn, .importantBtn:hover{
     background-color: red; color: white;
 }
 
