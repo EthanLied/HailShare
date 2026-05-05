@@ -246,7 +246,7 @@ async function loadRides(){
                 </div>
                 <div class="rightSideItems">
                     <a>
-                        <button class="btnNormal importantBtn">Close Ride <span class="material-symbols-outlined">close</span></button>
+                        <button class="btnNormal importantBtn" onclick="closeRide('${record.ride_id}')">Close Ride <span class="material-symbols-outlined">close</span></button>
                     </a>
                     <a href="editRide/index.html">
                         <button class="btnNormal">Edit Ride <span class="material-symbols-outlined">edit</span></button>
@@ -420,4 +420,25 @@ async function loadRides(){
 function formatTime(datetimeStr) {
     const date = new Date(datetimeStr);
     return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+}
+
+async function closeRide(rideId){
+    
+    // Query all ride participants for intended ride to close
+    const participantRows = await queryDB(`SELECT * FROM ride_participants WHERE ride_id = ${rideId}`);
+
+    // If participants, dont do anything
+    if (!participantRows || participantRows.length === 0) return;
+    
+    // More than 1 participant, reject cancelation
+    if (participantRows.length > 1){
+        alert("Sorry! You can't close a ride if someone else has joined in that ride.")
+        return;
+    }
+
+    // Else accept and close ride
+    alert(`Ride #${rideId} closed.`)
+
+    queryDB(`UPDATE rides SET status = 'closed' WHERE ride_id = ${rideId}`)
+    location.reload();
 }
