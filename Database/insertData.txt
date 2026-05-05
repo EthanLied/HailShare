@@ -1,18 +1,19 @@
 INSERT INTO `users` (`user_id`, `role_id`, `first_name`, `last_name`, `email`, `phone_number`, `password_hash`, `date_of_birth`, `security_question`, `security_question_answer`, `security_code`, `profile_picture`, `account_status`, `created_at`, `updated_at`) VALUES ('1', '1', 'Ahmad', 'Razif', 'ahmad.razif@email.com', '+60123456789', '$2b$12$KIXaBcDeFgHiJkLmNoPqRsTuVwXyZ', '1995-06-15', 'What is the name of your first pet?', '$2b$12$AnswerHashPlaceholderXYZABC', NULL, 'uploads/profiles/ahmad_razif.jpg', 'active', '2026-04-28 18:18:53', NULL);
 INSERT INTO `users` (`user_id`, `role_id`, `first_name`, `last_name`, `email`, `phone_number`, `password_hash`, `date_of_birth`, `security_question`, `security_question_answer`, `security_code`, `profile_picture`, `account_status`, `created_at`, `updated_at`) VALUES ('2', '2', 'Siti', 'Aminah', 'siti.aminah@email.com', '+60198765432', '$2b$12$AnotherHashPlaceholderXYZABC', '1998-03-22', 'What is your mother maiden name?', '$2b$12$AnswerHashPlaceholder2XYZABC', NULL, 'uploads/profiles/siti_aminah.jpg', 'active', '2026-04-28 18:18:53', NULL);
 
--- No data found for table: rides
+INSERT INTO `rides` (`ride_id`, `user_id`, `pickup_location`, `pickup_lat`, `pickup_long`, `dropoff_location`, `dropoff_lat`, `dropoff_long`, `price`, `pickup_time`, `available_seats`, `status`, `completed_at`, `created_at`, `updated_at`) VALUES ('1', '1', 'Sunway Pyramid, Petaling Jaya', '3.0738000', '101.6010000', 'KL Sentral, Kuala Lumpur', '3.1338000', '101.6861000', '8.00', '2026-05-27 08:30:00', '3', 'active', '2026-05-28 21:29:52', '2026-04-28 18:18:53', '2026-05-04 21:30:30');
+INSERT INTO `rides` (`ride_id`, `user_id`, `pickup_location`, `pickup_lat`, `pickup_long`, `dropoff_location`, `dropoff_lat`, `dropoff_long`, `price`, `pickup_time`, `available_seats`, `status`, `completed_at`, `created_at`, `updated_at`) VALUES ('3', '1', 'KLIA T1, KLIA Departure, Sepang, 64000, Malaysia', '2.7547334', '101.7046397', 'Serampang Hill, Malaysia', '2.3621814', '102.7844764', '1.00', '2026-05-07 00:00:00', '3', 'active', '2026-05-08 21:30:40', '2026-05-02 23:47:42', '2026-05-04 21:30:46');
 
--- No data found for table: ride_participants
+INSERT INTO `ride_participants` (`participant_id`, `ride_id`, `user_id`, `status`, `joined_at`, `completed_at`) VALUES ('1', '1', '2', 'active', '2026-04-28 09:00:00', NULL);
 
--- No data found for table: ratings
+INSERT INTO `ratings` (`rating_id`, `ride_id`, `rater_user_id`, `rated_user_id`, `rating_score`, `description`, `created_at`) VALUES ('1', '1', '1', '2', '5', 'Very punctual and friendly driver. Car was clean and comfortable.', '2026-04-28 18:18:53');
 
--- No data found for table: ride_chat_rooms
+INSERT INTO `ride_chat_rooms` (`ride_chat_id`, `ride_id`, `guest_user_id`, `status`, `created_at`, `closed_at`) VALUES ('1', '1', '1', 'active', '2026-04-28 09:05:00', NULL);
 
--- No data found for table: ride_chat_messages
+INSERT INTO `ride_chat_messages` (`message_id`, `ride_chat_id`, `sender_user_id`, `message_content`, `sent_at`) VALUES ('1', '1', '1', 'Hi! I am on my way. Will be there in 5 mins.', '2026-04-28 09:10:00');
 
--- No data found for table: support_chat_rooms
+INSERT INTO `support_chat_rooms` (`support_chat_id`, `customer_user_id`, `staff_user_id`, `status`, `started_at`, `connected_at`, `ended_at`) VALUES ('1', '1', '1', 'active', '2026-04-28 10:00:00', '2026-04-28 10:01:30', NULL);
 
--- No data found for table: support_chat_messages
+INSERT INTO `support_chat_messages` (`message_id`, `support_chat_id`, `sender_user_id`, `message_content`, `sent_at`) VALUES ('1', '1', '1', 'Hello, I would like to report an issue with my ride post.', '2026-04-28 10:02:00');
 
--- No data found for table: notifications
+INSERT INTO `notifications` (`notification_id`, `user_id`, `message`, `status`, `created_at`) VALUES ('1', '1', 'Your ride post "Sunway Pyramid to KL Sentral" has been updated by staff.', 'unread', '2026-04-28 11:00:00');

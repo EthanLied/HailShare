@@ -7,12 +7,16 @@ let isMobile
 let rideItemsPerPage
 let rideItems
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
     isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     // Load from DB
-    loadRides()
+    await loadRides()
+
+    // Refresh tabs
+    switchTab('hosted')
+    switchSubtab('ongoing')
 
     // Loads pagination
     paginationLoad()
@@ -407,9 +411,7 @@ async function loadRides(){
         container.appendChild(div);
     }
 
-    // Refresh tabs
-    switchTab('hosted');
-    switchSubtab('ongoing')
+    
 }
 
 function formatTime(datetimeStr) {
