@@ -2,8 +2,8 @@
 
 Rf
 - chatroom (both) 
-- ratings
-- edit ride
-- leave ride
-- profile
+- ratings (cookie logged)
+- edit ride (cookie logged)
+- leave ride (cookie logged)
+- profile 
 - create support request

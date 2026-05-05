@@ -214,7 +214,7 @@ async function loadRides(){
     //
 
     // Query hosted ride data
-    const rides = await queryDB(`SELECT * FROM rides WHERE user_id = ${userId} AND status = 'active'`);
+    const rides = await queryDB(`SELECT * FROM rides WHERE user_id = ${userId}`);
 
     // Seperate ongoing from past
     const now = new Date();
@@ -233,8 +233,10 @@ async function loadRides(){
             const div = document.createElement('div');
             div.className = 'ongoingRidesItem hosted ongoing';
 
-            // Store ride_id as data aria
+            // Store data arias
             div.dataset.rideId = record.ride_id;
+            div.dataset.userId = record.user_id;
+
             div.innerHTML = `
                 <div class="leftSideItems">
                     <p class="rideIDLabel">Ride ID: <span>#${record.ride_id}</span></p>
@@ -249,10 +251,10 @@ async function loadRides(){
                         <button class="btnNormal importantBtn" onclick="closeRide('${record.ride_id}')">Close Ride <span class="material-symbols-outlined">close</span></button>
                     </a>
                     <a href="editRide/index.html">
-                        <button class="btnNormal">Edit Ride <span class="material-symbols-outlined">edit</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Edit Ride <span class="material-symbols-outlined">edit</span></button>
                     </a>
                     <a href="chatRoom/index.html">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=' + this.closest('[data-ride-id]').dataset.rideId">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                 </div>
             `;
@@ -280,8 +282,10 @@ async function loadRides(){
             const div = document.createElement('div');
             div.className = 'rideHistoryItem hosted past';
 
-            // Store ride_id as data aria
+            // Store data arias
             div.dataset.rideId = record.ride_id;
+            div.dataset.userId = record.user_id;
+
             div.innerHTML = `
                 <div class="leftSideItems">
                     <p class="rideIDLabel">Ride ID: <span>#${record.ride_id}</span></p>
@@ -291,7 +295,7 @@ async function loadRides(){
                 </div>
                 <div class="rightSideItems">
                     <a href="chatRoom/index.html">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=' + this.closest('[data-ride-id]').dataset.rideId">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <p>Time Hosted: <span>${formatTime(record.pickup_time)}</span></p>
                     <p>Time Ended: <span>${timeEnded}</span></p>
@@ -339,8 +343,10 @@ async function loadRides(){
             const div = document.createElement('div');
             div.className = 'ongoingRidesItem joined ongoing';
 
-            // Store ride_id as data aria
+            // Store data arias
             div.dataset.rideId = record.ride_id;
+            div.dataset.userId = record.user_id;
+
             div.innerHTML = `
                 <div class="leftSideItems">
                     <p class="rideIDLabel">Ride ID: <span>#${record.ride_id}</span></p>
@@ -354,7 +360,7 @@ async function loadRides(){
                         <button class="btnNormal importantBtn">Leave Ride <span class="material-symbols-outlined">logout</span></button>
                     </a>
                     <a href="chatRoom/index.html">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=' + this.closest('[data-ride-id]').dataset.rideId">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <p>To: <span>${record.dropoff_location}</span></p>
                 </div>
@@ -383,8 +389,9 @@ async function loadRides(){
             const div = document.createElement('div');
             div.className = 'rideHistoryItem joined past';
 
-            // Store ride_id as data aria
+            // Store data arias
             div.dataset.rideId = record.ride_id;
+            div.dataset.userId = record.user_id;
 
             div.innerHTML = `
                 <div class="leftSideItems">
@@ -395,10 +402,10 @@ async function loadRides(){
                 </div>
                 <div class="rightSideItems">
                     <a href="chatRoom/index.html">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=' + this.closest('[data-ride-id]').dataset.rideId">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <a href="giveRating/index.html">
-                        <button class="btnNormal">Give Rating <span class="material-symbols-outlined">star</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_owner_id=${record.user_id};'">Give Rating <span class="material-symbols-outlined">star</span></button>
                     </a>
                     <p>Time Hosted: <span>${formatTime(record.pickup_time)}</span></p>
                     <p>Time Ended: <span>${timeEnded}</span></p>
@@ -442,3 +449,4 @@ async function closeRide(rideId){
     queryDB(`UPDATE rides SET status = 'closed' WHERE ride_id = ${rideId}`)
     location.reload();
 }
+
