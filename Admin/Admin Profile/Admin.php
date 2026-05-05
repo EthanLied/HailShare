@@ -14,12 +14,12 @@
 <div id="navbar">
     <div class="navbarItem">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-        <a href="../Homepage/Homepage.html"><h3>Hailshare Admin</h3></a>
+        <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
     </div>
-    <a href="../Account%20List/AccountList.html">
+    <a href="../Account%20List/AccountList.php">
         <div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Account List</p></div>
     </a>
-    <a href="Admin.html">
+    <a href="Admin.php">
         <div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Admin Profile</p></div>
     </a>
 </div>

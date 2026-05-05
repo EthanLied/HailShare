@@ -78,7 +78,7 @@ function toggleNavbar() {
                     <td>${acc.email}</td>
                     <td><span style="color:${statusColor};">● ${acc.status}</span></td>
                     <td>
-                        <a href="modifyAccount.html?email=${encodeURIComponent(acc.email)}"><span class="material-symbols-outlined" style="cursor:pointer;">edit</span></a>
+                        <a href="modifyAccount.php?id=${encodeURIComponent(acc.email)}"><span class="material-symbols-outlined" style="cursor:pointer;">edit</span></a>
                         <span class="material-symbols-outlined" style="cursor:pointer; margin-left:10px;">more_vert</span>
                     </td>
                 `;

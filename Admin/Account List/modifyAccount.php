@@ -14,19 +14,19 @@
 <div id="navbar">
     <div class="navbarItem">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-        <a href="../Homepage/Homepage.html"><h3>Hailshare Admin</h3></a>
+        <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
     </div>
-    <a href="AccountList.html">
+    <a href="AccountList.php">
         <div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Account List</p></div>
     </a>
-    <a href="../Admin%20Profile/Admin.html">
+    <a href="../Admin%20Profile/Admin.php">
         <div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Admin Profile</p></div>
     </a>
 </div>
 
 <div id="content" style="display: flex; flex-direction: column; align-items: center;">
     <div style="max-width: 700px; width: 100%;">
-        <a href="AccountList.html" style="display: inline-block; margin-bottom: 20px;">
+        <a href="AccountList.php" style="display: inline-block; margin-bottom: 20px;">
             <button class="btnNormal" style="display: flex; align-items: center; gap: 5px;">
                 <span class="material-symbols-outlined">chevron_left</span> Back to Account List
             </button>
@@ -83,7 +83,7 @@
         </div>
 
         <div style="display: flex; gap: 15px; justify-content: flex-end;">
-            <a href="AccountList.html"><button class="btnNormal">Cancel</button></a>
+            <a href="AccountList.php"><button class="btnNormal">Cancel</button></a>
             <button class="btnStrong" id="saveChangesBtn">Save Changes</button>
         </div>
     </div>
