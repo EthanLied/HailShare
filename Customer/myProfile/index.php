@@ -2,11 +2,12 @@
 <html>
   <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../shadCNTemplate.css" />
-    <link rel="stylesheet" href="navbar.css" />
-    <link rel="stylesheet" href="desktop.css" />
-    <link rel="stylesheet" href="mobile.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../shadCNTemplate.php" />
+    <link rel="stylesheet" href="navbar.php" />
+    <link rel="stylesheet" href="desktop.php" />
+    <link rel="stylesheet" href="mobile.php" />
+    <script src="script.php" defer></script>
+    <script src="../../Database/DBfunctions.php" defer></script>
     <title>My Profile</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -273,8 +274,9 @@
           <input id="newPasswordInput" />
           <h4>Security Question</h4>
           <select id="securityQuestionDropdown">
-            <option>A</option>
-            <option>B</option>
+            <option>What is your pet's name?</option>
+            <option>What is your school name?</option>
+            <option>What is your favorite food?</option>
           </select>
           <h4>Security Answer</h4>
           <input id="securityAnswerInput" />

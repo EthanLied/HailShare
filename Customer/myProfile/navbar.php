@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 
 /* Flex box column for navbar*/
 #navbar{
