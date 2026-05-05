@@ -39,7 +39,7 @@
         </div>
 
         <!--Ride List Icon-->
-        <a href="../rideList/index.html">
+        <a href="../rideList/index.php">
             <div class="navbarItem" href="">
                 <span class="material-symbols-outlined">list_alt</span>
                 <p>Ride List</p>
@@ -47,7 +47,7 @@
         </a>
 
         <!--Create Ride Icon-->
-        <a href="../createRide/index.html">
+        <a href="../createRide/index.php">
             <div class="navbarItem">
                 <span class="material-symbols-outlined"> add_circle</span>
                 <p>Create Ride</p>
@@ -63,7 +63,7 @@
         </a>
 
         <!--Customer Support Icon-->
-        <a href="../customerSupport/index.html">
+        <a href="../customerSupport/index.php">
             <div class="navbarItem">
                 <span class="material-symbols-outlined">support_agent</span>
                 <p>Customer Support</p>
@@ -71,7 +71,7 @@
         </a>
 
         <!--My Profile Icon-->
-        <a href="../myProfile/index.html">
+        <a href="../myProfile/index.php">
             <div class="navbarItem">
                 <span class="material-symbols-outlined"> account_circle</span>
                 <p>My Profile</p>

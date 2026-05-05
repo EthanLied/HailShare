@@ -1,114 +1,134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Live Chat – HailShare Staff</title>
     <link rel="stylesheet" href="shadCNTemplate.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <script src="script.js" defer></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="navbar">
+      <div class="navbarItem">
+        <span
+          class="material-symbols-outlined"
+          id="hamburgerMenuNavbarIcon"
+          onclick="toggleNavbar()"
+          >menu</span
+        >
+        <a href="">
+          <h3>HailShare</h3>
+        </a>
+      </div>
+      <a href="../ride-list-staff/index.php">
         <div class="navbarItem">
-            <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-            <a href="">
-                <h3>HailShare</h3>
-            </a>
+          <span class="material-symbols-outlined">list_alt</span>
+          <p>Ride List</p>
         </div>
-        <a href="../ride-list-staff/index.html">
-            <div class="navbarItem"><span class="material-symbols-outlined">list_alt</span>
-                <p>Ride List</p>
-            </div>
-        </a>
-        <a href="../business-analytics/index.html">
-            <div class="navbarItem"><span class="material-symbols-outlined">bar_chart</span>
-                <p>Analytics</p>
-            </div>
-        </a>
-        <a href="../live-chat-staff/index.html">
-            <div class="navbarItem"><span class="material-symbols-outlined">support_agent</span>
-                <p>Live Chat</p>
-            </div>
-        </a>
-        <a href="../profile-staff/index.html">
-            <div class="navbarItem"><span class="material-symbols-outlined">account_circle</span>
-                <p>Profile</p>
-            </div>
-        </a>
+      </a>
+      <a href="../business-analytics/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined">bar_chart</span>
+          <p>Analytics</p>
+        </div>
+      </a>
+      <a href="../live-chat-staff/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined">support_agent</span>
+          <p>Live Chat</p>
+        </div>
+      </a>
+      <a href="../profile-staff/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined">account_circle</span>
+          <p>Profile</p>
+        </div>
+      </a>
     </div>
 
     <div id="content">
-        <div class="content-wrapper">
-
-            <!-- Inbox View -->
-            <div id="inboxView">
-                <h1 class="page-title">Live Chat Inbox</h1>
-                <div class="controls-bar">
-                    <div class="control-group">
-                        <label for="sortChat">Sort By:</label>
-                        <select id="sortChat">
-                            <option value="">— select —</option>
-                            <option value="newest">Newest First</option>
-                            <option value="oldest">Oldest First</option>
-                            <option value="status">Status</option>
-                        </select>
-                    </div>
-                    <div class="control-group">
-                        <label for="filterChat">Filter By:</label>
-                        <select id="filterChat">
-                            <option value="">All</option>
-                            <option value="Active">Active</option>
-                            <option value="Waiting">Waiting</option>
-                            <option value="Closed">Closed</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- scrollable container -->
-                <div class="list-scroll-container">
-                    <div id="chatList"></div>
-                </div>
-
-                <div class="pagination">
-                    <span id="chatPageInfo">Page 1 / 1</span>
-                    <button class="btnNormal pag-btn" id="chatPrevPage" disabled>&#8249;</button>
-                    <button class="btnNormal pag-btn" id="chatNextPage">&#8250;</button>
-                </div>
+      <div class="content-wrapper">
+        <!-- Inbox View -->
+        <div id="inboxView">
+          <h1 class="page-title">Live Chat Inbox</h1>
+          <div class="controls-bar">
+            <div class="control-group">
+              <label for="sortChat">Sort By:</label>
+              <select id="sortChat">
+                <option value="">— select —</option>
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="status">Status</option>
+              </select>
             </div>
-
-            <!-- Chatroom View -->
-            <div id="chatroomView" class="hidden">
-                <div class="chatroom-header">
-                    <button class="btnNormal btn-back" id="backToInbox">&#8249; Back to Inbox</button>
-                    <span class="chatroom-title" id="chatroomChatId"></span>
-                    <div class="chatroom-actions">
-                        <button class="btnNormal" id="takeOverBtn">Take Over Chat</button>
-                        <button class="btnStrong2" id="endConvoBtn">End Conversation</button>
-                    </div>
-                </div>
-                <div class="chatroom-card">
-                    <div class="staff-info-bar">
-                        Current Staff Assigned: <strong id="assignedStaff">—</strong>
-                    </div>
-                    <div class="messages-area" id="messagesArea"></div>
-                    <div class="message-input-bar">
-                        <input type="text" id="msgInput" placeholder="Type a message…" autocomplete="off" />
-                        <button class="btnStrong send-btn" id="sendBtn" aria-label="Send">
-                            <span class="material-symbols-outlined" style="font-size:18px">send</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="control-group">
+              <label for="filterChat">Filter By:</label>
+              <select id="filterChat">
+                <option value="">All</option>
+                <option value="Active">Active</option>
+                <option value="Waiting">Waiting</option>
+                <option value="Closed">Closed</option>
+              </select>
             </div>
+          </div>
 
+          <!-- scrollable container -->
+          <div class="list-scroll-container">
+            <div id="chatList"></div>
+          </div>
+
+          <div class="pagination">
+            <span id="chatPageInfo">Page 1 / 1</span>
+            <button class="btnNormal pag-btn" id="chatPrevPage" disabled>
+              &#8249;
+            </button>
+            <button class="btnNormal pag-btn" id="chatNextPage">&#8250;</button>
+          </div>
         </div>
+
+        <!-- Chatroom View -->
+        <div id="chatroomView" class="hidden">
+          <div class="chatroom-header">
+            <button class="btnNormal btn-back" id="backToInbox">
+              &#8249; Back to Inbox
+            </button>
+            <span class="chatroom-title" id="chatroomChatId"></span>
+            <div class="chatroom-actions">
+              <button class="btnNormal" id="takeOverBtn">Take Over Chat</button>
+              <button class="btnStrong2" id="endConvoBtn">
+                End Conversation
+              </button>
+            </div>
+          </div>
+          <div class="chatroom-card">
+            <div class="staff-info-bar">
+              Current Staff Assigned: <strong id="assignedStaff">—</strong>
+            </div>
+            <div class="messages-area" id="messagesArea"></div>
+            <div class="message-input-bar">
+              <input
+                type="text"
+                id="msgInput"
+                placeholder="Type a message…"
+                autocomplete="off"
+              />
+              <button class="btnStrong send-btn" id="sendBtn" aria-label="Send">
+                <span class="material-symbols-outlined" style="font-size: 18px"
+                  >send</span
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-</body>
-
+  </body>
 </html>

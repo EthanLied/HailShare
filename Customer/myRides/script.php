@@ -250,10 +250,10 @@ async function loadRides(){
                     <a>
                         <button class="btnNormal importantBtn" onclick="closeRide('${record.ride_id}')">Close Ride <span class="material-symbols-outlined">close</span></button>
                     </a>
-                    <a href="editRide/index.html">
+                    <a href="editRide/index.php">
                         <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Edit Ride <span class="material-symbols-outlined">edit</span></button>
                     </a>
-                    <a href="chatRoom/index.html">
+                    <a href="chatRoom/index.php">
                         <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                 </div>
@@ -294,7 +294,7 @@ async function loadRides(){
                     <p>From: <span class="address">${record.pickup_location}</span></p>
                 </div>
                 <div class="rightSideItems">
-                    <a href="chatRoom/index.html">
+                    <a href="chatRoom/index.php">
                         <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <p>Time Hosted: <span>${formatTime(record.pickup_time)}</span></p>
@@ -359,7 +359,7 @@ async function loadRides(){
                     <a>
                         <button class="btnNormal importantBtn">Leave Ride <span class="material-symbols-outlined">logout</span></button>
                     </a>
-                    <a href="chatRoom/index.html">
+                    <a href="chatRoom/index.php">
                         <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <p>To: <span>${record.dropoff_location}</span></p>
@@ -401,10 +401,10 @@ async function loadRides(){
                     <p>From: <span class="address">${record.pickup_location}</span></p>
                 </div>
                 <div class="rightSideItems">
-                    <a href="chatRoom/index.html">
+                    <a href="chatRoom/index.php">
                         <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
-                    <a href="giveRating/index.html">
+                    <a href="giveRating/index.php">
                         <button class="btnNormal" onclick="document.cookie='ride_owner_id=${record.user_id};'">Give Rating <span class="material-symbols-outlined">star</span></button>
                     </a>
                     <p>Time Hosted: <span>${formatTime(record.pickup_time)}</span></p>

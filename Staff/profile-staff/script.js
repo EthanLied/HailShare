@@ -58,7 +58,7 @@ document.querySelectorAll('.toggle-pw').forEach(btn => {
 document.getElementById('logoutBtn').addEventListener('click', () => {
     if (confirm('Are you sure you want to logout?')) {
         showToast('Logging out…');
-        setTimeout(() => { window.location.href = '../index.html'; }, 1200);
+        setTimeout(() => { window.location.href = '../index.php'; }, 1200);
     }
 });
 

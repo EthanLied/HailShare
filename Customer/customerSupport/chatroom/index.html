@@ -1,176 +1,176 @@
 <!doctype html>
 <html>
-
-<head>
+  <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../../shadCNTemplate.css">
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="desktop.css">
-    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="../../shadCNTemplate.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="desktop.css" />
+    <link rel="stylesheet" href="mobile.css" />
     <script src="script.js" defer></script>
     <title>Customer Support - Chatroom</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!--Google SVG Imports-->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-</head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
 
-<body>
-
+  <body>
     <div id="header" class="mobileComponent">
-        <a>
-            <h2>Hailshare</h2>
-        </a>
+      <a>
+        <h2>Hailshare</h2>
+      </a>
     </div>
 
     <!--Navbar-->
     <div id="navbar">
+      <!--Hamburger menu and Logo-->
+      <div class="navbarItem">
+        <span
+          class="material-symbols-outlined"
+          id="hamburgerMenuNavbarIcon"
+          onclick="toggleNavbar()"
+        >
+          menu
+        </span>
+        <!-- "Onclick" triggers menu expansion / shrinking-->
+        <a href="">
+          <h3>Hailshare</h3>
+        </a>
+      </div>
 
-        <!--Hamburger menu and Logo-->
-        <div class="navbarItem">
-            <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()"> menu
-            </span> <!-- "Onclick" triggers menu expansion / shrinking-->
-            <a href="">
-                <h3>Hailshare</h3>
-            </a>
+      <!--Ride List Icon-->
+      <a href="../../rideList/index.php">
+        <div class="navbarItem" href="">
+          <span class="material-symbols-outlined">list_alt</span>
+          <p>Ride List</p>
         </div>
+      </a>
 
-        <!--Ride List Icon-->
-        <a href="../../rideList/index.html">
-            <div class="navbarItem" href="">
-                <span class="material-symbols-outlined">list_alt</span>
-                <p>Ride List</p>
-            </div>
-        </a>
+      <!--Create Ride Icon-->
+      <a href="../../createRide/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined"> add_circle</span>
+          <p>Create Ride</p>
+        </div>
+      </a>
 
-        <!--Create Ride Icon-->
-        <a href="../../createRide/index.html">
-            <div class="navbarItem">
-                <span class="material-symbols-outlined"> add_circle</span>
-                <p>Create Ride</p>
-            </div>
-        </a>
+      <!--My Rides Icon-->
+      <a href="../../myRides/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined"> event_available</span>
+          <p>My Rides</p>
+        </div>
+      </a>
 
-        <!--My Rides Icon-->
-        <a href="../../myRides/index.html">
-            <div class="navbarItem">
-                <span class="material-symbols-outlined"> event_available</span>
-                <p>My Rides</p>
-            </div>
-        </a>
+      <!--Customer Support Icon-->
+      <a href="../../customerSupport/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined">support_agent</span>
+          <p>Customer Support</p>
+        </div>
+      </a>
 
-        <!--Customer Support Icon-->
-        <a href="../../customerSupport/index.html">
-            <div class="navbarItem">
-                <span class="material-symbols-outlined">support_agent</span>
-                <p>Customer Support</p>
-            </div>
-        </a>
-
-        <!--My Profile Icon-->
-        <a href="../../myProfile/index.html">
-            <div class="navbarItem">
-                <span class="material-symbols-outlined"> account_circle</span>
-                <p>My Profile</p>
-            </div>
-        </a>
+      <!--My Profile Icon-->
+      <a href="../../myProfile/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined"> account_circle</span>
+          <p>My Profile</p>
+        </div>
+      </a>
     </div>
 
     <div id="content">
-        <h1>Chatroom (Customer Support)</h1>
-        <div id="actionBtns">
-            <a href="../index.html">
-                <button class="btnNormal" id="goBackBtn"><span class="material-symbols-outlined">
-                        chevron_left
-                    </span>Go Back</button>
-            </a>
-            <a>
-                <button class="btnNormal" id="endConversationBtn">
-                    <span class="material-symbols-outlined">
-                        close
-                    </span>End Conversation
-                </button>
-            </a>
-        </div>
+      <h1>Chatroom (Customer Support)</h1>
+      <div id="actionBtns">
+        <a href="../index.php">
+          <button class="btnNormal" id="goBackBtn">
+            <span class="material-symbols-outlined"> chevron_left </span>Go Back
+          </button>
+        </a>
+        <a>
+          <button class="btnNormal" id="endConversationBtn">
+            <span class="material-symbols-outlined"> close </span>End
+            Conversation
+          </button>
+        </a>
+      </div>
 
-        <div id="messageBox">
-            <div id="staffAssigned">
-                <p>Current Staff Assigned: ....</p>
-            </div>
-            <div id="scrollableContent">
-                <div id="messageContent">
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="incomingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                    <div class="outgoingMsg">
-                        <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-                        <p class="sentBy">User</p>
-                    </div>
-                </div>
-            </div>
-            <div id="sendMessageContainer">
-                <div id="textarea-wrapper">
-                    <textarea placeholder="Type a message..."
-                        onInput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'"></textarea>
-                </div>
-                <button class="btnNormal" id="sendBtn">
-                    <span class="material-symbols-outlined">
-                        send
-                    </span>
-                </button>
-            </div>
+      <div id="messageBox">
+        <div id="staffAssigned">
+          <p>Current Staff Assigned: ....</p>
         </div>
+        <div id="scrollableContent">
+          <div id="messageContent">
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="incomingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+            <div class="outgoingMsg">
+              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
+              <p class="sentBy">User</p>
+            </div>
+          </div>
+        </div>
+        <div id="sendMessageContainer">
+          <div id="textarea-wrapper">
+            <textarea
+              placeholder="Type a message..."
+              onInput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'"
+            ></textarea>
+          </div>
+          <button class="btnNormal" id="sendBtn">
+            <span class="material-symbols-outlined"> send </span>
+          </button>
+        </div>
+      </div>
     </div>
-
-
-
-</body>
-
+  </body>
 </html>

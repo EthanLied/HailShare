@@ -1,111 +1,113 @@
 <!doctype html>
 <html>
-
-<head>
+  <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../../shadCNTemplate.css">
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="desktop.css">
-    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="../../shadCNTemplate.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="desktop.css" />
+    <link rel="stylesheet" href="mobile.css" />
     <script src="script.js" defer></script>
     <title>Customer Support - Create Support Request</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!--Google SVG Imports-->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-</head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
 
-<body>
-
+  <body>
     <div id="header" class="mobileComponent">
-        <a>
-            <h2>Hailshare</h2>
-        </a>
+      <a>
+        <h2>Hailshare</h2>
+      </a>
     </div>
 
     <!--Navbar-->
     <div id="navbar">
+      <!--Hamburger menu and Logo-->
+      <div class="navbarItem">
+        <span
+          class="material-symbols-outlined"
+          id="hamburgerMenuNavbarIcon"
+          onclick="toggleNavbar()"
+        >
+          menu
+        </span>
+        <!-- "Onclick" triggers menu expansion / shrinking-->
+        <a href="">
+          <h3>Hailshare</h3>
+        </a>
+      </div>
 
-        <!--Hamburger menu and Logo-->
-        <div class="navbarItem">
-            <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()"> menu
-            </span> <!-- "Onclick" triggers menu expansion / shrinking-->
-            <a href="">
-                <h3>Hailshare</h3>
-            </a>
+      <!--Ride List Icon-->
+      <a href="../../rideList/index.php">
+        <div class="navbarItem" href="">
+          <span class="material-symbols-outlined">list_alt</span>
+          <p>Ride List</p>
         </div>
+      </a>
 
-        <!--Ride List Icon-->
-        <a href="../../rideList/index.html">
-            <div class="navbarItem" href="">
-                <span class="material-symbols-outlined">list_alt</span>
-                <p>Ride List</p>
-            </div>
-        </a>
+      <!--Create Ride Icon-->
+      <a href="../../createRide/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined"> add_circle</span>
+          <p>Create Ride</p>
+        </div>
+      </a>
 
-        <!--Create Ride Icon-->
-        <a href="../../createRide/index.html">
-            <div class="navbarItem">
-                <span class="material-symbols-outlined"> add_circle</span>
-                <p>Create Ride</p>
-            </div>
-        </a>
+      <!--My Rides Icon-->
+      <a href="../../myRides/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined"> event_available</span>
+          <p>My Rides</p>
+        </div>
+      </a>
 
-        <!--My Rides Icon-->
-        <a href="../../myRides/index.html">
-            <div class="navbarItem">
-                <span class="material-symbols-outlined"> event_available</span>
-                <p>My Rides</p>
-            </div>
-        </a>
+      <!--Customer Support Icon-->
+      <a href="../../customerSupport/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined">support_agent</span>
+          <p>Customer Support</p>
+        </div>
+      </a>
 
-        <!--Customer Support Icon-->
-        <a href="../../customerSupport/index.html">
-            <div class="navbarItem">
-                <span class="material-symbols-outlined">support_agent</span>
-                <p>Customer Support</p>
-            </div>
-        </a>
-
-        <!--My Profile Icon-->
-        <a href="../../myProfile/index.html">
-            <div class="navbarItem">
-                <span class="material-symbols-outlined"> account_circle</span>
-                <p>My Profile</p>
-            </div>
-        </a>
+      <!--My Profile Icon-->
+      <a href="../../myProfile/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined"> account_circle</span>
+          <p>My Profile</p>
+        </div>
+      </a>
     </div>
 
     <div id="content">
-        <h1>Create Support Request</h1>
+      <h1>Create Support Request</h1>
 
-        <a href="../../customerSupport/index.html">
-            <button class="btnNormal" id="backBtn"><span class="material-symbols-outlined">
-                    keyboard_arrow_left
-                </span>Back</button>
+      <a href="../../customerSupport/index.php">
+        <button class="btnNormal" id="backBtn">
+          <span class="material-symbols-outlined"> keyboard_arrow_left </span
+          >Back
+        </button>
+      </a>
+
+      <div id="supportRequestDetails">
+        <h2>Issue Type:</h2>
+        <select>
+          <option>A</option>
+        </select>
+        <h2>Additional Notes:</h2>
+        <textarea></textarea>
+        <a href="../index.php" id="createRequestRedirect">
+          <button class="btnStrong" id="createRequestBtn">
+            Create Support Request<span class="material-symbols-outlined">
+              add_circle
+            </span>
+          </button>
         </a>
-
-        <div id="supportRequestDetails">
-            <h2>Issue Type:</h2>
-            <select>
-                <option>A</option>
-            </select>
-            <h2>Additional Notes:</h2>
-            <textarea></textarea>
-            <a href="../index.html" id="createRequestRedirect">
-                <button class="btnStrong" id="createRequestBtn">Create Support Request<span
-                        class="material-symbols-outlined">
-                        add_circle
-                    </span></button>
-
-            </a>
-        </div>
+      </div>
     </div>
-
-
-
-</body>
-
+  </body>
 </html>

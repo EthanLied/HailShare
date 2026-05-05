@@ -79,11 +79,11 @@
                     close
                 </span>&ensp;Close</button>
             
-            <button class="btnNormal" onclick="window.location.href='../myRides/chatRoom/index.html'"><span class="material-symbols-outlined">
+            <button class="btnNormal" onclick="window.location.href='../myRides/chatRoom/index.php'"><span class="material-symbols-outlined">
                         chat
                 </span>&ensp;Chat</button>
 
-            <button class="btnStrong" id="joinRideBtn" onclick="window.location.href='../myRides/index.html'"><span class="material-symbols-outlined">
+            <button class="btnStrong" id="joinRideBtn" onclick="window.location.href='../myRides/index.php'"><span class="material-symbols-outlined">
                     directions_car
                 </span>&ensp;Join Ride</button>
 
@@ -112,7 +112,7 @@
         </a>
 
         <!--Create Ride Icon-->
-        <a href="../createRide/index.html">
+        <a href="../createRide/index.php">
             <div class="navbarItem">
                 <span class="material-symbols-outlined"> add_circle</span>
                 <p>Create Ride</p>
@@ -120,7 +120,7 @@
         </a>
 
         <!--My Rides Icon-->
-        <a href="../myRides/index.html">
+        <a href="../myRides/index.php">
             <div class="navbarItem">
                 <span class="material-symbols-outlined"> event_available</span>
                 <p>My Rides</p>
@@ -128,7 +128,7 @@
         </a>
 
         <!--Customer Support Icon-->
-        <a href="../customerSupport/index.html">
+        <a href="../customerSupport/index.php">
             <div class="navbarItem">
                 <span class="material-symbols-outlined">support_agent</span>
                 <p>Customer Support</p>
@@ -136,7 +136,7 @@
         </a>
 
         <!--My Profile Icon-->
-        <a href="../myProfile/index.html">
+        <a href="../myProfile/index.php">
             <div class="navbarItem">
                 <span class="material-symbols-outlined"> account_circle</span>
                 <p>My Profile</p>

@@ -294,12 +294,12 @@ async function loadRecords() {
                 <td>${count} / ${record.available_seats}</td>
                 <td>RM <s>${parseFloat(record.price).toFixed(0)}</s> ${splitPrice}</td>
                 <td>
-                    <a href="../myRides/chatRoom/index.html">
+                    <a href="../myRides/chatRoom/index.php">
                         <span class="material-symbols-outlined">chat</span>
                     </a>
                 </td>
                 <td>
-                    <a href="../myRides/index.html">
+                    <a href="../myRides/index.php">
                         <span class="material-symbols-outlined">directions_car</span>
                     </a>
                 </td>
