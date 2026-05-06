@@ -218,6 +218,9 @@ function toggleNavbar() {
 
 async function loadRecords() {
 
+    // Grabs userId cookie
+    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+    
     const records = await readDB('rides');
 
     const table = document.getElementById('desktopTable');
@@ -230,15 +233,22 @@ async function loadRecords() {
     while (table.rows.length > 1) {
         table.deleteRow(1);
     }
+    
 
     tableContainer.querySelectorAll('.rideItemMobile').forEach(el => el.remove());
 
     for (const record of records) {
 
+        // Dont show own rides
+        if (record.user_id === userId){
+            continue;
+        }
+
         const peopleInside = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id}`);
         
+        // If full or old ride
         if (peopleInside[0]['COUNT(*)'] == record.available_seats || isBeforeNow(record.pickup_time)){
-            continue; // skip this record, dont return (that stops the whole loop)
+            continue; 
         }
 
         const count = parseInt(peopleInside[0]['COUNT(*)']);
@@ -300,7 +310,7 @@ async function loadRecords() {
                 </td>
                 <td>
                     <a href="../myRides/index.php">
-                        <span class="material-symbols-outlined">directions_car</span>
+                        <span class="material-symbols-outlined" onclick="joinRide()">directions_car</span>
                     </a>
                 </td>
             `;
@@ -505,5 +515,8 @@ async function searchRides(){
         alert.innerText = ''
     }
 
-    
+}
+
+async function joinRide(){
+
 }

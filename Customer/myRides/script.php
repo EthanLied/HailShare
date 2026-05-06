@@ -251,10 +251,10 @@ async function loadRides(){
                         <button class="btnNormal importantBtn" onclick="closeRide('${record.ride_id}')">Close Ride <span class="material-symbols-outlined">close</span></button>
                     </a>
                     <a href="editRide/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Edit Ride <span class="material-symbols-outlined">edit</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/ '">Edit Ride <span class="material-symbols-outlined">edit</span></button>
                     </a>
                     <a href="chatRoom/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                 </div>
             `;
@@ -295,7 +295,7 @@ async function loadRides(){
                 </div>
                 <div class="rightSideItems">
                     <a href="chatRoom/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <p>Time Hosted: <span>${formatTime(record.pickup_time)}</span></p>
                     <p>Time Ended: <span>${timeEnded}</span></p>
@@ -357,10 +357,10 @@ async function loadRides(){
                 </div>
                 <div class="rightSideItems">
                     <a>
-                        <button class="btnNormal importantBtn">Leave Ride <span class="material-symbols-outlined">logout</span></button>
+                        <button class="btnNormal importantBtn" onclick="leaveRide(${record.ride_id}, ${userId})">Leave Ride <span class="material-symbols-outlined">logout</span></button>
                     </a>
                     <a href="chatRoom/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <p>To: <span>${record.dropoff_location}</span></p>
                 </div>
@@ -402,10 +402,10 @@ async function loadRides(){
                 </div>
                 <div class="rightSideItems">
                     <a href="chatRoom/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id};'">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/'">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <a href="giveRating/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_owner_id=${record.user_id};'">Give Rating <span class="material-symbols-outlined">star</span></button>
+                        <button class="btnNormal" onclick="document.cookie='ride_owner_id=${record.user_id}; max-age=2592000; path=/'">Give Rating <span class="material-symbols-outlined">star</span></button>
                     </a>
                     <p>Time Hosted: <span>${formatTime(record.pickup_time)}</span></p>
                     <p>Time Ended: <span>${timeEnded}</span></p>
@@ -448,5 +448,13 @@ async function closeRide(rideId){
 
     queryDB(`UPDATE rides SET status = 'closed' WHERE ride_id = ${rideId}`)
     location.reload();
+}
+
+async function leaveRide(rideId, userId){
+
+    const deleteResult = await queryDB(`DELETE FROM ride_participants WHERE ride_id = ${rideId} AND user_id = ${userId}`);
+
+    location.reload();
+
 }
 
