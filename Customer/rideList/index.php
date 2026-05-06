@@ -77,15 +77,18 @@
         <div id="popupMenuBtns">
             <button class="btnNormal" onclick="closePopup()"><span class="material-symbols-outlined">
                     close
-                </span>&ensp;Close</button>
+                </span>&ensp;Close
+            </button>
             
             <button class="btnNormal" onclick="window.location.href='../myRides/chatRoom/index.php'"><span class="material-symbols-outlined">
                         chat
-                </span>&ensp;Chat</button>
+                </span>&ensp;Chat
+            </button>
 
             <button class="btnStrong" id="joinRideBtn" onclick="window.location.href='../myRides/index.php'"><span class="material-symbols-outlined">
                     directions_car
-                </span>&ensp;Join Ride</button>
+                </span>&ensp;Join Ride
+            </button>
 
         </div>
     </div>

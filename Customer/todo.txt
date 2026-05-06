@@ -1,4 +1,4 @@
-- global system to set status = 'completed'
+
 
 Rf
 - chatroom (both) 

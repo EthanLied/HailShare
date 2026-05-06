@@ -139,7 +139,7 @@ function updatePagination(offset) {
     processPagination(selectedPage);
 }
 
-function showPopup(buttonElement){
+function showPopup(buttonElement, rideId){
 
     // Early return if not mobile
     if (!isMobile){
@@ -179,6 +179,13 @@ function showPopup(buttonElement){
     document.getElementById('popupSeats').textContent = `${rideData.seats}`;
     document.getElementById('popupNormalPrice').textContent = rideData.price
     document.getElementById('popupDiscountedPrice').textContent = parseFloat(rideData.price) / (parseInt(rideData.seats) + 1);
+
+    // Make popup button execute a function call and redirect
+    const joinRideBtn = document.getElementById('joinRideBtn');
+    joinRideBtn.onclick = async () => {
+        await joinRide(rideId);
+        window.location.href = '../myRides/index.php';
+    };
 }
 
 function closePopup(){
@@ -228,19 +235,27 @@ async function loadRecords() {
 
     // Completes any rides to be completed
     await queryDB(`UPDATE rides SET completed_at = DATE(created_at) + INTERVAL 1 DAY, status = 'completed' WHERE status = 'active' AND pickup_time <= NOW() - INTERVAL 1 DAY AND completed_at IS NULL`);
+
+    // Reflected in ride participants as well
+    await queryDB(`UPDATE ride_participants SET status = 'completed' WHERE ride_id IN (SELECT ride_id FROM rides WHERE status = 'completed' AND pickup_time <= NOW() - INTERVAL 1 DAY)`);
     
     // Clear existing records
     while (table.rows.length > 1) {
         table.deleteRow(1);
     }
     
-
     tableContainer.querySelectorAll('.rideItemMobile').forEach(el => el.remove());
 
     for (const record of records) {
 
         // Dont show own rides
         if (record.user_id === userId){
+            continue;
+        }
+
+        // Don't show rides the user has already actively joined
+        const existingParticipant = await queryDB(`SELECT * FROM ride_participants WHERE ride_id = ${record.ride_id} AND user_id = ${userId} AND status = 'active'`);
+        if (existingParticipant && existingParticipant.length > 0){
             continue;
         }
 
@@ -289,7 +304,7 @@ async function loadRecords() {
                     <p><span class="material-symbols-outlined">schedule</span><span>&ensp;</span>${formatTime(record.pickup_time)}</p>
                     <p><span class="material-symbols-outlined">attach_money</span>RM${record.price}</p>
                 </div>
-                <button class="btnStrong rideItemMobileBtn" onClick="showPopup(this)">View More</button>
+                <button class="btnStrong rideItemMobileBtn" onclick="showPopup(this, ${record.ride_id})">View More</button>
             `;
             tableContainer.appendChild(item);
 
@@ -310,7 +325,7 @@ async function loadRecords() {
                 </td>
                 <td>
                     <a href="../myRides/index.php">
-                        <span class="material-symbols-outlined" onclick="joinRide()">directions_car</span>
+                        <span class="material-symbols-outlined" onclick="joinRide(${record.ride_id})">directions_car</span>
                     </a>
                 </td>
             `;
@@ -517,6 +532,31 @@ async function searchRides(){
 
 }
 
-async function joinRide(){
+async function joinRide(rideId){
 
-}
+    // Grabs userId cookie
+    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+
+    // Check if the rideId + userId combo already exists 
+    const existingRecord = await queryDB(
+        `SELECT * FROM ride_participants WHERE ride_id = ${rideId} AND user_id = ${userId}`
+    );
+
+    // If it exists, change it to active
+    if (existingRecord.length > 0) {
+        await queryDB(
+            `UPDATE ride_participants 
+             SET status = 'active', completed_at = NULL 
+             WHERE ride_id = ${rideId} AND user_id = ${userId}`
+        );
+    } 
+    
+    // If record does not exist
+    else {
+        await queryDB(
+            `INSERT INTO ride_participants (ride_id, user_id, status) 
+             VALUES (${rideId}, ${userId}, 'active')`
+        );
+    }
+
+}   

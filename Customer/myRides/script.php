@@ -327,9 +327,18 @@ async function loadRides(){
     // If no rides, dont do anything
     if (!joinedRides || joinedRides.length === 0) return;
 
-    // Seperate ongoing from past
-    const ongoingJoined = joinedRides.filter(ride => ride.status === 'active');
-    const pastJoined = joinedRides.filter(ride => ride.status !== 'active');
+    // Attach participant status to each ride
+    // Adds a new key 'participantStatus' to the existing JSON
+    const joinedRidesWithStatus = await joinedRides.map(ride => ({
+        ...ride,
+        participantStatus: participantRows.find(participantRows => participantRows.ride_id === ride.ride_id)?.status
+    }));
+
+    // Seperate ongoing from rest
+    // Ignore self-hosted rides as they cannot be considered joined
+    // Ongoing only counts if the ride is active, and the ride participant is also active
+    const ongoingJoined = joinedRidesWithStatus.filter(ride => ride.status === 'active' && ride.participantStatus === 'active' && ride.user_id !== userId);
+    const pastJoined = joinedRidesWithStatus.filter(ride => ride.status !== 'active' || ride.participantStatus !== 'active' && ride.user_id !== userId);
 
     // Create each ongoing joined ride
     if (ongoingJoined.length > 0) {
@@ -446,13 +455,16 @@ async function closeRide(rideId){
     // Else accept and close ride
     alert(`Ride #${rideId} closed.`)
 
-    queryDB(`UPDATE rides SET status = 'closed' WHERE ride_id = ${rideId}`)
+    await queryDB(`UPDATE rides SET status = 'closed' WHERE ride_id = ${rideId}`)
+
+    // Changes ride participant status also
+    await queryDB(`UPDATE ride_participants SET status = 'completed' WHERE ride_id = ${rideId}`);
     location.reload();
 }
 
 async function leaveRide(rideId, userId){
 
-    const deleteResult = await queryDB(`DELETE FROM ride_participants WHERE ride_id = ${rideId} AND user_id = ${userId}`);
+    await queryDB(`UPDATE ride_participants SET status = 'left' WHERE ride_id = ${rideId} AND user_id = ${userId}`);
 
     location.reload();
 
