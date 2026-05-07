@@ -15,8 +15,8 @@
   <div class="navbar">
     <div class="nav-left">HailShare</div>
     <div class="nav-right">
-        <a href="login.html">Login</a>
-        <a href="registration 1.html">Register</a>
+        <a href="login.php">Login</a>
+        <a href="registration 1.php">Register</a>
 </div>
   </div>
 
@@ -34,24 +34,31 @@
 
       <h2>Forgot<br>Password?</h2>
 
-      <form action="forgot_verify.php" method="POST">
+      <form action="update_password.php" method="POST">
+
+  <input type="hidden" name="email" id="email">
 
   <div class="form-group">
-    <label>Email / Phone Number</label>
-    <input type="text" name="email" required>
+    <label>New Password</label>
+    <input type="password" name="password" required>
   </div>
 
   <div class="form-group">
-    <label>Security Question Answer</label>
-    <input type="text" name="answer" required>
+    <label>Confirm New Password</label>
+    <input type="password" name="confirm_password" required>
   </div>
 
   <button class="btn" type="submit">Confirm</button>
 
 </form>
 
+<script>
+const params = new URLSearchParams(window.location.search);
+document.getElementById("email").value = params.get("email");
+</script>
+
       <div class="bottom-link">
-        <a href="login.html">Back to Login</a>
+        <a href="login.php">Back to Login</a>
       </div>
 
       </div>

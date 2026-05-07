@@ -15,8 +15,8 @@
   <div class="navbar">
     <div class="nav-left">HailShare</div>
     <div class="nav-right">
-        <a href="login.html">Login</a>
-        <a href="registration 1.html">Register</a>
+        <a href="login.php">Login</a>
+        <a href="registration 1.php">Register</a>
 </div>
   </div>
 
@@ -34,29 +34,24 @@
 
       <h2>Forgot<br>Password?</h2>
 
-      <div class="form-group">
-        <label>Email / Phone Number</label>
-        <input type="text">
-      </div>
+      <form action="forgot_verify.php" method="POST">
 
-      <div class="form-group">
-        <label>Security Question</label>
-        <select>
-          <option disabled selected hidden></option>
-          <option>What is your pet's name?</option>
-          <option>What is your school name?</option>
-        </select>
-      </div>
+  <div class="form-group">
+    <label>Email / Phone Number</label>
+    <input type="text" name="email" required>
+  </div>
 
-      <div class="form-group">
-        <label>Answer</label>
-        <input type="text">
-      </div>
+  <div class="form-group">
+    <label>Security Question Answer</label>
+    <input type="text" name="answer" required>
+  </div>
 
-      <button onclick="window.location.href='password-recovery2.html'"class="btn">Confirm</button>
+  <button class="btn" type="submit">Confirm</button>
+
+</form>
 
       <div class="bottom-link">
-        <a href="login.html">Back to Login</a>
+        <a href="login.php">Back to Login</a>
       </div>
 
       </div>

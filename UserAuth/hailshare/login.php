@@ -1,30 +1,50 @@
-<?php
-session_start(); // 🔥 VERY IMPORTANT
-
-include 'db.php';
-
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-$sql = "SELECT * FROM users 
-        WHERE email='$email' 
-        AND password='$password'";
-
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-
-    $user = mysqli_fetch_assoc($result);
-
-    // ✅ STORE USER IN SESSION
-    $_SESSION['user_id'] = $user['id'];
-    $_SESSION['email'] = $user['email'];
-
-    // redirect
-    header("Location: dashboard.php");
-    exit();
-
-} else {
-    echo "Invalid email or password";
-}
-?>
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Login - HailShare</title> 
+        
+        <!-- Link to CSS --> 
+         <link rel="stylesheet" href="style.css"> 
+        </head> 
+        
+        <body> 
+            <!-- Navigationbar --> 
+             <div class="navbar"> 
+                <div class="nav-left">HailShare</div> 
+                <div class="nav-right"> 
+                    <a href="login.php">Login</a> 
+                    <a href="registration 1.php">Register</a> 
+                </div> 
+            </div> 
+            <!-- Main Content --> 
+             <div class="container">
+                 <!-- Left Image --> 
+                  <div class="left"> 
+                    Image 
+                </div> 
+                <!-- Right Login Form --> 
+                 <div class="right"> 
+                    <div class="form-box"> 
+                        <h2>Login</h2> 
+                        <form action="login_process.php" method="POST"> 
+                            <div class="form-group"> 
+                                <label>Email / Phone Number</label> 
+                                <input type="text" name="email" required> 
+                            </div> 
+                            <div class="form-group"> 
+                                <label>Password</label> 
+                                <input type="password" name="password" required> 
+                            </div> 
+                            <button class="btn" type="submit">Login</button> 
+                        </form> 
+                        <div class="links"> 
+                            <a href="registration 1.php">I'm New Here</a> 
+                            <a href="password-recovery.php">Forgot Password?</a> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+        </body> 
+        </html>

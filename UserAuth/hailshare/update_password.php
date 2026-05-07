@@ -9,12 +9,17 @@ if ($password !== $confirm) {
     die("Passwords do not match");
 }
 
-$sql = "UPDATE users 
-        SET password='$password' 
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+$sql = "UPDATE users
+        SET password='$hashedPassword'
         WHERE email='$email'";
 
 if (mysqli_query($conn, $sql)) {
-    echo "Password updated successfully!";
+
+    header("Location: login.php");
+    exit();
+
 } else {
     echo "Error updating password.";
 }

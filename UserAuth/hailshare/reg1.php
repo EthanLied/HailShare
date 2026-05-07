@@ -6,6 +6,6 @@ $_SESSION['last_name'] = $_POST['last_name'];
 $_SESSION['email'] = $_POST['email'];
 $_SESSION['phone'] = $_POST['phone'];
 
-header("Location: registration 2.html");
+header("Location: registration 2.php");
 exit();
 ?>

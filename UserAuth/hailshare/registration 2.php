@@ -15,8 +15,8 @@
   <div class="navbar">
     <div class="nav-left">HailShare</div>
     <div class="nav-right">
-        <a href="login.html">Login</a>
-  <a href="registration 1.html">Register</a>
+        <a href="login.php">Login</a>
+  <a href="registration 1.php">Register</a>
 </div>
   </div>
 
@@ -251,13 +251,13 @@
 
     <!-- Buttons -->
     <div class="button-row">
-      <button type="button" onclick="window.location.href='registration 1.html'" class="btnRegNormal">Back</button>
+      <button type="button" onclick="window.location.href='registration 1.php'" class="btnRegNormal">Back</button>
       <button type="submit" class="btnRegStrong">Next</button>
     </div>
     </form>
 
     <div class="bottom-link">
-      <a href="login.html">I have an account</a>
+      <a href="login.php">I have an account</a>
     </div>
   </div>
 

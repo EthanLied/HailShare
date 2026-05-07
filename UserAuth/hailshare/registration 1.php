@@ -15,8 +15,8 @@
   <div class="navbar">
     <div class="nav-left">HailShare</div>
     <div class="nav-right">
-        <a href="login.html">Login</a>
-  <a href="registration 1.html">Register</a>
+        <a href="login.php">Login</a>
+  <a href="registration 1.php">Register</a>
 </div>
   </div>
 
@@ -64,7 +64,7 @@
 </form>
 
     <div class="bottom-link">
-      <a href="login.html">I have an account</a>
+      <a href="login.php">I have an account</a>
     </div>
   </div>
 
