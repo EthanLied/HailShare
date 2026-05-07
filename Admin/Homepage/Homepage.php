@@ -13,19 +13,25 @@
 </head>
 <body>
 
-<!-- Sidebar -->
-<div id="navbar">
-    <div class="navbarItem">
-        <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-        <a href="Homepage.php"><h3>Hailshare Admin</h3></a>
+<!-- Top Navigation Bar -->
+<nav id="topNav">
+    <div class="nav-container">
+        <div class="nav-left">
+            <a href="Homepage.php" class="logo">
+                <h2>Hailshare</h2>
+            </a>
+            <div class="nav-links">
+                <a href="Homepage.php" class="nav-link">Home</a>
+                <a href="../Account%20List/AccountList.php" class="nav-link">Accounts</a>
+                <a href="../Admin%20Profile/Admin.php" class="nav-link">Profile</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <a href="#signup"><button class="btnNormal nav-btn">Sign Up</button></a>
+            <a href="#login"><button class="btnStrong nav-btn">Login</button></a>
+        </div>
     </div>
-    <a href="../Account%20List/AccountList.php">
-        <div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Account List</p></div>
-    </a>
-    <a href="../Admin%20Profile/Admin.php">
-        <div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Admin Profile</p></div>
-    </a>
-</div>
+</nav>
 
 <div id="content">
     <!-- ============ HERO SECTION ============ -->
@@ -43,11 +49,6 @@
                     <a href="#features"><button class="cta-primary">Find Your Ride</button></a>
                     <a href="#how-it-works"><button class="cta-secondary">See How It Works</button></a>
                 </div>
-            </div>
-            <div class="scroll-indicator">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
         </div>
     </section>

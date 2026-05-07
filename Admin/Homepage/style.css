@@ -14,6 +14,75 @@ body {
     color: #1a1a1a;
     background: #fafafa;
     overflow-x: hidden;
+    padding-top: 70px;
+}
+
+/* ============ TOP NAVIGATION BAR ============ */
+#topNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ececec;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo {
+    text-decoration: none;
+    color: #000;
+}
+
+.logo h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #666;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: #000;
+}
+
+.nav-right {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-btn {
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 /* ============ SIDEBAR + CONTENT (copy to all Admin style.css) ============ */
@@ -26,7 +95,7 @@ body {
     z-index: 5;
     left: 0;
     top: 0;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
     width: 55px;
@@ -91,13 +160,13 @@ a > .navbarItem:hover {
 }
 
 #content {
-    margin-left: 55px;
+    margin-left: 0;
     padding: 0;
     overflow-y: auto;
     overflow-x: hidden;
     transition: margin-left 0.3s cubic-bezier(.42,.94,.31,.99);
     box-sizing: border-box;
-    max-width: calc(100vw - 55px);
+    max-width: 100vw;
     background-color: #fafafa;
 }
 
@@ -237,35 +306,6 @@ a > .navbarItem:hover {
 .cta-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
-}
-
-.scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 4;
-    animation: bounce 2.5s infinite;
-}
-
-.scroll-indicator span {
-    width: 4px;
-    height: 4px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(-12px);
-    }
 }
 
 @keyframes slideInDown {
@@ -840,6 +880,85 @@ a > .navbarItem:hover {
     }
     50% {
         box-shadow: 0 12px 48px rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* ============ RESPONSIVE STYLES FOR TOP NAV ============ */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+
+    #topNav {
+        height: 60px;
+    }
+
+    .nav-container {
+        height: 60px;
+        padding: 0 15px;
+    }
+
+    .nav-left {
+        gap: 20px;
+    }
+
+    .logo h2 {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-link {
+        font-size: 13px;
+    }
+
+    .nav-right {
+        gap: 10px;
+    }
+
+    .nav-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 55px;
+    }
+
+    #topNav {
+        height: 55px;
+    }
+
+    .nav-container {
+        height: 55px;
+        padding: 0 10px;
+    }
+
+    .nav-left {
+        gap: 15px;
+    }
+
+    .logo h2 {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-right {
+        gap: 8px;
+    }
+
+    .nav-btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+}
     }
 }
 

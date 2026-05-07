@@ -32,16 +32,16 @@
         <div class="card" style="margin-bottom: 20px;">
             <h3 style="margin-bottom: 20px;">Personal Information</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <div><label>First Name</label><input value="Admin"></div>
-                <div><label>Last Name</label><input value="User"></div>
-                <div><label>Email</label><input value="admin@hailshare.com"></div>
-                <div><label>Phone Number</label><input value="+1 (555) 123-4567"></div>
+                <div><label>First Name</label><input id="firstName" value="Admin"></div>
+                <div><label>Last Name</label><input id="lastName" value="User"></div>
+                <div><label>Email</label><input id="email" value="admin@hailshare.com"></div>
+                <div><label>Phone Number</label><input id="phone" value="+1 (555) 123-4567"></div>
             </div>
             <div style="margin-top: 15px;"><label>Date of Birth</label>
                 <div style="display: flex; gap: 10px;">
-                    <select style="width: auto;"><option>1</option></select>
-                    <select style="width: auto;"><option>January</option></select>
-                    <select style="width: auto;"><option>1990</option></select>
+                    <select id="dobDay" style="width: auto;"><option>1</option></select>
+                    <select id="dobMonth" style="width: auto;"><option>January</option></select>
+                    <select id="dobYear" style="width: auto;"><option>1990</option></select>
                 </div>
             </div>
             <button class="btnStrong" style="width: 100%; margin-top: 20px;">Save Personal Info</button>
@@ -49,14 +49,14 @@
 
         <div class="card" style="margin-bottom: 20px;">
             <h3 style="margin-bottom: 20px;">Security Information</h3>
-            <div><label>New Password</label><input type="password" placeholder="Enter new password"></div>
+            <div><label>New Password</label><input id="newPassword" type="password" placeholder="Enter new password"></div>
             <div style="margin-top: 15px;"><label>Security Question</label>
-                <select><option>What is your pet's name?</option></select>
+                <select id="securityQuestion"><option>What is your pet's name?</option></select>
             </div>
-            <div style="margin-top: 15px;"><label>Security Answer</label><input placeholder="Answer"></div>
+            <div style="margin-top: 15px;"><label>Security Answer</label><input id="securityAnswer" placeholder="Answer"></div>
             <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
                 <label style="font-weight: 600;">Enter current password to change security info</label>
-                <input type="password" placeholder="Current Password" style="margin-top: 8px;">
+                <input id="currentPassword" type="password" placeholder="Current Password" style="margin-top: 8px;">
             </div>
             <button class="btnStrong" style="width: 100%; margin-top: 20px;">Save Security Info</button>
         </div>
