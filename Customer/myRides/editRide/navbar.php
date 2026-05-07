@@ -1,3 +1,5 @@
+<?php header("Content-type: text/css"); ?>
+
 /* Shrinks and slightly fades when hovering logo and navbar items*/
 h3:hover, .navbarItem:not(:first-child):active{
     transition: 0.2s;

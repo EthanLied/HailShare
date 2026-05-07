@@ -2,11 +2,12 @@
 <html>
   <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../../shadCNTemplate.css" />
-    <link rel="stylesheet" href="navbar.css" />
-    <link rel="stylesheet" href="desktop.css" />
-    <link rel="stylesheet" href="mobile.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../../shadCNTemplate.php" />
+    <link rel="stylesheet" href="navbar.php" />
+    <link rel="stylesheet" href="desktop.php" />
+    <link rel="stylesheet" href="mobile.php" />
+    <script src="script.php" defer></script>
+    <script src="../../../Database/DBfunctions.php" defer></script>
     <title>My Rides - Chatroom</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -84,7 +85,7 @@
     </div>
 
     <div id="content">
-      <h1>Chatroom (Ride No: ....)</h1>
+      <h1>Chatroom Ride ID: #<span id="rideId"></span></h1>
       <div id="actionBtns">
         <a href="../index.php">
           <button class="btnNormal" id="goBackBtn">
@@ -96,34 +97,7 @@
       <div id="messageBox">
         <div id="scrollableContent">
           <div id="messageContent">
-            <div class="incomingMsg">
-              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-              <p class="sentBy">User</p>
-            </div>
-            <div class="incomingMsg">
-              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-              <p class="sentBy">User</p>
-            </div>
-            <div class="incomingMsg">
-              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-              <p class="sentBy">User</p>
-            </div>
-            <div class="incomingMsg">
-              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-              <p class="sentBy">User</p>
-            </div>
-            <div class="incomingMsg">
-              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-              <p class="sentBy">User</p>
-            </div>
-            <div class="incomingMsg">
-              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-              <p class="sentBy">User</p>
-            </div>
-            <div class="outgoingMsg">
-              <p>AbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbcAbc</p>
-              <p class="sentBy">User</p>
-            </div>
+            
           </div>
         </div>
         <div id="sendMessageContainer">
@@ -131,9 +105,10 @@
             <textarea
               placeholder="Type a message..."
               onInput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'"
+              id="textBox"
             ></textarea>
           </div>
-          <button class="btnNormal" id="sendBtn">
+          <button class="btnNormal" id="sendBtn" onclick="sendMessage()">
             <span class="material-symbols-outlined"> send </span>
           </button>
         </div>

@@ -1,3 +1,7 @@
+<?php
+header("Content-type: application/javascript");
+?>
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Calls functions when page loads
@@ -8,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isMobile){
         styleDropdown()
     }
+
+    loadRide()
     
 
 })
@@ -140,4 +146,61 @@ function styleDropdown(){
         document.querySelectorAll(".custom-popup").forEach(p => p.style.display = "none");
     });
 
+}
+
+async function loadRide(){
+
+    // Grabs rideId cookie
+    const rideId = document.cookie.split('; ').find(cookie => cookie.startsWith('ride_id='))?.split('=')[1];
+
+    // Grabs records of all participants who has joined a spcific ride
+    const recordsOfMemberJoined = await queryDB(`SELECT * FROM ride_participants WHERE ride_id = '${rideId}' AND status = 'active'`)
+
+    // If someone already joined, cant edit
+    if (recordsOfMemberJoined.length > 1){
+        document.getElementById("fromAddressInput").disabled = true;
+        document.getElementById("toAddressInput").disabled = true;
+        document.getElementById("dateDropdown").disabled = true;
+        document.getElementById("hourDropdown").disabled = true;
+        document.getElementById("minuteDropdown").disabled = true;
+        document.getElementById("peopleDropdown").disabled = true;
+        document.getElementById("priceSelector").disabled = true;
+        document.getElementById("createRideBtn").disabled = true;
+        return;
+    }
+
+    let rideDetails = await queryDB(`SELECT * FROM rides WHERE ride_id = ${rideId}`)
+    rideDetails = rideDetails[0]
+
+    // Populate text inputs
+    document.getElementById("fromAddressInput").value = rideDetails.pickup_location;
+    document.getElementById("toAddressInput").value = rideDetails.dropoff_location;
+
+    // Parse pickup_time into date object
+    const pickupTime = new Date(rideDetails.pickup_time);
+
+    // Date dropdown "2026-05-27"
+    const dateOnly = rideDetails.pickup_time.split(' ')[0]; 
+    document.getElementById("dateDropdown").value = dateOnly;
+
+    // Convert hour to AM/PM format
+    const hour24 = pickupTime.getHours(); // Get hour value directly e.x 8
+    let hourValue;
+    if (hour24 === 0)        hourValue = "12AM";
+    else if (hour24 < 12)    hourValue = `${hour24}AM`;
+    else if (hour24 === 12)  hourValue = "12PM";
+    else                     hourValue = `${hour24 - 12}PM`;
+
+    // Hour dropdown
+    document.getElementById("hourDropdown").value = hourValue; // "8AM"
+
+    // Minute dropdown (formatted)
+    const minute = String(pickupTime.getMinutes()).padStart(2, '0');
+    document.getElementById("minuteDropdown").value = minute; 
+
+    // Capacity dropdown
+    document.getElementById("peopleDropdown").value = `${rideDetails.available_seats} People`;
+
+    // Price dropdown
+    document.getElementById("priceSelector").value = parseInt(rideDetails.price);
 }

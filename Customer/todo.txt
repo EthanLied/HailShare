@@ -1,9 +1,5 @@
-
-
 Rf
-- chatroom (both) 
 - ratings (cookie logged)
 - edit ride (cookie logged)
-- leave ride (cookie logged)
 - profile 
 - create support request

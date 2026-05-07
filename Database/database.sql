@@ -43,7 +43,6 @@ CREATE TABLE rides (
 CREATE TABLE ride_participants (
     participant_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     ride_id INT NOT NULL,
-    user_id INT NOT NULL,
     status ENUM('active', 'left', 'completed') NOT NULL DEFAULT 'active',
     joined_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     completed_at DATETIME NULL,
@@ -77,7 +76,6 @@ CREATE TABLE ride_chat_rooms (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     closed_at DATETIME NULL,
     FOREIGN KEY (ride_id) REFERENCES rides (ride_id),
-    FOREIGN KEY (guest_user_id) REFERENCES users (user_id)
 );
 -- Table 6: ride_chat_messages
 CREATE TABLE ride_chat_messages (
@@ -131,9 +129,12 @@ INSERT INTO `ride_participants` (`participant_id`, `ride_id`, `user_id`, `status
 
 INSERT INTO `ratings` (`rating_id`, `ride_id`, `rater_user_id`, `rated_user_id`, `rating_score`, `description`, `created_at`) VALUES ('1', '1', '1', '2', '5', 'Very punctual and friendly driver. Car was clean and comfortable.', '2026-04-28 18:18:53');
 
-INSERT INTO `ride_chat_rooms` (`ride_chat_id`, `ride_id`, `guest_user_id`, `status`, `created_at`, `closed_at`) VALUES ('1', '1', '1', 'active', '2026-04-28 09:05:00', NULL);
+INSERT INTO `ride_chat_rooms` (`ride_chat_id`, `ride_id`, `status`, `created_at`, `closed_at`) VALUES ('2', '1', 'active', '2026-05-07 13:47:38', NULL);
 
-INSERT INTO `ride_chat_messages` (`message_id`, `ride_chat_id`, `sender_user_id`, `message_content`, `sent_at`) VALUES ('1', '1', '1', 'Hi! I am on my way. Will be there in 5 mins.', '2026-04-28 09:10:00');
+INSERT INTO `ride_chat_messages` (`message_id`, `ride_chat_id`, `sender_user_id`, `message_content`, `sent_at`) VALUES ('1', '2', '1', 'Hello!', '2026-05-07 15:25:23');
+INSERT INTO `ride_chat_messages` (`message_id`, `ride_chat_id`, `sender_user_id`, `message_content`, `sent_at`) VALUES ('2', '2', '2', 'Hello!', '2026-05-07 16:29:26');
+INSERT INTO `ride_chat_messages` (`message_id`, `ride_chat_id`, `sender_user_id`, `message_content`, `sent_at`) VALUES ('7', '2', '2', 'Hi!', '2026-05-07 18:13:05');
+INSERT INTO `ride_chat_messages` (`message_id`, `ride_chat_id`, `sender_user_id`, `message_content`, `sent_at`) VALUES ('8', '2', '2', 'Hi!', '2026-05-07 18:13:46');
 
 INSERT INTO `support_chat_rooms` (`support_chat_id`, `customer_user_id`, `staff_user_id`, `status`, `started_at`, `connected_at`, `ended_at`) VALUES ('1', '1', '1', 'active', '2026-04-28 10:00:00', '2026-04-28 10:01:30', NULL);
 

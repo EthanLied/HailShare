@@ -2,12 +2,13 @@
 <html>
   <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../../shadCNTemplate.css" />
-    <link rel="stylesheet" href="desktop.css" />
-    <link rel="stylesheet" href="navbar.css" />
-    <link rel="stylesheet" href="mobile.css" />
-    <link rel="stylesheet" href="mobileDropdown.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../../shadCNTemplate.php" />
+    <link rel="stylesheet" href="desktop.php" />
+    <link rel="stylesheet" href="navbar.php" />
+    <link rel="stylesheet" href="mobile.php" />
+    <link rel="stylesheet" href="mobileDropdown.php" />
+    <script src="script.php" defer></script>
+    <script src="../../../Database/DBfunctions.php" defer></script>
     <title>Edit Ride</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -96,9 +97,9 @@
           You can only modify ride details if no one has joined it yet.
         </h4>
         <p>From:</p>
-        <input name="fromAddress" />
+        <input name="fromAddress" id="fromAddressInput"/>
         <p>To:</p>
-        <input name="toAddress" />
+        <input name="toAddress" id="toAddressInput" />
       </div>
       <div id="attributeDropdownsContainer">
         <p>Date:</p>
@@ -108,7 +109,7 @@
 
         <select name="date" id="dateDropdown"></select>
         <div id="timeSelector">
-          <select name="hour">
+          <select name="hour" id="hourDropdown">
             <option value="12AM">12 AM</option>
             <option value="1AM">1 AM</option>
             <option value="2AM">2 AM</option>
@@ -134,7 +135,7 @@
             <option value="10PM">10 PM</option>
             <option value="11PM">11 PM</option></select
           ><strong>:</strong>
-          <select name="minute">
+          <select name="minute" id="minuteDropdown">
             <option value="00">00</option>
             <option value="01">01</option>
             <option value="02">02</option>
@@ -197,7 +198,7 @@
             <option value="59">59</option>
           </select>
         </div>
-        <select name="capacity People">
+        <select name="capacity People" id="peopleDropdown">
           <option value="1 People">1 People</option>
           <option value="2 People">2 People</option>
           <option value="3 People">3 People</option>
@@ -209,7 +210,7 @@
           <option value="9 People">9 People</option>
           <option value="10 People">10 People</option>
         </select>
-        <select name="price">
+        <select name="price" id="priceSelector">
           <option value="1">RM 1</option>
           <option value="2">RM 2</option>
           <option value="3">RM 3</option>
