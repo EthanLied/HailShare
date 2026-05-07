@@ -1,9 +1,33 @@
+<?php
+// ============ PHP SESSION & INITIALIZATION ============
+session_start();
+
+// Define base paths
+$base_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/Admin/';
+
+// Check admin authentication (simple check - in production use database)
+if (!isset($_SESSION['admin_logged_in'])) {
+    // You can redirect to login if needed
+    // header('Location: ../UserAuth/login.php');
+    // exit();
+}
+
+// Site configuration
+$site_config = [
+    'name' => 'Hailshare Admin Dashboard',
+    'tagline' => 'Smart Ride-Sharing Platform',
+    'active_page' => 'home'
+];
+
+// Log page visit (optional)
+error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hailshare Admin – Dashboard</title>
+    <title><?php echo $site_config['name']; ?> – Dashboard</title>
     <!-- Universal template (two levels up to root) -->
     <link rel="stylesheet" href="../../shadCNTemplate.css">
     <!-- Page-specific styles -->
