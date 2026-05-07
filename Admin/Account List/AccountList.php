@@ -7,21 +7,51 @@ if (!isset($_SESSION['admin_logged_in'])) {
     $_SESSION['admin_logged_in'] = true;
 }
 
-// ============ ACCOUNT DATABASE (Array - Replace with actual DB later) ============
-$all_accounts = [
-    ['id' => 1, 'name' => 'Alex Chen', 'type' => 'Customer', 'email' => 'alex.c@email.com', 'status' => 'Active'],
-    ['id' => 2, 'name' => 'Maria Garcia', 'type' => 'Driver', 'email' => 'maria.g@email.com', 'status' => 'Active'],
-    ['id' => 3, 'name' => 'James Wilson', 'type' => 'Customer', 'email' => 'jwilson@email.com', 'status' => 'Pending'],
-    ['id' => 4, 'name' => 'Linda Brown', 'type' => 'Admin', 'email' => 'l.brown@hailshare.com', 'status' => 'Active'],
-    ['id' => 5, 'name' => 'Robert Taylor', 'type' => 'Driver', 'email' => 'rtaylor@email.com', 'status' => 'Suspended'],
-    ['id' => 6, 'name' => 'Sarah Johnson', 'type' => 'Customer', 'email' => 'sarah.j@email.com', 'status' => 'Active'],
-    ['id' => 7, 'name' => 'Michael Lee', 'type' => 'Driver', 'email' => 'michael.lee@email.com', 'status' => 'Active'],
-    ['id' => 8, 'name' => 'Emily Davis', 'type' => 'Customer', 'email' => 'emily.d@email.com', 'status' => 'Active'],
-    ['id' => 9, 'name' => 'David Kim', 'type' => 'Driver', 'email' => 'david.k@email.com', 'status' => 'Suspended'],
-    ['id' => 10, 'name' => 'Sophia Martinez', 'type' => 'Customer', 'email' => 'sophia.m@email.com', 'status' => 'Pending'],
-    ['id' => 11, 'name' => 'Daniel Brown', 'type' => 'Driver', 'email' => 'daniel.b@email.com', 'status' => 'Active'],
-    ['id' => 12, 'name' => 'Olivia Wilson', 'type' => 'Customer', 'email' => 'olivia.w@email.com', 'status' => 'Active']
-];
+// ============ DATABASE CONNECTION ============
+$database = new mysqli("localhost", "root", "", "hailshare account list");
+
+// Check connection
+if ($database->connect_error) {
+    die("Connection failed: " . $database->connect_error);
+}
+
+// Set charset
+$database->set_charset("utf8");
+
+// ============ FETCH ACCOUNTS FROM DATABASE ============
+$all_accounts = [];
+
+// Query to fetch all accounts from database
+$query = "SELECT * FROM accounts";
+$result = $database->query($query);
+
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $all_accounts[] = [
+            'id' => $row['id'],
+            'name' => $row['name'],
+            'type' => $row['type'],
+            'email' => $row['email'],
+            'status' => $row['status']
+        ];
+    }
+} else {
+    // Fallback array if query fails
+    $all_accounts = [
+        ['id' => 1, 'name' => 'Alex Chen', 'type' => 'Customer', 'email' => 'alex.c@email.com', 'status' => 'Active'],
+        ['id' => 2, 'name' => 'Maria Garcia', 'type' => 'Driver', 'email' => 'maria.g@email.com', 'status' => 'Active'],
+        ['id' => 3, 'name' => 'James Wilson', 'type' => 'Customer', 'email' => 'jwilson@email.com', 'status' => 'Pending'],
+        ['id' => 4, 'name' => 'Linda Brown', 'type' => 'Admin', 'email' => 'l.brown@hailshare.com', 'status' => 'Active'],
+        ['id' => 5, 'name' => 'Robert Taylor', 'type' => 'Driver', 'email' => 'rtaylor@email.com', 'status' => 'Suspended'],
+        ['id' => 6, 'name' => 'Sarah Johnson', 'type' => 'Customer', 'email' => 'sarah.j@email.com', 'status' => 'Active'],
+        ['id' => 7, 'name' => 'Michael Lee', 'type' => 'Driver', 'email' => 'michael.lee@email.com', 'status' => 'Active'],
+        ['id' => 8, 'name' => 'Emily Davis', 'type' => 'Customer', 'email' => 'emily.d@email.com', 'status' => 'Active'],
+        ['id' => 9, 'name' => 'David Kim', 'type' => 'Driver', 'email' => 'david.k@email.com', 'status' => 'Suspended'],
+        ['id' => 10, 'name' => 'Sophia Martinez', 'type' => 'Customer', 'email' => 'sophia.m@email.com', 'status' => 'Pending'],
+        ['id' => 11, 'name' => 'Daniel Brown', 'type' => 'Driver', 'email' => 'daniel.b@email.com', 'status' => 'Active'],
+        ['id' => 12, 'name' => 'Olivia Wilson', 'type' => 'Customer', 'email' => 'olivia.w@email.com', 'status' => 'Active']
+    ];
+}
 
 // Store in session for later use
 $_SESSION['accounts'] = $all_accounts;
@@ -169,6 +199,11 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
         <button class="btnNormal" id="goBtn" onclick="window.location.href='?page=' + document.getElementById('pageInput').value + '&filter=<?php echo htmlspecialchars($filter_type); ?>&sort=<?php echo htmlspecialchars($sort_by); ?>&search=<?php echo htmlspecialchars($search_term); ?>'">Go</button>
     </div>
 </div>
+
+<?php
+// Close database connection
+$database->close();
+?>
 
 </body>
 </html>
