@@ -1,6 +1,5 @@
 <?php header("Content-type: application/javascript");?>
 
-
 document.addEventListener('DOMContentLoaded', async () => {
     loadInfo()
 })
@@ -51,4 +50,77 @@ async function loadInfo(){
     document.querySelector('select[name="day"]').value = day;
     document.querySelector('select[name="month"]').value = month;
     document.querySelector('select[name="year"]').value = year;
+}
+
+async function saveNonSensitive(){
+
+    // Grabs userId cookie
+    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+
+    const firstName = document.querySelector('#firstName input').value;
+    const lastName  = document.querySelector('#lastName input').value;
+    const email     = document.querySelector('#emailInput').value;
+    const phone     = document.querySelector('#phoneNumberInput').value;
+
+    const day   = document.querySelector('#dobDropdowns select[name="day"]').value;
+    const month = document.querySelector('#dobDropdowns select[name="month"]').value;
+    const year  = document.querySelector('#dobDropdowns select[name="year"]').value;
+
+    // Padstart to provide leading '0' for single digit month / day
+    const dob = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`; 
+
+    await queryDB(`
+        UPDATE users
+        SET first_name = '${firstName}', last_name = '${lastName}', email = '${email}', phone_number = '${phone}', date_of_birth = '${dob}'
+        WHERE user_id = ${userId}
+    `)
+
+    alert('Profile Updated!')
+}
+
+async function saveSensitive(){
+
+    // Grabs userId cookie
+    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+
+    let storedHash = await queryDB(`
+        SELECT password_hash from users
+        WHERE user_id = ${userId}
+    `)
+    storedHash = storedHash[0].password_hash
+
+    const currentPasswordInput = document.getElementById("currentPasswordInput").value
+    const newPasswordInput = document.getElementById("newPasswordInput").value
+    const securityQuestionDropdown = document.getElementById("securityQuestionDropdown").value
+    const securityQuestionInput = document.getElementById("securityAnswerInput").value
+
+    const bcrypt = dcodeIO.bcrypt; // Hash comparision obj
+    const isMatch = await bcrypt.compare(currentPasswordInput, storedHash);
+   
+    if (!isMatch){
+        alert("Password does not match saved password!")
+        return
+    }
+
+    const newPasswordHash = await bcrypt.hash(newPasswordInput, 10)
+
+    // Add fields dynamically if user inputed them
+    const fields = [];
+
+    // Stops single quotes from breaking strings
+    const escape = str => str.replace(/'/g, "\\'");
+    if (newPasswordHash)          fields.push(`password_hash = '${escape(newPasswordHash)}'`);
+    if (securityQuestionDropdown) fields.push(`security_question = '${escape(securityQuestionDropdown)}'`);
+    if (securityQuestionInput)    fields.push(`security_question_answer = '${escape(securityQuestionInput)}'`);
+
+    if (fields.length === 0) return; // nothing to update
+
+    await queryDB(`
+        UPDATE users
+        SET ${fields.join(', ')}
+        WHERE user_id = ${userId}
+    `)
+
+    alert("Data Saved!")
+
 }

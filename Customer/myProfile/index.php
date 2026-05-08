@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="mobile.php" />
     <script src="script.php" defer></script>
     <script src="../../Database/DBfunctions.php" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs/dist/bcrypt.min.js"></script>
     <title>My Profile</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -263,7 +264,7 @@
               <option value="1926">1926</option>
             </select>
           </div>
-          <button class="btnStrong saveChangesBtn">
+          <button class="btnStrong saveChangesBtn" onclick="saveNonSensitive()">
             Save Non-Sensitive Info
           </button>
         </div>
@@ -286,7 +287,7 @@
           </h4>
           <h4>Current Password:</h4>
           <input id="currentPasswordInput" />
-          <button class="btnStrong saveChangesBtn">Save Sensitive Info</button>
+          <button class="btnStrong saveChangesBtn" onclick="saveSensitive()">Save Sensitive Info</button>
         </div>
         <div id="importantBtns">
           <button class="btnStrong" id="logoutBtn">Logout</button>
