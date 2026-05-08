@@ -23,13 +23,17 @@ CREATE TABLE rides (
     ride_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     pickup_location NVARCHAR(255) NOT NULL,
+    pickup_lat DECIMAL(10, 7) NOT NULL,
+    pickup_long DECIMAL(10, 7) NOT NULL,
     dropoff_location NVARCHAR(255) NOT NULL,
+    dropoff_lat DECIMAL(10, 7) NOT NULL,
+    dropoff_long DECIMAL(10, 7) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     carplate_number NVARCHAR(20) NOT NULL,
     vehicle_model NVARCHAR(100) NOT NULL,
     pickup_time DATETIME NOT NULL,
     available_seats INT NOT NULL,
-    status ENUM('active', 'ongoing', 'completed', 'cancelled') NOT NULL DEFAULT 'active',
+    status ENUM('active', 'ongoing', 'completed', 'closed') NOT NULL DEFAULT 'active',
     completed_at DATETIME NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
@@ -116,22 +120,257 @@ CREATE TABLE notifications (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
-
-INSERT INTO `users` (`user_id`, `role_id`, `first_name`, `last_name`, `email`, `phone_number`, `password_hash`, `date_of_birth`, `security_question`, `security_question_answer`, `security_code`, `profile_picture`, `account_status`, `created_at`, `updated_at`) VALUES ('1', '1', 'Ahmad', 'Razif', 'ahmad.razif@email.com', '+60123456789', '$2b$12$KIXaBcDeFgHiJkLmNoPqRsTuVwXyZ', '1995-06-15', 'What is the name of your first pet?', '$2b$12$AnswerHashPlaceholderXYZABC', NULL, 'uploads/profiles/ahmad_razif.jpg', 'active', '2026-04-28 18:18:53', NULL);
-INSERT INTO `users` (`user_id`, `role_id`, `first_name`, `last_name`, `email`, `phone_number`, `password_hash`, `date_of_birth`, `security_question`, `security_question_answer`, `security_code`, `profile_picture`, `account_status`, `created_at`, `updated_at`) VALUES ('2', '2', 'Siti', 'Aminah', 'siti.aminah@email.com', '+60198765432', '$2b$12$AnotherHashPlaceholderXYZABC', '1998-03-22', 'What is your mother maiden name?', '$2b$12$AnswerHashPlaceholder2XYZABC', NULL, 'uploads/profiles/siti_aminah.jpg', 'active', '2026-04-28 18:18:53', NULL);
-
-INSERT INTO `rides` (`ride_id`, `user_id`, `pickup_location`, `dropoff_location`, `price`, `carplate_number`, `vehicle_model`, `pickup_time`, `available_seats`, `status`, `completed_at`, `created_at`, `updated_at`) VALUES ('1', '1', 'Sunway Pyramid, Petaling Jaya', 'KL Sentral, Kuala Lumpur', '8.00', 'WXY 1234', 'Perodua Myvi 2022', '2026-05-01 08:30:00', '3', 'active', NULL, '2026-04-28 18:18:53', NULL);
-
-INSERT INTO `ride_participants` (`participant_id`, `ride_id`, `user_id`, `status`, `joined_at`, `completed_at`) VALUES ('1', '1', '1', 'active', '2026-04-28 09:00:00', NULL);
-
-INSERT INTO `ratings` (`rating_id`, `ride_id`, `rater_user_id`, `rated_user_id`, `rating_score`, `description`, `created_at`) VALUES ('1', '1', '1', '2', '5', 'Very punctual and friendly driver. Car was clean and comfortable.', '2026-04-28 18:18:53');
-
-INSERT INTO `ride_chat_rooms` (`ride_chat_id`, `ride_id`, `guest_user_id`, `status`, `created_at`, `closed_at`) VALUES ('1', '1', '1', 'active', '2026-04-28 09:05:00', NULL);
-
-INSERT INTO `ride_chat_messages` (`message_id`, `ride_chat_id`, `sender_user_id`, `message_content`, `sent_at`) VALUES ('1', '1', '1', 'Hi! I am on my way. Will be there in 5 mins.', '2026-04-28 09:10:00');
-
-INSERT INTO `support_chat_rooms` (`support_chat_id`, `customer_user_id`, `staff_user_id`, `status`, `started_at`, `connected_at`, `ended_at`) VALUES ('1', '1', '1', 'active', '2026-04-28 10:00:00', '2026-04-28 10:01:30', NULL);
-
-INSERT INTO `support_chat_messages` (`message_id`, `support_chat_id`, `sender_user_id`, `message_content`, `sent_at`) VALUES ('1', '1', '1', 'Hello, I would like to report an issue with my ride post.', '2026-04-28 10:02:00');
-
-INSERT INTO `notifications` (`notification_id`, `user_id`, `message`, `status`, `created_at`) VALUES ('1', '1', 'Your ride post "Sunway Pyramid to KL Sentral" has been updated by staff.', 'unread', '2026-04-28 11:00:00');
+INSERT INTO `users` (
+        `user_id`,
+        `role_id`,
+        `first_name`,
+        `last_name`,
+        `email`,
+        `phone_number`,
+        `password_hash`,
+        `date_of_birth`,
+        `security_question`,
+        `security_question_answer`,
+        `security_code`,
+        `profile_picture`,
+        `account_status`,
+        `created_at`,
+        `updated_at`
+    )
+VALUES (
+        '1',
+        '1',
+        'Ahmad',
+        'Razif',
+        'ahmad.razif@email.com',
+        '+60123456789',
+        '$2b$12$KIXaBcDeFgHiJkLmNoPqRsTuVwXyZ',
+        '1995-06-15',
+        'What is the name of your first pet?',
+        '$2b$12$AnswerHashPlaceholderXYZABC',
+        NULL,
+        'uploads/profiles/ahmad_razif.jpg',
+        'active',
+        '2026-04-28 18:18:53',
+        NULL
+    );
+INSERT INTO `users` (
+        `user_id`,
+        `role_id`,
+        `first_name`,
+        `last_name`,
+        `email`,
+        `phone_number`,
+        `password_hash`,
+        `date_of_birth`,
+        `security_question`,
+        `security_question_answer`,
+        `security_code`,
+        `profile_picture`,
+        `account_status`,
+        `created_at`,
+        `updated_at`
+    )
+VALUES (
+        '2',
+        '2',
+        'Siti',
+        'Aminah',
+        'siti.aminah@email.com',
+        '+60198765432',
+        '$2b$12$AnotherHashPlaceholderXYZABC',
+        '1998-03-22',
+        'What is your mother maiden name?',
+        '$2b$12$AnswerHashPlaceholder2XYZABC',
+        NULL,
+        'uploads/profiles/siti_aminah.jpg',
+        'active',
+        '2026-04-28 18:18:53',
+        NULL
+    );
+INSERT INTO `rides` (
+        `ride_id`,
+        `user_id`,
+        `pickup_location`,
+        `pickup_lat`,
+        `pickup_long`,
+        `dropoff_location`,
+        `dropoff_lat`,
+        `dropoff_long`,
+        `price`,
+        `carplate_number`,
+        `vehicle_model`,
+        `pickup_time`,
+        `available_seats`,
+        `status`,
+        `completed_at`,
+        `created_at`,
+        `updated_at`
+    )
+VALUES (
+        '1',
+        '1',
+        'Sunway Pyramid, Jalan PJS 11/15, Sunway City, Subang Jaya City Council, 47500, Malaysia',
+        '3.0724851',
+        '101.6065500',
+        'KL Sentral, Jalan Stesen Sentral, Seputeh, Kuala Lumpur, 50470, Malaysia',
+        '0.0000000',
+        '0.0000000',
+        '8.00',
+        '',
+        '',
+        '2026-05-27 08:31:00',
+        '3',
+        'active',
+        '2026-05-28 21:29:52',
+        '2026-04-28 18:18:53',
+        '2026-05-08 09:27:34'
+    );
+INSERT INTO `rides` (
+        `ride_id`,
+        `user_id`,
+        `pickup_location`,
+        `pickup_lat`,
+        `pickup_long`,
+        `dropoff_location`,
+        `dropoff_lat`,
+        `dropoff_long`,
+        `price`,
+        `carplate_number`,
+        `vehicle_model`,
+        `pickup_time`,
+        `available_seats`,
+        `status`,
+        `completed_at`,
+        `created_at`,
+        `updated_at`
+    )
+VALUES (
+        '6',
+        '1',
+        'KL Tower Mini Zoo, Jalan Puncak, Kampung Cendana, Kuala Lumpur, 50250, Malaysia',
+        '3.1526407',
+        '101.7035046',
+        'KLCC, Jalan Ampang, Kampung Cendana, Kuala Lumpur, 50088, Malaysia',
+        '3.1591628',
+        '101.7133606',
+        '15.00',
+        '',
+        '',
+        '2026-05-15 00:00:00',
+        '6',
+        'active',
+        '2026-05-16 00:00:00',
+        '2026-05-06 11:26:26',
+        NULL
+    );
+INSERT INTO `ride_participants` (
+        `participant_id`,
+        `ride_id`,
+        `user_id`,
+        `status`,
+        `joined_at`,
+        `completed_at`
+    )
+VALUES (
+        '8',
+        '6',
+        '1',
+        'active',
+        '2026-05-06 11:26:26',
+        NULL
+    );
+INSERT INTO `ratings` (
+        `rating_id`,
+        `ride_id`,
+        `rater_user_id`,
+        `rated_user_id`,
+        `rating_score`,
+        `description`,
+        `created_at`
+    )
+VALUES (
+        '1',
+        '1',
+        '1',
+        '2',
+        '5',
+        'Very punctual and friendly driver. Car was clean and comfortable.',
+        '2026-04-28 18:18:53'
+    );
+INSERT INTO `ride_chat_rooms` (
+        `ride_chat_id`,
+        `ride_id`,
+        `guest_user_id`,
+        `status`,
+        `created_at`,
+        `closed_at`
+    )
+VALUES (
+        '1',
+        '1',
+        '1',
+        'active',
+        '2026-04-28 09:05:00',
+        NULL
+    );
+INSERT INTO `ride_chat_messages` (
+        `message_id`,
+        `ride_chat_id`,
+        `sender_user_id`,
+        `message_content`,
+        `sent_at`
+    )
+VALUES (
+        '1',
+        '1',
+        '1',
+        'Hi! I am on my way. Will be there in 5 mins.',
+        '2026-04-28 09:10:00'
+    );
+INSERT INTO `support_chat_rooms` (
+        `support_chat_id`,
+        `customer_user_id`,
+        `staff_user_id`,
+        `status`,
+        `started_at`,
+        `connected_at`,
+        `ended_at`
+    )
+VALUES (
+        '1',
+        '1',
+        '1',
+        'active',
+        '2026-04-28 10:00:00',
+        '2026-04-28 10:01:30',
+        NULL
+    );
+INSERT INTO `support_chat_messages` (
+        `message_id`,
+        `support_chat_id`,
+        `sender_user_id`,
+        `message_content`,
+        `sent_at`
+    )
+VALUES (
+        '1',
+        '1',
+        '1',
+        'Hello, I would like to report an issue with my ride post.',
+        '2026-04-28 10:02:00'
+    );
+INSERT INTO `notifications` (
+        `notification_id`,
+        `user_id`,
+        `message`,
+        `status`,
+        `created_at`
+    )
+VALUES (
+        '1',
+        '1',
+        'Your ride post "Sunway Pyramid to KL Sentral" has been updated by staff.',
+        'unread',
+        '2026-04-28 11:00:00'
+    );
