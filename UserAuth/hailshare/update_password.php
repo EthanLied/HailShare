@@ -12,7 +12,7 @@ if ($password !== $confirm) {
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 $sql = "UPDATE users
-        SET password='$hashedPassword'
+        SET password_hash='$hashedPassword'
         WHERE email='$email'";
 
 if (mysqli_query($conn, $sql)) {

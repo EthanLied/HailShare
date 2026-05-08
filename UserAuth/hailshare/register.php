@@ -17,11 +17,21 @@ $answer = $_SESSION['security_answer'];
 $type = $_POST['account_type'];
 $code = $_POST['security_code'];
 
+
+// role_id setting
+if ($type == "Customer") {
+    $role_id = 1;
+} elseif ($type == "Staff") {
+    $role_id = 2;
+} else {
+    $role_id = 3;
+}
+
 $sql = "INSERT INTO users
-(first_name, last_name, email, phone, password, dob, security_question, security_answer, account_type, security_code)
+(role_id, first_name, last_name, email, phone_number, password_hash, date_of_birth, security_question, security_question_answer, security_code)
 
 VALUES
-('$first','$last','$email','$phone','$password','$dob','$question','$answer','$type','$code')";
+('$role_id','$first','$last','$email','$phone','$password','$dob','$question','$answer','$code')";
 
 if (mysqli_query($conn, $sql)) {
 

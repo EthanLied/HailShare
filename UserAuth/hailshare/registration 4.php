@@ -39,21 +39,48 @@
 
   <div class="form-group">
     <label>Account Type</label>
-    <select name="account_type" required>
-      <option>Customer</option>
-      <option>Staff</option>
-      <option>Admin</option>
-    </select>
+    <select name="account_type" id="account_type" required onchange="toggleSecurityCode()">
+  <option value="">Select Account Type</option>
+  <option value="Customer">Customer</option>
+  <option value="Staff">Staff</option>
+  <option value="Admin">Admin</option>
+</select>
   </div>
 
-  <div class="form-group">
-    <label>Security Code</label>
-    <input type="text" name="security_code" required>
-  </div>
+  <div class="form-group" id="securityCodeGroup" style="display:none;">
+  <label>Security Code</label>
+  <input type="text" name="security_code" id="security_code">
+</div>
 
   <button type="submit" class="btnRegStrong">Create</button>
 
 </form>
+
+<script>
+function toggleSecurityCode() {
+
+    const accountType = document.getElementById("account_type").value;
+
+    const securityGroup = document.getElementById("securityCodeGroup");
+
+    const securityInput = document.getElementById("security_code");
+
+    if (accountType === "Staff" || accountType === "Admin") {
+
+        securityGroup.style.display = "block";
+
+        securityInput.required = true;
+
+    } else {
+
+        securityGroup.style.display = "none";
+
+        securityInput.required = false;
+
+        securityInput.value = "";
+    }
+}
+</script>
 
     <div class="bottom-link">
       <a href="login.php">I have an account</a>

@@ -6,7 +6,7 @@ $answer = $_POST['answer'];
 
 $sql = "SELECT * FROM users 
         WHERE email='$email' 
-        AND security_answer='$answer'";
+        AND security_question_answer='$answer'";
 
 $result = mysqli_query($conn, $sql);
 
