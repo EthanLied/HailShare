@@ -97,9 +97,37 @@
           You can only modify ride details if no one has joined it yet.
         </h4>
         <p>From:</p>
-        <input name="fromAddress" id="fromAddressInput"/>
+        <div class="addressDropdownWrapper">
+              <input name="fromAddress" id="fromInput" onfocus="resolveAddress('from', this.value)" oninput="resolveAddress('from', this.value)" onblur="toggleAddressDropdown('close', 'from', 'offFocus')">
+              <div class="addressDropdown" id="fromAddressDropdown">
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('0', 'from', this.innerText)">
+                  </div>
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('1', 'from', this.innerText)">
+                  </div>
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('2', 'from', this.innerText)">
+                  </div>
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('3', 'from', this.innerText)">
+                  </div>
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('4', 'from', this.innerText)">
+                  </div>
+              </div>
+          </div>
         <p>To:</p>
-        <input name="toAddress" id="toAddressInput" />
+        <div class="addressDropdownWrapper">
+              <input name="toAddress" id="toInput" onfocus="resolveAddress('to', this.value)" oninput="resolveAddress('to', this.value)" onblur="toggleAddressDropdown('close', 'to', 'offFocus')">
+              <div class="addressDropdown" id="toAddressDropdown">
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('0', 'to', this.innerText)">
+                  </div>
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('1', 'to', this.innerText)">
+                  </div>
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('2', 'to', this.innerText)">
+                  </div>
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('3', 'to', this.innerText)">
+                  </div>
+                  <div class = "addressDropdownItem" onclick="selectDropdownLocation('4', 'to', this.innerText)">
+                  </div>
+              </div>
+          </div>
       </div>
       <div id="attributeDropdownsContainer">
         <p>Date:</p>
@@ -413,8 +441,8 @@
           <option value="200">RM 200</option>
         </select>
       </div>
-
-      <button class="btnStrong" id="createRideBtn">Create Ride</button>
+      <p id="alert"></p>
+      <button class="btnStrong" id="createRideBtn" onclick="saveChanges()">Save Changes</button>
     </div>
   </body>
 </html>

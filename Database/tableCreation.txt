@@ -43,6 +43,7 @@ CREATE TABLE rides (
 CREATE TABLE ride_participants (
     participant_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     ride_id INT NOT NULL,
+    user_id INT NOT NULL,
     status ENUM('active', 'left', 'completed') NOT NULL DEFAULT 'active',
     joined_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     completed_at DATETIME NULL,
@@ -76,6 +77,7 @@ CREATE TABLE ride_chat_rooms (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     closed_at DATETIME NULL,
     FOREIGN KEY (ride_id) REFERENCES rides (ride_id),
+    FOREIGN KEY (guest_user_id) REFERENCES users (user_id)
 );
 -- Table 6: ride_chat_messages
 CREATE TABLE ride_chat_messages (

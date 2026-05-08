@@ -163,7 +163,6 @@ let debounceTimer = null;
 // Used to cancel API requests if double sent
 let activeController = null;
 
-
 async function resolveAddress(addressInputType, addressQuery) {
 
     // Clears previous addresses

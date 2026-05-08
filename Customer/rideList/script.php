@@ -324,7 +324,7 @@ async function loadRecords() {
                     </a>
                 </td>
                 <td>
-                    <a href="../myRides/index.php">
+                    <a>
                         <span class="material-symbols-outlined" onclick="joinRide(${record.ride_id})">directions_car</span>
                     </a>
                 </td>
@@ -558,5 +558,7 @@ async function joinRide(rideId){
              VALUES (${rideId}, ${userId}, 'active')`
         );
     }
+
+    window.location.href = '../myRides/index.php';
 
 }   
