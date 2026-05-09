@@ -1,0 +1,7 @@
+Rf
+- ratings (cookie logged)
+- profile 
+- create support request
+- rideList sorting
+- no rides notice
+- chatroom on ride list

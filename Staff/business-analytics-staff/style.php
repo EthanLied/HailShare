@@ -1,0 +1,292 @@
+<?php header("Content-type: text/css"); ?>
+/* business-analytics.css */
+html,
+body {
+    overflow-x: hidden;
+}
+
+body {
+    background: #fff;
+    color: #111;
+    font-size: 14px;
+}
+
+#navbar>a:nth-of-type(2)>.navbarItem {
+    background-color: rgb(216, 216, 216);
+}
+
+#navbar>a:nth-child(5) {
+    position: absolute;
+    top: auto;
+    bottom: 10px;
+}
+
+@media screen and (min-width: 769px) {
+    .mobileComponent {
+        display: none !important;
+    }
+
+    .desktopComponent {
+        display: inline-flex !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mobileComponent {
+        display: block;
+    }
+
+    .desktopComponent {
+        display: none;
+    }
+}
+
+.content-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.page-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #111;
+    letter-spacing: -0.3px;
+}
+
+.section-card {
+    background: #fff;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: #111;
+}
+
+.chart-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.chart-controls select {
+    font-size: 13px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 14px;
+    height: 32px;
+    font-size: 13px;
+    margin-left: auto;
+}
+
+.btn-download .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 240px;
+    width: 100%;
+}
+
+.table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    min-width: 560px;
+}
+
+th {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    white-space: nowrap;
+    text-align: left;
+}
+
+td {
+    font-size: 13px;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: #fafafa;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.status-Active {
+    background: #e6f4ec;
+    color: #1a7a3c;
+}
+
+.status-Pending {
+    background: #fff4e0;
+    color: #b45309;
+}
+
+.status-Completed {
+    background: #eff1f5;
+    color: #4a4f5e;
+}
+
+.status-Cancelled {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #555;
+}
+
+.pag-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 16px;
+}
+
+.pag-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.toast {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: #111;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    z-index: 999;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .chart-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .btn-download {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .custom-select-container {
+        width: 100%;
+        position: relative;
+    }
+
+    .custom-select-trigger {
+        width: 100%;
+        height: 30px;
+        border: solid 1px rgb(208, 208, 208);
+        border-radius: 6px;
+        display: flex;
+        padding: 4px 8px;
+        align-items: center;
+        box-sizing: border-box;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 10px;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .custom-popup {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 30vh;
+        background: white;
+        z-index: 100;
+        display: none;
+        border: solid 1px rgb(208, 208, 208);
+        border-radius: 10px;
+        overflow-y: scroll;
+    }
+
+    .custom-popup.open {
+        display: block;
+    }
+
+    .custom-popup-item {
+        padding: 8px 10px;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .custom-popup-item:active {
+        background: #f0f0f0;
+    }
+
+    .chart-wrapper {
+        height: 180px;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+
+    .toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        text-align: center;
+    }
+}
