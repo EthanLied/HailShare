@@ -1,15 +1,18 @@
-
+<?php header("Content-type: application/javascript");?>
 let currentTab = 'ongoing'
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
     isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    await loadChats()
 
     // Calls functions when page loads
     switchTab('ongoing');
 
     // Loads pagination
     paginationLoad()
+    
 })
 
 
@@ -156,4 +159,67 @@ function updatePagination(offset) {
 
     // Updates paginaiton contents
     processPagination(selectedPage);
+}
+
+async function loadChats(){
+
+    // Grabs userId cookie
+    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+
+    const supportChatRooms = await queryDB(`
+        SELECT * FROM support_chat_rooms
+        WHERE customer_user_id = ${userId}
+    `)
+
+    // Grabs container to append
+    const container = document.getElementById('recordRowContainer');
+
+    for (const supportChatRoom of supportChatRooms){
+        const issueType = supportChatRoom.issue_type
+        const timeOpened = supportChatRoom.started_at
+        const timeClosed = supportChatRoom.ended_at
+        const additionalNotes = supportChatRoom.additional_notes
+        const agentNameQueried = await queryDB(`
+            SELECT first_name FROM users 
+            WHERE user_id = '${supportChatRoom.staff_user_id}'`)
+        const agentName = agentNameQueried[0].first_name
+
+        if (supportChatRoom.status === 'active'){
+            container.innerHTML += `
+                <div class="chatItem ongoing">
+                    <div class="leftSideItems">
+                        <p class="issueTypeLabel">Issue Type: <span>${issueType}</span></p>
+                        <p>Time Opened: <span>${timeOpened}</span></p>
+                        <p>Additional Notes: <span class="additionalNotes">${additionalNotes}</span></p>
+                        <p>Agent assigned: <span>${agentName}</span></p>
+                    </div>
+                    <div class="rightSideItems">
+                        <a href="chatroom/index.php">
+                            <button class="btnNormal">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        </a>
+                        <a>
+                            <button class="btnNormal closeChatBtn">Close Chat <span class="material-symbols-outlined">cancel</span></button>
+                        </a>
+                    </div>
+                </div>`
+        }
+        else{
+            const timeClosed = supportChatRoom.ended_at
+
+            container.innerHTML += `
+                <div class="chatItem past">
+                    <div class="leftSideItems">
+                        <p class="issueTypeLabel">Issue Type: <span>${issueType}</span></p>
+                        <p>Time Closed: <span>${timeClosed}</span></p>
+                        <p>Additional Notes: <span class="additionalNotes">${additionalNotes}</span></p>
+                    </div>
+                    <div class="rightSideItems">
+                        <a href="chatroom/index.php">
+                            <button class="btnNormal">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        </a>
+                        <p>Agent assigned: <span>${agentName}</span></p>
+                    </div>
+                </div>`
+        }
+    }
 }

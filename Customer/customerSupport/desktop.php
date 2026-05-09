@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 /* Removes default spacing*/
 *{
     padding: 0;
@@ -143,7 +144,7 @@ h3:active{
     height: 43px; width: 100%;
 }
 
-.rideIDLabel{
+.issueTypeLabel{
     font-size: 20px; font-weight: 600;
 }
 
