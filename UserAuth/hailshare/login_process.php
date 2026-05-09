@@ -23,10 +23,14 @@ if (mysqli_num_rows($result) > 0) {
         exit();
 
     } else {
-        echo "Invalid password";
+
+        header("Location: login.php?error=invalidpassword");
+        exit();
     }
 
 } else {
-    echo "Email not found";
+
+    header("Location: login.php?error=emailnotfound");
+    exit();
 }
 ?>

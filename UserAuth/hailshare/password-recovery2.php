@@ -10,6 +10,18 @@
 </head>
 
 <body>
+  <?php
+  if (isset($_GET['error'])) {
+
+    if ($_GET['error'] == "passwordmismatch") {
+        echo "<script>alert('Passwords do not match');</script>";
+    }
+
+    if ($_GET['error'] == "updatefailed") {
+        echo "<script>alert('Error updating password');</script>";
+    }
+  }
+  ?>
 
   <!-- Navigation bar -->
   <div class="navbar">

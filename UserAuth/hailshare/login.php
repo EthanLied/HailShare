@@ -10,6 +10,26 @@
         </head> 
         
         <body> 
+            <?php
+            if (isset($_GET['error'])) {
+
+                if ($_GET['error'] == "invalidpassword") {
+                     echo "<script>alert('Invalid password');</script>";
+                }
+
+                if ($_GET['error'] == "emailnotfound") {
+                    echo "<script>alert('Email not found');</script>";
+                }
+            }
+            ?>
+            <?php
+            if (isset($_GET['success'])) {
+
+                if ($_GET['success'] == "passwordupdated") {
+                    echo "<script>alert('Password updated successfully');</script>";
+                }
+            }
+            ?>
             <!-- Navigationbar --> 
              <div class="navbar"> 
                 <div class="nav-left">HailShare</div> 

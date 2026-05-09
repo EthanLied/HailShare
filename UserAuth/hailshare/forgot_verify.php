@@ -11,10 +11,13 @@ $sql = "SELECT * FROM users
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-    // go to next step
+
     header("Location: password-recovery2.php?email=$email");
     exit();
+
 } else {
-    echo "Incorrect email or security answer.";
+
+    header("Location: password-recovery.php?error=wronganswer");
+    exit();
 }
 ?>

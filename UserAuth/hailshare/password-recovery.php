@@ -10,6 +10,14 @@
 </head>
 
 <body>
+  <?php
+  if (isset($_GET['error'])) {
+
+    if ($_GET['error'] == "wronganswer") {
+        echo "<script>alert('Incorrect email or security answer');</script>";
+    }
+  }
+  ?>
 
   <!-- Navigation bar -->
   <div class="navbar">

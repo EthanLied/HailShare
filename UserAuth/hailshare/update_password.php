@@ -6,7 +6,9 @@ $password = $_POST['password'];
 $confirm = $_POST['confirm_password'];
 
 if ($password !== $confirm) {
-    die("Passwords do not match");
+
+    header("Location: password-recovery2.php?email=$email&error=passwordmismatch");
+    exit();
 }
 
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -17,10 +19,12 @@ $sql = "UPDATE users
 
 if (mysqli_query($conn, $sql)) {
 
-    header("Location: login.php");
+    header("Location: login.php?success=passwordupdated");
     exit();
 
 } else {
-    echo "Error updating password.";
+
+    header("Location: password-recovery2.php?email=$email&error=updatefailed");
+    exit();
 }
 ?>
