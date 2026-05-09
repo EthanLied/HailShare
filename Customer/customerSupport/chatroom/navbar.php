@@ -1,4 +1,4 @@
-
+<?php header("Content-type: text/css"); ?>
 /* Flex box column for navbar*/
 #navbar{
     position: absolute; z-index: 5; left: 0; top: 0; /* Acts like an overlay */
@@ -80,6 +80,6 @@ a > .navbarItem:active {
 }
 
 /* When menu is expanded, show a contrasting color on the current page loaded to indicate current page open (controlled by nth-child)*/
-a:nth-of-type(5) > .navbarItem{
+a:nth-of-type(4) > .navbarItem{
     background-color: rgb(216, 216, 216);
 }

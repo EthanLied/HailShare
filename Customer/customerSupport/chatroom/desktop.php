@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 /* Removes default spacing*/
 *{
     padding: 0;

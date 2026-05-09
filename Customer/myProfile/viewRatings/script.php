@@ -1,5 +1,6 @@
-// Global Vars
-let isMobile
+<? php header("Content-type: application/javascript");?>
+    // Global Vars
+    let isMobile
 let rideItemsPerPage
 let rideItems
 
@@ -53,7 +54,7 @@ function paginationLoad() {
 
     // Grabs the pagination total value
     const paginationTotal = document.getElementById("paginationTotal");
-    
+
     // Adjusts it accordingly from number of rows detected
     paginationTotal.innerText = `${Math.ceil(Array.from(rideItems).length / rideItemsPerPage)}`
 

@@ -1,4 +1,4 @@
-
+<?php header("Content-type: text/css"); ?>
 /* Mobile View */
 @media screen and (max-width: 768px) {
 
@@ -50,7 +50,7 @@
     /* Preps navbar movement by tucking contents to the left + remove blue box on mobile tap*/
     #navbar > a{
         -webkit-tap-highlight-color: transparent; pointer-events: none;
-        transform: translateX(-350%);
+                transform: translateX(-350%);
         opacity: 0;
     }
 
@@ -68,7 +68,7 @@
     /* Re-adjust position of the profile component in navbar*/
     #navbar > a:nth-child(6) { position: absolute; top:92vh; }
 
-    #ratingRecieved{
+    #supportRequestDetails{
         height: 100%;
     }
 }

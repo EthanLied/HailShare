@@ -1,4 +1,4 @@
-
+<?php header("Content-type: text/css"); ?>
 /* Mobile View */
 @media screen and (max-width: 768px) {
 
@@ -29,7 +29,9 @@
     /* Readjust content pading for mobile */
     #content{
         padding-left: 20px; padding-right: 20px; padding-top: 90px;
+        margin-left: 0px;
     }
+
 
     /* No need to move content as navbar is now an overlay*/
     #content, #content.expand{
@@ -68,7 +70,7 @@
     /* Re-adjust position of the profile component in navbar*/
     #navbar > a:nth-child(6) { position: absolute; top:92vh; }
 
-    #supportRequestDetails{
-        height: 100%;
+    textarea{
+        font-size: 20px;
     }
 }
