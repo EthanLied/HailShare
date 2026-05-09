@@ -27,17 +27,17 @@ if ($result->num_rows > 0) {
         // Redirect based on role
         if ($user['role_id'] == 1) {
 
-            header("Location: /SEM3RWDD/website_code/HailShare/Customer/myProfile/index.php");
+            header("Location: /HailShare/Customer/myProfile/index.php");
             exit();
 
         } elseif ($user['role_id'] == 2) {
 
-            header("Location: /SEM3RWDD/website_code/HailShare/Staff/profile-staff/index.php");
+            header("Location: /HailShare/Staff/profile-staff/index.php");
             exit();
 
         } elseif ($user['role_id'] == 3) {
 
-            header("Location: /SEM3RWDD/website_code/HailShare/Admin/Admin Profile/Admin.php");
+            header("Location: /HailShare/Admin/Admin Profile/Admin.php");
             exit();
 
         } else {
