@@ -37,7 +37,7 @@ if (mysqli_num_rows($result) > 0) {
 
         } elseif ($user['role_id'] == 3) {
 
-            header("Location: Admin/index.php");
+            header("Location: Admin/");
             exit();
 
         } else {
