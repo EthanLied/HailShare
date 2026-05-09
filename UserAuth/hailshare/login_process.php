@@ -19,8 +19,8 @@ if (mysqli_num_rows($result) > 0) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['email'] = $user['email'];
 
-        header("Location: dashboard.php");
-        exit();
+            header("Location: dashboard.php");
+            exit();
 
     } else {
 
@@ -29,7 +29,7 @@ if (mysqli_num_rows($result) > 0) {
     }
 
 } else {
-
+    
     header("Location: login.php?error=emailnotfound");
     exit();
 }
