@@ -22,20 +22,20 @@ if (mysqli_num_rows($result) > 0) {
         // Store session data
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['email'] = $user['email'];
-        $_SESSION['role'] = $user['role'];
+        $_SESSION['role_id'] = $user['role_id'];
 
         // Redirect based on role
-        if ($user['role'] == 'staff') {
-
-            header("Location: Staff/profile-staff/index.php");
-            exit();
-
-        } elseif ($user['role'] == 'customer') {
+        if ($user['role_id'] == 1) {
 
             header("Location: Customer/myProfile/index.php");
             exit();
 
-        } elseif ($user['role'] == 'admin') {
+        } elseif ($user['role_id'] == 2) {
+
+            header("Location: Staff/profile-staff/index.php");
+            exit();
+
+        } elseif ($user['role_id'] == 3) {
 
             header("Location: Admin/index.php");
             exit();
