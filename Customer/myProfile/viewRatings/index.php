@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+
+<head>
+    <!--Imports-->
+    <link rel="stylesheet" href="../../shadCNTemplate.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="desktop.css">
+    <link rel="stylesheet" href="mobile.css">
+    <script src="script.js" defer></script>
+    <title>My Profile - View Ratings</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Google SVG Imports-->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+
+    <div id="header" class="mobileComponent">
+        <a>
+            <h2>Hailshare</h2>
+        </a>
+    </div>
+
+    <!--Navbar-->
+    <div id="navbar">
+
+        <!--Hamburger menu and Logo-->
+        <div class="navbarItem">
+            <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()"> menu
+            </span> <!-- "Onclick" triggers menu expansion / shrinking-->
+            <a href="">
+                <h3>Hailshare</h3>
+            </a>
+        </div>
+
+        <!--Ride List Icon-->
+        <a href="../../rideList/index.php">
+            <div class="navbarItem" href="">
+                <span class="material-symbols-outlined">list_alt</span>
+                <p>Ride List</p>
+            </div>
+        </a>
+
+        <!--Create Ride Icon-->
+        <a href="../../createRide/index.php">
+            <div class="navbarItem">
+                <span class="material-symbols-outlined"> add_circle</span>
+                <p>Create Ride</p>
+            </div>
+        </a>
+
+        <!--My Rides Icon-->
+        <a href="../../myRides/index.php">
+            <div class="navbarItem">
+                <span class="material-symbols-outlined"> event_available</span>
+                <p>My Rides</p>
+            </div>
+        </a>
+
+        <!--Customer Support Icon-->
+        <a href="../../customerSupport/index.php">
+            <div class="navbarItem">
+                <span class="material-symbols-outlined">support_agent</span>
+                <p>Customer Support</p>
+            </div>
+        </a>
+
+        <!--My Profile Icon-->
+        <a href="../../myProfile/index.php">
+            <div class="navbarItem">
+                <span class="material-symbols-outlined"> account_circle</span>
+                <p>My Profile</p>
+            </div>
+        </a>
+    </div>
+
+    <div id="content">
+
+        <h1>My Ratings</h1>
+        <div id="topContent">
+            <a href="../index.php">
+                <button class="btnNormal" id="backBtn"><span class="material-symbols-outlined">
+                        chevron_left
+                    </span>Back
+                </button>
+            </a>
+            <div id="myRating">
+                <h2>Overall Rating</h2>
+                <p id="ratingValue">......</p>
+            </div>
+        </div>
+        <div id="ratingRecieved">
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+            <div class="ratingItem">
+                <div class="stars">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                    <span class="material-symbols-outlined">
+                        star
+                    </span>
+                </div>
+                <p>Rated on ... <br>By...</p>
+            </div>
+
+        </div>
+
+        <div id="pagination">
+            <p id="paginationLabel">Page:&nbsp;</p>
+
+            <button class="btnNormal paginationBtn" onclick="updatePagination(-1)">
+                <span class="material-symbols-outlined">chevron_backward</span>
+                <p>Previous&nbsp;&nbsp;</p>
+            </button>
+
+            <input id="paginationSelector" value="1" oninput="processPagination(this.value)">
+
+            <p> &nbsp;/&nbsp;
+            <p id="paginationTotal">20</p>
+            </p>
+
+            <button class="btnNormal paginationBtn" onclick="updatePagination(1)">
+                <p>&nbsp;&nbsp;Next</p>
+                <span class="material-symbols-outlined">chevron_forward</span>
+            </button>
+        </div>
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>

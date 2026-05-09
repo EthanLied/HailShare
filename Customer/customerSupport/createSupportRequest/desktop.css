@@ -1,0 +1,105 @@
+/* Removes default spacing*/
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    overflow-y: hidden;
+}
+
+/* Removes blue text and underline from hyperlinks*/
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Hides mobile components in desktop mode */
+.mobileComponent{
+    display: none;
+}
+
+#navbar, #navbar.expand, #navbar > a, #content, #tabList > a, .navbarItem {
+    transition: 0.3s cubic-bezier(.42, .94, .31, .99);
+}
+
+/* Shrinks and slightly fades when hovering logo and navbar items*/
+h3:hover, .navbarItem:not(:first-child):active{
+    transition: 0.2s;
+    opacity: 0.75;
+    transform: scale(0.95);
+}
+
+/* Shrinks and slightly fades further on logo only*/
+h3:active{
+    opacity: 0.5;
+    transform: scale(0.9);
+}
+
+/* Div for the main contents of the page*/
+#content{
+    margin-left: 55px; padding: 50px; padding-bottom: 10px;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+    transition: 0.3s cubic-bezier(.42,.94,.31,.99);
+}
+
+#content > h2{
+    margin-top: 20px; margin-bottom: 10px;
+}
+
+/* When the navbar is expanded, push content div to the right*/
+#content.expand{
+    margin-left: 280px;
+}
+
+#backBtn{
+    display: flex; flex-direction: row;
+    align-items: center; justify-content: center;
+    padding: 5px; padding-right: 10px;
+    margin-top: 10px;
+}
+
+/* Container to store all inputs */
+#supportRequestDetails{
+    display: flex; flex-direction: column;
+    height: 70%;
+    background-color: rgb(248, 248, 248); border-radius: 10px;
+    padding: 10px; margin-top: 10px; 
+    justify-content: flex-start ; align-items: center;
+}
+
+#supportRequestDetails > h2{
+    margin-top: 10px; margin-bottom: 5px;
+}
+
+#supportRequestDetails > textarea{
+    outline: none; 
+    border: solid 0.5px rgb(221, 221, 221);
+    border-radius: 10px;
+    padding: 10px;
+    resize: none;
+    width: 70%; height: 30%;
+    transition: 0.3s cubic-bezier(.42, .94, .31, .99);
+}
+
+#supportRequestDetails > textarea:focus{
+    box-shadow: 0px 0px 5px grey;
+}
+
+/* Container for btn */
+#createRequestRedirect{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#createRequestBtn{
+    display: flex; justify-content: center; align-items: center;
+    margin-top: 50px; padding: 15px; width: 70%; gap: 10px;
+    font-weight: 550;
+}
+
+
+
