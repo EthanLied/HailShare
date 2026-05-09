@@ -1,6 +1,5 @@
 <?php
 include 'db.php';
-
 session_start();
 
 $first = $_SESSION['first_name'];
@@ -17,8 +16,6 @@ $answer = $_SESSION['security_answer'];
 $type = $_POST['account_type'];
 $code = $_POST['security_code'];
 
-
-// role_id setting
 if ($type == "Customer") {
     $role_id = 1;
 } elseif ($type == "Staff") {
@@ -27,20 +24,31 @@ if ($type == "Customer") {
     $role_id = 3;
 }
 
-$sql = "INSERT INTO users
+$stmt = $conn->prepare("
+INSERT INTO users 
 (role_id, first_name, last_name, email, phone_number, password_hash, date_of_birth, security_question, security_question_answer, security_code)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+");
 
-VALUES
-('$role_id','$first','$last','$email','$phone','$password','$dob','$question','$answer','$code')";
+$stmt->bind_param(
+    "isssssssss",
+    $role_id,
+    $first,
+    $last,
+    $email,
+    $phone,
+    $password,
+    $dob,
+    $question,
+    $answer,
+    $code
+);
 
-if (mysqli_query($conn, $sql)) {
-
+if ($stmt->execute()) {
     session_destroy();
-
     header("Location: login.php");
     exit();
-
 } else {
-    echo "Error: " . mysqli_error($conn);
+    echo "Error: " . $stmt->error;
 }
 ?>

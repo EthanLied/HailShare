@@ -4,15 +4,20 @@ include 'db.php';
 $email = $_POST['email'];
 $answer = $_POST['answer'];
 
-$sql = "SELECT * FROM users 
-        WHERE email='$email' 
-        AND security_question_answer='$answer'";
+$stmt = $conn->prepare("
+    SELECT * FROM users 
+    WHERE email = ? 
+    AND security_question_answer = ?
+");
 
-$result = mysqli_query($conn, $sql);
+$stmt->bind_param("ss", $email, $answer);
+$stmt->execute();
 
-if (mysqli_num_rows($result) > 0) {
+$result = $stmt->get_result();
 
-    header("Location: password-recovery2.php?email=$email");
+if ($result->num_rows > 0) {
+
+    header("Location: password-recovery2.php?email=" . urlencode($email));
     exit();
 
 } else {

@@ -6,15 +6,15 @@ include 'db.php';
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-// Get user by email
-$sql = "SELECT * FROM users WHERE email='$email'";
+$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
 
-$result = mysqli_query($conn, $sql);
+$result = $stmt->get_result();
 
-// Check if email exists
-if (mysqli_num_rows($result) > 0) {
+if ($result->num_rows > 0) {
 
-    $user = mysqli_fetch_assoc($result);
+    $user = $result->fetch_assoc();
 
     // Verify password
     if (password_verify($password, $user['password_hash'])) {
