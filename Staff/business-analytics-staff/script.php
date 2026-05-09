@@ -1,9 +1,10 @@
-// business-analytics.js
-function toggleNavbar() {
-    document.getElementById('navbar').classList.toggle('expand');
-    document.getElementById('content').classList.toggle('expand');
-    document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand'));
-}
+<?php header("Content-type: text/javascript"); ?>
+    // business-analytics.js
+    function toggleNavbar() {
+        document.getElementById('navbar').classList.toggle('expand');
+        document.getElementById('content').classList.toggle('expand');
+        document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand'));
+    }
 
 const data = {
     rides: { month: { labels: ['W1', 'W2', 'W3', 'W4'], values: [22, 35, 28, 40] }, week: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], values: [5, 8, 4, 9, 7, 12, 6] }, quarter: { labels: ['Jan', 'Feb', 'Mar'], values: [95, 120, 105] } },

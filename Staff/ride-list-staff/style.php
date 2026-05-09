@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 /* ride-list-staff.css */
 html,
 body {

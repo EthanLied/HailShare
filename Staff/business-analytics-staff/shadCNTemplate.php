@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+<?php header("Content-type: text/css");
+?>@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
 * {
     font-family: "Geist", sans-serif;

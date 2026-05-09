@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 /* business-analytics.css */
 html,
 body {

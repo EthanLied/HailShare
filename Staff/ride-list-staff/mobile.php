@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 /* mobile.css — touch overrides */
 
 html,
@@ -37,17 +38,12 @@ body {
         background-color: transparent;
     }
 
-    /* THE KEY FIX:
-     navbar.css makes #content a block with margin-left:55px.
-     A block element is still 100vw wide — so it bleeds 55px off the right.
-     width: calc(100vw - 55px) shrinks it to fit the remaining space. */
     #content,
     #content.expand {
         margin-left: 55px !important;
         width: calc(100vw - 55px) !important;
         max-width: calc(100vw - 55px) !important;
         padding: 20px 16px 40px 16px !important;
-        /* equal left+right = 16px each */
         overflow-x: hidden !important;
         box-sizing: border-box !important;
         height: auto !important;
@@ -61,7 +57,6 @@ body {
         box-sizing: border-box;
     }
 
-    /* Prevent any child from exceeding container width */
     #content * {
         max-width: 100%;
         box-sizing: border-box;

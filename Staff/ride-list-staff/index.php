@@ -5,12 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ride List – HailShare Staff</title>
-    <link rel="stylesheet" href="../profile-staff/shadCNTemplate.css" />
-    <link rel="stylesheet" href="../ride-list-staff/mobile.css" />
-    <link rel="stylesheet" href="../ride-list-staff/style.css" />
+    <link rel="stylesheet" href="../profile-staff/shadCNTemplate.php" />
+    <link rel="stylesheet" href="../ride-list-staff/mobile.php" />
+    <link rel="stylesheet" href="../ride-list-staff/style.php" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="../ride-list-staff/script.js" defer></script>
+    <script src="../ride-list-staff/script.php" defer></script>
 </head>
 
 <body>
@@ -21,22 +21,22 @@
                 <h3>HailShare</h3>
             </a>
         </div>
-        <a href="../ride-list-staff/index.html">
+        <a href="../ride-list-staff/index.php">
             <div class="navbarItem"><span class="material-symbols-outlined">list_alt</span>
                 <p>Ride List</p>
             </div>
         </a>
-        <a href="../business-analytics-staff/index.html">
+        <a href="../business-analytics-staff/index.php">
             <div class="navbarItem"><span class="material-symbols-outlined">bar_chart</span>
                 <p>Analytics</p>
             </div>
         </a>
-        <a href="../live-chat-staff/index.html">
+        <a href="../live-chat-staff/index.php">
             <div class="navbarItem"><span class="material-symbols-outlined">support_agent</span>
                 <p>Live Chat</p>
             </div>
         </a>
-        <a href="../profile-staff/index.html">
+        <a href="../profile-staff/index.php">
             <div class="navbarItem"><span class="material-symbols-outlined">account_circle</span>
                 <p>Profile</p>
             </div>

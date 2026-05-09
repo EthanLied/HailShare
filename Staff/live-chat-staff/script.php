@@ -1,3 +1,4 @@
+<?php header("Content-type: text/javascript"); ?>
 // live-chat.js
 const chatSessions = [
     {
@@ -137,4 +138,3 @@ document.getElementById('filterChat').addEventListener('change', renderInbox);
 function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2800); }
 
 renderInbox();
-

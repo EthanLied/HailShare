@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 /* profile.css */
 html,
 body {
@@ -230,7 +231,6 @@ body {
     height: 0 !important;
 }
 
-/* Also suppress for any input that isn't actually a password field */
 input[type="text"]::-webkit-credentials-auto-fill-button,
 input[type="text"]::-webkit-contacts-auto-fill-button {
     visibility: hidden !important;

@@ -1,3 +1,4 @@
+<?php header("Content-type: text/javascript"); ?>
 // ride-list-staff.js
 const rides = [
     {
@@ -229,13 +230,11 @@ function renderPassengerEditor() {
         actions.className = 'pax-actions';
 
         if (p.host) {
-            // Host badge (no Make Host button)
             const badge = document.createElement('span');
             badge.className = 'host-badge';
             badge.textContent = 'Host';
             actions.appendChild(badge);
         } else {
-            // Make Host button
             const makeHostBtn = document.createElement('button');
             makeHostBtn.type = 'button';
             makeHostBtn.className = 'btn-make-host';
@@ -262,7 +261,6 @@ function renderPassengerEditor() {
             }
             const wasHost = workingPassengers[idx].host;
             workingPassengers.splice(idx, 1);
-            // If the removed person was host, auto-assign host to first remaining person
             if (wasHost && workingPassengers.length > 0) {
                 workingPassengers[0].host = true;
                 showToast(`Host removed — "${workingPassengers[0].name}" is now the host.`);
@@ -298,7 +296,6 @@ document.getElementById('addPersonBtn').addEventListener('click', () => {
     renderPassengerEditor();
 });
 
-// Allow pressing Enter in the name input to add
 document.getElementById('newPersonName').addEventListener('keydown', e => {
     if (e.key === 'Enter') {
         e.preventDefault();
@@ -356,8 +353,9 @@ document.getElementById('nextPage').addEventListener('click', () => {
 function toggleNavbar() {
     document.getElementById('navbar').classList.toggle('expand');
     document.getElementById('content').classList.toggle('expand');
-    document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand')); // ← add this
+    document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand'));
 }
+
 function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg; t.classList.add('show');
