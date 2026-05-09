@@ -174,6 +174,9 @@ async function loadChats(){
     // Grabs container to append
     const container = document.getElementById('recordRowContainer');
 
+    // Clears container
+    container.innerHTML = ""
+
     for (const supportChatRoom of supportChatRooms){
         const issueType = supportChatRoom.issue_type
         const timeOpened = supportChatRoom.started_at
@@ -198,7 +201,7 @@ async function loadChats(){
                             <button class="btnNormal">Chatroom <span class="material-symbols-outlined">chat</span></button>
                         </a>
                         <a>
-                            <button class="btnNormal closeChatBtn">Close Chat <span class="material-symbols-outlined">cancel</span></button>
+                            <button class="btnNormal closeChatBtn" onclick="closeChat(${supportChatRoom.support_chat_id})">Close Chat <span class="material-symbols-outlined">cancel</span></button>
                         </a>
                     </div>
                 </div>`
@@ -222,4 +225,19 @@ async function loadChats(){
                 </div>`
         }
     }
+}
+
+async function closeChat(supportChatId){
+
+    await queryDB(`
+        UPDATE support_chat_rooms
+        SET status = 'closed'
+        WHERE support_chat_id = ${supportChatId}
+    `)
+
+    // Refresh chats
+    await loadChats()
+
+    // Refresh tab
+    switchTab('ongoing');
 }
