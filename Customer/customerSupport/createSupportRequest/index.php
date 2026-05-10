@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="desktop.php" />
     <link rel="stylesheet" href="mobile.php" />
     <script src="script.php" defer></script>
-    <script src="../../Database/DBfunctions.php" defer></script>
+    <script src="../../../Database/DBfunctions.php" defer></script>
+    <script src="../../cookieJSInterface.php" defer></script>
     <title>Customer Support - Create Support Request</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -96,16 +97,16 @@
 
       <div id="supportRequestDetails">
         <h2>Issue Type:</h2>
-        <select>
+        <select id="issueDropdown">
           <option>Ride Issue</option>
           <option>Account Issue</option>
           <option>Other User Issue</option>
           <option>Others</option>
         </select>
         <h2>Additional Notes:</h2>
-        <textarea></textarea>
-        <a href="../index.php" id="createRequestRedirect">
-          <button class="btnStrong" id="createRequestBtn">
+        <textarea id="additionalNotesTextarea"></textarea>
+        <a id="createRequestRedirect">
+          <button class="btnStrong" id="createRequestBtn" onclick="submitSupportRequest()">
             Create Support Request<span class="material-symbols-outlined">
               add_circle
             </span>

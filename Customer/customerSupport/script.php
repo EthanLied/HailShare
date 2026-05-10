@@ -15,12 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     
 })
 
-async function grabCookie(key) {
-    const response = await fetch(`../cookieInterface.php?key=${encodeURIComponent(key)}`);
-    const data = await response.json();
-    return data.value ?? null;
-}
-
 // Closes and opens navbar
 function toggleNavbar() {
 
@@ -191,9 +185,9 @@ async function loadChats(){
         const agentNameQueried = await queryDB(`
             SELECT first_name FROM users 
             WHERE user_id = '${supportChatRoom.staff_user_id}'`)
-        const agentName = agentNameQueried[0].first_name
+        const agentName = agentNameQueried?.[0]?.first_name ?? "Unassigned"
 
-        if (supportChatRoom.status === 'active'){
+        if (supportChatRoom.status === 'active' || supportChatRoom.status === 'waiting'){
             container.innerHTML += `
                 <div class="chatItem ongoing">
                     <div class="leftSideItems">
@@ -204,10 +198,10 @@ async function loadChats(){
                     </div>
                     <div class="rightSideItems">
                         <a href="chatroom/index.php">
-                            <button class="btnNormal">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                            <button class="btnNormal">Chatroom <span class="material-symbols-outlined" onclick="openChatroom(${supportChatRoom.support_chat_id})">chat</span></button>
                         </a>
                         <a>
-                            <button class="btnNormal closeChatBtn" onclick="closeChat(${supportChatRoom.support_chat_id})">Close Chat <span class="material-symbols-outlined">cancel</span></button>
+                            <button class="btnNormal closeChatBtn" onclick="closeRequest(${supportChatRoom.support_chat_id})">Close Chat <span class="material-symbols-outlined">cancel</span></button>
                         </a>
                     </div>
                 </div>`
@@ -233,11 +227,11 @@ async function loadChats(){
     }
 }
 
-async function closeChat(supportChatId){
+async function closeRequest(supportChatId){
 
     await queryDB(`
         UPDATE support_chat_rooms
-        SET status = 'closed'
+        SET status = 'closed', ended_at = NOW()
         WHERE support_chat_id = ${supportChatId}
     `)
 
@@ -246,4 +240,11 @@ async function closeChat(supportChatId){
 
     // Refresh tab
     switchTab('ongoing');
+}
+
+async function openChatroom(supportChatRoomId){
+
+    await setCookie('support_chat_room_id', supportChatRoomId)
+
+    window.location.href = 'createSupportRequest/index.php'
 }

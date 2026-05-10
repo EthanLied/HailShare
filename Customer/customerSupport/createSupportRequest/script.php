@@ -22,3 +22,16 @@ function toggleNavbar() {
     // Triggers the "expand" attribute of the content
     content.classList.toggle("expand")
 }
+
+async function submitSupportRequest(){
+    
+    const userId = await grabCookie('user_id')
+    const issueType = document.getElementById("issueDropdown").value
+    const additionalNotes = document.getElementById("additionalNotesTextarea").value
+
+    await queryDB(`
+        INSERT INTO support_chat_rooms (customer_user_id, issue_type, additional_notes)
+        VALUES ('${userId}', '${issueType}', '${additionalNotes}')
+    `)
+
+}
