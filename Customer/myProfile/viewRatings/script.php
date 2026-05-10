@@ -129,7 +129,36 @@ async function loadRatings(){
         WHERE rated_user_id = ${userId}
     `)
 
+    const ratingContainer = document.getElementById("ratingRecieved")
+
     for (const rating of ratings){
+        const ratingScore = rating.rating_score
+        const ratedOn = rating.created_at
+        ratedByResults = await queryDB(`
+            SELECT first_name FROM users
+            WHERE user_id = ${rating.rater_user_id}
+        `)
+        const ratedBy = ratedByResults[0].first_name
+
+        // Build stars based on ratingScore
+        const starsHTML = Array.from({ length: 5 }, (_, i) => `
+            <span class="material-symbols-outlined" style="color: ${'#000000'}">
+                star
+            </span>
+        `).join('')
+
+        const ratingItem = document.createElement('div')
+        ratingItem.classList.add('ratingItem')
+        ratingItem.innerHTML = `
+            <div class="stars">
+                ${starsHTML}
+            </div>
+            <p>Rated on ${ratedOn} <br> By <strong>${ratedBy}<strong></p>
+        `
+
+        ratingContainer.appendChild(ratingItem)
+
+
         
     }
 

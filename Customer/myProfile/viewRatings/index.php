@@ -96,26 +96,6 @@
             </div>
         </div>
         <div id="ratingRecieved">
-            <div class="ratingItem">
-                <div class="stars">
-                    <span class="material-symbols-outlined">
-                        star
-                    </span>
-                    <span class="material-symbols-outlined">
-                        star
-                    </span>
-                    <span class="material-symbols-outlined">
-                        star
-                    </span>
-                    <span class="material-symbols-outlined">
-                        star
-                    </span>
-                    <span class="material-symbols-outlined">
-                        star
-                    </span>
-                </div>
-                <p>Rated on ... <br>By...</p>
-            </div>
 
         </div>
 
