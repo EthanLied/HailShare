@@ -15,6 +15,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     
 })
 
+async function grabCookie(key) {
+    const response = await fetch(`../cookieInterface.php?key=${encodeURIComponent(key)}`);
+    const data = await response.json();
+    return data.value ?? null;
+}
 
 // Closes and opens navbar
 function toggleNavbar() {
@@ -164,7 +169,8 @@ function updatePagination(offset) {
 async function loadChats(){
 
     // Grabs userId cookie
-    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+    const userId = await grabCookie('user_id')
+    console.log(userId)
 
     const supportChatRooms = await queryDB(`
         SELECT * FROM support_chat_rooms
