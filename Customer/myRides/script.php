@@ -201,7 +201,7 @@ function updatePagination(offset) {
 async function loadRides(){
     
     // Grabs userId cookie
-    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+    const userId = await grabCookie('user_id')
     
     // Dont do anything if cookie not found
     if (!userId) return;
@@ -253,8 +253,8 @@ async function loadRides(){
                     <a href="editRide/index.php">
                         <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/ '">Edit Ride <span class="material-symbols-outlined">edit</span></button>
                     </a>
-                    <a href="chatRoom/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/'">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                    <a >
+                        <button class="btnNormal" onclick="openChatroom('${record.ride_id}')">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                 </div>
             `;
@@ -294,8 +294,8 @@ async function loadRides(){
                     <p>From: <span class="address">${record.pickup_location}</span></p>
                 </div>
                 <div class="rightSideItems">
-                    <a href="chatRoom/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/'">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                    <a >
+                        <button class="btnNormal" onclick="openChatroom('${record.ride_id}')">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <p>Time Hosted: <span>${formatTime(record.pickup_time)}</span></p>
                     <p>Time Ended: <span>${timeEnded}</span></p>
@@ -368,8 +368,8 @@ async function loadRides(){
                     <a>
                         <button class="btnNormal importantBtn" onclick="leaveRide(${record.ride_id}, ${userId})">Leave Ride <span class="material-symbols-outlined">logout</span></button>
                     </a>
-                    <a href="chatRoom/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/'">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                    <a>
+                        <button class="btnNormal" onclick="openChatroom('${record.ride_id}')">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <p>To: <span>${record.dropoff_location}</span></p>
                 </div>
@@ -410,8 +410,8 @@ async function loadRides(){
                     <p>From: <span class="address">${record.pickup_location}</span></p>
                 </div>
                 <div class="rightSideItems">
-                    <a href="chatRoom/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/'">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                    <a>
+                        <button class="btnNormal" onclick="openChatroom('${record.ride_id}')">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <a href="giveRating/index.php">
                         <button class="btnNormal" onclick="document.cookie='ride_owner_id=${record.user_id}; max-age=2592000; path=/'">Give Rating <span class="material-symbols-outlined">star</span></button>
@@ -468,5 +468,14 @@ async function leaveRide(rideId, userId){
 
     location.reload();
 
+}
+
+async function openChatroom(chatRoomId){
+
+    await setCookie('chat_room_id', chatRoomId)
+
+    await setCookie('chatroom_type', 'ride')
+
+    window.location.href = '../chatRoom/index.php'
 }
 

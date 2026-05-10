@@ -13,6 +13,12 @@ input{
     box-sizing: border-box;
 }
 
+/* Hides mobile components in desktop mode */
+.mobileComponent{
+    display: none;
+}
+
+
 /* Removes blue text and underline from hyperlinks*/
 a{
     text-decoration: none;

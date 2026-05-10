@@ -80,6 +80,6 @@ a > .navbarItem:active {
 }
 
 /* When menu is expanded, show a contrasting color on the current page loaded to indicate current page open (controlled by nth-child)*/
-a:nth-of-type(3) > .navbarItem{
+a:nth-of-type(4) > .navbarItem{
     background-color: rgb(216, 216, 216);
 }

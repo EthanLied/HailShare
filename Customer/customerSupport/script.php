@@ -197,8 +197,8 @@ async function loadChats(){
                         <p>Agent assigned: <span>${agentName}</span></p>
                     </div>
                     <div class="rightSideItems">
-                        <a href="chatroom/index.php">
-                            <button class="btnNormal">Chatroom <span class="material-symbols-outlined" onclick="openChatroom(${supportChatRoom.support_chat_id})">chat</span></button>
+                        <a>
+                            <button class="btnNormal" onclick="openChatroom(${supportChatRoom.support_chat_id})">Chatroom <span class="material-symbols-outlined" >chat</span></button>
                         </a>
                         <a>
                             <button class="btnNormal closeChatBtn" onclick="closeRequest(${supportChatRoom.support_chat_id})">Close Chat <span class="material-symbols-outlined">cancel</span></button>
@@ -217,8 +217,8 @@ async function loadChats(){
                         <p>Additional Notes: <span class="additionalNotes">${additionalNotes}</span></p>
                     </div>
                     <div class="rightSideItems">
-                        <a href="chatroom/index.php">
-                            <button class="btnNormal">Chatroom <span class="material-symbols-outlined">chat</span></button>
+                        <a">
+                            <button class="btnNormal" onclick="openChatroom(${supportChatRoom.support_chat_id})">Chatroom <span class="material-symbols-outlined">chat</span></button>
                         </a>
                         <p>Agent assigned: <span>${agentName}</span></p>
                     </div>
@@ -246,5 +246,7 @@ async function openChatroom(supportChatRoomId){
 
     await setCookie('support_chat_room_id', supportChatRoomId)
 
-    window.location.href = 'createSupportRequest/index.php'
+    await setCookie('chatroom_type', 'support')
+
+    window.location.href = '../chatRoom/index.php'
 }

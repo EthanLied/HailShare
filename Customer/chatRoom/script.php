@@ -36,29 +36,47 @@ function toggleNavbar() {
     content.classList.toggle("expand")
 }
 
+let chatroomType
+let chatroomTable
+let chatroomMessageTable
+let chatroomMessagesRecordIdName
+let chatroomIdValue
+let chatroomId 
+
 async function loadMessages(){
 
-    const rideId = document.cookie.split('; ').find(row => row.startsWith('ride_id='))?.split('=')[1];
-    userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+    // Grabs cookies
+    userId = await grabCookie('user_id')
+    chatRoomCookieId = await grabCookie('chat_room_id')
+    supportChatRoomCookieId = await grabCookie('support_chat_room_id')
 
-    // Displays rideId
-    document.getElementById("rideId").innerText = `${rideId}`
+    // Seperate between normal ride chatrooms and support request chatrooms
+    chatroomType = await grabCookie('chatroom_type')
+    chatroomTable = (chatroomType === 'ride') ? 'ride_chat_rooms' : 'support_chat_rooms'
+    chatroomMessageTable = (chatroomType === 'ride') ? 'ride_chat_messages' : 'support_chat_messages'
+    chatroomMessagesRecordIdName = (chatroomType === 'ride') ? 'ride_chat_id' : 'support_chat_id'
+    chatroomIdValue = (chatroomType === 'ride') ? chatRoomCookieId : supportChatRoomCookieId
+    chatroomId = (chatroomType === 'ride') ? 'ride_id' : 'support_chat_id'
 
-    chatroomExistence = await queryDB(`SELECT * FROM ride_chat_rooms WHERE ride_id = ${rideId}`)
+    // Displays chatroom ID
+    document.getElementById("chatroomId").innerText = `${chatroomIdValue}`
+
+    console.log(`SELECT * FROM ${chatroomTable} WHERE ${chatroomId} = ${chatroomIdValue}`)
+    chatroomExistence = await queryDB(`SELECT * FROM ${chatroomTable} WHERE ${chatroomId} = ${chatroomIdValue}`)
 
     // If this is NOT an existing chatroom, add to DB
     if (chatroomExistence.length != 1){
         await queryDB(`
-        INSERT INTO ride_chat_rooms (ride_id, status) 
-        VALUES (${rideId}, 'active')`)
+        INSERT INTO ${chatroomTable} (${chatroomId}, status) 
+        VALUES (${chatroomIdValue}, 'active')`)
         return;
     }
 
     // Grabs all messages of a chatroom
     rideChatId = chatroomExistence[0].ride_chat_id
     const allMessages = await queryDB(
-        `SELECT * FROM ride_chat_messages 
-        WHERE ride_chat_id = '${rideChatId}' 
+        `SELECT * FROM ${chatroomMessageTable}
+        WHERE ${chatroomMessagesRecordIdName} = '${chatroomIdValue}' 
         ORDER BY sent_at ASC`
     );
 
@@ -98,7 +116,7 @@ async function sendMessage(){
     }
 
     // Write to DB
-    await queryDB(`INSERT INTO ride_chat_messages (ride_chat_id, sender_user_id, message_content) VALUES ('${rideChatId}', '${userId}', '${message}')`)
+    await queryDB(`INSERT INTO ${chatroomMessageTable} (${chatroomMessagesRecordIdName}, sender_user_id, message_content) VALUES ('${chatroomIdValue}', '${userId}', '${message}')`)
 
     appendMessages(message, senderName, "outgoing")
 
@@ -110,7 +128,7 @@ async function sendMessage(){
 
 async function refreshMessages(){
 
-    const newMessages = await queryDB(`SELECT * FROM ride_chat_messages WHERE sent_at > '${lastUpdateTimeStamp}' AND sender_user_id <> ${userId}`)
+    const newMessages = await queryDB(`SELECT * FROM ${chatroomMessageTable} WHERE sent_at > '${lastUpdateTimeStamp}' AND sender_user_id <> ${userId}`)
 
     for (const message of newMessages){
         const nameRecord = await queryDB(`SELECT first_name FROM users WHERE user_id = '${message.sender_user_id}'`)
@@ -145,4 +163,14 @@ function appendMessages(textContent, name, type){
     msgDiv.appendChild(msgText);
     msgDiv.appendChild(msgSender);
     messageContainer.appendChild(msgDiv);
+}
+
+function goBack(){
+
+    if ((chatroomType === 'ride')){
+        window.location.href = '../myRides/index.php'
+    }
+    else{
+        window.location.href = '../customerSupport/index.php'
+    }
 }

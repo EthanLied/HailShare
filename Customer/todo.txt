@@ -3,3 +3,4 @@ Rf
 - rideList sorting
 - no rides notice
 - chatroom on ride list
+- fix all hrefs

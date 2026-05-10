@@ -2,12 +2,13 @@
 <html>
   <head>
     <!--Imports-->
-    <link rel="stylesheet" href="../../shadCNTemplate.php" />
+    <link rel="stylesheet" href="../shadCNTemplate.php" />
     <link rel="stylesheet" href="navbar.php" />
     <link rel="stylesheet" href="desktop.php" />
     <link rel="stylesheet" href="mobile.php" />
     <script src="script.php" defer></script>
-    <script src="../../../Database/DBfunctions.php" defer></script>
+    <script src="../../Database/DBfunctions.php" defer></script>
+    <script src="../cookieJSInterface.php" defer></script>
     <title>My Rides - Chatroom</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -85,16 +86,25 @@
     </div>
 
     <div id="content">
-      <h1>Chatroom Ride ID: #<span id="rideId"></span></h1>
+      <h1>Chatroom ID: #<span id="chatroomId"></span></h1>
       <div id="actionBtns">
-        <a href="../index.php">
-          <button class="btnNormal" id="goBackBtn">
+        <a >
+          <button class="btnNormal" id="goBackBtn" onclick="goBack()">
             <span class="material-symbols-outlined"> chevron_left </span>Go Back
+          </button>
+        </a>
+        <a>
+          <button class="btnNormal" id="endConversationBtn">
+            <span class="material-symbols-outlined"> close </span>End
+            Conversation
           </button>
         </a>
       </div>
 
       <div id="messageBox">
+        <div id="staffAssigned">
+          <p>Current Staff Assigned: ....</p>
+        </div>
         <div id="scrollableContent">
           <div id="messageContent">
             

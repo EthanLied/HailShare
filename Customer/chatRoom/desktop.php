@@ -83,6 +83,14 @@ h3:active{
     display: flex; flex-direction: column;
 }
 
+#staffAssigned{
+    width: 100%; height: 10%;
+    background-color:  rgb(241, 241, 241);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
 #staffAssigned > p{
     font-size: 15px; font-weight: 550;
     padding-left: 20px;

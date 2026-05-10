@@ -1,12 +1,15 @@
-<? php header("Content-type: application/javascript");?>
-    // Global Vars
-    let isMobile
+<?php header("Content-type: application/javascript");?>
+// Global Vars
+let isMobile
 let rideItemsPerPage
 let rideItems
 
 document.addEventListener('DOMContentLoaded', () => {
 
     isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+
+    loadRatings()
 
     // Loads pagination
     paginationLoad()
@@ -115,4 +118,19 @@ function updatePagination(offset) {
 
     // Updates paginaiton contents
     processPagination(selectedPage);
+}
+
+async function loadRatings(){
+
+    userId = await grabCookie('user_id')
+
+    ratings = await queryDB(`
+        SELECT * FROM ratings
+        WHERE rated_user_id = ${userId}
+    `)
+
+    for (const rating of ratings){
+        
+    }
+
 }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="mobile.php">
     <script src="script.php" defer></script>
     <script src="../../Database/DBfunctions.php" defer></script>
-    <script src="/Customer/cookieJSInterface.php"></script>
+    <script src="../cookieJSInterface.php"></script>
     <title>My Rides</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
