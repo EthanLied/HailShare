@@ -6,7 +6,7 @@
   <title>Create Account - Step 2</title>
 
  <!-- Link to CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.php">
 </head>
 
 <body>
