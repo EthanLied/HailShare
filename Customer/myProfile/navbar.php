@@ -67,6 +67,7 @@ a > .navbarItem:active {
     transition: 0.15s ease-out;
     color: transparent; /* Hides text color when not expanded */
     margin-left: 15px;
+    pointer-events: none;
 }
 
 /* Hailshare Logo */

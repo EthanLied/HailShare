@@ -96,7 +96,8 @@ CREATE TABLE support_chat_rooms (
     staff_user_id INT NULL,
     status ENUM('waiting', 'active', 'closed', 'timeout') NOT NULL DEFAULT 'waiting',
     started_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    connected_at DATETIME NULL,
+    issue_type NVARCHAR(255) NOT NULL,
+    additional_notes NVARCHAR(255) NOT NULL,
     ended_at DATETIME NULL,
     FOREIGN KEY (customer_user_id) REFERENCES users (user_id),
     FOREIGN KEY (staff_user_id) REFERENCES users (user_id)

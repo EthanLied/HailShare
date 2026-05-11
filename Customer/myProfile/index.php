@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="mobile.php" />
     <script src="script.php" defer></script>
     <script src="../../Database/DBfunctions.php" defer></script>
+    <script src="../cookieJSInterface.php" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bcryptjs/dist/bcrypt.min.js"></script>
     <title>My Profile</title>
 
@@ -88,7 +89,7 @@
     <div id="content">
       <h1>My Profile</h1>
       <div id="ratingsContainer">
-        <h4>My Rating: 4.7/5.0</h4>
+        <h4>My Ratings</h4>
         <a href="viewRatings/index.php" id="viewMoreRatings">
           <button class="btnNormal" id="viewMoreRatingsBtn">View More</button>
         </a>
@@ -290,8 +291,8 @@
           <button class="btnStrong saveChangesBtn" onclick="saveSensitive()">Save Sensitive Info</button>
         </div>
         <div id="importantBtns">
-          <button class="btnStrong" id="logoutBtn">Logout</button>
-          <button class="btnStrong" id="deleteAccountBtn">
+          <button class="btnStrong" id="logoutBtn" onclick="logout()">Logout</button>
+          <button class="btnStrong" id="deleteAccountBtn" onclick="openDeletePrompt()">
             Delete Account
           </button>
         </div>

@@ -414,7 +414,7 @@ async function loadRides(){
                         <button class="btnNormal" onclick="openChatroom('${record.ride_id}')">Chatroom <span class="material-symbols-outlined">chat</span></button>
                     </a>
                     <a href="giveRating/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_owner_id=${record.user_id}; max-age=2592000; path=/'">Give Rating <span class="material-symbols-outlined">star</span></button>
+                        <button class="btnNormal" onclick="setCookie('ride_id', '${record.ride_id}')">Give Rating <span class="material-symbols-outlined">star</span></button>
                     </a>
                     <p>Time Hosted: <span>${formatTime(record.pickup_time)}</span></p>
                     <p>Time Ended: <span>${timeEnded}</span></p>

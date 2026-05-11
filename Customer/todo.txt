@@ -4,3 +4,4 @@ Rf
 - no rides notice
 - chatroom on ride list
 - fix all hrefs
+- fix navbar text being clickable when unopened

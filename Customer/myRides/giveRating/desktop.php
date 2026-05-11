@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 /* Removes default spacing*/
 *{
     padding: 0;
@@ -90,6 +91,11 @@ h3:active{
     font-size: 15px; font-weight: 550;
 }
 
-
+#notice{
+    margin-top: 30px;
+    color: red;
+    font-size: 30px;
+    text-align: center;
+}
 
 

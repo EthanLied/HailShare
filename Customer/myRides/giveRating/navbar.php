@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 /* Flex box column for navbar*/
 #navbar{
     position: absolute; z-index: 5; left: 0; top: 0; /* Acts like an overlay */

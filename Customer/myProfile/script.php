@@ -83,17 +83,20 @@ async function saveSensitive(){
     // Grabs userId cookie
     const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
 
+    // Grabs stored password
     let storedHash = await queryDB(`
         SELECT password_hash from users
         WHERE user_id = ${userId}
     `)
     storedHash = storedHash[0].password_hash
 
+    // Grabs user input
     const currentPasswordInput = document.getElementById("currentPasswordInput").value
     const newPasswordInput = document.getElementById("newPasswordInput").value
     const securityQuestionDropdown = document.getElementById("securityQuestionDropdown").value
     const securityQuestionInput = document.getElementById("securityAnswerInput").value
 
+    // Crypto obj and validating password
     const bcrypt = dcodeIO.bcrypt; // Hash comparision obj
     const isMatch = await bcrypt.compare(currentPasswordInput, storedHash);
    
@@ -124,3 +127,57 @@ async function saveSensitive(){
     alert("Data Saved!")
 
 }
+
+function openDeletePrompt(){
+    const deleteBtn = document.getElementById("deleteAccountBtn")
+    
+    deleteBtn.remove()
+
+    const importantBtnsContainer = document.getElementById("importantBtns")
+
+    importantBtnsContainer.innerHTML = `
+        <button class="btnStrong" id="deleteAccountBtn" onclick="deleteAccount()">YES, DELETE!</button>
+        <button class="btnStrong" id="logoutBtn" onclick="closeDeletePrompt()">NO, GO BACK!</button>
+    `
+}
+
+
+function closeDeletePrompt(){
+
+    const deleteBtn = document.getElementById("deleteAccountBtn")
+    
+    deleteBtn.remove()
+
+    const importantBtnsContainer = document.getElementById("importantBtns")
+
+    importantBtnsContainer.innerHTML = `
+        <button class="btnStrong" id="logoutBtn" onclick="logout()">Logout</button>
+          <button class="btnStrong" id="deleteAccountBtn" onclick="openDeletePrompt()">
+            Delete Account
+          </button>
+    `
+}
+
+async function deleteAccount(){
+
+    const userId = await grabCookie('user_id')
+
+    console.log(`
+        DELETE FROM users
+        WHERE user_id = ${userId}
+    `)
+
+    await queryDB(`
+        DELETE FROM users
+        WHERE user_id = ${userId}
+    `)
+
+
+    window.location.href = '../../Admin/Homepage/index.php'
+
+}
+
+function logout(){
+    window.location.href = '../../Admin/Homepage/index.php'
+}
+

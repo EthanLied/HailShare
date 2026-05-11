@@ -130,9 +130,22 @@ async function loadRatings(){
     `)
 
     const ratingContainer = document.getElementById("ratingRecieved")
+    const ratingItem = document.createElement('div')
+    ratingItem.classList.add('ratingItem')
+
+    if (ratings.length === 0){
+        ratingItem.innerHTML = `<p style="text-align: center"><strong>No ratings yet!</strong></p>`
+        ratingItem.style.justifyContent = "center"
+        ratingContainer.appendChild(ratingItem)
+        return
+    }
+
+    let totalRatingValue = 0
 
     for (const rating of ratings){
+
         const ratingScore = rating.rating_score
+        totalRatingValue += parseInt(ratingScore)
         const ratedOn = rating.created_at
         ratedByResults = await queryDB(`
             SELECT first_name FROM users
@@ -142,24 +155,22 @@ async function loadRatings(){
 
         // Build stars based on ratingScore
         const starsHTML = Array.from({ length: 5 }, (_, i) => `
-            <span class="material-symbols-outlined" style="color: ${'#000000'}">
+            <span class="material-symbols-outlined" style="color: ${i < ratingScore ? '#000000' : '#cccccc00'}">
                 star
             </span>
         `).join('')
 
-        const ratingItem = document.createElement('div')
-        ratingItem.classList.add('ratingItem')
         ratingItem.innerHTML = `
             <div class="stars">
                 ${starsHTML}
             </div>
-            <p>Rated on ${ratedOn} <br> By <strong>${ratedBy}<strong></p>
+            <p>Rated on ${ratedOn} <br> By <strong>${ratedBy}</strong>
+
+            </p>
         `
-
         ratingContainer.appendChild(ratingItem)
-
-
-        
     }
+
+    document.getElementById("ratingValue").innerText = `${totalRatingValue / ratings.length}`
 
 }

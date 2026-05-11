@@ -96,7 +96,8 @@ CREATE TABLE support_chat_rooms (
     staff_user_id INT NULL,
     status ENUM('waiting', 'active', 'closed', 'timeout') NOT NULL DEFAULT 'waiting',
     started_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    connected_at DATETIME NULL,
+    issue_type NVARCHAR(255) NOT NULL,
+    additional_notes NVARCHAR(255) NOT NULL,
     ended_at DATETIME NULL,
     FOREIGN KEY (customer_user_id) REFERENCES users (user_id),
     FOREIGN KEY (staff_user_id) REFERENCES users (user_id)
@@ -123,13 +124,12 @@ CREATE TABLE notifications (
 
 INSERT INTO `users` (`user_id`, `role_id`, `first_name`, `last_name`, `email`, `phone_number`, `password_hash`, `date_of_birth`, `security_question`, `security_question_answer`, `security_code`, `profile_picture`, `account_status`, `created_at`, `updated_at`) VALUES ('1', '1', 'Ahmad', 'Razif', 'ahmad.razif@email.com', '+60123456789', '$2b$12$KIXaBcDeFgHiJkLmNoPqRsTuVwXyZ', '1995-06-15', 'What is the name of your first pet?', '$2b$12$AnswerHashPlaceholderXYZABC', NULL, 'uploads/profiles/ahmad_razif.jpg', 'active', '2026-04-28 18:18:53', NULL);
 INSERT INTO `users` (`user_id`, `role_id`, `first_name`, `last_name`, `email`, `phone_number`, `password_hash`, `date_of_birth`, `security_question`, `security_question_answer`, `security_code`, `profile_picture`, `account_status`, `created_at`, `updated_at`) VALUES ('2', '2', 'Siti', 'Aminah', 'siti.aminah@email.com', '+60198765432', '$2b$12$AnotherHashPlaceholderXYZABC', '1998-03-22', 'What is your mother maiden name?', '$2b$12$AnswerHashPlaceholder2XYZABC', NULL, 'uploads/profiles/siti_aminah.jpg', 'active', '2026-04-28 18:18:53', NULL);
-INSERT INTO `users` (`user_id`, `role_id`, `first_name`, `last_name`, `email`, `phone_number`, `password_hash`, `date_of_birth`, `security_question`, `security_question_answer`, `security_code`, `profile_picture`, `account_status`, `created_at`, `updated_at`) VALUES ('5', '1', 'Ethan', 'Lai', 'ethanjy5428@gmail.com', '01131998832', '$2y$10$VxgMZIWqYOI2VJBhDDmTiOkR50VEZUpR6DNDrqS9QOz4QkGQ8VXB6', '1999-10-13', 'What is your pet''s name?', '1', '', NULL, 'active', '2026-05-10 10:15:04', NULL);
 
-INSERT INTO `rides` (`ride_id`, `user_id`, `pickup_location`, `pickup_lat`, `pickup_long`, `dropoff_location`, `dropoff_lat`, `dropoff_long`, `price`, `carplate_number`, `vehicle_model`, `pickup_time`, `available_seats`, `status`, `completed_at`, `created_at`, `updated_at`) VALUES ('1', '1', 'Sunway Pyramid, Petaling Jaya', '0.0000000', '0.0000000', 'KL Sentral, Kuala Lumpur', '0.0000000', '0.0000000', '8.00', 'WXY 1234', 'Perodua Myvi 2022', '2026-05-01 08:30:00', '3', 'active', NULL, '2026-04-28 18:18:53', NULL);
+INSERT INTO `rides` (`ride_id`, `user_id`, `pickup_location`, `pickup_lat`, `pickup_long`, `dropoff_location`, `dropoff_lat`, `dropoff_long`, `price`, `carplate_number`, `vehicle_model`, `pickup_time`, `available_seats`, `status`, `completed_at`, `created_at`, `updated_at`) VALUES ('1', '1', 'Sunway Pyramid, Petaling Jaya', '0.0000000', '0.0000000', 'KL Sentral, Kuala Lumpur', '0.0000000', '0.0000000', '8.00', 'WXY 1234', 'Perodua Myvi 2022', '2026-05-13 08:30:00', '3', 'completed', '0000-00-00 00:00:00', '2026-04-28 18:18:53', '2026-05-11 08:46:52');
 
-INSERT INTO `ride_participants` (`participant_id`, `ride_id`, `user_id`, `status`, `joined_at`, `completed_at`) VALUES ('1', '1', '1', 'active', '2026-04-28 09:00:00', NULL);
+INSERT INTO `ride_participants` (`participant_id`, `ride_id`, `user_id`, `status`, `joined_at`, `completed_at`) VALUES ('1', '1', '1', 'completed', '2026-04-28 09:00:00', NULL);
 
-INSERT INTO `ratings` (`rating_id`, `ride_id`, `rater_user_id`, `rated_user_id`, `rating_score`, `description`, `created_at`) VALUES ('1', '1', '2', '1', '5', 'Very punctual and friendly driver. Car was clean and comfortable.', '2026-04-28 18:18:53');
+INSERT INTO `ratings` (`rating_id`, `ride_id`, `rater_user_id`, `rated_user_id`, `rating_score`, `description`, `created_at`) VALUES ('3', '1', '2', '1', '5', NULL, '2026-05-11 09:33:32');
 
 INSERT INTO `ride_chat_rooms` (`ride_chat_id`, `ride_id`, `guest_user_id`, `status`, `created_at`, `closed_at`) VALUES ('1', '1', '2', 'active', '2026-04-28 09:00:00', NULL);
 
