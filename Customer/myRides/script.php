@@ -318,7 +318,12 @@ async function loadRides(){
 
     // Query ride participants
     const participantRows = await queryDB(`SELECT * FROM ride_participants WHERE user_id = ${userId}`);
-    if (!participantRows || participantRows.length === 0) return;
+    if (!participantRows || participantRows.length === 0){
+        const div = document.createElement('div');
+        div.className = 'ongoingRidesItem joined ongoing';
+        div.innerHTML = `<p>Your rides will appear here!</p>`;
+        container.appendChild(div);
+    };
 
     // Query joined rides with the ride participants returned above
     const joinedRideIds = participantRows.map(participant => participant.ride_id).join(',');
@@ -376,11 +381,6 @@ async function loadRides(){
             `;
             container.appendChild(div);
         }
-    } else {
-        const div = document.createElement('div');
-        div.className = 'ongoingRidesItem joined ongoing';
-        div.innerHTML = `<p>Your rides will appear here!</p>`;
-        container.appendChild(div);
     }
 
     // Create each past joined ride

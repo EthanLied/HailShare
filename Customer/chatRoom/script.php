@@ -61,7 +61,9 @@ async function loadMessages(){
     // Displays chatroom ID
     document.getElementById("chatroomId").innerText = `${chatroomIdValue}`
 
-    console.log(`SELECT * FROM ${chatroomTable} WHERE ${chatroomId} = ${chatroomIdValue}`)
+    // Hides staff components if needed
+    document.querySelectorAll('.staffChat').forEach(el => el.style.display = (chatroomType === 'ride') ? 'none' : 'flex');
+
     chatroomExistence = await queryDB(`SELECT * FROM ${chatroomTable} WHERE ${chatroomId} = ${chatroomIdValue}`)
 
     // If this is NOT an existing chatroom, add to DB
@@ -70,6 +72,23 @@ async function loadMessages(){
         INSERT INTO ${chatroomTable} (${chatroomId}, status) 
         VALUES (${chatroomIdValue}, 'active')`)
         return;
+    }
+
+    // Set staff assigned
+    if (chatroomType != 'ride'){
+
+        staffQueryName = await queryDB(`
+            SELECT first_name from users
+            WHERE user_id = ${chatroomExistence[0].staff_user_id}
+        `)
+
+        let staffName = "Waiting for Support Agent";
+
+        if (staffQueryName && staffQueryName.length > 0) {
+            staffName = staffQueryName[0].first_name || "Waiting for Support Agent";
+        }
+    
+        document.getElementById("staffAssignedName").innerText = staffName
     }
 
     // Grabs all messages of a chatroom
@@ -130,13 +149,15 @@ async function refreshMessages(){
 
     const newMessages = await queryDB(`SELECT * FROM ${chatroomMessageTable} WHERE sent_at > '${lastUpdateTimeStamp}' AND sender_user_id <> ${userId}`)
 
+    lastUpdateTimeStamp = new Date().toLocaleString('sv-SE');
+
     for (const message of newMessages){
         const nameRecord = await queryDB(`SELECT first_name FROM users WHERE user_id = '${message.sender_user_id}'`)
         const incomingName = nameRecord[0].first_name
         appendMessages(message.message_content, incomingName, "incoming")
     }
 
-    lastUpdateTimeStamp = new Date().toLocaleString('sv-SE');
+    
 
 }
 

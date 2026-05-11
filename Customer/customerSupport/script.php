@@ -217,7 +217,7 @@ async function loadChats(){
                         <p>Additional Notes: <span class="additionalNotes">${additionalNotes}</span></p>
                     </div>
                     <div class="rightSideItems">
-                        <a">
+                        <a>
                             <button class="btnNormal" onclick="openChatroom(${supportChatRoom.support_chat_id})">Chatroom <span class="material-symbols-outlined">chat</span></button>
                         </a>
                         <p>Agent assigned: <span>${agentName}</span></p>

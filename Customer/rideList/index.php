@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="mobileCSS.php">
     <script src="script.php" defer></script>
     <script src="../../Database/DBfunctions.php" defer></script>
+    <script src="../cookieJSInterface.php"></script>
     <title>Ride List</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,7 +86,7 @@
                 </span>&ensp;Chat
             </button>
 
-            <button class="btnStrong" id="joinRideBtn" onclick="window.location.href='../myRides/index.php'"><span class="material-symbols-outlined">
+            <button class="btnStrong" id="joinRideBtn" onclick="joinRide(mobileRideId); window.location.href='../chatRoom/index.php'"><span class="material-symbols-outlined">
                     directions_car
                 </span>&ensp;Join Ride
             </button>

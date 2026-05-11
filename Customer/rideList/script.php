@@ -10,6 +10,7 @@ let toLong = 0
 let toLat = 0
 let fromLong = 0
 let fromLat = 0
+let mobileRideId = 0
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -139,12 +140,17 @@ function updatePagination(offset) {
     processPagination(selectedPage);
 }
 
-function showPopup(buttonElement, rideId){
+async function showPopup(buttonElement, rideId){
 
     // Early return if not mobile
     if (!isMobile){
         return
     }
+
+    // Set global vars of ride ids for chatroom and joining ride functs
+    await setCookie('ride_id', rideId)
+    await setCookie('chatroom_type', 'ride')
+    mobileRideId = rideId
 
     // Import required html elements to transition
     const popupMenu = document.querySelector('#popupMenu')
@@ -226,15 +232,26 @@ function toggleNavbar() {
 async function loadRecords() {
 
     // Grabs userId cookie
-    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+    const userId = await grabCookie('user_id')
     
     const records = await readDB('rides');
 
     const table = document.getElementById('desktopTable');
     const tableContainer = document.getElementById('tableContainer');
 
-    // Completes any rides to be completed
-    await queryDB(`UPDATE rides SET completed_at = DATE(created_at) + INTERVAL 1 DAY, status = 'completed' WHERE status = 'active' AND pickup_time <= NOW() - INTERVAL 1 DAY AND completed_at IS NULL`);
+    // Completes any rides and chatrooms if they have expired
+    await queryDB(`
+        UPDATE rides r
+        LEFT JOIN ride_chat_rooms rcr ON r.ride_id = rcr.ride_id
+        SET 
+            r.status = 'completed',
+            r.completed_at = DATE(r.created_at) + INTERVAL 1 DAY,
+            rcr.status = IF(rcr.ride_id IS NOT NULL, 'closed', rcr.status),
+            rcr.closed_at = IF(rcr.ride_id IS NOT NULL, NOW(), rcr.closed_at)
+        WHERE r.status = 'active' 
+        AND r.pickup_time <= NOW() - INTERVAL 1 DAY 
+        AND r.completed_at IS NULL
+    `);
 
     // Reflected in ride participants as well
     await queryDB(`UPDATE ride_participants SET status = 'completed' WHERE ride_id IN (SELECT ride_id FROM rides WHERE status = 'completed' AND pickup_time <= NOW() - INTERVAL 1 DAY)`);
@@ -244,6 +261,7 @@ async function loadRecords() {
         table.deleteRow(1);
     }
     
+    // Clear existing records (mobile)
     tableContainer.querySelectorAll('.rideItemMobile').forEach(el => el.remove());
 
     for (const record of records) {
@@ -291,6 +309,7 @@ async function loadRecords() {
             item.dataset.time = formatTime(record.pickup_time);
             item.dataset.seats = `${count} / ${record.available_seats}`;
             item.dataset.price = record.price;
+            item.dataset.id = record.ride_id
             item.innerHTML = `
                 <div class="rideItemMobileRow1">
                     <div class="rideItemMobileRowLeft">
@@ -319,8 +338,8 @@ async function loadRecords() {
                 <td>${count} / ${record.available_seats}</td>
                 <td>RM <s>${parseFloat(record.price).toFixed(0)}</s> ${splitPrice}</td>
                 <td>
-                    <a href="../myRides/chatRoom/index.php">
-                        <span class="material-symbols-outlined">chat</span>
+                    <a>
+                        <span class="material-symbols-outlined" onclick="openChat(${record.ride_id})">chat</span>
                     </a>
                 </td>
                 <td>
@@ -332,6 +351,30 @@ async function loadRecords() {
             table.appendChild(row);
         }
     }
+
+    const tbody = table.querySelector('tbody');
+    const mobileTable = document.getElementById("tableContainer")
+
+    if (isMobile && mobileTable.children.length <= 1 ){
+        const mobileNotice = document.createElement('div');
+        mobileNotice.classList.add('rideItemMobile', 'mobileComponent')
+        mobileNotice.innerHTML = `
+            <p>No Results Returned! Please try again Later!</p>
+        `;
+
+        mobileTable.append(mobileNotice)
+    }
+    if (!isMobile && table.children.length <= 1 ){
+        const row = document.createElement('tr');
+        row.id = 'emptyState';
+        row.innerHTML = `
+        <tr id="emptyState">
+            <td colspan="9"><strong>No Results Returned! Please try again Later!</strong></td>
+        </tr>
+        `;
+        tbody.appendChild(row);
+    }
+    
 }
 
 function formatTime(datetimeStr) {
@@ -562,3 +605,12 @@ async function joinRide(rideId){
     window.location.href = '../myRides/index.php';
 
 }   
+
+async function openChat(rideId){
+
+    await setCookie('ride_id', rideId)
+    await setCookie('chatroom_type', 'ride')
+
+    window.location.href = '../chatRoom/index.php'
+
+}

@@ -94,7 +94,7 @@
           </button>
         </a>
         <a>
-          <button class="btnNormal" id="endConversationBtn">
+          <button class="btnNormal staffChat" id="endConversationBtn">
             <span class="material-symbols-outlined"> close </span>End
             Conversation
           </button>
@@ -102,8 +102,8 @@
       </div>
 
       <div id="messageBox">
-        <div id="staffAssigned">
-          <p>Current Staff Assigned: ....</p>
+        <div id="staffAssigned" class="staffChat">
+          <p>Current Staff Assigned: <span id="staffAssignedName"></span></p>
         </div>
         <div id="scrollableContent">
           <div id="messageContent">

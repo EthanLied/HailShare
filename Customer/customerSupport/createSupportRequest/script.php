@@ -34,4 +34,6 @@ async function submitSupportRequest(){
         VALUES ('${userId}', '${issueType}', '${additionalNotes}')
     `)
 
+    window.location.href = '../index.php'
+
 }

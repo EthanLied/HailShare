@@ -1,7 +1,5 @@
 Rf
-- ratings (cookie logged)
 - rideList sorting
-- no rides notice
-- chatroom on ride list
 - fix all hrefs
-- fix navbar text being clickable when unopened
+- refactor all cookies
+- prevent chatroom usage when closed
