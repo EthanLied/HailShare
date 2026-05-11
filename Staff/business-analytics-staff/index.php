@@ -11,6 +11,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+    <script src="../../Database/DBfunctions.php" defer></script>
     <script src="../business-analytics-staff/script.php" defer></script>
 </head>
 
@@ -62,15 +63,15 @@
                         </div>
                     </div>
                     <select id="periodSelect" class="desktopComponent">
-                        <option value="month">This Month</option>
                         <option value="week">This Week</option>
+                        <option value="month">This Month</option>
                         <option value="quarter">This Quarter</option>
                     </select>
                     <div class="custom-select-container mobileComponent" id="periodContainer">
-                        <div class="custom-select-trigger" id="periodTrigger">This Month</div>
+                        <div class="custom-select-trigger" id="periodTrigger">This Week</div>
                         <div class="custom-popup" id="periodPopup">
-                            <div class="custom-popup-item" data-val="month">This Month</div>
                             <div class="custom-popup-item" data-val="week">This Week</div>
+                            <div class="custom-popup-item" data-val="month">This Month</div>
                             <div class="custom-popup-item" data-val="quarter">This Quarter</div>
                         </div>
                     </div>
@@ -90,14 +91,16 @@
                         <thead>
                             <tr>
                                 <th>Ride ID</th>
-                                <th>Date</th>
+                                <th>Pickup Time</th>
                                 <th>Route</th>
-                                <th>Passengers</th>
+                                <th>Seats</th>
                                 <th>Revenue (RM)</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody id="recordsBody"></tbody>
+                        <tbody id="recordsBody">
+                            <tr><td colspan="6" style="text-align:center;">Loading…</td></tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="pagination">

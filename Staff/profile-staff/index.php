@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../profile-staff/style.php" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs/dist/bcrypt.min.js"></script>
+    <script src="../../Database/DBfunctions.php" defer></script>
     <script src="../profile-staff/script.php" defer></script>
 </head>
 
@@ -107,7 +109,7 @@
                     </div>
                     <div class="form-group">
                         <label for="securityAnswer">Security Answer</label>
-                        <input type="text" id="securityAnswer" placeholder="Your answer" autocomplete="new-password"
+                        <input type="text" id="securityAnswer" placeholder="Your answer" autocomplete="off"
                             data-lpignore="true" data-form-type="other" />
                     </div>
                     <div class="form-divider"></div>

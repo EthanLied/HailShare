@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../ride-list-staff/style.php" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="../../Database/DBfunctions.php" defer></script>
     <script src="../ride-list-staff/script.php" defer></script>
 </head>
 
@@ -55,22 +56,24 @@
                             <option value="date-desc">Date (Newest first)</option>
                             <option value="price-asc">Price (Low → High)</option>
                             <option value="price-desc">Price (High → Low)</option>
-                            <option value="people-asc">People (Low → High)</option>
+                            <option value="people-asc">Seats (Low → High)</option>
                         </select>
                     </div>
                     <div class="control-group">
                         <label for="filterBy">Filter By:</label>
                         <select id="filterBy">
                             <option value="">All Status</option>
-                            <option value="Active">Active</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Cancelled">Cancelled</option>
+                            <option value="active">Active</option>
+                            <option value="ongoing">Ongoing</option>
+                            <option value="completed">Completed</option>
+                            <option value="closed">Closed</option>
                         </select>
                     </div>
                 </div>
                 <div class="list-scroll-container">
-                    <div id="rideList"></div>
+                    <div id="rideList">
+                        <p style="text-align:center;">Loading…</p>
+                    </div>
                 </div>
                 <div class="pagination">
                     <span id="pageInfo">Page 1 / 1</span>
@@ -124,10 +127,10 @@
                             <div class="form-group">
                                 <label for="modifyStatus">Status:</label>
                                 <select id="modifyStatus">
-                                    <option value="Active">Active</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="active">Active</option>
+                                    <option value="ongoing">Ongoing</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="closed">Closed</option>
                                 </select>
                             </div>
                         </div>
@@ -135,7 +138,7 @@
                             <label class="section-label">In Ride:</label>
                             <div class="passenger-editor">
                                 <div class="add-person-row">
-                                    <input type="text" id="newPersonName" placeholder="Enter name to add…"
+                                    <input type="text" id="newPersonName" placeholder="Enter user ID to add…"
                                         autocomplete="off" />
                                     <button type="button" class="btnStrong btn-add-person" id="addPersonBtn">
                                         <span class="material-symbols-outlined">person_add</span>

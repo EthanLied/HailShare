@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../live-chat-staff/style.php" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="../../Database/DBfunctions.php" defer></script>
     <script src="../live-chat-staff/script.php" defer></script>
 </head>
 
@@ -61,13 +62,16 @@
                         <label for="filterChat">Filter By:</label>
                         <select id="filterChat">
                             <option value="">All</option>
-                            <option value="Active">Active</option>
-                            <option value="Waiting">Waiting</option>
-                            <option value="Closed">Closed</option>
+                            <option value="active">Active</option>
+                            <option value="waiting">Waiting</option>
+                            <option value="closed">Closed</option>
+                            <option value="timeout">Timeout</option>
                         </select>
                     </div>
                 </div>
-                <div id="chatList"></div>
+                <div id="chatList">
+                    <p style="text-align:center;">Loading…</p>
+                </div>
             </div>
             <!-- CHATROOM -->
             <div id="chatroomView" class="hidden">

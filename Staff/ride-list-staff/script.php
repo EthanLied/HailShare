@@ -1,354 +1,6 @@
 <?php header("Content-type: text/javascript"); ?>
-// ride-list-staff.js
-const rides = [
-    {
-        id: 'R-001', from: 'KLCC', to: 'Bukit Bintang', date: '2026-04-15', time: '09:00', status: 'Active', people: 3, capacity: 5, price: 5.00,
-        passengers: [{ name: 'Ahmad Rizal', host: true }, { name: 'Siti Aishah', host: false }, { name: 'Lee Wei Jian', host: false }]
-    },
-    {
-        id: 'R-002', from: 'Petaling Jaya', to: 'Subang Jaya', date: '2026-04-14', time: '10:30', status: 'Completed', people: 5, capacity: 5, price: 8.00,
-        passengers: [{ name: 'Siti Aishah', host: true }, { name: 'Priya Krishnan', host: false }, { name: 'Hafiz Azman', host: false }, { name: 'Nurul Huda', host: false }, { name: 'Ravi S.', host: false }]
-    },
-    {
-        id: 'R-003', from: 'Chow Kit', to: 'Ampang', date: '2026-04-16', time: '14:15', status: 'Pending', people: 2, capacity: 4, price: 6.50,
-        passengers: [{ name: 'Lee Wei Jian', host: true }, { name: 'Tan Mei Ling', host: false }]
-    },
-    {
-        id: 'R-004', from: 'Puchong', to: 'Cyberjaya', date: '2026-04-13', time: '07:45', status: 'Active', people: 4, capacity: 6, price: 9.50,
-        passengers: [{ name: 'Priya Krishnan', host: true }, { name: 'Ahmad Rizal', host: false }, { name: 'Zainab Yusof', host: false }, { name: 'Kevin Lim', host: false }]
-    },
-    {
-        id: 'R-005', from: 'Kepong', to: 'Cheras', date: '2026-04-12', time: '18:30', status: 'Cancelled', people: 1, capacity: 3, price: 4.00,
-        passengers: [{ name: 'Hafiz Azman', host: true }]
-    },
-    {
-        id: 'R-006', from: 'Damansara', to: 'Mont Kiara', date: '2026-04-17', time: '08:05', status: 'Pending', people: 3, capacity: 5, price: 7.00,
-        passengers: [{ name: 'Nurul Huda', host: true }, { name: 'Farah Nadia', host: false }, { name: 'Johnson Tan', host: false }]
-    },
-    {
-        id: 'R-007', from: 'Shah Alam', to: 'Klang', date: '2026-04-11', time: '11:20', status: 'Completed', people: 4, capacity: 4, price: 6.00,
-        passengers: [{ name: 'Ravi Subramaniam', host: true }, { name: 'Tan Mei Ling', host: false }, { name: 'Nur Izzati', host: false }, { name: 'Marcus Wong', host: false }]
-    },
-    {
-        id: 'R-008', from: 'Bangsar', to: 'KL Sentral', date: '2026-04-18', time: '16:05', status: 'Active', people: 2, capacity: 5, price: 5.50,
-        passengers: [{ name: 'Tan Mei Ling', host: true }, { name: 'Aisha Binti Ali', host: false }]
-    },
-    {
-        id: 'R-009', from: 'Setapak', to: 'Gombak', date: '2026-04-19', time: '09:20', status: 'Pending', people: 3, capacity: 5, price: 7.50,
-        passengers: [{ name: 'Zainab Yusof', host: true }, { name: 'Raj Kumar', host: false }, { name: 'Lim Pei Shan', host: false }]
-    },
-    {
-        id: 'R-010', from: 'Selayang', to: 'Batu Caves', date: '2026-04-20', time: '10:00', status: 'Active', people: 2, capacity: 4, price: 5.00,
-        passengers: [{ name: 'Kevin Lim', host: true }, { name: 'Mohd Faris', host: false }]
-    },
-    {
-        id: 'R-011', from: 'Sri Petaling', to: 'Bukit Jalil', date: '2026-04-21', time: '13:45', status: 'Completed', people: 4, capacity: 4, price: 6.50,
-        passengers: [{ name: 'Farah Nadia', host: true }, { name: 'Tan Siew Ling', host: false }, { name: 'Ahmad Fauzi', host: false }, { name: 'Sarina Che Ros', host: false }]
-    },
-    {
-        id: 'R-012', from: 'Wangsa Maju', to: 'KLCC', date: '2026-04-22', time: '08:30', status: 'Active', people: 2, capacity: 5, price: 5.00,
-        passengers: [{ name: 'Johnson Tan', host: true }, { name: 'Derek Ng', host: false }]
-    },
-    {
-        id: 'R-013', from: 'Cheras', to: 'Puchong', date: '2026-04-23', time: '17:00', status: 'Pending', people: 3, capacity: 6, price: 8.00,
-        passengers: [{ name: 'Nur Izzati', host: true }, { name: 'Ahmad Rizal', host: false }, { name: 'Priya Krishnan', host: false }]
-    },
-    {
-        id: 'R-014', from: 'Ampang', to: 'Bukit Bintang', date: '2026-04-24', time: '12:15', status: 'Cancelled', people: 1, capacity: 3, price: 4.50,
-        passengers: [{ name: 'Marcus Wong', host: true }]
-    },
-    {
-        id: 'R-015', from: 'Mont Kiara', to: 'Damansara', date: '2026-04-25', time: '07:30', status: 'Active', people: 5, capacity: 6, price: 10.00,
-        passengers: [{ name: 'Aisha Binti Ali', host: true }, { name: 'Kevin Lim', host: false }, { name: 'Nurul Huda', host: false }, { name: 'Tan Mei Ling', host: false }, { name: 'Hafiz Azman', host: false }]
-    },
-    {
-        id: 'R-016', from: 'KL Sentral', to: 'Bangsar', date: '2026-04-26', time: '19:00', status: 'Completed', people: 2, capacity: 4, price: 5.50,
-        passengers: [{ name: 'Raj Kumar', host: true }, { name: 'Farah Nadia', host: false }]
-    },
-    {
-        id: 'R-017', from: 'Subang Jaya', to: 'Shah Alam', date: '2026-04-27', time: '06:45', status: 'Pending', people: 3, capacity: 5, price: 7.00,
-        passengers: [{ name: 'Lim Pei Shan', host: true }, { name: 'Johnson Tan', host: false }, { name: 'Marcus Wong', host: false }]
-    },
-    {
-        id: 'R-018', from: 'Klang', to: 'Bukit Raja', date: '2026-04-28', time: '11:00', status: 'Active', people: 4, capacity: 4, price: 6.00,
-        passengers: [{ name: 'Mohd Faris', host: true }, { name: 'Ahmad Rizal', host: false }, { name: 'Siti Aishah', host: false }, { name: 'Derek Ng', host: false }]
-    },
-    {
-        id: 'R-019', from: 'Cyberjaya', to: 'Putrajaya', date: '2026-04-29', time: '09:55', status: 'Completed', people: 2, capacity: 3, price: 4.00,
-        passengers: [{ name: 'Tan Siew Ling', host: true }, { name: 'Nur Izzati', host: false }]
-    },
-    {
-        id: 'R-020', from: 'Bukit Bintang', to: 'KLCC', date: '2026-04-30', time: '20:10', status: 'Active', people: 3, capacity: 5, price: 5.50,
-        passengers: [{ name: 'Ahmad Fauzi', host: true }, { name: 'Zainab Yusof', host: false }, { name: 'Raj Kumar', host: false }]
-    },
-    {
-        id: 'R-021', from: 'Gombak', to: 'Setapak', date: '2026-05-01', time: '08:00', status: 'Pending', people: 2, capacity: 4, price: 6.00,
-        passengers: [{ name: 'Sarina Che Ros', host: true }, { name: 'Lim Pei Shan', host: false }]
-    },
-    {
-        id: 'R-022', from: 'Batu Caves', to: 'Kepong', date: '2026-05-02', time: '15:30', status: 'Active', people: 3, capacity: 5, price: 7.50,
-        passengers: [{ name: 'Derek Ng', host: true }, { name: 'Kevin Lim', host: false }, { name: 'Farah Nadia', host: false }]
-    },
-];
 
-const ROWS_PER_PAGE = 10;
-let currentPage = 1;
-let currentRideId = null;
-let filteredRides = [...rides];
-
-// Working copy of passengers for the modify form (deep copy, not a reference)
-let workingPassengers = [];
-
-/* ══════════════════════════════════════
-   RIDE LIST
-══════════════════════════════════════ */
-function renderRides() {
-    const sortVal = document.getElementById('sortBy').value;
-    const filterVal = document.getElementById('filterBy').value;
-
-    filteredRides = filterVal ? rides.filter(r => r.status === filterVal) : [...rides];
-    if (sortVal === 'date-asc') filteredRides.sort((a, b) => a.date.localeCompare(b.date));
-    if (sortVal === 'date-desc') filteredRides.sort((a, b) => b.date.localeCompare(a.date));
-    if (sortVal === 'price-asc') filteredRides.sort((a, b) => a.price - b.price);
-    if (sortVal === 'price-desc') filteredRides.sort((a, b) => b.price - a.price);
-    if (sortVal === 'people-asc') filteredRides.sort((a, b) => a.people - b.people);
-
-    currentPage = 1;
-    renderPage();
-}
-
-function renderPage() {
-    const totalPages = Math.max(1, Math.ceil(filteredRides.length / ROWS_PER_PAGE));
-    const slice = filteredRides.slice((currentPage - 1) * ROWS_PER_PAGE, currentPage * ROWS_PER_PAGE);
-    const list = document.getElementById('rideList');
-
-    if (!slice.length) {
-        list.innerHTML = '<div class="empty-state">No rides match the current filter.</div>';
-    } else {
-        list.innerHTML = slice.map(r => {
-            const passengerHTML = r.passengers
-                .map(p => p.host
-                    ? `<span class="passenger-name">${p.name} <span class="host-tag">Host</span></span>`
-                    : `<span class="passenger-name">${p.name}</span>`)
-                .join('');
-            return `
-        <div class="ride-card">
-          <div class="ride-route">
-            <div class="from"><strong>From:</strong> ${r.from}</div>
-            <div class="to"><strong>To:</strong> ${r.to}</div>
-            <div class="in-ride-row">
-              <span class="in-ride-label">In Ride:</span>
-              <span class="passenger-list">${passengerHTML}</span>
-            </div>
-          </div>
-          <div class="ride-meta">
-            <span>${r.time}&nbsp; ${r.date}</span>
-            <span class="status-badge status-${r.status}">${r.status}</span>
-            <span>People ${r.people}/${r.capacity}</span>
-            <span><strong>RM ${r.price.toFixed(2)}</strong></span>
-            <button class="btn-info" data-id="${r.id}" title="Modify ${r.id}" aria-label="Modify ride ${r.id}">
-              <span class="material-symbols-outlined">info</span>
-            </button>
-          </div>
-        </div>`;
-        }).join('');
-
-        document.querySelectorAll('.btn-info').forEach(btn =>
-            btn.addEventListener('click', () => openModify(btn.dataset.id)));
-    }
-
-    document.getElementById('pageInfo').textContent = `Page ${currentPage} / ${totalPages}`;
-    document.getElementById('prevPage').disabled = currentPage === 1;
-    document.getElementById('nextPage').disabled = currentPage === totalPages;
-}
-
-/* ══════════════════════════════════════
-   MODIFY RIDE — OPEN
-══════════════════════════════════════ */
-function openModify(id) {
-    const ride = rides.find(r => r.id === id);
-    if (!ride) return;
-    currentRideId = id;
-
-    // Deep-copy passengers so edits don't affect the list until Save
-    workingPassengers = ride.passengers.map(p => ({ ...p }));
-
-    document.getElementById('rideListView').classList.add('hidden');
-    document.getElementById('modifyRideView').classList.remove('hidden');
-    document.getElementById('modifyRideId').textContent = ride.id;
-    document.getElementById('modifyFrom').value = ride.from;
-    document.getElementById('modifyTo').value = ride.to;
-    document.getElementById('modifyPrice').value = ride.price;
-
-    // Date dropdown
-    const dateEl = document.getElementById('modifyDate');
-    dateEl.innerHTML = '';
-    const dates = [];
-    for (let d = 1; d <= 30; d++) dates.push(`2026-04-${String(d).padStart(2, '0')}`);
-    for (let d = 1; d <= 31; d++) dates.push(`2026-05-${String(d).padStart(2, '0')}`);
-    dates.forEach(v => dateEl.appendChild(new Option(v, v, v === ride.date, v === ride.date)));
-
-    // Hour dropdown
-    const [rideHour, rideMin] = ride.time.split(':');
-    const hourEl = document.getElementById('modifyHour');
-    hourEl.innerHTML = '';
-    for (let h = 0; h < 24; h++) {
-        const v = String(h).padStart(2, '0');
-        hourEl.appendChild(new Option(v, v, v === rideHour, v === rideHour));
-    }
-
-    // Minute dropdown (00–59)
-    const minEl = document.getElementById('modifyMinute');
-    minEl.innerHTML = '';
-    for (let m = 0; m < 60; m++) {
-        const v = String(m).padStart(2, '0');
-        minEl.appendChild(new Option(v, v, v === rideMin, v === rideMin));
-    }
-
-    document.getElementById('modifyCapacity').value = ride.capacity;
-    document.getElementById('modifyStatus').value = ride.status;
-
-    renderPassengerEditor();
-}
-
-/* ══════════════════════════════════════
-   PASSENGER EDITOR
-══════════════════════════════════════ */
-function renderPassengerEditor() {
-    const container = document.getElementById('passengerList');
-    container.innerHTML = '';
-
-    workingPassengers.forEach((p, idx) => {
-        const row = document.createElement('div');
-        row.className = 'passenger-row';
-
-        const nameSpan = document.createElement('span');
-        nameSpan.className = 'pax-name';
-        nameSpan.textContent = p.name;
-
-        const actions = document.createElement('div');
-        actions.className = 'pax-actions';
-
-        if (p.host) {
-            const badge = document.createElement('span');
-            badge.className = 'host-badge';
-            badge.textContent = 'Host';
-            actions.appendChild(badge);
-        } else {
-            const makeHostBtn = document.createElement('button');
-            makeHostBtn.type = 'button';
-            makeHostBtn.className = 'btn-make-host';
-            makeHostBtn.textContent = 'Make Host';
-            makeHostBtn.setAttribute('aria-label', `Make ${p.name} the host`);
-            makeHostBtn.addEventListener('click', () => {
-                workingPassengers.forEach(x => x.host = false);
-                workingPassengers[idx].host = true;
-                renderPassengerEditor();
-            });
-            actions.appendChild(makeHostBtn);
-        }
-
-        // Remove button
-        const removeBtn = document.createElement('button');
-        removeBtn.type = 'button';
-        removeBtn.className = 'btn-remove-pax';
-        removeBtn.setAttribute('aria-label', `Remove ${p.name}`);
-        removeBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px">close</span>';
-        removeBtn.addEventListener('click', () => {
-            if (workingPassengers.length <= 1) {
-                showToast('There must be at least 1 person in the ride.');
-                return;
-            }
-            const wasHost = workingPassengers[idx].host;
-            workingPassengers.splice(idx, 1);
-            if (wasHost && workingPassengers.length > 0) {
-                workingPassengers[0].host = true;
-                showToast(`Host removed — "${workingPassengers[0].name}" is now the host.`);
-            }
-            renderPassengerEditor();
-        });
-        actions.appendChild(removeBtn);
-
-        row.appendChild(nameSpan);
-        row.appendChild(actions);
-        container.appendChild(row);
-    });
-}
-
-/* ── Add Person ────────────────────────────────── */
-document.getElementById('addPersonBtn').addEventListener('click', () => {
-    const input = document.getElementById('newPersonName');
-    const name = input.value.trim();
-    if (!name) {
-        showToast('Please enter a name before adding.');
-        input.focus();
-        return;
-    }
-    const duplicate = workingPassengers.some(p => p.name.toLowerCase() === name.toLowerCase());
-    if (duplicate) {
-        showToast(`"${name}" is already in the ride.`);
-        input.focus();
-        return;
-    }
-    workingPassengers.push({ name, host: false });
-    input.value = '';
-    input.focus();
-    renderPassengerEditor();
-});
-
-document.getElementById('newPersonName').addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        document.getElementById('addPersonBtn').click();
-    }
-});
-
-/* ══════════════════════════════════════
-   SAVE CHANGES
-══════════════════════════════════════ */
-document.getElementById('modifyForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const ride = rides.find(r => r.id === currentRideId);
-    if (!ride) return;
-
-    if (workingPassengers.length === 0) {
-        showToast('There must be at least 1 person in the ride.');
-        return;
-    }
-
-    ride.from = document.getElementById('modifyFrom').value.trim();
-    ride.to = document.getElementById('modifyTo').value.trim();
-    ride.date = document.getElementById('modifyDate').value;
-    ride.time = `${document.getElementById('modifyHour').value}:${document.getElementById('modifyMinute').value}`;
-    ride.capacity = parseInt(document.getElementById('modifyCapacity').value);
-    ride.price = parseFloat(document.getElementById('modifyPrice').value) || 0;
-    ride.status = document.getElementById('modifyStatus').value;
-    ride.passengers = workingPassengers.map(p => ({ ...p }));
-    ride.people = ride.passengers.length;
-
-    showToast('Ride updated successfully.');
-    document.getElementById('modifyRideView').classList.add('hidden');
-    document.getElementById('rideListView').classList.remove('hidden');
-    renderRides();
-});
-
-/* ══════════════════════════════════════
-   NAVIGATION & UTILITIES
-══════════════════════════════════════ */
-document.getElementById('backToList').addEventListener('click', () => {
-    document.getElementById('modifyRideView').classList.add('hidden');
-    document.getElementById('rideListView').classList.remove('hidden');
-});
-
-document.getElementById('sortBy').addEventListener('change', renderRides);
-document.getElementById('filterBy').addEventListener('change', renderRides);
-
-document.getElementById('prevPage').addEventListener('click', () => {
-    if (currentPage > 1) { currentPage--; renderPage(); }
-});
-document.getElementById('nextPage').addEventListener('click', () => {
-    if (currentPage < Math.ceil(filteredRides.length / ROWS_PER_PAGE)) { currentPage++; renderPage(); }
-});
+// ── ride-list-staff/script.php ──────────────────────────────────────────────
 
 function toggleNavbar() {
     document.getElementById('navbar').classList.toggle('expand');
@@ -356,10 +8,355 @@ function toggleNavbar() {
     document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand'));
 }
 
+// ── State ─────────────────────────────────────────────────────────────────────
+const ROWS_PER_PAGE = 10;
+let allRides        = [];
+let currentPage     = 1;
+let currentRideId   = null;  // ride_id being modified
+
+// ── Load Rides from DB ────────────────────────────────────────────────────────
+
+async function loadRides() {
+    const sortVal   = document.getElementById('sortBy').value;
+    const filterVal = document.getElementById('filterBy').value;
+
+    // Build ORDER BY
+    let orderClause = 'r.pickup_time DESC';
+    if (sortVal === 'date-asc')    orderClause = 'r.pickup_time ASC';
+    if (sortVal === 'date-desc')   orderClause = 'r.pickup_time DESC';
+    if (sortVal === 'price-asc')   orderClause = 'r.price ASC';
+    if (sortVal === 'price-desc')  orderClause = 'r.price DESC';
+    if (sortVal === 'people-asc')  orderClause = 'r.available_seats ASC';
+
+    // Build WHERE
+    const whereClause = filterVal ? `WHERE r.status = '${filterVal}'` : '';
+
+    const rows = await queryDB(`
+        SELECT
+            r.ride_id,
+            r.pickup_location,
+            r.dropoff_location,
+            r.pickup_time,
+            r.price,
+            r.available_seats,
+            r.status,
+            r.carplate_number,
+            r.vehicle_model,
+            CONCAT(u.first_name, ' ', u.last_name) AS host_name,
+            r.user_id AS host_id,
+            (SELECT COUNT(*) FROM ride_participants rp
+             WHERE rp.ride_id = r.ride_id AND rp.status = 'active') AS passenger_count
+        FROM rides r
+        JOIN users u ON u.user_id = r.user_id
+        ${whereClause}
+        ORDER BY ${orderClause}
+    `);
+
+    allRides    = rows ?? [];
+    currentPage = 1;
+    renderRideList();
+}
+
+// ── Render Ride List ──────────────────────────────────────────────────────────
+
+function renderRideList() {
+    const start = (currentPage - 1) * ROWS_PER_PAGE;
+    const page  = allRides.slice(start, start + ROWS_PER_PAGE);
+    const total = Math.max(1, Math.ceil(allRides.length / ROWS_PER_PAGE));
+
+    document.getElementById('pageInfo').textContent = `Page ${currentPage} / ${total}`;
+    document.getElementById('prevPage').disabled    = currentPage <= 1;
+    document.getElementById('nextPage').disabled    = currentPage >= total;
+
+    if (allRides.length === 0) {
+        document.getElementById('rideList').innerHTML =
+            '<p style="text-align:center;">No rides found.</p>';
+        return;
+    }
+
+    document.getElementById('rideList').innerHTML = page.map(r => {
+        const statusLabel = r.status.charAt(0).toUpperCase() + r.status.slice(1);
+        const plate  = r.carplate_number || '—';
+        const model  = r.vehicle_model   || '—';
+        return `
+        <div class="ride-item">
+            <div class="ride-item-info">
+                <div class="ride-ids">
+                    Ride ID: R-${String(r.ride_id).padStart(3,'0')}
+                    <span>Host: ${r.host_name} (ID: ${r.host_id})</span>
+                    <span>${plate} · ${model}</span>
+                </div>
+                <div class="ride-route">${r.pickup_location} → ${r.dropoff_location}</div>
+                <div class="ride-meta">
+                    <span>Pickup: ${r.pickup_time ? r.pickup_time.substring(0,16) : '—'}</span>
+                    <span>RM ${Number(r.price).toFixed(2)}</span>
+                    <span>Seats: ${r.available_seats}</span>
+                    <span>Passengers: ${r.passenger_count ?? 0}</span>
+                </div>
+            </div>
+            <div class="ride-actions">
+                <span class="status-badge status-${statusLabel}">${statusLabel}</span>
+                <button class="btnNormal btn-modify" data-id="${r.ride_id}">Modify</button>
+            </div>
+        </div>`;
+    }).join('');
+
+    document.querySelectorAll('.btn-modify').forEach(btn =>
+        btn.addEventListener('click', () => openModifyView(Number(btn.dataset.id)))
+    );
+}
+
+// ── Pagination ────────────────────────────────────────────────────────────────
+
+document.getElementById('prevPage').addEventListener('click', () => {
+    if (currentPage > 1) { currentPage--; renderRideList(); }
+});
+document.getElementById('nextPage').addEventListener('click', () => {
+    const total = Math.ceil(allRides.length / ROWS_PER_PAGE);
+    if (currentPage < total) { currentPage++; renderRideList(); }
+});
+
+// ── Sort / Filter listeners ───────────────────────────────────────────────────
+
+document.getElementById('sortBy').addEventListener('change', loadRides);
+document.getElementById('filterBy').addEventListener('change', loadRides);
+
+// ── Open Modify View ──────────────────────────────────────────────────────────
+
+async function openModifyView(rideId) {
+    currentRideId = rideId;
+
+    // Fetch full ride row
+    const rows = await queryDB(
+        `SELECT * FROM rides WHERE ride_id = ${rideId}`
+    );
+    if (!rows || rows.length === 0) { showToast('Ride not found.'); return; }
+    const ride = rows[0];
+
+    document.getElementById('rideListView').classList.add('hidden');
+    document.getElementById('modifyRideView').classList.remove('hidden');
+    document.getElementById('modifyRideId').textContent = `R-${String(rideId).padStart(3,'0')}`;
+
+    // Fill fields
+    document.getElementById('modifyFrom').value    = ride.pickup_location  ?? '';
+    document.getElementById('modifyTo').value      = ride.dropoff_location ?? '';
+    document.getElementById('modifyPrice').value   = ride.price            ?? 0;
+    document.getElementById('modifyCapacity').value = ride.available_seats ?? 3;
+    document.getElementById('modifyStatus').value  = ride.status           ?? 'active';
+
+    // Populate date dropdown centred around ride date
+    populateModifyDates(ride.pickup_time);
+
+    // Set time dropdowns
+    populateTimePickers(ride.pickup_time);
+
+    // Load passengers
+    await loadPassengers(rideId);
+}
+
+// ── Date Dropdown for Modify ──────────────────────────────────────────────────
+
+function populateModifyDates(pickupTime) {
+    const sel = document.getElementById('modifyDate');
+    sel.innerHTML = '';
+
+    // Show 60 days centred around today
+    const today    = new Date();
+    const rideDate = pickupTime ? pickupTime.substring(0, 10) : null;
+    let   matched  = false;
+
+    for (let i = -30; i <= 30; i++) {
+        const d      = new Date(today);
+        d.setDate(d.getDate() + i);
+        const iso    = d.toISOString().split('T')[0];
+        const label  = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+        const opt    = new Option(label, iso);
+        if (iso === rideDate) { opt.selected = true; matched = true; }
+        sel.add(opt);
+    }
+
+    // If ride date is outside the window, still add it
+    if (!matched && rideDate) {
+        const opt = new Option(rideDate, rideDate, true, true);
+        sel.insertBefore(opt, sel.firstChild);
+    }
+}
+
+// ── Time Pickers for Modify ───────────────────────────────────────────────────
+
+function populateTimePickers(pickupTime) {
+    const hourSel   = document.getElementById('modifyHour');
+    const minuteSel = document.getElementById('modifyMinute');
+    hourSel.innerHTML   = '';
+    minuteSel.innerHTML = '';
+
+    let rideHour = 8, rideMinute = 0;
+    if (pickupTime && pickupTime.length >= 16) {
+        const parts = pickupTime.substring(11, 16).split(':');
+        rideHour   = Number(parts[0]);
+        rideMinute = Number(parts[1]);
+    }
+
+    for (let h = 0; h < 24; h++) {
+        const label = h === 0 ? '12 AM' : h < 12 ? `${h} AM` : h === 12 ? '12 PM' : `${h - 12} PM`;
+        const opt   = new Option(label, h);
+        if (h === rideHour) opt.selected = true;
+        hourSel.add(opt);
+    }
+
+    [0, 15, 30, 45].forEach(m => {
+        const opt = new Option(String(m).padStart(2,'0'), m);
+        // Find nearest quarter
+        if (Math.abs(m - rideMinute) < 8 ||
+            (m === 45 && rideMinute >= 38) ||
+            (m === 0  && rideMinute < 8)) opt.selected = true;
+        minuteSel.add(opt);
+    });
+}
+
+// ── Load Passengers ───────────────────────────────────────────────────────────
+
+async function loadPassengers(rideId) {
+    const rows = await queryDB(`
+        SELECT rp.participant_id, rp.user_id, rp.status,
+               CONCAT(u.first_name, ' ', u.last_name) AS name
+        FROM ride_participants rp
+        JOIN users u ON u.user_id = rp.user_id
+        WHERE rp.ride_id = ${rideId}
+    `);
+
+    renderPassengers(rows ?? []);
+}
+
+function renderPassengers(passengers) {
+    const container = document.getElementById('passengerList');
+    if (passengers.length === 0) {
+        container.innerHTML = '<p style="color:var(--muted-foreground);font-size:0.85rem;">No passengers yet.</p>';
+        return;
+    }
+    container.innerHTML = passengers.map(p => `
+        <div class="passenger-row" data-participant-id="${p.participant_id}" data-user-id="${p.user_id}">
+            <span>${p.name} (ID: ${p.user_id})</span>
+            <span class="status-badge status-${p.status.charAt(0).toUpperCase()+p.status.slice(1)}">${p.status}</span>
+            <button type="button" class="btnNormal btn-remove-person" data-pid="${p.participant_id}" title="Remove">✕</button>
+        </div>
+    `).join('');
+
+    document.querySelectorAll('.btn-remove-person').forEach(btn =>
+        btn.addEventListener('click', () => removePerson(Number(btn.dataset.pid)))
+    );
+}
+
+// ── Add Person ────────────────────────────────────────────────────────────────
+
+document.getElementById('addPersonBtn').addEventListener('click', async () => {
+    const input  = document.getElementById('newPersonName');
+    const userId = input.value.trim();
+    if (!userId || isNaN(userId)) {
+        showToast('Please enter a valid numeric User ID.');
+        return;
+    }
+    if (currentRideId === null) return;
+
+    // Check user exists
+    const userCheck = await queryDB(
+        `SELECT user_id FROM users WHERE user_id = ${userId}`
+    );
+    if (!userCheck || userCheck.length === 0) {
+        showToast(`User ID ${userId} not found.`);
+        return;
+    }
+
+    // Check not already a participant
+    const existing = await queryDB(`
+        SELECT participant_id FROM ride_participants
+        WHERE ride_id = ${currentRideId} AND user_id = ${userId}
+    `);
+    if (existing && existing.length > 0) {
+        showToast('This user is already in the ride.');
+        return;
+    }
+
+    await queryDB(`
+        INSERT INTO ride_participants (ride_id, user_id, status)
+        VALUES (${currentRideId}, ${userId}, 'active')
+    `);
+
+    input.value = '';
+    showToast('Person added.');
+    await loadPassengers(currentRideId);
+});
+
+// ── Remove Person ─────────────────────────────────────────────────────────────
+
+async function removePerson(participantId) {
+    if (!confirm('Remove this person from the ride?')) return;
+    await queryDB(
+        `DELETE FROM ride_participants WHERE participant_id = ${participantId}`
+    );
+    showToast('Person removed.');
+    await loadPassengers(currentRideId);
+}
+
+// ── Save Ride Changes ─────────────────────────────────────────────────────────
+
+document.getElementById('modifyForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    if (currentRideId === null) return;
+
+    const from     = document.getElementById('modifyFrom').value.trim();
+    const to       = document.getElementById('modifyTo').value.trim();
+    const date     = document.getElementById('modifyDate').value;
+    const hour     = document.getElementById('modifyHour').value;
+    const minute   = document.getElementById('modifyMinute').value;
+    const capacity = document.getElementById('modifyCapacity').value;
+    const price    = document.getElementById('modifyPrice').value;
+    const status   = document.getElementById('modifyStatus').value;
+
+    if (!from || !to) { showToast('From and To fields are required.'); return; }
+
+    const datetime = `${date} ${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}:00`;
+    const esc      = s => String(s).replace(/'/g, "''");
+
+    await queryDB(`
+        UPDATE rides
+        SET pickup_location  = '${esc(from)}',
+            dropoff_location = '${esc(to)}',
+            pickup_time      = '${datetime}',
+            available_seats  = ${capacity},
+            price            = ${price},
+            status           = '${status}'
+        WHERE ride_id = ${currentRideId}
+    `);
+
+    showToast('Ride updated successfully.');
+
+    // Go back to list and refresh
+    document.getElementById('modifyRideView').classList.add('hidden');
+    document.getElementById('rideListView').classList.remove('hidden');
+    await loadRides();
+});
+
+// ── Back to List ──────────────────────────────────────────────────────────────
+
+document.getElementById('backToList').addEventListener('click', () => {
+    currentRideId = null;
+    document.getElementById('modifyRideView').classList.add('hidden');
+    document.getElementById('rideListView').classList.remove('hidden');
+    renderRideList();
+});
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+
 function showToast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('show');
+    t.textContent = msg;
+    t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-renderRides();
+// ── Boot ──────────────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadRides();
+});
