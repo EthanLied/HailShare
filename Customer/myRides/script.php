@@ -226,7 +226,7 @@ async function loadRides(){
         for (const record of ongoingRides) {
             
             // Find participant count
-            const participants = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id}`);
+            const participants = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id} AND status = 'active'`);
             const count = parseInt(participants[0]['COUNT(*)']);
 
             // Create Item
@@ -251,7 +251,7 @@ async function loadRides(){
                         <button class="btnNormal importantBtn" onclick="closeRide('${record.ride_id}')">Close Ride <span class="material-symbols-outlined">close</span></button>
                     </a>
                     <a href="editRide/index.php">
-                        <button class="btnNormal" onclick="document.cookie='ride_id=${record.ride_id}; max-age=2592000; path=/ '">Edit Ride <span class="material-symbols-outlined">edit</span></button>
+                        <button class="btnNormal" onclick="setCookie('ride_id', ${record.ride_id})">Edit Ride <span class="material-symbols-outlined">edit</span></button>
                     </a>
                     <a >
                         <button class="btnNormal" onclick="openChatroom('${record.ride_id}')">Chatroom <span class="material-symbols-outlined">chat</span></button>
@@ -272,7 +272,7 @@ async function loadRides(){
         for (const record of pastRides) {
 
             // Find participant count
-            const participants = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id}`);
+            const participants = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id} AND status = 'active'`);
             const count = parseInt(participants[0]['COUNT(*)']);
 
             // Find the time completed for each ride
@@ -350,7 +350,7 @@ async function loadRides(){
         for (const record of ongoingJoined) {
 
             // Find participant count
-            const participants = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id}`);
+            const participants = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id}  AND status = 'active'`);
             const count = parseInt(participants[0]['COUNT(*)']);
 
             // Create ride item
@@ -388,7 +388,7 @@ async function loadRides(){
         for (const record of pastJoined) {
 
             // Find participant count
-            const participants = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id}`);
+            const participants = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id}  AND status = 'active'`);
             const count = parseInt(participants[0]['COUNT(*)']);
 
             // Find the time completed for each ride
@@ -443,9 +443,6 @@ async function closeRide(rideId){
     // Query all ride participants for intended ride to close
     const participantRows = await queryDB(`SELECT * FROM ride_participants WHERE ride_id = ${rideId}`);
 
-    // If participants, dont do anything
-    if (!participantRows || participantRows.length === 0) return;
-    
     // More than 1 participant, reject cancelation
     if (participantRows.length > 1){
         alert("Sorry! You can't close a ride if someone else has joined in that ride.")

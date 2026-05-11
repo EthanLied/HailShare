@@ -157,7 +157,7 @@ let rideId
 async function loadRide(){
 
     // Grabs rideId cookie
-    rideId = document.cookie.split('; ').find(cookie => cookie.startsWith('ride_id='))?.split('=')[1];
+    rideId = await grabCookie('ride_id')
 
     // Grabs records of all participants who has joined a spcific ride
     const recordsOfMemberJoined = await queryDB(`SELECT * FROM ride_participants WHERE ride_id = '${rideId}' AND status = 'active'`)

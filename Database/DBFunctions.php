@@ -88,6 +88,8 @@ function generateInserts(tableName, data) {
 // Send SQL queries here
 async function queryDB(query) {
 
+    console.log("Query Passed: " + query)
+
     // Provides PHP with query
     const response = await fetch('/hailshare/Database/queryDB.php', {
         method: 'POST',

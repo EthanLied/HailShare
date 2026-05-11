@@ -254,7 +254,10 @@ async function loadRecords() {
     `);
 
     // Reflected in ride participants as well
-    await queryDB(`UPDATE ride_participants SET status = 'completed' WHERE ride_id IN (SELECT ride_id FROM rides WHERE status = 'completed' AND pickup_time <= NOW() - INTERVAL 1 DAY)`);
+    await queryDB(`
+        UPDATE ride_participants SET status = 'completed' 
+        WHERE ride_id IN (SELECT ride_id FROM rides WHERE status = 'completed' AND pickup_time <= NOW() - INTERVAL 1 DAY)
+    `);
     
     // Clear existing records
     while (table.rows.length > 1) {
@@ -277,7 +280,7 @@ async function loadRecords() {
             continue;
         }
 
-        const peopleInside = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id}`);
+        const peopleInside = await queryDB(`SELECT COUNT(*) FROM ride_participants WHERE ride_id = ${record.ride_id}  AND status = 'active'`);
         
         // If full or old ride
         if (peopleInside[0]['COUNT(*)'] == record.available_seats || isBeforeNow(record.pickup_time)){
@@ -578,7 +581,7 @@ async function searchRides(){
 async function joinRide(rideId){
 
     // Grabs userId cookie
-    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+    const userId = await grabCookie('user_id')
 
     // Check if the rideId + userId combo already exists 
     const existingRecord = await queryDB(

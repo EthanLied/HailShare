@@ -31,7 +31,7 @@ function toggleNavbar() {
 async function loadInfo(){
 
     // Grabs userId cookie
-    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+    const userId = await grabCookie('user_id')
 
     // Query userdata
     const userData = await queryDB(`SELECT * FROM users WHERE user_id = ${userId}`);
@@ -55,7 +55,7 @@ async function loadInfo(){
 async function saveNonSensitive(){
 
     // Grabs userId cookie
-    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+    const userId = await grabCookie('user_id')
 
     const firstName = document.querySelector('#firstName input').value;
     const lastName  = document.querySelector('#lastName input').value;
@@ -81,7 +81,7 @@ async function saveNonSensitive(){
 async function saveSensitive(){
 
     // Grabs userId cookie
-    const userId = document.cookie.split('; ').find(cookie => cookie.startsWith('user_id='))?.split('=')[1];
+    const userId = await grabCookie('user_id')
 
     // Grabs stored password
     let storedHash = await queryDB(`

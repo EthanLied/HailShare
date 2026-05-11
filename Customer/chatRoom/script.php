@@ -1,9 +1,8 @@
 <?php header("Content-type: application/javascript");?>
 
-let rideChatId
 let userId
 let senderName
-let lastUpdateTimeStamp
+let lastUpdateTimeStamp = new Date().toLocaleString('sv-SE');
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -37,11 +36,9 @@ function toggleNavbar() {
 }
 
 let chatroomType
-let chatroomTable
-let chatroomMessageTable
-let chatroomMessagesRecordIdName
+let chatroomTableName
+let chatroomIncrementingIdValue
 let chatroomIdValue
-let chatroomId 
 
 async function loadMessages(){
 
@@ -52,31 +49,50 @@ async function loadMessages(){
 
     // Seperate between normal ride chatrooms and support request chatrooms
     chatroomType = await grabCookie('chatroom_type')
-    chatroomTable = (chatroomType === 'ride') ? 'ride_chat_rooms' : 'support_chat_rooms'
-    chatroomMessageTable = (chatroomType === 'ride') ? 'ride_chat_messages' : 'support_chat_messages'
-    chatroomMessagesRecordIdName = (chatroomType === 'ride') ? 'ride_chat_id' : 'support_chat_id'
-    chatroomIdValue = (chatroomType === 'ride') ? chatRoomCookieId : supportChatRoomCookieId
-    chatroomId = (chatroomType === 'ride') ? 'ride_id' : 'support_chat_id'
+
+    if (chatroomType === 'ride'){
+        chatroomTableName = 'ride_chat_rooms'
+        chatroomMessagesTableName = 'ride_chat_messages'
+        chatroomOwnerName = 'guest_user_id'
+        chatroomFkName = 'ride_chat_id'
+        chatroomId = 'ride_id'
+        chatroomIdValue = chatRoomCookieId
+
+        const incrementingIdResult = await queryDB(`
+            SELECT ride_chat_id FROM ride_chat_rooms
+            WHERE ride_id = ${chatroomIdValue}
+        `)
+
+        chatroomIncrementingIdValue = incrementingIdResult[0].ride_chat_id
+    }
+    else{
+        chatroomTableName = 'support_chat_rooms'
+        chatroomMessagesTableName = 'support_chat_messages'
+        chatroomOwnerName = 'customer_user_id'
+        chatroomFkName = 'support_chat_id'
+        chatroomId = 'support_chat_id'
+        chatroomIdValue = supportChatRoomCookieId
+        chatroomIncrementingIdValue = await grabCookie('support_chat_room_id')
+    }
 
     // Displays chatroom ID
     document.getElementById("chatroomId").innerText = `${chatroomIdValue}`
 
     // Hides staff components if needed
     document.querySelectorAll('.staffChat').forEach(el => el.style.display = (chatroomType === 'ride') ? 'none' : 'flex');
+    chatroomExistence = await queryDB(`SELECT * FROM ${chatroomTableName} WHERE ${chatroomId} = ${chatroomIdValue}`)
 
-    chatroomExistence = await queryDB(`SELECT * FROM ${chatroomTable} WHERE ${chatroomId} = ${chatroomIdValue}`)
-
-    // If this is NOT an existing chatroom, add to DB
-    if (chatroomExistence.length != 1){
-        await queryDB(`
-        INSERT INTO ${chatroomTable} (${chatroomId}, status) 
-        VALUES (${chatroomIdValue}, 'active')`)
-        return;
+    // Lock chatroom if closed
+    if (chatroomExistence[0].status !== 'active'){
+        document.getElementById("sendMessageContainer").style.display = 'none'
+        document.getElementById("scrollableContent").style.opacity = 0.5
+        document.getElementById("chatroomId").innerText = `` 
+        document.getElementById("chatroomId").innerHTML = `${chatroomIdValue} <strong>(CLOSED)</strong>` 
     }
 
     // Set staff assigned
     if (chatroomType != 'ride'){
-
+    
         staffQueryName = await queryDB(`
             SELECT first_name from users
             WHERE user_id = ${chatroomExistence[0].staff_user_id}
@@ -92,10 +108,9 @@ async function loadMessages(){
     }
 
     // Grabs all messages of a chatroom
-    rideChatId = chatroomExistence[0].ride_chat_id
     const allMessages = await queryDB(
-        `SELECT * FROM ${chatroomMessageTable}
-        WHERE ${chatroomMessagesRecordIdName} = '${chatroomIdValue}' 
+        `SELECT * FROM ${chatroomMessagesTableName}
+        WHERE ${chatroomFkName} = '${chatroomIncrementingIdValue}' 
         ORDER BY sent_at ASC`
     );
 
@@ -135,7 +150,10 @@ async function sendMessage(){
     }
 
     // Write to DB
-    await queryDB(`INSERT INTO ${chatroomMessageTable} (${chatroomMessagesRecordIdName}, sender_user_id, message_content) VALUES ('${chatroomIdValue}', '${userId}', '${message}')`)
+    await queryDB(`
+        INSERT INTO ${chatroomMessagesTableName} (${chatroomFkName}, sender_user_id, message_content) 
+        VALUES ('${chatroomIncrementingIdValue}', '${userId}', '${message}')
+    `)
 
     appendMessages(message, senderName, "outgoing")
 
@@ -147,7 +165,7 @@ async function sendMessage(){
 
 async function refreshMessages(){
 
-    const newMessages = await queryDB(`SELECT * FROM ${chatroomMessageTable} WHERE sent_at > '${lastUpdateTimeStamp}' AND sender_user_id <> ${userId}`)
+    const newMessages = await queryDB(`SELECT * FROM ${chatroomMessagesTableName} WHERE sent_at > '${lastUpdateTimeStamp}' AND sender_user_id <> ${userId}`)
 
     lastUpdateTimeStamp = new Date().toLocaleString('sv-SE');
 
@@ -156,8 +174,6 @@ async function refreshMessages(){
         const incomingName = nameRecord[0].first_name
         appendMessages(message.message_content, incomingName, "incoming")
     }
-
-    
 
 }
 
@@ -194,4 +210,15 @@ function goBack(){
     else{
         window.location.href = '../customerSupport/index.php'
     }
+}
+
+async function closeRequest(){
+
+    await queryDB(`
+        UPDATE support_chat_rooms
+        SET status = 'closed', ended_at = NOW()
+        WHERE support_chat_id = ${chatroomIdValue}
+    `)
+
+    window.location.href = "../customerSupport/index.php"
 }

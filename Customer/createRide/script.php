@@ -318,17 +318,25 @@ async function submitRide() {
     else {
         alert.innerText = ""
         alert.style.color = "white"
-        const cookies = document.cookie.split('; ');
-        const userID = cookies.find(c => c.startsWith('user_id' + '=')).split('=')[1];
-        const addToRide = `INSERT INTO \`rides\` (\`user_id\`, \`pickup_location\`, \`pickup_lat\`, \`pickup_long\`, \`dropoff_location\`, \`dropoff_lat\`, \`dropoff_long\`, \`price\`, \`pickup_time\`, \`available_seats\`, \`status\`, \`completed_at\`, \`created_at\`, \`updated_at\`) ` +
-        `VALUES ('${userID}', '${from}', '${fromLat}', '${fromLong}', '${to}', '${toLat}', '${toLong}', '${price}', '${datetime}', '${capacity}', 'active', DATE('${datetime}') + INTERVAL 1 DAY, NOW(), NULL)`;
-        await queryDB(addToRide);
+        const userId = await grabCookie('user_id')
+
+        // Add ride record
+        const addToRide = `
+        INSERT INTO \`rides\` (\`user_id\`, \`pickup_location\`, \`pickup_lat\`, \`pickup_long\`, \`dropoff_location\`, \`dropoff_lat\`, \`dropoff_long\`, \`price\`, \`pickup_time\`, \`available_seats\`, \`status\`, \`completed_at\`, \`created_at\`, \`updated_at\`) ` +
+        `VALUES ('${userId}', '${from}', '${fromLat}', '${fromLong}', '${to}', '${toLat}', '${toLong}', '${price}', '${datetime}', '${capacity}', 'active', DATE('${datetime}') + INTERVAL 1 DAY, NOW(), NULL)`;
+        const result = await queryDB(addToRide);
         console.log("Sent DB Query: " + addToRide)
 
         const rideIdResult = await queryDB(`SELECT ride_id FROM rides ORDER BY ride_id DESC LIMIT 1`);
         const rideId = rideIdResult[0].ride_id;
 
-        const addToRideParticipants = `INSERT INTO ride_participants (ride_id, user_id) VALUES ('${rideId}', '${userID}')`;
+        // Add ride chat record
+        const createRideChatroomQuery = await queryDB(`
+            INSERT INTO ride_chat_rooms (ride_id, guest_user_id, status)
+            VALUES (${rideId}, ${userId}, 'active')
+        `)
+
+        const addToRideParticipants = `INSERT INTO ride_participants (ride_id, user_id) VALUES ('${rideId}', '${userId}')`;
         await queryDB(addToRideParticipants);
         console.log("Sent DB Query: " + addToRideParticipants)
 

@@ -164,7 +164,6 @@ async function loadChats(){
 
     // Grabs userId cookie
     const userId = await grabCookie('user_id')
-    console.log(userId)
 
     const supportChatRooms = await queryDB(`
         SELECT * FROM support_chat_rooms

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="mobileDropdown.php">
     <script src="script.php" defer></script>
     <script src="../../Database/DBfunctions.php" defer></script>
+    <script src="../cookieJSInterface.php" defer></script>
     <title>Create Ride</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

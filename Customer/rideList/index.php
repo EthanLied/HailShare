@@ -81,7 +81,7 @@
                 </span>&ensp;Close
             </button>
             
-            <button class="btnNormal" onclick="window.location.href='../myRides/chatRoom/index.php'"><span class="material-symbols-outlined">
+            <button class="btnNormal" onclick="window.location.href='../chatRoom/index.php'"><span class="material-symbols-outlined">
                         chat
                 </span>&ensp;Chat
             </button>

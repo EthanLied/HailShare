@@ -45,7 +45,7 @@
       </div>
 
       <!--Ride List Icon-->
-      <a href="../../rideList/index.php">
+      <a href="../../Customer/rideList/index.php">
         <div class="navbarItem" href="">
           <span class="material-symbols-outlined">list_alt</span>
           <p>Ride List</p>
@@ -53,7 +53,7 @@
       </a>
 
       <!--Create Ride Icon-->
-      <a href="../../createRide/index.php">
+      <a href="../../Customer/createRide/index.php">
         <div class="navbarItem">
           <span class="material-symbols-outlined"> add_circle</span>
           <p>Create Ride</p>
@@ -61,7 +61,7 @@
       </a>
 
       <!--My Rides Icon-->
-      <a href="../../myRides/index.php">
+      <a href="../../Customer/myRides/index.php">
         <div class="navbarItem">
           <span class="material-symbols-outlined"> event_available</span>
           <p>My Rides</p>
@@ -69,7 +69,7 @@
       </a>
 
       <!--Customer Support Icon-->
-      <a href="../../customerSupport/index.php">
+      <a href="../../Customer/customerSupport/index.php">
         <div class="navbarItem">
           <span class="material-symbols-outlined">support_agent</span>
           <p>Customer Support</p>
@@ -77,7 +77,7 @@
       </a>
 
       <!--My Profile Icon-->
-      <a href="../../myProfile/index.php">
+      <a href="../../Customer/myProfile/index.php">
         <div class="navbarItem">
           <span class="material-symbols-outlined"> account_circle</span>
           <p>My Profile</p>
@@ -94,7 +94,7 @@
           </button>
         </a>
         <a>
-          <button class="btnNormal staffChat" id="endConversationBtn">
+          <button class="btnNormal staffChat" id="endConversationBtn" onclick="closeRequest()">
             <span class="material-symbols-outlined"> close </span>End
             Conversation
           </button>
