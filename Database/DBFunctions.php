@@ -1,4 +1,7 @@
-<script>
+<?php
+header("Content-type: application/javascript");
+?>
+
 
     async function saveDB(){
 
@@ -87,7 +90,7 @@
     async function queryDB(query) {
 
         // Provides PHP with query
-        const response = await fetch('queryDB.php', {
+        const response = await fetch('/hailshare/Database/queryDB.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query })
@@ -117,5 +120,3 @@
     }
 
 
-
-</script>

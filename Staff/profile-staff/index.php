@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bcryptjs/dist/bcrypt.min.js"></script>
     <script src="../../Database/DBfunctions.php" defer></script>
     <script src="../profile-staff/script.php" defer></script>
+    <script src="../cookieJSInterface.php" defer></script>
 </head>
 
 <body>
