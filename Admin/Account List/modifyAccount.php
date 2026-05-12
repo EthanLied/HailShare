@@ -7,53 +7,66 @@ if (!isset($_SESSION['admin_logged_in'])) {
     $_SESSION['admin_logged_in'] = true;
 }
 
-// Get account email from URL parameter
-$account_email = $_GET['id'] ?? null;
+// Get account ID from URL parameter
+$account_id = $_GET['id'] ?? null;
 $message = '';
 $message_type = '';
 
-// Sample account database (Replace with actual DB query later)
-$all_accounts = $_SESSION['accounts'] ?? [
-    ['id' => 1, 'name' => 'Alex Chen', 'type' => 'Customer', 'email' => 'alex.c@email.com', 'status' => 'Active', 'phone' => '+1 (555) 987-6543', 'dob' => '15-March-1990'],
-    ['id' => 2, 'name' => 'Maria Garcia', 'type' => 'Driver', 'email' => 'maria.g@email.com', 'status' => 'Active', 'phone' => '+1 (555) 123-4567', 'dob' => '20-July-1988'],
-];
+// ============ INCLUDE DATABASE CONNECTION ============
+require_once '../Database/DBConnection.php';
+$db = new DatabaseConnection();
 
-// Find account by email
+// Fetch account from database
 $current_account = null;
-foreach ($all_accounts as $acc) {
-    if ($acc['email'] === $account_email) {
-        $current_account = $acc;
-        break;
+if ($account_id) {
+    $current_account = $db->getAccountById($account_id);
+    
+    if ($current_account) {
+        // Format data for display
+        $current_account['firstName'] = $current_account['first_name'] ?? '';
+        $current_account['lastName'] = $current_account['last_name'] ?? '';
+        $current_account['type'] = $db->getRoleName($current_account['role_id'] ?? 3);
+        $current_account['status'] = $current_account['account_status'] ?? 'active';
+        $current_account['phone'] = $current_account['phone_number'] ?? '';
+        
+        // Parse DOB
+        if (isset($current_account['date_of_birth']) && $current_account['date_of_birth']) {
+            $dob_parts = explode('-', $current_account['date_of_birth']);
+            $current_account['dobDay'] = str_pad($dob_parts[2] ?? '1', 2, '0', STR_PAD_LEFT);
+            $current_account['dobMonth'] = $dob_parts[1] ?? '01';
+            $current_account['dobYear'] = $dob_parts[0] ?? '1990';
+        }
+        
+        $current_account['securityQuestion'] = $current_account['security_question'] ?? '';
+        $current_account['securityAnswer'] = $current_account['security_question_answer'] ?? '';
+    } else {
+        $message = 'Account not found!';
+        $message_type = 'error';
     }
 }
 
 // If no account found, set default
 if (!$current_account) {
     $current_account = [
-        'name' => 'Unknown Account',
-        'email' => $account_email ?? 'no-email@hailshare.com',
-        'type' => 'Customer',
-        'status' => 'Active',
-        'phone' => '+1 (555) 000-0000',
-        'dob' => '01-January-1990',
+        'user_id' => 0,
+        'first_name' => 'Unknown',
+        'last_name' => 'Account',
         'firstName' => 'Unknown',
         'lastName' => 'Account',
+        'email' => 'no-email@hailshare.com',
+        'type' => 'Customer',
+        'status' => 'active',
+        'phone_number' => '+1 (555) 000-0000',
+        'phone' => '+1 (555) 000-0000',
         'dobDay' => '1',
-        'dobMonth' => 'January',
+        'dobMonth' => '01',
         'dobYear' => '1990',
         'securityQuestion' => 'What is your pet\'s name?',
         'securityAnswer' => ''
     ];
 }
 
-// Parse name if only full name available
-if (!isset($current_account['firstName']) && isset($current_account['name'])) {
-    $name_parts = explode(' ', $current_account['name']);
-    $current_account['firstName'] = $name_parts[0];
-    $current_account['lastName'] = $name_parts[1] ?? 'Account';
-}
-
-// Handle form submission
+// Handle form submission - UPDATE operation
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate input
     $firstName = htmlspecialchars($_POST['firstName'] ?? '');
@@ -61,10 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = htmlspecialchars($_POST['email'] ?? '');
     $phone = htmlspecialchars($_POST['phone'] ?? '');
     $dobDay = htmlspecialchars($_POST['dobDay'] ?? '1');
-    $dobMonth = htmlspecialchars($_POST['dobMonth'] ?? 'January');
+    $dobMonth = htmlspecialchars($_POST['dobMonth'] ?? '01');
     $dobYear = htmlspecialchars($_POST['dobYear'] ?? '1990');
     $accountType = htmlspecialchars($_POST['accountType'] ?? 'Customer');
-    $accountStatus = htmlspecialchars($_POST['accountStatus'] ?? 'Active');
+    $accountStatus = htmlspecialchars($_POST['accountStatus'] ?? 'active');
     $securityQuestion = htmlspecialchars($_POST['securityQuestion'] ?? '');
     $securityAnswer = htmlspecialchars($_POST['securityAnswer'] ?? '');
     $newPassword = $_POST['newPassword'] ?? '';
@@ -81,31 +94,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = 'Password must be at least 8 characters long!';
         $message_type = 'error';
     } else {
-        // Update account (in production, save to database)
-        $updated_account = [
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'name' => $firstName . ' ' . $lastName,
+        // Prepare update data
+        $update_data = [
+            'first_name' => $firstName,
+            'last_name' => $lastName,
             'email' => $email,
-            'phone' => $phone,
-            'dobDay' => $dobDay,
-            'dobMonth' => $dobMonth,
-            'dobYear' => $dobYear,
-            'dob' => $dobDay . '-' . $dobMonth . '-' . $dobYear,
-            'type' => $accountType,
-            'status' => $accountStatus,
-            'securityQuestion' => $securityQuestion,
-            'securityAnswer' => $securityAnswer
+            'phone_number' => $phone,
+            'date_of_birth' => $dobYear . '-' . $dobMonth . '-' . str_pad($dobDay, 2, '0', STR_PAD_LEFT),
+            'role_id' => $db->getRoleId($accountType),
+            'account_status' => $accountStatus,
+            'security_question' => $securityQuestion,
+            'security_question_answer' => $securityAnswer
         ];
         
-        // Merge with original data
-        $current_account = array_merge($current_account, $updated_account);
+        // Add password if provided
+        if (!empty($newPassword)) {
+            $update_data['password_hash'] = password_hash($newPassword, PASSWORD_BCRYPT);
+        }
         
-        $message = 'Account updated successfully!';
-        $message_type = 'success';
-        
-        // Log the update
-        error_log('Account modified: ' . $email . ' at ' . date('Y-m-d H:i:s'));
+        // Update account in database
+        if ($db->updateAccount($account_id, $update_data)) {
+            $message = 'Account updated successfully!';
+            $message_type = 'success';
+            
+            // Update local account data for display
+            $current_account['firstName'] = $firstName;
+            $current_account['lastName'] = $lastName;
+            $current_account['first_name'] = $firstName;
+            $current_account['last_name'] = $lastName;
+            $current_account['email'] = $email;
+            $current_account['phone'] = $phone;
+            $current_account['phone_number'] = $phone;
+            $current_account['dobDay'] = str_pad($dobDay, 2, '0', STR_PAD_LEFT);
+            $current_account['dobMonth'] = $dobMonth;
+            $current_account['dobYear'] = $dobYear;
+            $current_account['type'] = $accountType;
+            $current_account['status'] = $accountStatus;
+            $current_account['securityQuestion'] = $securityQuestion;
+            $current_account['securityAnswer'] = $securityAnswer;
+            
+            error_log('Account modified: ' . $email . ' at ' . date('Y-m-d H:i:s'));
+        } else {
+            $message = 'Failed to update account. Please try again.';
+            $message_type = 'error';
+        }
     }
 }
 ?>
@@ -127,6 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
         <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
     </div>
+    <div style="flex-grow: 1;"></div>
     <a href="AccountList.php">
         <div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Account List</p></div>
     </a>
@@ -164,13 +197,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label>Date of Birth</label>
                     <div style="display: flex; gap: 10px;">
                         <select name="dobDay" id="dobDay" style="width: auto;" required>
-                            <option value="<?php echo $current_account['dobDay'] ?? '1'; ?>"><?php echo $current_account['dobDay'] ?? '1'; ?></option>
+                            <?php for ($d = 1; $d <= 31; $d++): ?>
+                                <option value="<?php echo str_pad($d, 2, '0', STR_PAD_LEFT); ?>" <?php echo ($current_account['dobDay'] ?? '1') == str_pad($d, 2, '0', STR_PAD_LEFT) ? 'selected' : ''; ?>><?php echo str_pad($d, 2, '0', STR_PAD_LEFT); ?></option>
+                            <?php endfor; ?>
                         </select>
                         <select name="dobMonth" id="dobMonth" style="width: auto;" required>
-                            <option value="<?php echo $current_account['dobMonth'] ?? 'January'; ?>"><?php echo $current_account['dobMonth'] ?? 'January'; ?></option>
+                            <?php 
+                                $months = ['01' => 'January', '02' => 'February', '03' => 'March', '04' => 'April', '05' => 'May', '06' => 'June',
+                                          '07' => 'July', '08' => 'August', '09' => 'September', '10' => 'October', '11' => 'November', '12' => 'December'];
+                                foreach ($months as $m => $name): 
+                            ?>
+                                <option value="<?php echo $m; ?>" <?php echo ($current_account['dobMonth'] ?? '01') == $m ? 'selected' : ''; ?>><?php echo $name; ?></option>
+                            <?php endforeach; ?>
                         </select>
                         <select name="dobYear" id="dobYear" style="width: auto;" required>
-                            <option value="<?php echo $current_account['dobYear'] ?? '1990'; ?>"><?php echo $current_account['dobYear'] ?? '1990'; ?></option>
+                            <?php for ($y = 1950; $y <= date('Y'); $y++): ?>
+                                <option value="<?php echo $y; ?>" <?php echo ($current_account['dobYear'] ?? '1990') == $y ? 'selected' : ''; ?>><?php echo $y; ?></option>
+                            <?php endfor; ?>
                         </select>
                     </div>
                 </div>
@@ -178,16 +221,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label>Account Type</label>
                     <select name="accountType" id="accountType" required>
                         <option value="Customer" <?php echo isset($current_account['type']) && $current_account['type'] === 'Customer' ? 'selected' : ''; ?>>Customer</option>
-                        <option value="Driver" <?php echo isset($current_account['type']) && $current_account['type'] === 'Driver' ? 'selected' : ''; ?>>Driver</option>
+                        <option value="Staff" <?php echo isset($current_account['type']) && $current_account['type'] === 'Staff' ? 'selected' : ''; ?>>Staff</option>
                         <option value="Admin" <?php echo isset($current_account['type']) && $current_account['type'] === 'Admin' ? 'selected' : ''; ?>>Admin</option>
                     </select>
                 </div>
                 <div style="margin-top: 15px;">
                     <label>Account Status</label>
                     <select name="accountStatus" id="accountStatus" required>
-                        <option value="Active" <?php echo isset($current_account['status']) && $current_account['status'] === 'Active' ? 'selected' : ''; ?>>Active</option>
-                        <option value="Suspended" <?php echo isset($current_account['status']) && $current_account['status'] === 'Suspended' ? 'selected' : ''; ?>>Suspended</option>
-                        <option value="Pending" <?php echo isset($current_account['status']) && $current_account['status'] === 'Pending' ? 'selected' : ''; ?>>Pending</option>
+                        <option value="active" <?php echo (isset($current_account['status']) && strtolower($current_account['status']) === 'active') ? 'selected' : ''; ?>>Active</option>
+                        <option value="suspended" <?php echo (isset($current_account['status']) && strtolower($current_account['status']) === 'suspended') ? 'selected' : ''; ?>>Suspended</option>
+                        <option value="banned" <?php echo (isset($current_account['status']) && strtolower($current_account['status']) === 'banned') ? 'selected' : ''; ?>>Banned</option>
+                        <option value="deactivated" <?php echo (isset($current_account['status']) && strtolower($current_account['status']) === 'deactivated') ? 'selected' : ''; ?>>Deactivated</option>
                     </select>
                 </div>
             </div>
@@ -221,6 +265,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </div>
+
+<?php
+$db->close();
+?>
 
 </body>
 </html>

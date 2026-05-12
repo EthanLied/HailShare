@@ -84,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
         <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
     </div>
+    <div style="flex-grow: 1;"></div>
     <a href="../Account%20List/AccountList.php">
         <div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Account List</p></div>
     </a>
