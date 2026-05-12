@@ -9,11 +9,10 @@ function toggleNavbar() {
 }
 
 // ── State ────────────────────────────────────────────────────────────────────
-let chatSessions   = [];   // loaded from support_chat_rooms
-let currentChatId  = null; // support_chat_id of open room
-let pollInterval   = null; // for live message polling
+let chatSessions  = [];   // loaded from support_chat_rooms
+let currentChatId = null; // support_chat_id (Number) of open room
+let pollInterval  = null; // for live message polling
 
-// Grab logged-in staff user_id from cookie (same pattern as group leader)
 function getStaffId() {
     const c = document.cookie.split('; ').find(x => x.startsWith('user_id='));
     return c ? c.split('=')[1] : null;
@@ -22,7 +21,6 @@ function getStaffId() {
 // ── Load Inbox ────────────────────────────────────────────────────────────────
 
 async function loadInbox() {
-    // Join with users to get customer name, and staff name where assigned
     const rows = await queryDB(`
         SELECT
             scr.support_chat_id,
@@ -39,7 +37,15 @@ async function loadInbox() {
         ORDER BY scr.started_at DESC
     `);
 
-    chatSessions = rows ?? [];
+    // ── FIX: normalise support_chat_id and staff_user_id to Numbers so
+    //         strict-equality comparisons work everywhere below
+    chatSessions = (rows ?? []).map(r => ({
+        ...r,
+        support_chat_id: Number(r.support_chat_id),
+        staff_user_id:   r.staff_user_id != null ? Number(r.staff_user_id) : null,
+        customer_user_id: Number(r.customer_user_id),
+    }));
+
     renderInbox();
 }
 
@@ -59,14 +65,18 @@ function renderInbox() {
 
     if (d.length === 0) {
         document.getElementById('chatList').innerHTML =
-            '<p style="text-align:center;">No chat sessions found.</p>';
+            '<p style="text-align:center;padding:20px;color:#888;">No chat sessions found.</p>';
         return;
     }
 
     document.getElementById('chatList').innerHTML = d.map(c => {
         const statusLabel = c.status.charAt(0).toUpperCase() + c.status.slice(1);
-        const staffLabel  = c.staff_name ?? 'Unassigned';
-        const endedLabel  = c.ended_at ?? '—';
+        // staff_name is NULL when no staff assigned; handle gracefully
+        const staffLabel  = (c.staff_name && c.staff_name.trim() !== ' ')
+            ? c.staff_name : 'Unassigned';
+        const endedRaw    = c.ended_at;
+        const endedLabel  = endedRaw ? endedRaw.substring(0, 16) : '—';
+
         return `
         <div class="chat-item">
             <div class="chat-item-info">
@@ -77,13 +87,18 @@ function renderInbox() {
                 </div>
                 <div class="chat-meta">
                     <span>Started: ${c.started_at ? c.started_at.substring(0,16) : '—'}</span>
-                    <span>Ended: ${typeof endedLabel === 'string' && endedLabel !== '—' ? endedLabel.substring(0,16) : endedLabel}</span>
+                    <span>Ended: ${endedLabel}</span>
                 </div>
             </div>
             <div class="chat-status">
                 <span class="status-badge status-${statusLabel}">${statusLabel}</span>
-                <button class="btn-open-chat" data-id="${c.support_chat_id}" title="Open chat" aria-label="Open chat SC-${c.support_chat_id}">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <button class="btn-open-chat"
+                        data-id="${c.support_chat_id}"
+                        title="Open chat"
+                        aria-label="Open chat SC-${c.support_chat_id}">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                     </svg>
                 </button>
@@ -91,6 +106,7 @@ function renderInbox() {
         </div>`;
     }).join('');
 
+    // ── FIX: parse data-id as Number so the find() below uses Number === Number
     document.querySelectorAll('.btn-open-chat').forEach(btn =>
         btn.addEventListener('click', () => openChatroom(Number(btn.dataset.id)))
     );
@@ -99,9 +115,11 @@ function renderInbox() {
 // ── Open Chatroom ─────────────────────────────────────────────────────────────
 
 async function openChatroom(id) {
+    // id is already a Number (we cast it above)
     currentChatId = id;
     stopPolling();
 
+    // support_chat_id in chatSessions is also a Number now — strict equality works
     const chat = chatSessions.find(c => c.support_chat_id === id);
     if (!chat) return;
 
@@ -109,17 +127,18 @@ async function openChatroom(id) {
     document.getElementById('chatroomView').classList.remove('hidden');
     document.getElementById('chatroomChatId').textContent =
         `Chat Room – SC-${String(id).padStart(3,'0')}`;
-    document.getElementById('assignedStaff').textContent =
-        chat.staff_name ?? 'Unassigned';
+
+    const staffLabel = (chat.staff_name && chat.staff_name.trim() !== ' ')
+        ? chat.staff_name : 'Unassigned';
+    document.getElementById('assignedStaff').textContent = staffLabel;
 
     const isClosed = (chat.status === 'closed' || chat.status === 'timeout');
-    document.getElementById('msgInput').disabled   = isClosed;
-    document.getElementById('sendBtn').disabled    = isClosed;
+    document.getElementById('msgInput').disabled    = isClosed;
+    document.getElementById('sendBtn').disabled     = isClosed;
     document.getElementById('endConvoBtn').disabled = isClosed;
 
     await loadMessages(id);
 
-    // Poll for new messages every 5s if chat is open/waiting
     if (!isClosed) {
         pollInterval = setInterval(() => loadMessages(id), 5000);
     }
@@ -143,20 +162,19 @@ async function loadMessages(chatId) {
         ORDER BY scm.sent_at ASC
     `);
 
-    const chat      = chatSessions.find(c => c.support_chat_id === chatId);
-    const staffId   = chat?.staff_user_id ? Number(chat.staff_user_id) : null;
-    const messages  = rows ?? [];
+    const chat     = chatSessions.find(c => c.support_chat_id === chatId);
+    const staffId  = chat?.staff_user_id ?? null;   // already a Number or null
+    const messages = rows ?? [];
 
-    const area = document.getElementById('messagesArea');
-    const wasAtBottom =
-        area.scrollHeight - area.clientHeight <= area.scrollTop + 5;
+    const area        = document.getElementById('messagesArea');
+    const wasAtBottom = area.scrollHeight - area.clientHeight <= area.scrollTop + 5;
 
     area.innerHTML = messages.map(m => {
-        const isStaff  = staffId && Number(m.sender_user_id) === staffId;
+        const isStaff   = staffId !== null && Number(m.sender_user_id) === staffId;
         const sideClass = isStaff ? 'staff' : 'customer';
         return `
         <div class="msg ${sideClass}">
-            <span class="msg-sender">${m.sender_name}</span>
+            <span class="msg-sender">${escapeHtml(m.sender_name)}</span>
             <div class="msg-bubble">${escapeHtml(m.message_content)}</div>
             <span class="msg-meta">${m.sent_at ? m.sent_at.substring(11,16) : ''}</span>
         </div>`;
@@ -176,8 +194,8 @@ function escapeHtml(str) {
 // ── Send Message ──────────────────────────────────────────────────────────────
 
 async function sendMessage() {
-    const input  = document.getElementById('msgInput');
-    const text   = input.value.trim();
+    const input   = document.getElementById('msgInput');
+    const text    = input.value.trim();
     if (!text || currentChatId === null) return;
 
     const staffId = getStaffId();
@@ -202,21 +220,19 @@ document.getElementById('takeOverBtn').addEventListener('click', async () => {
 
     await queryDB(`
         UPDATE support_chat_rooms
-        SET staff_user_id  = ${staffId},
-            status         = 'active',
-            connected_at   = NOW()
+        SET staff_user_id = ${staffId},
+            status        = 'active',
+            connected_at  = NOW()
         WHERE support_chat_id = ${currentChatId}
     `);
 
-    // Update local cache
     const chat = chatSessions.find(c => c.support_chat_id === currentChatId);
     if (chat) {
-        // Re-fetch name for display
         const staffRow = await queryDB(
             `SELECT CONCAT(first_name, ' ', last_name) AS name FROM users WHERE user_id = ${staffId}`
         );
         const staffName = staffRow?.[0]?.name ?? 'Staff';
-        chat.staff_user_id = staffId;
+        chat.staff_user_id = Number(staffId);
         chat.staff_name    = staffName;
         chat.status        = 'active';
         document.getElementById('assignedStaff').textContent = staffName;
@@ -226,7 +242,6 @@ document.getElementById('takeOverBtn').addEventListener('click', async () => {
     document.getElementById('sendBtn').disabled     = false;
     document.getElementById('endConvoBtn').disabled = false;
 
-    // Start polling if not already
     if (!pollInterval) {
         pollInterval = setInterval(() => loadMessages(currentChatId), 5000);
     }
@@ -264,7 +279,7 @@ document.getElementById('backToInbox').addEventListener('click', async () => {
     currentChatId = null;
     document.getElementById('chatroomView').classList.add('hidden');
     document.getElementById('inboxView').classList.remove('hidden');
-    await loadInbox(); // refresh from DB
+    await loadInbox();
 });
 
 // ── Polling helpers ───────────────────────────────────────────────────────────
@@ -280,7 +295,7 @@ document.getElementById('msgInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') sendMessage();
 });
 
-// ── Sort / Filter listeners ───────────────────────────────────────────────────
+// ── Sort / Filter ─────────────────────────────────────────────────────────────
 
 document.getElementById('sortChat').addEventListener('change', renderInbox);
 document.getElementById('filterChat').addEventListener('change', renderInbox);
