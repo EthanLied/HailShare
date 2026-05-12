@@ -11,6 +11,11 @@ function setSessionValue(string $key, mixed $value): void {
     $_SESSION[$key] = $value;
 }
 
+function clearSession() {
+    session_unset();
+    session_destroy();
+}
+
 $key  = $_GET['key']   ?? '';
 $mode = $_GET['mode']  ?? '';
 $value = $_GET['value'] ?? null;
@@ -52,6 +57,10 @@ if ($mode === 'read') {
 } elseif ($mode === 'dump'){
     echo json_encode(['session' => $_SESSION]);
 } 
+
+  elseif ($mode === 'clear'){
+    clearSession();
+  }
 
 else {
     echo json_encode(['error' => "Unknown mode '$mode'. Use mode=read or mode=write"]);

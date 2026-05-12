@@ -173,11 +173,14 @@ async function deleteAccount(){
     `)
 
 
+    await clearCookies();
     window.location.href = '../../Admin/Homepage/index.php'
 
 }
 
-function logout(){
+async function logout(){
+
+    await clearCookies();
     window.location.href = '../../Admin/Homepage/index.php'
 }
 

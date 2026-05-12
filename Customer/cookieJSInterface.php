@@ -11,3 +11,7 @@ async function setCookie(key, value) {
     const data = await res.json();
     return data.success ?? false;
 }
+
+async function clearCookies(){
+    const res = await fetch(`/hailshare/Customer/cookieInterface.php?mode=clear`);
+}
