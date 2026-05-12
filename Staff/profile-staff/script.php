@@ -1,13 +1,16 @@
 <?php
 header("Content-type: text/javascript");
 
-// Read the server-side cookie in PHP and embed it directly into the JS.
-$userId = isset($_COOKIE['user_id']) ? intval($_COOKIE['user_id']) : 0;
+// Resume the existing session so $_SESSION is populated
+session_start();
+
+// Read user_id from session (set at login) and embed into JS
+$userId = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : 0;
 ?>
 
 // ── profile-staff/script.php ────────────────────────────────────────────────
 
-// user_id injected server-side by PHP — no JS cookie parsing needed
+// user_id injected server-side from $_SESSION — persists across page loads
 const STAFF_USER_ID = <?php echo $userId; ?>;
 
 function toggleNavbar() {
@@ -48,10 +51,10 @@ async function loadProfile() {
 
     const u = rows[0];
 
-    document.getElementById('firstName').value = u.first_name    ?? '';
-    document.getElementById('lastName').value  = u.last_name     ?? '';
-    document.getElementById('email').value     = u.email         ?? '';
-    document.getElementById('phone').value     = u.phone_number  ?? '';
+    document.getElementById('firstName').value = u.first_name   ?? '';
+    document.getElementById('lastName').value  = u.last_name    ?? '';
+    document.getElementById('email').value     = u.email        ?? '';
+    document.getElementById('phone').value     = u.phone_number ?? '';
 
     if (u.date_of_birth) {
         const [year, month, day] = u.date_of_birth.split('-').map(Number);
@@ -60,7 +63,6 @@ async function loadProfile() {
         document.getElementById('dobYear').value  = year;
     }
 
-    // Pre-select matching security question option
     const sqSelect = document.getElementById('securityQuestion');
     for (const opt of sqSelect.options) {
         if (opt.text === u.security_question) {
