@@ -1,18 +1,19 @@
-<?php header("Content-type: text/javascript"); ?>
+<?php
+header("Content-type: text/javascript");
+
+// Read the server-side cookie in PHP and embed it directly into the JS.
+$userId = isset($_COOKIE['user_id']) ? intval($_COOKIE['user_id']) : 0;
+?>
 
 // ── profile-staff/script.php ────────────────────────────────────────────────
+
+// user_id injected server-side by PHP — no JS cookie parsing needed
+const STAFF_USER_ID = <?php echo $userId; ?>;
 
 function toggleNavbar() {
     document.getElementById('navbar').classList.toggle('expand');
     document.getElementById('content').classList.toggle('expand');
     document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand'));
-}
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-function getUserId() {
-    const c = document.cookie.split('; ').find(x => x.startsWith('user_id='));
-    return c ? c.split('=')[1] : null;
 }
 
 // ── Populate DOB dropdowns ────────────────────────────────────────────────────
@@ -37,20 +38,21 @@ function populateDOB() {
 // ── Load Profile from DB ──────────────────────────────────────────────────────
 
 async function loadProfile() {
-    const userId = getUserId();
-    if (!userId) { showToast('Not logged in.'); return; }
+    if (!STAFF_USER_ID) {
+        showToast('Not logged in.');
+        return;
+    }
 
-    const rows = await queryDB(`SELECT * FROM users WHERE user_id = ${userId}`);
+    const rows = await queryDB(`SELECT * FROM users WHERE user_id = ${STAFF_USER_ID}`);
     if (!rows || rows.length === 0) { showToast('User not found.'); return; }
 
     const u = rows[0];
 
-    document.getElementById('firstName').value = u.first_name ?? '';
-    document.getElementById('lastName').value  = u.last_name  ?? '';
-    document.getElementById('email').value     = u.email      ?? '';
-    document.getElementById('phone').value     = u.phone_number ?? '';
+    document.getElementById('firstName').value = u.first_name    ?? '';
+    document.getElementById('lastName').value  = u.last_name     ?? '';
+    document.getElementById('email').value     = u.email         ?? '';
+    document.getElementById('phone').value     = u.phone_number  ?? '';
 
-    // Parse DOB: stored as "YYYY-MM-DD"
     if (u.date_of_birth) {
         const [year, month, day] = u.date_of_birth.split('-').map(Number);
         document.getElementById('dobDay').value   = day;
@@ -58,7 +60,7 @@ async function loadProfile() {
         document.getElementById('dobYear').value  = year;
     }
 
-    // Pre-select security question if it matches one of the options
+    // Pre-select matching security question option
     const sqSelect = document.getElementById('securityQuestion');
     for (const opt of sqSelect.options) {
         if (opt.text === u.security_question) {
@@ -73,8 +75,7 @@ async function loadProfile() {
 document.getElementById('personalForm').addEventListener('submit', async e => {
     e.preventDefault();
 
-    const userId = getUserId();
-    if (!userId) { showToast('Not logged in.'); return; }
+    if (!STAFF_USER_ID) { showToast('Not logged in.'); return; }
 
     const first = document.getElementById('firstName').value.trim();
     const last  = document.getElementById('lastName').value.trim();
@@ -104,7 +105,7 @@ document.getElementById('personalForm').addEventListener('submit', async e => {
             email         = '${esc(email)}',
             phone_number  = '${esc(phone)}',
             date_of_birth = '${dob}'
-        WHERE user_id = ${userId}
+        WHERE user_id = ${STAFF_USER_ID}
     `);
 
     showToast('Personal information updated successfully.');
@@ -115,8 +116,7 @@ document.getElementById('personalForm').addEventListener('submit', async e => {
 document.getElementById('securityForm').addEventListener('submit', async e => {
     e.preventDefault();
 
-    const userId    = getUserId();
-    if (!userId) { showToast('Not logged in.'); return; }
+    if (!STAFF_USER_ID) { showToast('Not logged in.'); return; }
 
     const currentPw = document.getElementById('currentPassword').value;
     const newPw     = document.getElementById('newPassword').value;
@@ -128,9 +128,8 @@ document.getElementById('securityForm').addEventListener('submit', async e => {
         return;
     }
 
-    // Fetch the stored hash from DB
     const rows = await queryDB(
-        `SELECT password_hash FROM users WHERE user_id = ${userId}`
+        `SELECT password_hash FROM users WHERE user_id = ${STAFF_USER_ID}`
     );
     if (!rows || rows.length === 0) { showToast('User not found.'); return; }
 
@@ -167,7 +166,7 @@ document.getElementById('securityForm').addEventListener('submit', async e => {
     await queryDB(`
         UPDATE users
         SET ${fields.join(', ')}
-        WHERE user_id = ${userId}
+        WHERE user_id = ${STAFF_USER_ID}
     `);
 
     document.getElementById('currentPassword').value = '';
@@ -191,8 +190,6 @@ document.querySelectorAll('.toggle-pw').forEach(btn => {
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
     if (confirm('Are you sure you want to logout?')) {
-        // Clear the user_id cookie
-        document.cookie = 'user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         showToast('Logging out…');
         setTimeout(() => { window.location.href = '../index.php'; }, 1200);
     }
