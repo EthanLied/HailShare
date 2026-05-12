@@ -457,6 +457,13 @@ async function closeRide(rideId){
     // Changes ride participant status also
     await queryDB(`UPDATE ride_participants SET status = 'completed' WHERE ride_id = ${rideId}`);
     location.reload();
+
+    // Close it's related chatroom also
+    await queryDB(`
+        UPDATE ride_chat_rooms
+        SET status = 'closed'
+        WHERE ride_id = ${rideId}
+    `)
 }
 
 async function leaveRide(rideId, userId){
