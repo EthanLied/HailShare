@@ -1,6 +1,15 @@
-<?php header("Content-type: text/javascript"); ?>
+<?php
+header("Content-type: text/javascript");
 
-// ── ride-list-staff/script.php ──────────────────────────────────────────────
+session_start();
+
+$userId = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : 0;
+?>
+
+// ── live-chat-staff/script.php ──────────────────────────────────────────────
+
+// user_id injected server-side from $_SESSION — persists across page loads
+const STAFF_USER_ID = <?php echo $userId; ?>;
 
 function toggleNavbar() {
     document.getElementById('navbar').classList.toggle('expand');
@@ -8,344 +17,284 @@ function toggleNavbar() {
     document.querySelectorAll('.navbarItem').forEach(i => i.classList.toggle('expand'));
 }
 
-// ── State ─────────────────────────────────────────────────────────────────────
-const ROWS_PER_PAGE = 10;
-let allRides      = [];
-let currentPage   = 1;
-let currentRideId = null;
+// ── State ────────────────────────────────────────────────────────────────────
+let chatSessions  = [];   // loaded from support_chat_rooms
+let currentChatId = null; // support_chat_id (Number) of open room
+let pollInterval  = null; // for live message polling
 
-// ── Load Rides from DB ────────────────────────────────────────────────────────
+// ── Load Inbox ────────────────────────────────────────────────────────────────
 
-async function loadRides() {
-    const sortVal   = document.getElementById('sortBy').value;
-    const filterVal = document.getElementById('filterBy').value;
-
-    let orderClause = 'r.pickup_time DESC';
-    if (sortVal === 'date-asc')   orderClause = 'r.pickup_time ASC';
-    if (sortVal === 'date-desc')  orderClause = 'r.pickup_time DESC';
-    if (sortVal === 'price-asc')  orderClause = 'r.price ASC';
-    if (sortVal === 'price-desc') orderClause = 'r.price DESC';
-    if (sortVal === 'people-asc') orderClause = 'r.available_seats ASC';
-
-    const whereClause = filterVal ? `WHERE r.status = '${filterVal}'` : '';
-
+async function loadInbox() {
     const rows = await queryDB(`
         SELECT
-            r.ride_id,
-            r.pickup_location,
-            r.dropoff_location,
-            r.pickup_time,
-            r.price,
-            r.available_seats,
-            r.status,
-            r.carplate_number,
-            r.vehicle_model,
-            CONCAT(u.first_name, ' ', u.last_name) AS host_name,
-            r.user_id AS host_id,
-            (SELECT COUNT(*) FROM ride_participants rp
-             WHERE rp.ride_id = r.ride_id AND rp.status = 'active') AS passenger_count
-        FROM rides r
-        JOIN users u ON u.user_id = r.user_id
-        ${whereClause}
-        ORDER BY ${orderClause}
+            scr.support_chat_id,
+            scr.customer_user_id,
+            CONCAT(cu.first_name, ' ', cu.last_name) AS customer_name,
+            scr.staff_user_id,
+            CONCAT(su.first_name, ' ', su.last_name) AS staff_name,
+            scr.status,
+            scr.started_at,
+            scr.ended_at
+        FROM support_chat_rooms scr
+        JOIN users cu ON cu.user_id = scr.customer_user_id
+        LEFT JOIN users su ON su.user_id = scr.staff_user_id
+        ORDER BY scr.started_at DESC
     `);
 
-    allRides    = rows ?? [];
-    currentPage = 1;
-    renderRideList();
+    // Normalise IDs to Numbers so strict-equality comparisons work everywhere
+    chatSessions = (rows ?? []).map(r => ({
+        ...r,
+        support_chat_id:  Number(r.support_chat_id),
+        staff_user_id:    r.staff_user_id != null ? Number(r.staff_user_id) : null,
+        customer_user_id: Number(r.customer_user_id),
+    }));
+
+    renderInbox();
 }
 
-// ── Render Ride List ──────────────────────────────────────────────────────────
+// ── Render Inbox ──────────────────────────────────────────────────────────────
 
-function renderRideList() {
-    const start = (currentPage - 1) * ROWS_PER_PAGE;
-    const page  = allRides.slice(start, start + ROWS_PER_PAGE);
-    const total = Math.max(1, Math.ceil(allRides.length / ROWS_PER_PAGE));
+function renderInbox() {
+    const sortVal   = document.getElementById('sortChat').value;
+    const filterVal = document.getElementById('filterChat').value;
 
-    document.getElementById('pageInfo').textContent = `Page ${currentPage} / ${total}`;
-    document.getElementById('prevPage').disabled    = currentPage <= 1;
-    document.getElementById('nextPage').disabled    = currentPage >= total;
+    let d = filterVal
+        ? chatSessions.filter(c => c.status === filterVal)
+        : [...chatSessions];
 
-    if (allRides.length === 0) {
-        document.getElementById('rideList').innerHTML =
-            '<p style="text-align:center;padding:20px;color:#888;">No rides found.</p>';
+    if (sortVal === 'newest') d.sort((a, b) => b.started_at.localeCompare(a.started_at));
+    if (sortVal === 'oldest') d.sort((a, b) => a.started_at.localeCompare(b.started_at));
+    if (sortVal === 'status') d.sort((a, b) => a.status.localeCompare(b.status));
+
+    if (d.length === 0) {
+        document.getElementById('chatList').innerHTML =
+            '<p style="text-align:center;padding:20px;color:#888;">No chat sessions found.</p>';
         return;
     }
 
-    document.getElementById('rideList').innerHTML = page.map(r => {
-        const statusLabel = r.status.charAt(0).toUpperCase() + r.status.slice(1);
-        const plate = r.carplate_number || '—';
-        const model = r.vehicle_model   || '—';
+    document.getElementById('chatList').innerHTML = d.map(c => {
+        const statusLabel = c.status.charAt(0).toUpperCase() + c.status.slice(1);
+        const staffLabel  = (c.staff_name && c.staff_name.trim() !== ' ')
+            ? c.staff_name : 'Unassigned';
+        const endedLabel  = c.ended_at ? c.ended_at.substring(0, 16) : '—';
 
         return `
-        <div class="ride-card">
-            <div class="ride-route">
-                <div class="from">
-                    Ride ID: R-${String(r.ride_id).padStart(3,'0')}
-                    &nbsp; Host: ${r.host_name} (ID: ${r.host_id})
-                    &nbsp; ${plate} &middot; ${model}
+        <div class="chat-item">
+            <div class="chat-item-info">
+                <div class="chat-ids">
+                    Support Chat ID: SC-${String(c.support_chat_id).padStart(3,'0')}
+                    <span>Customer: ${c.customer_name} (ID: ${c.customer_user_id})</span>
+                    <span>Staff: ${staffLabel}</span>
                 </div>
-                <div class="to">${r.pickup_location} → ${r.dropoff_location}</div>
-                <div class="in-ride-row">
-                    <span class="in-ride-label">Info:</span>
-                    <span class="passenger-list" style="font-size:12px;color:#555;">
-                        Pickup: ${r.pickup_time ? r.pickup_time.substring(0,16) : '—'}
-                        &nbsp;&middot;&nbsp; RM ${Number(r.price).toFixed(2)}
-                        &nbsp;&middot;&nbsp; Seats: ${r.available_seats}
-                        &nbsp;&middot;&nbsp; Passengers: ${r.passenger_count ?? 0}
-                    </span>
+                <div class="chat-meta">
+                    <span>Started: ${c.started_at ? c.started_at.substring(0,16) : '—'}</span>
+                    <span>Ended: ${endedLabel}</span>
                 </div>
             </div>
-            <div class="ride-meta">
+            <div class="chat-status">
                 <span class="status-badge status-${statusLabel}">${statusLabel}</span>
-                <button class="btnNormal btn-modify"
-                        data-id="${r.ride_id}"
-                        title="Modify ride"
-                        style="padding:0 14px;height:32px;font-size:13px;cursor:pointer;">
-                    Modify
+                <button class="btn-open-chat"
+                        data-id="${c.support_chat_id}"
+                        title="Open chat"
+                        aria-label="Open chat SC-${c.support_chat_id}">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
                 </button>
             </div>
         </div>`;
     }).join('');
 
-    document.querySelectorAll('.btn-modify').forEach(btn =>
-        btn.addEventListener('click', () => openModifyView(Number(btn.dataset.id)))
+    document.querySelectorAll('.btn-open-chat').forEach(btn =>
+        btn.addEventListener('click', () => openChatroom(Number(btn.dataset.id)))
     );
 }
 
-// ── Pagination ────────────────────────────────────────────────────────────────
+// ── Open Chatroom ─────────────────────────────────────────────────────────────
 
-document.getElementById('prevPage').addEventListener('click', () => {
-    if (currentPage > 1) { currentPage--; renderRideList(); }
-});
-document.getElementById('nextPage').addEventListener('click', () => {
-    const total = Math.ceil(allRides.length / ROWS_PER_PAGE);
-    if (currentPage < total) { currentPage++; renderRideList(); }
-});
+async function openChatroom(id) {
+    currentChatId = id;
+    stopPolling();
 
-document.getElementById('sortBy').addEventListener('change', loadRides);
-document.getElementById('filterBy').addEventListener('change', loadRides);
+    const chat = chatSessions.find(c => c.support_chat_id === id);
+    if (!chat) return;
 
-// ── Open Modify View ──────────────────────────────────────────────────────────
+    document.getElementById('inboxView').classList.add('hidden');
+    document.getElementById('chatroomView').classList.remove('hidden');
+    document.getElementById('chatroomChatId').textContent =
+        `Chat Room – SC-${String(id).padStart(3,'00')}`;
 
-async function openModifyView(rideId) {
-    currentRideId = rideId;
+    const staffLabel = (chat.staff_name && chat.staff_name.trim() !== ' ')
+        ? chat.staff_name : 'Unassigned';
+    document.getElementById('assignedStaff').textContent = staffLabel;
 
-    const rows = await queryDB(`SELECT * FROM rides WHERE ride_id = ${rideId}`);
-    if (!rows || rows.length === 0) { showToast('Ride not found.'); return; }
-    const ride = rows[0];
+    const isClosed = (chat.status === 'closed' || chat.status === 'timeout');
+    document.getElementById('msgInput').disabled    = isClosed;
+    document.getElementById('sendBtn').disabled     = isClosed;
+    document.getElementById('endConvoBtn').disabled = isClosed;
 
-    document.getElementById('rideListView').classList.add('hidden');
-    document.getElementById('modifyRideView').classList.remove('hidden');
-    document.getElementById('modifyRideId').textContent =
-        `R-${String(rideId).padStart(3,'0')}`;
+    await loadMessages(id);
 
-    document.getElementById('modifyFrom').value     = ride.pickup_location  ?? '';
-    document.getElementById('modifyTo').value       = ride.dropoff_location ?? '';
-    document.getElementById('modifyPrice').value    = ride.price            ?? 0;
-    document.getElementById('modifyCapacity').value = ride.available_seats  ?? 3;
-    document.getElementById('modifyStatus').value   = ride.status           ?? 'active';
-
-    populateModifyDates(ride.pickup_time);
-    populateTimePickers(ride.pickup_time);
-    await loadPassengers(rideId);
-}
-
-// ── Date Dropdown ─────────────────────────────────────────────────────────────
-
-function populateModifyDates(pickupTime) {
-    const sel      = document.getElementById('modifyDate');
-    sel.innerHTML  = '';
-    const today    = new Date();
-    const rideDate = pickupTime ? pickupTime.substring(0, 10) : null;
-    let   matched  = false;
-
-    for (let i = -30; i <= 30; i++) {
-        const d     = new Date(today);
-        d.setDate(d.getDate() + i);
-        const iso   = d.toISOString().split('T')[0];
-        const label = d.toLocaleDateString('en-US',
-            { weekday: 'short', month: 'short', day: 'numeric' });
-        const opt   = new Option(label, iso);
-        if (iso === rideDate) { opt.selected = true; matched = true; }
-        sel.add(opt);
-    }
-
-    if (!matched && rideDate) {
-        const opt = new Option(rideDate, rideDate, true, true);
-        sel.insertBefore(opt, sel.firstChild);
+    if (!isClosed) {
+        pollInterval = setInterval(() => loadMessages(id), 5000);
     }
 }
 
-// ── Time Pickers ──────────────────────────────────────────────────────────────
+// ── Load & Render Messages ────────────────────────────────────────────────────
 
-function populateTimePickers(pickupTime) {
-    const hourSel   = document.getElementById('modifyHour');
-    const minuteSel = document.getElementById('modifyMinute');
-    hourSel.innerHTML   = '';
-    minuteSel.innerHTML = '';
-
-    let rideHour = 8, rideMinute = 0;
-    if (pickupTime && pickupTime.length >= 16) {
-        const parts = pickupTime.substring(11, 16).split(':');
-        rideHour   = Number(parts[0]);
-        rideMinute = Number(parts[1]);
-    }
-
-    for (let h = 0; h < 24; h++) {
-        const label = h === 0 ? '12 AM'
-                    : h < 12  ? `${h} AM`
-                    : h === 12 ? '12 PM'
-                    : `${h - 12} PM`;
-        const opt = new Option(label, h);
-        if (h === rideHour) opt.selected = true;
-        hourSel.add(opt);
-    }
-
-    [0, 15, 30, 45].forEach(m => {
-        const opt = new Option(String(m).padStart(2,'0'), m);
-        if (m === 0  && rideMinute < 8)               opt.selected = true;
-        if (m === 15 && rideMinute >= 8  && rideMinute < 23) opt.selected = true;
-        if (m === 30 && rideMinute >= 23 && rideMinute < 38) opt.selected = true;
-        if (m === 45 && rideMinute >= 38)             opt.selected = true;
-        minuteSel.add(opt);
-    });
-}
-
-// ── Load Passengers ───────────────────────────────────────────────────────────
-
-async function loadPassengers(rideId) {
+async function loadMessages(chatId) {
     const rows = await queryDB(`
-        SELECT rp.participant_id, rp.user_id, rp.status,
-               CONCAT(u.first_name, ' ', u.last_name) AS name
-        FROM ride_participants rp
-        JOIN users u ON u.user_id = rp.user_id
-        WHERE rp.ride_id = ${rideId}
+        SELECT
+            scm.message_id,
+            scm.sender_user_id,
+            CONCAT(u.first_name, ' ', u.last_name) AS sender_name,
+            scm.message_content,
+            scm.sent_at,
+            scr.staff_user_id
+        FROM support_chat_messages scm
+        JOIN users u ON u.user_id = scm.sender_user_id
+        JOIN support_chat_rooms scr ON scr.support_chat_id = scm.support_chat_id
+        WHERE scm.support_chat_id = ${chatId}
+        ORDER BY scm.sent_at ASC
     `);
-    renderPassengers(rows ?? []);
-}
 
-function renderPassengers(passengers) {
-    const container = document.getElementById('passengerList');
-    if (passengers.length === 0) {
-        container.innerHTML =
-            '<p style="padding:10px 12px;color:#888;font-size:13px;">No passengers yet.</p>';
-        return;
-    }
-    container.innerHTML = passengers.map(p => {
-        const sLabel = p.status.charAt(0).toUpperCase() + p.status.slice(1);
+    const chat     = chatSessions.find(c => c.support_chat_id === chatId);
+    const staffId  = chat?.staff_user_id ?? null;
+    const messages = rows ?? [];
+
+    const area        = document.getElementById('messagesArea');
+    const wasAtBottom = area.scrollHeight - area.clientHeight <= area.scrollTop + 5;
+
+    area.innerHTML = messages.map(m => {
+        const isStaff   = staffId !== null && Number(m.sender_user_id) === staffId;
+        const sideClass = isStaff ? 'staff' : 'customer';
         return `
-        <div class="passenger-row">
-            <span class="pax-name">${p.name} (ID: ${p.user_id})</span>
-            <div class="pax-actions">
-                <span class="status-badge status-${sLabel}">${sLabel}</span>
-                <button type="button" class="btnNormal btn-remove-person"
-                        data-pid="${p.participant_id}"
-                        title="Remove"
-                        style="padding:0 10px;height:28px;font-size:12px;cursor:pointer;">✕ Remove</button>
-            </div>
+        <div class="msg ${sideClass}">
+            <span class="msg-sender">${escapeHtml(m.sender_name)}</span>
+            <div class="msg-bubble">${escapeHtml(m.message_content)}</div>
+            <span class="msg-meta">${m.sent_at ? m.sent_at.substring(11,16) : ''}</span>
         </div>`;
     }).join('');
 
-    document.querySelectorAll('.btn-remove-person').forEach(btn =>
-        btn.addEventListener('click', () => removePerson(Number(btn.dataset.pid)))
-    );
+    if (wasAtBottom) area.scrollTop = area.scrollHeight;
 }
 
-// ── Add Person ────────────────────────────────────────────────────────────────
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
 
-document.getElementById('addPersonBtn').addEventListener('click', async () => {
-    const input  = document.getElementById('newPersonName');
-    const userId = input.value.trim();
-    if (!userId || isNaN(userId)) {
-        showToast('Please enter a valid numeric User ID.');
-        return;
-    }
-    if (currentRideId === null) return;
+// ── Send Message ──────────────────────────────────────────────────────────────
 
-    const userCheck = await queryDB(
-        `SELECT user_id FROM users WHERE user_id = ${userId}`
-    );
-    if (!userCheck || userCheck.length === 0) {
-        showToast(`User ID ${userId} not found.`);
-        return;
-    }
+async function sendMessage() {
+    const input = document.getElementById('msgInput');
+    const text  = input.value.trim();
+    if (!text || currentChatId === null) return;
 
-    const existing = await queryDB(`
-        SELECT participant_id FROM ride_participants
-        WHERE ride_id = ${currentRideId} AND user_id = ${userId}
-    `);
-    if (existing && existing.length > 0) {
-        showToast('This user is already in the ride.');
-        return;
-    }
+    if (!STAFF_USER_ID) { showToast('Not logged in.'); return; }
 
+    const safe = text.replace(/'/g, "''");
     await queryDB(`
-        INSERT INTO ride_participants (ride_id, user_id, status)
-        VALUES (${currentRideId}, ${userId}, 'active')
+        INSERT INTO support_chat_messages (support_chat_id, sender_user_id, message_content)
+        VALUES (${currentChatId}, ${STAFF_USER_ID}, '${safe}')
     `);
 
     input.value = '';
-    showToast('Person added.');
-    await loadPassengers(currentRideId);
-});
-
-// ── Remove Person ─────────────────────────────────────────────────────────────
-
-async function removePerson(participantId) {
-    if (!confirm('Remove this person from the ride?')) return;
-    await queryDB(
-        `DELETE FROM ride_participants WHERE participant_id = ${participantId}`
-    );
-    showToast('Person removed.');
-    await loadPassengers(currentRideId);
+    await loadMessages(currentChatId);
 }
 
-// ── Save Changes ──────────────────────────────────────────────────────────────
+// ── Take Over ─────────────────────────────────────────────────────────────────
 
-document.getElementById('modifyForm').addEventListener('submit', async e => {
-    e.preventDefault();
-    if (currentRideId === null) return;
-
-    const from     = document.getElementById('modifyFrom').value.trim();
-    const to       = document.getElementById('modifyTo').value.trim();
-    const date     = document.getElementById('modifyDate').value;
-    const hour     = document.getElementById('modifyHour').value;
-    const minute   = document.getElementById('modifyMinute').value;
-    const capacity = document.getElementById('modifyCapacity').value;
-    const price    = document.getElementById('modifyPrice').value;
-    const status   = document.getElementById('modifyStatus').value;
-
-    if (!from || !to) { showToast('From and To fields are required.'); return; }
-
-    const datetime = `${date} ${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}:00`;
-    const esc      = s => String(s).replace(/'/g, "''");
+document.getElementById('takeOverBtn').addEventListener('click', async () => {
+    if (!STAFF_USER_ID) { showToast('Not logged in.'); return; }
+    if (currentChatId === null) return;
 
     await queryDB(`
-        UPDATE rides
-        SET pickup_location  = '${esc(from)}',
-            dropoff_location = '${esc(to)}',
-            pickup_time      = '${datetime}',
-            available_seats  = ${capacity},
-            price            = ${price},
-            status           = '${status}'
-        WHERE ride_id = ${currentRideId}
+        UPDATE support_chat_rooms
+        SET staff_user_id = ${STAFF_USER_ID},
+            status        = 'active',
+            connected_at  = NOW()
+        WHERE support_chat_id = ${currentChatId}
     `);
 
-    showToast('Ride updated successfully.');
-    document.getElementById('modifyRideView').classList.add('hidden');
-    document.getElementById('rideListView').classList.remove('hidden');
-    await loadRides();
+    const chat = chatSessions.find(c => c.support_chat_id === currentChatId);
+    if (chat) {
+        const staffRow = await queryDB(
+            `SELECT CONCAT(first_name, ' ', last_name) AS name FROM users WHERE user_id = ${STAFF_USER_ID}`
+        );
+        const staffName = staffRow?.[0]?.name ?? 'Staff';
+        chat.staff_user_id = STAFF_USER_ID;
+        chat.staff_name    = staffName;
+        chat.status        = 'active';
+        document.getElementById('assignedStaff').textContent = staffName;
+    }
+
+    document.getElementById('msgInput').disabled    = false;
+    document.getElementById('sendBtn').disabled     = false;
+    document.getElementById('endConvoBtn').disabled = false;
+
+    if (!pollInterval) {
+        pollInterval = setInterval(() => loadMessages(currentChatId), 5000);
+    }
+
+    showToast('You have taken over this chat.');
 });
 
-// ── Back to List ──────────────────────────────────────────────────────────────
+// ── End Conversation ──────────────────────────────────────────────────────────
 
-document.getElementById('backToList').addEventListener('click', () => {
-    currentRideId = null;
-    document.getElementById('modifyRideView').classList.add('hidden');
-    document.getElementById('rideListView').classList.remove('hidden');
-    renderRideList();
+document.getElementById('endConvoBtn').addEventListener('click', async () => {
+    if (currentChatId === null) return;
+    if (!confirm('Are you sure you want to end this conversation?')) return;
+
+    await queryDB(`
+        UPDATE support_chat_rooms
+        SET status   = 'closed',
+            ended_at = NOW()
+        WHERE support_chat_id = ${currentChatId}
+    `);
+
+    const chat = chatSessions.find(c => c.support_chat_id === currentChatId);
+    if (chat) chat.status = 'closed';
+
+    stopPolling();
+    document.getElementById('msgInput').disabled    = true;
+    document.getElementById('sendBtn').disabled     = true;
+    document.getElementById('endConvoBtn').disabled = true;
+    showToast('Conversation ended.');
 });
+
+// ── Back to Inbox ─────────────────────────────────────────────────────────────
+
+document.getElementById('backToInbox').addEventListener('click', async () => {
+    stopPolling();
+    currentChatId = null;
+    document.getElementById('chatroomView').classList.add('hidden');
+    document.getElementById('inboxView').classList.remove('hidden');
+    await loadInbox();
+});
+
+// ── Polling helpers ───────────────────────────────────────────────────────────
+
+function stopPolling() {
+    if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+}
+
+// ── Send button / Enter key ───────────────────────────────────────────────────
+
+document.getElementById('sendBtn').addEventListener('click', sendMessage);
+document.getElementById('msgInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage();
+});
+
+// ── Sort / Filter ─────────────────────────────────────────────────────────────
+
+document.getElementById('sortChat').addEventListener('change', renderInbox);
+document.getElementById('filterChat').addEventListener('change', renderInbox);
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
 
@@ -359,5 +308,5 @@ function showToast(msg) {
 // ── Boot ──────────────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadRides();
+    loadInbox();
 });
