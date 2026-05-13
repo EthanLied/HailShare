@@ -44,6 +44,7 @@ async function loadMessages(){
 
     // Grabs cookies
     userId = await grabCookie('user_id')
+    rideId = await grabCookie('ride_id')
     chatRoomCookieId = await grabCookie('chat_room_id')
     supportChatRoomCookieId = await grabCookie('support_chat_room_id')
 
@@ -56,7 +57,7 @@ async function loadMessages(){
         chatroomOwnerName = 'guest_user_id'
         chatroomFkName = 'ride_chat_id'
         chatroomId = 'ride_id'
-        chatroomIdValue = chatRoomCookieId
+        chatroomIdValue = rideId
 
         const incrementingIdResult = await queryDB(`
             SELECT ride_chat_id FROM ride_chat_rooms
