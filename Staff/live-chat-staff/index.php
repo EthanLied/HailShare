@@ -11,7 +11,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="../../Database/DBfunctions.php" defer></script>
-    <script src="../live-chat-staff/cookieJSInterface.php" defer></script>
+    <script src="../cookieJSInterface.php" defer></script>
     <script src="../live-chat-staff/script.php" defer></script>
 </head>
 

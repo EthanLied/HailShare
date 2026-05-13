@@ -220,8 +220,7 @@ document.getElementById('takeOverBtn').addEventListener('click', async () => {
     await queryDB(`
         UPDATE support_chat_rooms
         SET staff_user_id = ${staffId},
-            status        = 'active',
-            connected_at  = NOW()
+            status        = 'active'
         WHERE support_chat_id = ${currentChatId}
     `);
 
