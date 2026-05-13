@@ -13,9 +13,8 @@ let chatSessions  = [];   // loaded from support_chat_rooms
 let currentChatId = null; // support_chat_id (Number) of open room
 let pollInterval  = null; // for live message polling
 
-function getStaffId() {
-    const c = document.cookie.split('; ').find(x => x.startsWith('user_id='));
-    return c ? c.split('=')[1] : null;
+async function getStaffId() {
+    return await grabCookie('user_id');
 }
 
 // ── Load Inbox ────────────────────────────────────────────────────────────────
@@ -198,7 +197,7 @@ async function sendMessage() {
     const text    = input.value.trim();
     if (!text || currentChatId === null) return;
 
-    const staffId = getStaffId();
+    const staffId = await getStaffId();
     if (!staffId) { showToast('Not logged in.'); return; }
 
     const safe = text.replace(/'/g, "''");
@@ -214,7 +213,7 @@ async function sendMessage() {
 // ── Take Over ─────────────────────────────────────────────────────────────────
 
 document.getElementById('takeOverBtn').addEventListener('click', async () => {
-    const staffId = getStaffId();
+    const staffId = await getStaffId();
     if (!staffId) { showToast('Not logged in.'); return; }
     if (currentChatId === null) return;
 
