@@ -8,14 +8,6 @@ $email = $_SESSION['email'];
 $phone = $_SESSION['phone'];
 
 $password = $_SESSION['password'];
-
-/* PASSWORD VALIDATION */
-if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{8,}$/', $password)) {
-
-    header("Location: registration 2.php?error=invalidpassword");
-    exit();
-}
-
 /* HASH PASSWORD AFTER VALIDATION */
 $password = password_hash($password, PASSWORD_DEFAULT);
 
