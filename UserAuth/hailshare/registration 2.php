@@ -10,6 +10,14 @@
 </head>
 
 <body>
+  <?php
+  if (isset($_GET['error'])) {
+
+    if ($_GET['error'] == "invalidpassword") {
+        echo "<script>alert('Password must be at least 8 characters and contain uppercase and lowercase letters');</script>";
+    }
+}
+?>
 
   <!-- Navbar -->
   <div class="navbar">

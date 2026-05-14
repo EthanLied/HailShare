@@ -10,7 +10,18 @@
 </head>
 
 <body>
+<?php
+if (isset($_GET['error'])) {
 
+    if ($_GET['error'] == "emailexists") {
+        echo "<script>alert('Email already exists');</script>";
+    }
+
+    if ($_GET['error'] == "phoneexists") {
+        echo "<script>alert('Phone number already exists');</script>";
+    }
+}
+?>
   <!-- Navbar -->
   <div class="navbar">
     <div class="nav-left">HailShare</div>

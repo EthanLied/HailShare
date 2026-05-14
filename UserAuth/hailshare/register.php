@@ -7,7 +7,17 @@ $last = $_SESSION['last_name'];
 $email = $_SESSION['email'];
 $phone = $_SESSION['phone'];
 
-$password = password_hash($_SESSION['password'], PASSWORD_DEFAULT);
+$password = $_SESSION['password'];
+
+/* PASSWORD VALIDATION */
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{8,}$/', $password)) {
+
+    header("Location: registration 2.php?error=invalidpassword");
+    exit();
+}
+
+/* HASH PASSWORD AFTER VALIDATION */
+$password = password_hash($password, PASSWORD_DEFAULT);
 
 $dob = $_SESSION['dob'];
 $question = $_SESSION['security_question'];

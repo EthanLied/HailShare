@@ -20,6 +20,10 @@
     if ($_GET['error'] == "updatefailed") {
         echo "<script>alert('Error updating password');</script>";
     }
+
+    if ($_GET['error'] == "invalidpassword") {
+    echo "<script>alert('Password must be at least 8 characters and contain uppercase and lowercase letters');</script>";
+    }
   }
   ?>
 

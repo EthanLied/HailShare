@@ -11,6 +11,12 @@ if ($password !== $confirm) {
     exit();
 }
 
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{8,}$/', $password)) {
+
+    header("Location: password-recovery2.php?email=" . urlencode($email) . "&error=invalidpassword");
+    exit();
+}
+
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 $stmt = $conn->prepare("
