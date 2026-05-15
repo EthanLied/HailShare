@@ -1,0 +1,193 @@
+<?php header("Content-type: text/css"); ?>
+/* Removes default spacing*/
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    overflow-y: hidden;
+}
+
+/* Removes blue text and underline from hyperlinks*/
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Hides mobile components in desktop mode */
+.mobileComponent{
+    display: none;
+}
+
+
+#navbar, #navbar.expand, #navbar > a, #content, #tabList > a, .navbarItem {
+    transition: 0.3s cubic-bezier(.42, .94, .31, .99);
+}
+
+/* Shrinks and slightly fades when hovering logo and navbar items*/
+h3:hover, .navbarItem:not(:first-child):active{
+    transition: 0.2s;
+    opacity: 0.75;
+    transform: scale(0.95);
+}
+
+/* Shrinks and slightly fades further on logo only*/
+h3:active{
+    opacity: 0.5;
+    transform: scale(0.9);
+}
+/* Div for the main contents of the page*/
+#content{
+    margin-left: 55px; padding: 50px; padding-bottom: 10px;
+    height: 100vh; overflow-y: auto; overflow-x: hidden;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+    transition: 0.3s cubic-bezier(.42,.94,.31,.99);
+}
+
+#content > h2{
+    margin-top: 20px; margin-bottom: 10px;
+}
+
+/* When the navbar is expanded, push content div to the right*/
+#content.expand{
+    margin-left: 280px;
+}
+
+#supportRequestBtn{
+    height: 70px; width: 100%;
+    margin-top: 20px; margin-bottom: 20px;
+    font-size: 20px; font-weight: 600;
+    display: flex; flex-direction: row;
+    justify-content: center; align-items: center;
+    gap: 10px;
+}
+
+#supportRequestBtn:hover{
+    transform: scale(0.975);
+    cursor: pointer;
+}
+
+#supportRequestBtn:active{
+    transform: scale(0.95);
+}
+
+#tabList{
+    display: flex; flex-direction: row;
+    background-color: rgb(241, 241, 241);
+    width: 100%; min-height: 50px;
+    border-radius: 5px;
+    margin-top: 10px; padding: 8px 4px 8px 4px;
+    align-items: center; justify-content: center;
+}
+
+/* Content inside tablist */
+#tabList > a{
+    display: flex;
+    align-items: center; justify-content: center;
+    width: 49.5%; height: 100%;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+/* On load set first child as highlighted*/
+#tabList > a:nth-child(1){
+    background-color: rgb(216, 216, 216);
+}
+
+#tabList > a:hover{
+    cursor: pointer;
+    scale: 0.98;
+}
+
+/* Contains all ride items */
+#recordRowContainer{
+    margin-top: 20px; padding: 10px;
+    display: flex; flex-direction: column;
+    height: auto;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Individual container */
+.chatItem{
+    width: 98%;     
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(236, 236, 236); border-radius: 10px;
+    padding: 10px;
+    display: flex; flex-direction: row;
+    gap: 10px;
+}
+
+/* Defines left and ride side contents of each individual container */
+.leftSideItems{
+    gap: 5px;
+}
+
+.rightSideItems{
+    gap: 10px;
+}
+
+.leftSideItems, .rightSideItems{
+    display: flex; flex-direction: column;
+    width: 50%;
+}
+
+.leftSideItems > p > span, .rightSideItems > p > span{
+    font-size: 0.8em;
+}
+
+.rightSideItems > a > button{
+    display: flex; gap: 10px;
+    align-items: center; justify-content: center;
+    height: 43px; width: 100%;
+}
+
+.issueTypeLabel{
+    font-size: 20px; font-weight: 600;
+}
+
+/* Handles multiline contents for additional notes */
+.additionalNotes{
+    overflow-wrap: break-word; 
+    word-break:keep-all;
+    font-size: 12px;
+}
+
+.closeChatBtn, .closeChatBtn:hover{
+    background-color: red; color: white;
+}
+
+/* Pagination styles */
+#pagination{
+    display: flex; flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#pagination > input{
+    max-width: 20px;
+    text-align: center;
+}
+
+#paginationLabel{
+    font-weight: 500;
+    margin-bottom: 1px;
+}
+
+.paginationBtn{
+    display: flex;
+    border: none;  
+    font-size: 15px; 
+    padding:5px;
+    align-items: center; justify-content: center; /* Centering */        
+    cursor: pointer;
+}
+
+.paginationBtn p{
+    margin: 0;              
+    line-height: 0;
+}
+
+

@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+  <head>
+    <!--Imports-->
+    <link rel="stylesheet" href="../../shadCNTemplate.php" />
+    <link rel="stylesheet" href="desktop.php" />
+    <link rel="stylesheet" href="navbar.php" />
+    <link rel="stylesheet" href="mobile.php" />
+    <script src="script.php" defer></script>
+    <script src="../../../Database/DBfunctions.php" defer></script>
+    <script src="../../cookieJSInterface.php"></script>
+    <title>Give Rating</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Google SVG Imports-->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
+
+  <body>
+    <div id="header" class="mobileComponent">
+      <a>
+        <h2>Hailshare</h2>
+      </a>
+    </div>
+
+    <!--Navbar-->
+    <div id="navbar">
+      <!--Hamburger menu and Logo-->
+      <div class="navbarItem">
+        <span
+          class="material-symbols-outlined"
+          id="hamburgerMenuNavbarIcon"
+          onclick="toggleNavbar()"
+        >
+          menu
+        </span>
+        <!-- "Onclick" triggers menu expansion / shrinking-->
+        <a href="">
+          <h3>Hailshare</h3>
+        </a>
+      </div>
+
+      <!--Ride List Icon-->
+      <a href="../../rideList/index.php">
+        <div class="navbarItem" href="">
+          <span class="material-symbols-outlined">list_alt</span>
+          <p>Ride List</p>
+        </div>
+      </a>
+
+      <!--Create Ride Icon-->
+      <a href="../../createRide/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined"> add_circle</span>
+          <p>Create Ride</p>
+        </div>
+      </a>
+
+      <!--My Rides Icon-->
+      <a href="../../myRides/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined"> event_available</span>
+          <p>My Rides</p>
+        </div>
+      </a>
+
+      <!--Customer Support Icon-->
+      <a href="../../customerSupport/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined">support_agent</span>
+          <p>Customer Support</p>
+        </div>
+      </a>
+
+      <!--My Profile Icon-->
+      <a href="../../myProfile/index.php">
+        <div class="navbarItem">
+          <span class="material-symbols-outlined"> account_circle</span>
+          <p>My Profile</p>
+        </div>
+      </a>
+    </div>
+
+    <div id="content">
+      <h1>Give Rating</h1>
+      <a href="../index.php">
+        <button class="btnNormal" id="backBtn">
+          <span class="material-symbols-outlined"> chevron_left </span> Back
+        </button>
+      </a>
+      <h2>Select Rating:</h2>
+      <div id="ratingContainer">
+        <span class="material-symbols-outlined"> star </span
+        ><span class="material-symbols-outlined"> star </span
+        ><span class="material-symbols-outlined"> star </span
+        ><span class="material-symbols-outlined"> star </span
+        ><span class="material-symbols-outlined"> star </span>
+      </div>
+      <a>
+        <button class="btnStrong" id="submitRatingBtn" onclick="submitRating()">
+          Submit Rating <span class="material-symbols-outlined"> send </span>
+        </button>
+      </a>
+    </div>
+  </body>
+</html>
