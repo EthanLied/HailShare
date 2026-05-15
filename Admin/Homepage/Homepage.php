@@ -46,8 +46,9 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
             </a>
             <div class="nav-links">
                 <a href="Homepage.php" class="nav-link">Home</a>
-                <a href="../Account%20List/AccountList.php" class="nav-link">Accounts</a>
-                <a href="../Admin%20Profile/Admin.php" class="nav-link">Profile</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
         </div>
         <div class="nav-right">
@@ -282,7 +283,7 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
                 <ul>
                     <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#features">Features</a></li>
-                    <li><a href="../../RWDD PROJECT/RWDD CODE/HailShare/">Download App</a></li>
+                    <li><a href="#contact">Get In Touch</a></li>
                 </ul>
             </div>
             <div class="footer-column">

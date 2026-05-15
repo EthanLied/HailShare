@@ -706,6 +706,9 @@ a > .navbarItem:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    word-break: break-word;
+    overflow: visible;
+    white-space: normal;
 }
 
 .stat-card p {

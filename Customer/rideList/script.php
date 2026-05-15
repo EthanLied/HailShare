@@ -269,6 +269,8 @@ async function loadRecords() {
 
     for (const record of records) {
 
+        console.log(record.ride_id)
+
         // Dont show own rides
         if (record.user_id === userId){
             continue;
@@ -611,8 +613,19 @@ async function joinRide(rideId){
 
 async function openChat(rideId){
 
+    console.log("Passed in: " + rideId)
+
     await setCookie('ride_id', rideId)
     await setCookie('chatroom_type', 'ride')
+
+    const rideChatIdResult = await queryDB(`
+        SELECT ride_chat_id FROM ride_chat_rooms
+        WHERE ride_id = ${rideId}
+    `)
+
+    rideChatId = rideChatIdResult[0].ride_chat_id
+
+    await setCookie('chat_room_id', rideChatId)
 
     window.location.href = '../chatRoom/index.php'
 
