@@ -2,6 +2,14 @@
 // ============ PHP SESSION & INITIALIZATION ============
 session_start();
 
+require_once __DIR__ . '/../sessionCookie.php';
+require_once __DIR__ . '/../../Database/DBConnection.php';
+
+syncUserCookieToSession();
+
+$db = new DatabaseConnection();
+$dashboard_stats = $db->getDashboardStats();
+
 // Define base paths
 $base_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/Admin/';
 
@@ -18,6 +26,14 @@ $site_config = [
     'tagline' => 'Smart Ride-Sharing Platform',
     'active_page' => 'home'
 ];
+
+function formatStatNumber($number) {
+    if ($number >= 1000) {
+        return number_format($number / 1000, 1) . 'K';
+    }
+
+    return (string) $number;
+}
 
 // Log page visit (optional)
 error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
@@ -48,7 +64,6 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
                 <a href="Homepage.php" class="nav-link">Home</a>
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#how-it-works" class="nav-link">How It Works</a>
-                <a href="#contact" class="nav-link">Contact</a>
             </div>
         </div>
         <div class="nav-right">
@@ -235,20 +250,20 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
             <h2>Hailshare by the Numbers</h2>
             <div class="stats-grid">
                 <div class="stat-card stat-card-fade">
-                    <h3 class="stat-number">50K+</h3>
-                    <p>Active Riders</p>
+                    <h3 class="stat-number"><?php echo formatStatNumber($dashboard_stats['active_riders']); ?></h3>
+                    <p>Active Accounts</p>
                 </div>
                 <div class="stat-card stat-card-fade">
-                    <h3 class="stat-number">$2.5M+</h3>
-                    <p>Saved Together</p>
-                </div>
-                <div class="stat-card stat-card-fade">
-                    <h3 class="stat-number">100K+</h3>
+                    <h3 class="stat-number"><?php echo formatStatNumber($dashboard_stats['rides_shared']); ?></h3>
                     <p>Rides Shared</p>
                 </div>
                 <div class="stat-card stat-card-fade">
-                    <h3 class="stat-number">500 Tons</h3>
-                    <p>CO2 Reduced</p>
+                    <h3 class="stat-number"><?php echo formatStatNumber($dashboard_stats['completed_rides']); ?></h3>
+                    <p>Completed Rides</p>
+                </div>
+                <div class="stat-card stat-card-fade">
+                    <h3 class="stat-number"><?php echo formatStatNumber($dashboard_stats['support_requests']); ?></h3>
+                    <p>Support Requests</p>
                 </div>
             </div>
         </div>
@@ -298,5 +313,6 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
     </footer>
 </div>
 
+<?php $db->close(); ?>
 </body>
 </html>

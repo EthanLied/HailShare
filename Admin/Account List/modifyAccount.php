@@ -2,29 +2,40 @@
 // ============ PHP SESSION & ACCOUNT MODIFICATION ============
 session_start();
 
+require_once __DIR__ . '/../sessionCookie.php';
+
+syncUserCookieToSession();
+
 // Check admin authentication
 if (!isset($_SESSION['admin_logged_in'])) {
     $_SESSION['admin_logged_in'] = true;
 }
 
 // Get account ID from URL parameter
-$account_id = $_GET['id'] ?? null;
+$account_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+if (!$account_id) {
+    $account_id = filter_input(INPUT_GET, 'account_id', FILTER_VALIDATE_INT);
+}
+if (!$account_id) {
+    $account_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
+}
 $message = '';
 $message_type = '';
 
 // ============ INCLUDE DATABASE CONNECTION ============
-require_once '../Database/DBConnection.php';
+require_once __DIR__ . '/../../Database/DBConnection.php';
 $db = new DatabaseConnection();
 
 // Fetch account from database
 $current_account = null;
-if ($account_id) {
+if ($account_id && $account_id > 0) {
     $current_account = $db->getAccountById($account_id);
     
     if ($current_account) {
         // Format data for display
         $current_account['firstName'] = $current_account['first_name'] ?? '';
         $current_account['lastName'] = $current_account['last_name'] ?? '';
+        $current_account['name'] = trim(($current_account['first_name'] ?? '') . ' ' . ($current_account['last_name'] ?? ''));
         $current_account['type'] = $db->getRoleName($current_account['role_id'] ?? 3);
         $current_account['status'] = $current_account['account_status'] ?? 'active';
         $current_account['phone'] = $current_account['phone_number'] ?? '';
@@ -45,29 +56,13 @@ if ($account_id) {
     }
 }
 
-// If no account found, set default
-if (!$current_account) {
-    $current_account = [
-        'user_id' => 0,
-        'first_name' => 'Unknown',
-        'last_name' => 'Account',
-        'firstName' => 'Unknown',
-        'lastName' => 'Account',
-        'email' => 'no-email@hailshare.com',
-        'type' => 'Customer',
-        'status' => 'active',
-        'phone_number' => '+1 (555) 000-0000',
-        'phone' => '+1 (555) 000-0000',
-        'dobDay' => '1',
-        'dobMonth' => '01',
-        'dobYear' => '1990',
-        'securityQuestion' => 'What is your pet\'s name?',
-        'securityAnswer' => ''
-    ];
+if (!$current_account && empty($message)) {
+    $message = 'Account not found!';
+    $message_type = 'error';
 }
 
 // Handle form submission - UPDATE operation
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $current_account) {
     // Validate input
     $firstName = htmlspecialchars($_POST['firstName'] ?? '');
     $lastName = htmlspecialchars($_POST['lastName'] ?? '');
@@ -113,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         // Update account in database
-        if ($db->updateAccount($account_id, $update_data)) {
+        if ($db->updateAccount($current_account['user_id'], $update_data)) {
             $message = 'Account updated successfully!';
             $message_type = 'success';
             
@@ -159,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
         <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
     </div>
-    <div style="flex-grow: 1;"></div>
+    <div class="navbarSpacer"></div>
     <a href="AccountList.php">
         <div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Account List</p></div>
     </a>
@@ -182,6 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
         </a>
         <h1 style="margin-bottom: 20px;">Modify Account</h1>
+        <?php if ($current_account): ?>
         <p style="margin-bottom: 20px; color: #666;">Editing account: <strong id="accountName"><?php echo htmlspecialchars($current_account['name'] ?? 'Unknown'); ?></strong> (<span id="accountEmail"><?php echo htmlspecialchars($current_account['email']); ?></span>)</p>
 
         <form method="POST">
@@ -263,6 +259,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btnStrong" id="saveChangesBtn">Save Changes</button>
             </div>
         </form>
+        <?php else: ?>
+            <div class="card" style="margin-bottom: 20px;">
+                <h3>Account Not Found</h3>
+                <p style="color: #666; margin-top: 10px;">The selected account does not exist or the link is missing a valid user ID.</p>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 
