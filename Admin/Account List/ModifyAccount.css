@@ -73,6 +73,14 @@ a > .navbarItem:hover {
     padding-left: 12px;
 }
 
+.navbarHeader > a {
+    display: none;
+}
+
+.navbarHeader.expand > a {
+    display: block;
+}
+
 .navbarSpacer {
     flex: 0 0 18px;
 }
@@ -88,6 +96,11 @@ a > .navbarItem:hover {
 .navbarItem.expand > p,
 .navbarItem.expand > a > h3 {
     color: #000000;
+}
+
+.navbarHeader:not(.expand) {
+    justify-content: center;
+    padding-left: 0;
 }
 
 /* ============ CONTENT ============ */

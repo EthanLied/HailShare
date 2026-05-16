@@ -119,14 +119,14 @@ $security_questions = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Profile - Hailshare</title>
     <link rel="stylesheet" href="../../shadCNTemplate.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=admin-sidebar-actions-2">
+    <script src="script.js?v=admin-sidebar-actions-2" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 
 <div id="navbar">
-    <div class="navbarItem">
+    <div class="navbarItem navbarHeader">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
         <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
     </div>

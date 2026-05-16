@@ -12,19 +12,6 @@ if (!isset($_SESSION['admin_logged_in'])) {
 }
 
 $db = new DatabaseConnection();
-$delete_message = '';
-$delete_message_type = 'success';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delete') {
-    $account_id = intval($_POST['account_id'] ?? 0);
-
-    if ($account_id > 0 && $db->deleteAccount($account_id)) {
-        $delete_message = 'Account deleted successfully!';
-    } else {
-        $delete_message = 'Error deleting account. Please try again.';
-        $delete_message_type = 'error';
-    }
-}
 
 $filter_type = $_GET['filter'] ?? 'all';
 $search_term = trim($_GET['search'] ?? '');
@@ -68,63 +55,14 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account List - Hailshare Admin</title>
     <link rel="stylesheet" href="../../shadCNTemplate.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=admin-sidebar-actions-2">
+    <script src="script.js?v=admin-sidebar-actions-2" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        .delete-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .delete-modal.show {
-            display: flex;
-        }
-
-        .delete-modal-content {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .delete-modal h3 {
-            margin-bottom: 15px;
-            color: #d32f2f;
-        }
-
-        .delete-modal p {
-            margin-bottom: 20px;
-            color: #666;
-        }
-
-        .delete-modal-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        .account-delete-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-    </style>
 </head>
 <body>
 
 <div id="navbar">
-    <div class="navbarItem">
+    <div class="navbarItem navbarHeader">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
         <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
     </div>
@@ -139,12 +77,6 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
 
 <div id="content">
     <h1 style="margin-bottom: 20px;">Account List</h1>
-
-    <?php if (!empty($delete_message)): ?>
-        <div style="background-color: <?php echo $delete_message_type === 'success' ? '#d4edda' : '#f8d7da'; ?>; color: <?php echo $delete_message_type === 'success' ? '#155724' : '#721c24'; ?>; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid <?php echo $delete_message_type === 'success' ? '#c3e6cb' : '#f5c6cb'; ?>;">
-            <?php echo htmlspecialchars($delete_message); ?>
-        </div>
-    <?php endif; ?>
 
     <form method="GET" style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
         <select name="sort" id="sortSelect" style="width: auto; min-width: 150px;">
@@ -189,9 +121,6 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
                             <a class="account-edit-link" href="modifyAccount.php?id=<?php echo urlencode($acc['id']); ?>" title="Edit account">
                                 <span class="material-symbols-outlined">edit</span>
                             </a>
-                            <button type="button" class="account-delete-button" onclick='openDeleteModal(<?php echo intval($acc['id']); ?>, <?php echo json_encode($acc['name']); ?>)' title="Delete account">
-                                <span class="material-symbols-outlined" style="color: #d32f2f;">delete</span>
-                            </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -214,44 +143,13 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
     </div>
 </div>
 
-<div id="deleteModal" class="delete-modal">
-    <div class="delete-modal-content">
-        <h3>Delete Account</h3>
-        <p>Are you sure you want to delete <strong id="deleteAccountName"></strong>? This action cannot be undone.</p>
-        <div class="delete-modal-buttons">
-            <button type="button" class="btnNormal" onclick="closeDeleteModal()">Cancel</button>
-            <form method="POST" style="display: contents;">
-                <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="account_id" id="deleteAccountId" value="">
-                <button type="submit" class="btnStrong" style="background-color: #d32f2f; border-color: #d32f2f;">Delete</button>
-            </form>
-        </div>
-    </div>
-</div>
-
 <script>
-    function openDeleteModal(accountId, accountName) {
-        document.getElementById('deleteAccountId').value = accountId;
-        document.getElementById('deleteAccountName').textContent = accountName;
-        document.getElementById('deleteModal').classList.add('show');
-    }
-
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.remove('show');
-    }
-
     function goToPage() {
         const page = document.getElementById('pageInput').value;
         const params = new URLSearchParams(window.location.search);
         params.set('page', page);
         window.location.href = '?' + params.toString();
     }
-
-    document.getElementById('deleteModal').addEventListener('click', function(event) {
-        if (event.target === this) {
-            closeDeleteModal();
-        }
-    });
 </script>
 
 <?php $db->close(); ?>
