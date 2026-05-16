@@ -121,6 +121,7 @@ $security_questions = [
     <link rel="stylesheet" href="../../shadCNTemplate.css">
     <link rel="stylesheet" href="style.css?v=admin-sidebar-actions-2">
     <script src="script.js?v=admin-sidebar-actions-2" defer></script>
+    <script src="../cookieInterfaceJS.php" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
