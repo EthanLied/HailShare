@@ -1,29 +1,16 @@
 <?php
 header("Content-Type: application/json");
 
-$database = new mysqli("localhost", "root", "", "myDB");
+require_once __DIR__ . '/DBConnection.php';
 
 $table = $_GET['table'] ?? '';
 
-if ($database->connect_error) {
+try {
+    $database = new DatabaseConnection();
+    echo json_encode($database->getAllRows($table));
+    $database->close();
+} catch (Exception $exception) {
     http_response_code(500);
-    echo json_encode(["error" => "Connection failed"]);
-    exit;
+    echo json_encode(["error" => $exception->getMessage()]);
 }
-
-$result = $database->query("SELECT * FROM `$table`");
-
-# To store each record
-$rows = [];
-
-# Turns metadata to array
-while ($row = $result->fetch_assoc()) {
-    $rows[] = $row;
-}
-
-# Returns JSON data
-echo json_encode($rows);
-
-# Cleanup
-$database->close();
-?> 
+?>
