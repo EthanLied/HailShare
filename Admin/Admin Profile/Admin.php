@@ -1,30 +1,20 @@
 <?php
-// ============ PHP SESSION & COOKIE MANAGEMENT ============
-session_start();
-
-require_once __DIR__ . '/../sessionCookie.php';
 require_once __DIR__ . '/../../Database/DBConnection.php';
-
-syncUserCookieToSession();
 
 $db = new DatabaseConnection();
 
-if (!isset($_SESSION['admin_logged_in'])) {
-    $_SESSION['admin_logged_in'] = true;
-}
-
 $message = '';
 $message_type = 'success';
-$session_user_id = intval($_SESSION['user_id'] ?? ($_SESSION['admin_user_id'] ?? 0));
-$admin_account = $session_user_id > 0 ? $db->getAccountById($session_user_id) : null;
-
-if (!$admin_account && $session_user_id <= 0) {
-    $admin_account = $db->getFirstAdminAccount();
+$cookie_user_id = filter_input(INPUT_COOKIE, 'user_id', FILTER_VALIDATE_INT);
+if ($cookie_user_id === null || $cookie_user_id === false) {
+    $cookie_user_id = isset($_COOKIE['user_id']) ? filter_var($_COOKIE['user_id'], FILTER_VALIDATE_INT) : false;
 }
 
-if ($admin_account) {
-    $_SESSION['user_id'] = intval($admin_account['user_id']);
-    $_SESSION['admin_user_id'] = intval($admin_account['user_id']);
+$admin_account = $cookie_user_id && $cookie_user_id > 0 ? $db->getAccountById($cookie_user_id) : null;
+
+if (!$admin_account) {
+    $message = 'No account found for the current user_id cookie.';
+    $message_type = 'error';
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'logout') {
         $db->close();
-        session_destroy();
+        setcookie('user_id', '', time() - 3600, '/');
         header('Location: ../Homepage/Homepage.php');
         exit();
     }
 
     if (!$admin_account) {
-        $message = 'No account found for the current session user.';
+        $message = 'No account found for the current user_id cookie.';
         $message_type = 'error';
     } elseif ($action === 'save_personal') {
         $dob = ($_POST['dobYear'] ?? '1990') . '-' . str_pad($_POST['dobMonth'] ?? '01', 2, '0', STR_PAD_LEFT) . '-' . str_pad($_POST['dobDay'] ?? '01', 2, '0', STR_PAD_LEFT);
@@ -112,8 +102,7 @@ $security_questions = [
     "What city were you born in?",
     "What is the name of your first pet?"
 ];
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -151,6 +140,8 @@ $security_questions = [
 
         <span class="adminBadge"><span class="material-symbols-outlined" style="font-size:18px;">verified</span> <?php echo htmlspecialchars($admin_data['adminBadge']); ?></span>
         <h1 style="margin-bottom: 30px; text-align: center;">Admin Profile</h1>
+
+        <?php if ($admin_account): ?>
 
         <form method="POST" style="display: contents;">
             <input type="hidden" name="action" value="save_personal">
@@ -213,6 +204,11 @@ $security_questions = [
                 <button type="submit" class="btnNormal" style="color:red; border-color:#ffcccc; padding: 10px 30px;">Logout</button>
             </form>
         </div>
+        <?php else: ?>
+            <div class="card" style="text-align: center;">
+                <p>Please log in again so HailShare can load your admin profile from the database.</p>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 

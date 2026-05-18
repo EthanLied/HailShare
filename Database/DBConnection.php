@@ -3,10 +3,11 @@
 
 class DatabaseConnection {
     private $connection;
-    private $host = "localhost";
+    private $host = "127.0.0.1";
     private $user = "root";
     private $password = "";
     private $database = "myDB";
+    private $port = 3306;
 
     private $allowedTables = [
         "users",
@@ -21,7 +22,7 @@ class DatabaseConnection {
     ];
 
     public function __construct() {
-        $this->connection = new mysqli($this->host, $this->user, $this->password, $this->database);
+        $this->connection = new mysqli($this->host, $this->user, $this->password, $this->database, $this->port);
 
         if ($this->connection->connect_error) {
             throw new Exception("Connection failed: " . $this->connection->connect_error);
