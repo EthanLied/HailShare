@@ -67,8 +67,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
             </div>
         </div>
         <div class="nav-right">
-            <a href="#signup"><button class="btnNormal nav-btn">Sign Up</button></a>
-            <a href="#login"><button class="btnStrong nav-btn">Login</button></a>
+            <a href="../../UserAuth/hailshare/registration%201.php"><button class="btnNormal nav-btn">Sign Up</button></a>
+            <a href="../../UserAuth/hailshare/login.php"><button class="btnStrong nav-btn">Login</button></a>
         </div>
     </div>
 </nav>

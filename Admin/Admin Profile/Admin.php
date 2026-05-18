@@ -15,14 +15,15 @@ if (!isset($_SESSION['admin_logged_in'])) {
 
 $message = '';
 $message_type = 'success';
-$admin_id = intval($_SESSION['admin_user_id'] ?? 0);
-$admin_account = $admin_id > 0 ? $db->getAccountById($admin_id) : null;
+$session_user_id = intval($_SESSION['user_id'] ?? ($_SESSION['admin_user_id'] ?? 0));
+$admin_account = $session_user_id > 0 ? $db->getAccountById($session_user_id) : null;
 
-if (!$admin_account || intval($admin_account['role_id'] ?? 0) !== 1) {
+if (!$admin_account && $session_user_id <= 0) {
     $admin_account = $db->getFirstAdminAccount();
 }
 
 if ($admin_account) {
+    $_SESSION['user_id'] = intval($admin_account['user_id']);
     $_SESSION['admin_user_id'] = intval($admin_account['user_id']);
 }
 
@@ -37,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$admin_account) {
-        $message = 'No admin account found in the database.';
+        $message = 'No account found for the current session user.';
         $message_type = 'error';
     } elseif ($action === 'save_personal') {
         $dob = ($_POST['dobYear'] ?? '1990') . '-' . str_pad($_POST['dobMonth'] ?? '01', 2, '0', STR_PAD_LEFT) . '-' . str_pad($_POST['dobDay'] ?? '01', 2, '0', STR_PAD_LEFT);
