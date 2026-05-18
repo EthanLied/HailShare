@@ -11,6 +11,21 @@ if ($cookie_user_id === null || $cookie_user_id === false) {
     $cookie_user_id = isset($_COOKIE['user_id']) ? filter_var($_COOKIE['user_id'], FILTER_VALIDATE_INT) : false;
 }
 $current_user = $cookie_user_id && $cookie_user_id > 0 ? $db->getAccountById($cookie_user_id) : null;
+$profile_url = '#';
+
+if ($current_user) {
+    switch (intval($current_user['role_id'] ?? 0)) {
+        case 1:
+            $profile_url = '/hailshare/Customer/rideList/index.php';
+            break;
+        case 2:
+            $profile_url = '/hailshare/Staff/ride-list-staff/index.php';
+            break;
+        case 3:
+            $profile_url = '/hailshare/Admin/Admin%20Profile/Admin.php';
+            break;
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'logout') {
     setcookie('user_id', '', time() - 3600, '/');
@@ -84,7 +99,7 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
                         <span class="material-symbols-outlined profile-icon">account_circle</span>
                     </button>
                     <div class="profile-dropdown" hidden>
-                        <a href="../Admin%20Profile/Admin.php">
+                        <a href="<?php echo htmlspecialchars($profile_url); ?>">
                             <span class="material-symbols-outlined">person</span>
                             <span>Profile</span>
                         </a>

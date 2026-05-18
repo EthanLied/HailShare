@@ -34,14 +34,19 @@ if ($result->num_rows > 0) {
 
         // Redirect based on the role IDs used by the HailShare users table.
         // Customer = 1, Staff = 2, Admin = 3.
-        if ($user['role_id'] == 3) {
+        if ($user['role_id'] == 1) {
 
-            header("Location: /HailShare/Admin/Admin Profile/Admin.php");
+            header("Location: /hailshare/Customer/rideList/index.php");
             exit();
 
-        } elseif ($user['role_id'] == 2 || $user['role_id'] == 1) {
+        } elseif ($user['role_id'] == 2) {
 
-            header("Location: /HailShare/UserAuth/hailshare/dashboard.php");
+            header("Location: /hailshare/Staff/ride-list-staff/index.php");
+            exit();
+
+        } elseif ($user['role_id'] == 3) {
+
+            header("Location: /hailshare/Admin/Admin%20Profile/Admin.php");
             exit();
 
         } else {
