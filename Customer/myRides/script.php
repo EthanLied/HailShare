@@ -476,7 +476,7 @@ async function leaveRide(rideId, userId){
 
 async function openChatroom(chatRoomId){
 
-    await setCookie('chat_room_id', chatRoomId)
+    await setCookie('ride_id', chatRoomId)
 
     await setCookie('chatroom_type', 'ride')
 
