@@ -20,6 +20,10 @@
                 if ($_GET['error'] == "emailnotfound") {
                     echo "<script>alert('Email not found');</script>";
                 }
+
+                if ($_GET['error'] == "accountinactive") {
+                     echo "<script>alert('Your account is inactive');</script>";
+                }
             }
             ?>
             <?php

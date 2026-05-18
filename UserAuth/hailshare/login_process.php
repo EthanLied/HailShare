@@ -3,8 +3,8 @@ session_start();
 
 include 'db.php';
 
-$email = $_POST['email'] ?? '';
-$password = $_POST['password'] ?? '';
+$email = $_POST['email'];
+$password = $_POST['password'];
 
 $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
@@ -16,19 +16,25 @@ if ($result->num_rows > 0) {
 
     $user = $result->fetch_assoc();
 
+    /* CHECK ACCOUNT STATUS */
+    if ($user['account_status'] != 'active') {
+
+        header("Location: login.php?error=accountinactive");
+        exit();
+    }
+
     // Verify password
     if (password_verify($password, $user['password_hash'])) {
 
-        // Store login data for existing pages and the admin cookie-based profile.
+        // Store session data
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['role_id'] = $user['role_id'];
-        setcookie('user_id', (string) $user['user_id'], time() + (86400 * 7), '/');
 
-        // Redirect based on the role IDs used by the HailShare users table.
+        // Redirect based on role
         if ($user['role_id'] == 1) {
 
-            header("Location: /HailShare/Admin/Admin Profile/Admin.php");
+            header("Location: /HailShare/Customer/myProfile/index.php");
             exit();
 
         } elseif ($user['role_id'] == 2) {
@@ -38,7 +44,7 @@ if ($result->num_rows > 0) {
 
         } elseif ($user['role_id'] == 3) {
 
-            header("Location: /HailShare/Customer/myProfile/index.php");
+            header("Location: /HailShare/Admin/Admin Profile/Admin.php");
             exit();
 
         } else {

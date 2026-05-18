@@ -546,11 +546,11 @@ h2 {
   /* Bottom link */
   .reg-container .bottom-link {
     text-align: center;
-    margin-top: 159px;
+    margin-top: 200px;
   }
 
   .reg-container .button-row + .bottom-link {
-    margin-top: 153px;
+    margin-top: 133px;
     text-align: center;
   }
 }
@@ -588,7 +588,7 @@ h2 {
   }
 
   .reg-container:has(.sub-title) .bottom-link {
-    margin-top: 231px;  /* adjust link spacing */
+    margin-top: 331px;  /* adjust link spacing */
     text-align: center;
   }
 }
