@@ -40,12 +40,16 @@ body {
 }
 
 .nav-left {
+    height: 40px;
     display: flex;
     align-items: center;
     gap: 40px;
 }
 
 .logo {
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
     color: #000;
 }
@@ -53,19 +57,26 @@ body {
 .logo h2 {
     font-size: 24px;
     font-weight: 700;
+    line-height: 1;
     margin: 0;
 }
 
 .nav-links {
+    height: 40px;
     display: flex;
+    align-items: center;
     gap: 30px;
 }
 
 .nav-link {
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
     color: #666;
     font-size: 15px;
     font-weight: 500;
+    line-height: 1;
     transition: color 0.2s;
 }
 
@@ -74,6 +85,7 @@ body {
 }
 
 .nav-right {
+    height: 40px;
     display: flex;
     gap: 15px;
     align-items: center;
@@ -83,6 +95,127 @@ body {
     padding: 8px 18px;
     font-size: 14px;
     font-weight: 500;
+}
+.profile-menu {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 40px;
+}
+
+.profile-trigger {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #171717;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    box-shadow: none;
+    outline: none;
+}
+
+.profile-trigger:hover,
+.profile-trigger:focus-visible,
+.profile-menu.open .profile-trigger {
+    background: #e8e8e8;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    transform: translateY(6px);
+}
+
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    width: 148px;
+    padding: 6px;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
+    z-index: 1100;
+    transform-origin: top right;
+}
+
+.profile-menu.open .profile-dropdown {
+    animation: profileDropdown 0.18s ease-out both;
+}
+
+.profile-dropdown[hidden] {
+    display: none;
+}
+
+.profile-dropdown a,
+.profile-logout-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    padding: 9px 10px;
+    border-radius: 6px;
+    color: #171717;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.profile-dropdown a:hover,
+.profile-logout-button:hover {
+    background: #f4f4f4;
+}
+
+.profile-logout-form {
+    margin: 2px 0 0;
+}
+
+.profile-logout-button {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.profile-logout-button:hover {
+    color: #b42318;
+}
+
+.profile-dropdown .material-symbols-outlined {
+    width: 24px;
+    font-size: 20px;
+}
+
+@keyframes profileDropdown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* ============ SIDEBAR + CONTENT (copy to all Admin style.css) ============ */

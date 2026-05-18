@@ -109,8 +109,8 @@ $security_questions = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Profile - Hailshare</title>
     <link rel="stylesheet" href="../../shadCNTemplate.css">
-    <link rel="stylesheet" href="style.css?v=admin-sidebar-actions-2">
-    <script src="script.js?v=admin-sidebar-actions-2" defer></script>
+    <link rel="stylesheet" href="style.css?v=admin-sidebar-rail-align-4">
+    <script src="script.js?v=admin-sidebar-rail-align-4" defer></script>
     <script src="../cookieInterfaceJS.php" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -126,7 +126,7 @@ $security_questions = [
         <div class="navbarItem"><span class="material-symbols-outlined">group</span><p>Account List</p></div>
     </a>
     <a href="Admin.php">
-        <div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Admin Profile</p></div>
+        <div class="navbarItem"><span class="material-symbols-outlined">admin_panel_settings</span><p>Profile</p></div>
     </a>
 </div>
 

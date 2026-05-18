@@ -2,13 +2,24 @@
 // ============ PHP SESSION & INITIALIZATION ============
 session_start();
 
-require_once __DIR__ . '/../sessionCookie.php';
 require_once __DIR__ . '/../../Database/DBConnection.php';
-
-syncUserCookieToSession();
 
 $db = new DatabaseConnection();
 $dashboard_stats = $db->getDashboardStats();
+$cookie_user_id = filter_input(INPUT_COOKIE, 'user_id', FILTER_VALIDATE_INT);
+if ($cookie_user_id === null || $cookie_user_id === false) {
+    $cookie_user_id = isset($_COOKIE['user_id']) ? filter_var($_COOKIE['user_id'], FILTER_VALIDATE_INT) : false;
+}
+$current_user = $cookie_user_id && $cookie_user_id > 0 ? $db->getAccountById($cookie_user_id) : null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'logout') {
+    setcookie('user_id', '', time() - 3600, '/');
+    $_SESSION = [];
+    session_destroy();
+    $db->close();
+    header('Location: Homepage.php');
+    exit();
+}
 
 // Define base paths
 $base_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/Admin/';
@@ -47,8 +58,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
     <!-- Universal template (two levels up to root) -->
     <link rel="stylesheet" href="../../shadCNTemplate.css">
     <!-- Page-specific styles -->
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=profile-icon-lower-8">
+    <script src="script.js?v=profile-icon-lower-8" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
@@ -67,8 +78,29 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
             </div>
         </div>
         <div class="nav-right">
-            <a href="../../UserAuth/hailshare/registration%201.php"><button class="btnNormal nav-btn">Sign Up</button></a>
-            <a href="../../UserAuth/hailshare/login.php"><button class="btnStrong nav-btn">Login</button></a>
+            <?php if ($current_user): ?>
+                <div class="profile-menu">
+                    <button type="button" class="profile-trigger" aria-label="Open profile menu" aria-expanded="false" title="Profile">
+                        <span class="material-symbols-outlined profile-icon">account_circle</span>
+                    </button>
+                    <div class="profile-dropdown" hidden>
+                        <a href="../Admin%20Profile/Admin.php">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>Profile</span>
+                        </a>
+                        <form method="POST" class="profile-logout-form">
+                            <input type="hidden" name="action" value="logout">
+                            <button type="submit" class="profile-logout-button">
+                                <span class="material-symbols-outlined">logout</span>
+                                <span>Logout</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <?php else: ?>
+                <a href="../../UserAuth/hailshare/registration%201.php"><button class="btnNormal nav-btn">Sign Up</button></a>
+                <a href="../../UserAuth/hailshare/login.php"><button class="btnStrong nav-btn">Login</button></a>
+            <?php endif; ?>
         </div>
     </div>
 </nav>
