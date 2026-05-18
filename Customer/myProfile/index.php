@@ -292,9 +292,6 @@
         </div>
         <div id="importantBtns">
           <button class="btnStrong" id="logoutBtn" onclick="logout()">Logout</button>
-          <button class="btnStrong" id="deleteAccountBtn" onclick="openDeletePrompt()">
-            Delete Account
-          </button>
         </div>
       </div>
     </div>
