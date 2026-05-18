@@ -139,12 +139,12 @@ INSERT INTO `users` (
     )
 VALUES (
         '1',
-        '1',
+        '3',
         'Ahmad',
         'Razif',
         'ahmad.razif@email.com',
         '+60123456789',
-        '$2b$12$KIXaBcDeFgHiJkLmNoPqRsTuVwXyZ',
+        '$2y$10$sMpNHj4pwb.z7BTPKFCeauwf.J.6rlKBlfRX8/Aeq27QhmdCzImuG',
         '1995-06-15',
         'What is the name of your first pet?',
         '$2b$12$AnswerHashPlaceholderXYZABC',

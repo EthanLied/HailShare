@@ -52,9 +52,9 @@ class DatabaseConnection {
         $query = "SELECT user_id AS id,
                          CONCAT(first_name, ' ', last_name) AS name,
                          CASE
-                            WHEN role_id = 1 THEN 'Admin'
+                            WHEN role_id = 1 THEN 'Customer'
                             WHEN role_id = 2 THEN 'Staff'
-                            WHEN role_id = 3 THEN 'Customer'
+                            WHEN role_id = 3 THEN 'Admin'
                             ELSE 'Unknown'
                          END AS type,
                          email,
@@ -98,7 +98,7 @@ class DatabaseConnection {
     }
 
     public function getFirstAdminAccount() {
-        $rows = $this->selectPrepared("SELECT * FROM users WHERE role_id = 1 ORDER BY user_id ASC LIMIT 1", "", []);
+        $rows = $this->selectPrepared("SELECT * FROM users WHERE role_id = 3 ORDER BY user_id ASC LIMIT 1", "", []);
         return $rows[0] ?? null;
     }
 
@@ -223,11 +223,11 @@ class DatabaseConnection {
     public function getRoleName($roleId) {
         switch (intval($roleId)) {
             case 1:
-                return "Admin";
+                return "Customer";
             case 2:
                 return "Staff";
             case 3:
-                return "Customer";
+                return "Admin";
             default:
                 return "Unknown";
         }
@@ -235,11 +235,11 @@ class DatabaseConnection {
 
     public function getRoleId($roleName) {
         switch ($roleName) {
-            case "Admin":
+            case "Customer":
                 return 1;
             case "Staff":
                 return 2;
-            case "Customer":
+            case "Admin":
                 return 3;
             default:
                 return 0;

@@ -26,19 +26,15 @@ if ($result->num_rows > 0) {
         setcookie('user_id', (string) $user['user_id'], time() + (86400 * 7), '/');
 
         // Redirect based on the role IDs used by the HailShare users table.
-        if ($user['role_id'] == 1) {
+        // Customer = 1, Staff = 2, Admin = 3.
+        if ($user['role_id'] == 3) {
 
             header("Location: /HailShare/Admin/Admin Profile/Admin.php");
             exit();
 
-        } elseif ($user['role_id'] == 2) {
+        } elseif ($user['role_id'] == 2 || $user['role_id'] == 1) {
 
-            header("Location: /HailShare/Staff/profile-staff/index.php");
-            exit();
-
-        } elseif ($user['role_id'] == 3) {
-
-            header("Location: /HailShare/Customer/myProfile/index.php");
+            header("Location: /HailShare/UserAuth/hailshare/dashboard.php");
             exit();
 
         } else {
