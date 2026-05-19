@@ -71,7 +71,7 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $site_config['name']; ?> – Dashboard</title>
     <!-- Universal template (two levels up to root) -->
-    <link rel="stylesheet" href="../../shadCNTemplate.css">
+    <link rel="stylesheet" href="../shadCNTemplate.css">
     <!-- Page-specific styles -->
     <link rel="stylesheet" href="style.css?v=profile-icon-lower-8">
     <script src="script.js?v=profile-icon-lower-8" defer></script>
