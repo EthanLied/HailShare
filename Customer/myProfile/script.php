@@ -128,55 +128,7 @@ async function saveSensitive(){
 
 }
 
-function openDeletePrompt(){
-    const deleteBtn = document.getElementById("deleteAccountBtn")
-    
-    deleteBtn.remove()
 
-    const importantBtnsContainer = document.getElementById("importantBtns")
-
-    importantBtnsContainer.innerHTML = `
-        <button class="btnStrong" id="deleteAccountBtn" onclick="deleteAccount()">YES, DELETE!</button>
-        <button class="btnStrong" id="logoutBtn" onclick="closeDeletePrompt()">NO, GO BACK!</button>
-    `
-}
-
-
-function closeDeletePrompt(){
-
-    const deleteBtn = document.getElementById("deleteAccountBtn")
-    
-    deleteBtn.remove()
-
-    const importantBtnsContainer = document.getElementById("importantBtns")
-
-    importantBtnsContainer.innerHTML = `
-        <button class="btnStrong" id="logoutBtn" onclick="logout()">Logout</button>
-          <button class="btnStrong" id="deleteAccountBtn" onclick="openDeletePrompt()">
-            Delete Account
-          </button>
-    `
-}
-
-async function deleteAccount(){
-
-    const userId = await grabCookie('user_id')
-
-    console.log(`
-        DELETE FROM users
-        WHERE user_id = ${userId}
-    `)
-
-    await queryDB(`
-        DELETE FROM users
-        WHERE user_id = ${userId}
-    `)
-
-
-    await clearCookies();
-    window.location.href = '../../Admin/Homepage/index.php'
-
-}
 
 async function logout(){
 

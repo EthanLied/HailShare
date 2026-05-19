@@ -187,16 +187,6 @@
         <button class="btnStrong" id="searchBtn" onclick="searchRides()">Search</button>
         <p id="alert"></p>
         <h2 id="ridesTitle">Rides</h2>
-        <h4 class="mobileComponent">Sort By:</h4>
-        <select id="sortByDropdown">
-            <option>Time (Eariler)</option>
-            <option>Time (Later)</option>
-            <option>Pickup Distance (Ascending)</option>
-            <option>Pickup Distance (Decending)</option>
-            <option>Dropoff Distance (Decending)</option>
-            <option>Dropoff Distance (Decending)</option>
-            <option>Price (Cheaper)</option>
-        </select>
         <div id="tableContainer">
             <div class="rideItemMobile mobileComponent" 
             data-pickup-specific="Petronas Twin Tower" data-pickup-general="KLCC, 50088 KL"

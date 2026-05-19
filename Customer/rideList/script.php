@@ -464,8 +464,8 @@ async function resolveAddress(addressInputType, addressQuery) {
 
             // Uses photon as external api
             const res = await fetch(
-                `https://photon.komoot.io/api/?q=${encodeURIComponent(addressQuery)}&bbox=99.6418,0.8538,119.2758,7.3634`,
-                { signal: activeController.signal } // Makes activeController manage ongoing API requests
+                `https://nominatim.openstreetmap.org/search?format=geojson&q=${encodeURIComponent(addressQuery)}&bounded=1&viewbox=99.6418,7.3634,119.2758,0.8538&limit=5`,
+                { signal: activeController.signal }
             );
 
             // Grabs data back
@@ -486,24 +486,17 @@ async function resolveAddress(addressInputType, addressQuery) {
 
 function captureQueryData(data) {
 
-    const fields = ["name", "street", "district", "city", "postcode", "country"];
+    // For each returned address data
+    for (let i = 0; i < Math.min(data.features.length, 5); i++) {
 
-    for (locationSuggestionNum = 0; locationSuggestionNum < Math.min(data.features.length, 5); locationSuggestionNum++) {
+        // Return as array
+        const long    = data.features[i].geometry.coordinates[0];
+        const lat     = data.features[i].geometry.coordinates[1];
+        const address = data.features[i].properties.display_name;
 
-        const long = data.features[locationSuggestionNum].geometry.coordinates[0]
-        const lat = data.features[locationSuggestionNum].geometry.coordinates[1]
-        const currentsuggestionData = data.features[locationSuggestionNum].properties
-
-        const address = fields
-            // Loops over each iteam and add to string + conditional if value is blank
-            .map(field => currentsuggestionData[field] ? `${currentsuggestionData[field]}, ` : "")
-            .join("")
-            .slice(0, -2); // removes trailing ", 
-
-        returnedLocations.push({ "address": address, "long": long, "lat": lat });
+        returnedLocations.push({ address, long, lat });
     }
-
-    return returnedLocations
+    return returnedLocations;
 }
 
 function displaySuggestedLocations(addessInputType) {

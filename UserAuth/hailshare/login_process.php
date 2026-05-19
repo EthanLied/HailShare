@@ -16,6 +16,13 @@ if ($result->num_rows > 0) {
 
     $user = $result->fetch_assoc();
 
+    /* CHECK ACCOUNT STATUS */
+    if ($user['account_status'] != 'active') {
+
+        header("Location: login.php?error=accountinactive");
+        exit();
+    }
+
     // Verify password
     if (password_verify($password, $user['password_hash'])) {
 

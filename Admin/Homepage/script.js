@@ -4,6 +4,25 @@ function toggleNavbar() {
 
 // ============ SCROLL ANIMATIONS & EFFECTS ============
 document.addEventListener('DOMContentLoaded', function() {
+    // Profile dropdown toggle.
+    const profileMenu = document.querySelector('.profile-menu');
+    const profileTrigger = document.querySelector('.profile-trigger');
+    const profileDropdown = document.querySelector('.profile-dropdown');
+    if (profileMenu && profileTrigger && profileDropdown) {
+        profileTrigger.addEventListener('click', () => {
+            const isOpen = profileMenu.classList.toggle('open');
+            profileTrigger.setAttribute('aria-expanded', String(isOpen));
+            profileDropdown.hidden = !isOpen;
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!profileMenu.contains(event.target)) {
+                profileMenu.classList.remove('open');
+                profileTrigger.setAttribute('aria-expanded', 'false');
+                profileDropdown.hidden = true;
+            }
+        });
+    }
     
     // ============ INTERSECTION OBSERVER FOR SCROLL ANIMATIONS ============
     const observerOptions = {

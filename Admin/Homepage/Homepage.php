@@ -2,6 +2,40 @@
 // ============ PHP SESSION & INITIALIZATION ============
 session_start();
 
+require_once __DIR__ . '/../../Database/DBConnection.php';
+
+$db = new DatabaseConnection();
+$dashboard_stats = $db->getDashboardStats();
+$cookie_user_id = filter_input(INPUT_COOKIE, 'user_id', FILTER_VALIDATE_INT);
+if ($cookie_user_id === null || $cookie_user_id === false) {
+    $cookie_user_id = isset($_COOKIE['user_id']) ? filter_var($_COOKIE['user_id'], FILTER_VALIDATE_INT) : false;
+}
+$current_user = $cookie_user_id && $cookie_user_id > 0 ? $db->getAccountById($cookie_user_id) : null;
+$profile_url = '#';
+
+if ($current_user) {
+    switch (intval($current_user['role_id'] ?? 0)) {
+        case 1:
+            $profile_url = '/hailshare/Customer/rideList/index.php';
+            break;
+        case 2:
+            $profile_url = '/hailshare/Staff/ride-list-staff/index.php';
+            break;
+        case 3:
+            $profile_url = '/hailshare/Admin/Admin%20Profile/Admin.php';
+            break;
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'logout') {
+    setcookie('user_id', '', time() - 3600, '/');
+    $_SESSION = [];
+    session_destroy();
+    $db->close();
+    header('Location: Homepage.php');
+    exit();
+}
+
 // Define base paths
 $base_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/Admin/';
 
@@ -19,6 +53,14 @@ $site_config = [
     'active_page' => 'home'
 ];
 
+function formatStatNumber($number) {
+    if ($number >= 1000) {
+        return number_format($number / 1000, 1) . 'K';
+    }
+
+    return (string) $number;
+}
+
 // Log page visit (optional)
 error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
 ?>
@@ -31,8 +73,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
     <!-- Universal template (two levels up to root) -->
     <link rel="stylesheet" href="../../shadCNTemplate.css">
     <!-- Page-specific styles -->
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=profile-icon-lower-8">
+    <script src="script.js?v=profile-icon-lower-8" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
@@ -48,12 +90,32 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
                 <a href="Homepage.php" class="nav-link">Home</a>
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#how-it-works" class="nav-link">How It Works</a>
-                <a href="#contact" class="nav-link">Contact</a>
             </div>
         </div>
         <div class="nav-right">
-            <a href="#signup"><button class="btnNormal nav-btn">Sign Up</button></a>
-            <a href="#login"><button class="btnStrong nav-btn">Login</button></a>
+            <?php if ($current_user): ?>
+                <div class="profile-menu">
+                    <button type="button" class="profile-trigger" aria-label="Open profile menu" aria-expanded="false" title="Profile">
+                        <span class="material-symbols-outlined profile-icon">account_circle</span>
+                    </button>
+                    <div class="profile-dropdown" hidden>
+                        <a href="<?php echo htmlspecialchars($profile_url); ?>">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>Profile</span>
+                        </a>
+                        <form method="POST" class="profile-logout-form">
+                            <input type="hidden" name="action" value="logout">
+                            <button type="submit" class="profile-logout-button">
+                                <span class="material-symbols-outlined">logout</span>
+                                <span>Logout</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <?php else: ?>
+                <a href="../../UserAuth/hailshare/registration%201.php"><button class="btnNormal nav-btn">Sign Up</button></a>
+                <a href="../../UserAuth/hailshare/login.php"><button class="btnStrong nav-btn">Login</button></a>
+            <?php endif; ?>
         </div>
     </div>
 </nav>
@@ -235,20 +297,20 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
             <h2>Hailshare by the Numbers</h2>
             <div class="stats-grid">
                 <div class="stat-card stat-card-fade">
-                    <h3 class="stat-number">50K+</h3>
-                    <p>Active Riders</p>
+                    <h3 class="stat-number"><?php echo formatStatNumber($dashboard_stats['active_riders']); ?></h3>
+                    <p>Active Accounts</p>
                 </div>
                 <div class="stat-card stat-card-fade">
-                    <h3 class="stat-number">$2.5M+</h3>
-                    <p>Saved Together</p>
-                </div>
-                <div class="stat-card stat-card-fade">
-                    <h3 class="stat-number">100K+</h3>
+                    <h3 class="stat-number"><?php echo formatStatNumber($dashboard_stats['rides_shared']); ?></h3>
                     <p>Rides Shared</p>
                 </div>
                 <div class="stat-card stat-card-fade">
-                    <h3 class="stat-number">500 Tons</h3>
-                    <p>CO2 Reduced</p>
+                    <h3 class="stat-number"><?php echo formatStatNumber($dashboard_stats['completed_rides']); ?></h3>
+                    <p>Completed Rides</p>
+                </div>
+                <div class="stat-card stat-card-fade">
+                    <h3 class="stat-number"><?php echo formatStatNumber($dashboard_stats['support_requests']); ?></h3>
+                    <p>Support Requests</p>
                 </div>
             </div>
         </div>
@@ -298,5 +360,6 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
     </footer>
 </div>
 
+<?php $db->close(); ?>
 </body>
 </html>
