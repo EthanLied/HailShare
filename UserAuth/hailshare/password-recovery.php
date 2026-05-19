@@ -33,7 +33,7 @@
 
     <!-- Left Image -->
     <div class="left">
-      Image
+      <img src="login-image.jpeg" alt="Login Image" class="side-image">
     </div>
 
     <!-- Right Form -->
