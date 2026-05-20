@@ -46,7 +46,7 @@
              <div class="container">
                  <!-- Left Image --> 
                   <div class="left"> 
-                    Image 
+                    <img src="login-image.jpeg" alt="Login Image" class="side-image">
                 </div> 
                 <!-- Right Login Form --> 
                  <div class="right"> 

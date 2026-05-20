@@ -2,7 +2,7 @@
 // ============ PHP SESSION & INITIALIZATION ============
 session_start();
 
-require_once __DIR__ . '/../../Database/DBConnection.php';
+require_once __DIR__ . '/../Database/DBConnection.php';
 
 $db = new DatabaseConnection();
 $dashboard_stats = $db->getDashboardStats();
@@ -71,10 +71,10 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $site_config['name']; ?> – Dashboard</title>
     <!-- Universal template (two levels up to root) -->
-    <link rel="stylesheet" href="../shadCNTemplate.css">
+    <link rel="stylesheet" href="../../shadCNTemplate.css">
     <!-- Page-specific styles -->
-    <link rel="stylesheet" href="style.css?v=profile-icon-lower-8">
-    <script src="script.js?v=profile-icon-lower-8" defer></script>
+    <link rel="stylesheet" href="style.css?v=hero-preview-1">
+    <script src="script.js?v=hero-preview-1" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
@@ -137,6 +137,9 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
                     <a href="#how-it-works"><button class="cta-secondary">See How It Works</button></a>
                 </div>
             </div>
+            <div class="hero-product-preview" aria-label="Ride list preview">
+                <img src="assets/ride-list-preview.jpeg" alt="Hailshare ride list search and available rides preview">
+            </div>
         </div>
     </section>
 
@@ -171,21 +174,9 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
         </div>
     </section>
 
-    <!-- ============ HOW IT WORKS - STICKY VIDEO SECTION ============ -->
+    <!-- ============ HOW IT WORKS SECTION ============ -->
     <section class="how-it-works" id="how-it-works">
         <div class="how-it-works-container">
-            <!-- Video Column -->
-            <div class="video-column">
-                <div class="sticky-video-wrapper">
-                    <video class="how-video" id="howVideo" muted playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/284896051/road-3863490-hd.mp4" type="video/mp4">
-                        <source src="https://player.vimeo.com/external/285295435.hd.mp4?s=9aa2b6e03e0b28e1f2e0c0e0e0e0e0e&profile_id=175" type="video/mp4">
-                    </video>
-                    <div class="video-overlay"></div>
-                </div>
-            </div>
-
-            <!-- Steps Column -->
             <div class="steps-column">
                 <h2>How It Works</h2>
                 <p class="section-subtitle">Four simple steps to share your ride</p>
@@ -235,11 +226,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
         <div class="features-grid">
             <!-- Feature 1 -->
             <div class="feature-card feature-card-1">
-                <div class="feature-video-bg">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/293941921/technology-2580836-hd.mp4" type="video/mp4">
-                    </video>
-                    <div class="feature-overlay"></div>
+                <div class="feature-icon-wrap">
+                    <span class="material-symbols-outlined">route</span>
                 </div>
                 <div class="feature-content">
                     <h3>Smart Matching</h3>
@@ -249,11 +237,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
 
             <!-- Feature 2 -->
             <div class="feature-card feature-card-2">
-                <div class="feature-video-bg">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/298589139/gps-3002872-hd.mp4" type="video/mp4">
-                    </video>
-                    <div class="feature-overlay"></div>
+                <div class="feature-icon-wrap">
+                    <span class="material-symbols-outlined">location_on</span>
                 </div>
                 <div class="feature-content">
                     <h3>Real-Time Tracking</h3>
@@ -263,11 +248,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
 
             <!-- Feature 3 -->
             <div class="feature-card feature-card-3">
-                <div class="feature-video-bg">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/335735402/security-3617512-hd.mp4" type="video/mp4">
-                    </video>
-                    <div class="feature-overlay"></div>
+                <div class="feature-icon-wrap">
+                    <span class="material-symbols-outlined">encrypted</span>
                 </div>
                 <div class="feature-content">
                     <h3>Secure Payments</h3>
@@ -277,11 +259,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
 
             <!-- Feature 4 -->
             <div class="feature-card feature-card-4">
-                <div class="feature-video-bg">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/328697717/people-3589951-hd.mp4" type="video/mp4">
-                    </video>
-                    <div class="feature-overlay"></div>
+                <div class="feature-icon-wrap">
+                    <span class="material-symbols-outlined">verified_user</span>
                 </div>
                 <div class="feature-content">
                     <h3>Community Rating</h3>

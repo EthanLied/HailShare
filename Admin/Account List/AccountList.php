@@ -3,7 +3,7 @@
 session_start();
 
 require_once __DIR__ . '/../sessionCookie.php';
-require_once __DIR__ . '/../../Database/DBConnection.php';
+require_once __DIR__ . '/../Database/DBConnection.php';
 
 syncUserCookieToSession();
 
@@ -54,7 +54,7 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account List - Hailshare Admin</title>
-    <link rel="stylesheet" href="../shadCNTemplate.css">
+    <link rel="stylesheet" href="../../shadCNTemplate.css">
     <link rel="stylesheet" href="style.css?v=admin-sidebar-rail-align-4">
     <script src="script.js?v=admin-sidebar-rail-align-4" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />

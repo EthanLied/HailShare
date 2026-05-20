@@ -337,6 +337,7 @@ a > .navbarItem:hover {
     position: relative;
     width: 100%;
     height: 100vh;
+    min-height: 760px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -372,12 +373,17 @@ a > .navbarItem:hover {
     text-align: center;
     color: white;
     animation: fadeInUp 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    max-width: 600px;
-    padding: 0 20px;
+    width: min(1120px, calc(100% - 40px));
+    max-width: 1120px;
+    padding: 120px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-text-wrapper {
-    margin-bottom: 60px;
+    margin-bottom: 34px;
+    max-width: 680px;
 }
 
 .hero-title {
@@ -404,6 +410,22 @@ a > .navbarItem:hover {
     justify-content: center;
     flex-wrap: wrap;
     animation: slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+}
+
+.hero-product-preview {
+    width: min(860px, 92vw);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+    background: rgba(255, 255, 255, 0.08);
+    animation: slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both;
+}
+
+.hero-product-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .cta-primary,
@@ -558,65 +580,34 @@ a > .navbarItem:hover {
 }
 
 .how-it-works-container {
-    max-width: 1400px;
+    max-width: 980px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-}
-
-.video-column {
-    position: sticky;
-    top: 100px;
-    height: fit-content;
-}
-
-.sticky-video-wrapper {
-    position: relative;
     width: 100%;
-    padding-bottom: 75%;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-}
-
-.how-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.1);
-    pointer-events: none;
 }
 
 .steps-column h2 {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
     margin-bottom: 12px;
+    text-align: center;
 }
 
 .steps-column .section-subtitle {
-    text-align: left;
+    text-align: center;
     margin-bottom: 60px;
 }
 
 .step-item {
     display: flex;
     gap: 24px;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out forwards;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
 }
 
 .step-1 { animation-delay: 0.1s; }
@@ -661,17 +652,6 @@ a > .navbarItem:hover {
     margin: 0;
 }
 
-@media (max-width: 1024px) {
-    .how-it-works-container {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-
-    .video-column {
-        position: static;
-    }
-}
-
 /* ============ FEATURES SECTION ============ */
 .features-section {
     background: white;
@@ -703,14 +683,20 @@ a > .navbarItem:hover {
 
 .feature-card {
     position: relative;
-    height: 400px;
+    min-height: 320px;
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     animation: fadeInUp 0.8s ease-out forwards;
     opacity: 0;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 36px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .feature-card-1 { animation-delay: 0.1s; }
@@ -720,58 +706,34 @@ a > .navbarItem:hover {
 
 .feature-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
 }
 
-.feature-video-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.feature-icon-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+    background: #000000;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 34px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.feature-video-bg video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease-out;
+.feature-icon-wrap .material-symbols-outlined {
+    font-size: 38px;
+    line-height: 1;
 }
 
-.feature-card:hover .feature-video-bg video {
-    transform: scale(1.1);
-}
-
-.feature-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
-    transition: all 0.4s ease-out;
-    z-index: 2;
-}
-
-.feature-card:hover .feature-overlay {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 100%);
+.feature-card:hover .feature-icon-wrap {
+    transform: translateY(-4px);
+    background: #2b2b2b;
 }
 
 .feature-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 40px 30px;
-    color: white;
-    z-index: 3;
-    transform: translateY(20px);
-    transition: transform 0.4s ease-out;
-}
-
-.feature-card:hover .feature-content {
-    transform: translateY(0);
+    color: #111111;
 }
 
 .feature-content h3 {
@@ -784,12 +746,7 @@ a > .navbarItem:hover {
     font-size: 0.9rem;
     line-height: 1.6;
     margin: 0;
-    opacity: 0;
-    transition: opacity 0.4s ease-out 0.1s;
-}
-
-.feature-card:hover .feature-content p {
-    opacity: 1;
+    opacity: 0.78;
 }
 
 /* ============ STATS SECTION ============ */
@@ -1188,6 +1145,24 @@ a {
 
 /* ============ RESPONSIVE DESIGN ============ */
 @media (max-width: 768px) {
+    .hero-section {
+        min-height: 720px;
+    }
+
+    .hero-content {
+        width: calc(100% - 28px);
+        padding: 96px 14px 56px;
+    }
+
+    .hero-text-wrapper {
+        margin-bottom: 24px;
+    }
+
+    .hero-product-preview {
+        width: 100%;
+        border-radius: 8px;
+    }
+
     .hero-cta-group {
         flex-direction: column;
         align-items: center;

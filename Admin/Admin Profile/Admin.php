@@ -1,20 +1,34 @@
 <?php
-require_once __DIR__ . '/../../Database/DBConnection.php';
+session_start();
+
+require_once __DIR__ . '/../Database/DBConnection.php';
 
 $db = new DatabaseConnection();
 
 $message = '';
 $message_type = 'success';
-$cookie_user_id = filter_input(INPUT_COOKIE, 'user_id', FILTER_VALIDATE_INT);
-if ($cookie_user_id === null || $cookie_user_id === false) {
-    $cookie_user_id = isset($_COOKIE['user_id']) ? filter_var($_COOKIE['user_id'], FILTER_VALIDATE_INT) : false;
+$current_user_id = filter_input(INPUT_COOKIE, 'user_id', FILTER_VALIDATE_INT);
+if ($current_user_id === null || $current_user_id === false) {
+    $current_user_id = false;
 }
 
-$admin_account = $cookie_user_id && $cookie_user_id > 0 ? $db->getAccountById($cookie_user_id) : null;
+if (!$current_user_id || $current_user_id <= 0) {
+    foreach (['user_id', 'admin_user_id'] as $sessionKey) {
+        $session_user_id = filter_var($_SESSION[$sessionKey] ?? null, FILTER_VALIDATE_INT);
+        if ($session_user_id && $session_user_id > 0) {
+            $current_user_id = $session_user_id;
+            break;
+        }
+    }
+}
+
+$admin_account = $current_user_id && $current_user_id > 0 ? $db->getAccountById($current_user_id) : null;
 
 if (!$admin_account) {
-    $message = 'No account found for the current user_id cookie.';
+    $message = 'No account found for the current logged-in user.';
     $message_type = 'error';
+} else {
+    $_SESSION['user_id'] = intval($admin_account['user_id']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -28,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$admin_account) {
-        $message = 'No account found for the current user_id cookie.';
+        $message = 'No account found for the current logged-in user.';
         $message_type = 'error';
     } elseif ($action === 'save_personal') {
         $dob = ($_POST['dobYear'] ?? '1990') . '-' . str_pad($_POST['dobMonth'] ?? '01', 2, '0', STR_PAD_LEFT) . '-' . str_pad($_POST['dobDay'] ?? '01', 2, '0', STR_PAD_LEFT);
@@ -108,7 +122,7 @@ $security_questions = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Profile - Hailshare</title>
-    <link rel="stylesheet" href="../shadCNTemplate.css">
+    <link rel="stylesheet" href="../../shadCNTemplate.css">
     <link rel="stylesheet" href="style.css?v=admin-sidebar-rail-align-4">
     <script src="script.js?v=db-profile-current-user-1" defer></script>
     <script src="../cookieInterfaceJS.php" defer></script>

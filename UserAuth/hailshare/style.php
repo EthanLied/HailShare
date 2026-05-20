@@ -637,3 +637,11 @@ h2 {
 .container:not(.reg-container) {
   overflow: hidden;
 }
+
+.side-image {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+}
