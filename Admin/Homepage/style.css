@@ -337,6 +337,7 @@ a > .navbarItem:hover {
     position: relative;
     width: 100%;
     height: 100vh;
+    min-height: 760px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -372,12 +373,17 @@ a > .navbarItem:hover {
     text-align: center;
     color: white;
     animation: fadeInUp 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    max-width: 600px;
-    padding: 0 20px;
+    width: min(1120px, calc(100% - 40px));
+    max-width: 1120px;
+    padding: 120px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-text-wrapper {
-    margin-bottom: 60px;
+    margin-bottom: 34px;
+    max-width: 680px;
 }
 
 .hero-title {
@@ -404,6 +410,22 @@ a > .navbarItem:hover {
     justify-content: center;
     flex-wrap: wrap;
     animation: slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+}
+
+.hero-product-preview {
+    width: min(860px, 92vw);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+    background: rgba(255, 255, 255, 0.08);
+    animation: slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both;
+}
+
+.hero-product-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .cta-primary,
@@ -1165,6 +1187,24 @@ a {
 
 /* ============ RESPONSIVE DESIGN ============ */
 @media (max-width: 768px) {
+    .hero-section {
+        min-height: 720px;
+    }
+
+    .hero-content {
+        width: calc(100% - 28px);
+        padding: 96px 14px 56px;
+    }
+
+    .hero-text-wrapper {
+        margin-bottom: 24px;
+    }
+
+    .hero-product-preview {
+        width: 100%;
+        border-radius: 8px;
+    }
+
     .hero-cta-group {
         flex-direction: column;
         align-items: center;

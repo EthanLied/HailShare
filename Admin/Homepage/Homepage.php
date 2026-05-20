@@ -73,8 +73,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
     <!-- Universal template (two levels up to root) -->
     <link rel="stylesheet" href="../../shadCNTemplate.css">
     <!-- Page-specific styles -->
-    <link rel="stylesheet" href="style.css?v=profile-icon-lower-8">
-    <script src="script.js?v=profile-icon-lower-8" defer></script>
+    <link rel="stylesheet" href="style.css?v=hero-preview-1">
+    <script src="script.js?v=hero-preview-1" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
@@ -136,6 +136,9 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
                     <a href="#features"><button class="cta-primary">Find Your Ride</button></a>
                     <a href="#how-it-works"><button class="cta-secondary">See How It Works</button></a>
                 </div>
+            </div>
+            <div class="hero-product-preview" aria-label="Ride list preview">
+                <img src="assets/ride-list-preview.jpeg" alt="Hailshare ride list search and available rides preview">
             </div>
         </div>
     </section>
