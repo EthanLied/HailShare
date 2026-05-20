@@ -2,7 +2,7 @@
 // ============ PHP SESSION & INITIALIZATION ============
 session_start();
 
-require_once __DIR__ . '/../../Database/DBConnection.php';
+require_once __DIR__ . '/../Database/DBConnection.php';
 
 $db = new DatabaseConnection();
 $dashboard_stats = $db->getDashboardStats();
@@ -235,11 +235,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
         <div class="features-grid">
             <!-- Feature 1 -->
             <div class="feature-card feature-card-1">
-                <div class="feature-video-bg">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/293941921/technology-2580836-hd.mp4" type="video/mp4">
-                    </video>
-                    <div class="feature-overlay"></div>
+                <div class="feature-icon-wrap">
+                    <span class="material-symbols-outlined">route</span>
                 </div>
                 <div class="feature-content">
                     <h3>Smart Matching</h3>
@@ -249,11 +246,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
 
             <!-- Feature 2 -->
             <div class="feature-card feature-card-2">
-                <div class="feature-video-bg">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/298589139/gps-3002872-hd.mp4" type="video/mp4">
-                    </video>
-                    <div class="feature-overlay"></div>
+                <div class="feature-icon-wrap">
+                    <span class="material-symbols-outlined">location_on</span>
                 </div>
                 <div class="feature-content">
                     <h3>Real-Time Tracking</h3>
@@ -263,11 +257,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
 
             <!-- Feature 3 -->
             <div class="feature-card feature-card-3">
-                <div class="feature-video-bg">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/335735402/security-3617512-hd.mp4" type="video/mp4">
-                    </video>
-                    <div class="feature-overlay"></div>
+                <div class="feature-icon-wrap">
+                    <span class="material-symbols-outlined">encrypted</span>
                 </div>
                 <div class="feature-content">
                     <h3>Secure Payments</h3>
@@ -277,11 +268,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
 
             <!-- Feature 4 -->
             <div class="feature-card feature-card-4">
-                <div class="feature-video-bg">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/328697717/people-3589951-hd.mp4" type="video/mp4">
-                    </video>
-                    <div class="feature-overlay"></div>
+                <div class="feature-icon-wrap">
+                    <span class="material-symbols-outlined">verified_user</span>
                 </div>
                 <div class="feature-content">
                     <h3>Community Rating</h3>

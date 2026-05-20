@@ -23,7 +23,7 @@ $message = '';
 $message_type = '';
 
 // ============ INCLUDE DATABASE CONNECTION ============
-require_once __DIR__ . '/../../Database/DBConnection.php';
+require_once __DIR__ . '/../Database/DBConnection.php';
 $db = new DatabaseConnection();
 
 // Fetch account from database
