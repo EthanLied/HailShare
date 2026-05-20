@@ -174,21 +174,9 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
         </div>
     </section>
 
-    <!-- ============ HOW IT WORKS - STICKY VIDEO SECTION ============ -->
+    <!-- ============ HOW IT WORKS SECTION ============ -->
     <section class="how-it-works" id="how-it-works">
         <div class="how-it-works-container">
-            <!-- Video Column -->
-            <div class="video-column">
-                <div class="sticky-video-wrapper">
-                    <video class="how-video" id="howVideo" muted playsinline>
-                        <source src="https://cdn.pixabay.com/vimeo/284896051/road-3863490-hd.mp4" type="video/mp4">
-                        <source src="https://player.vimeo.com/external/285295435.hd.mp4?s=9aa2b6e03e0b28e1f2e0c0e0e0e0e0e&profile_id=175" type="video/mp4">
-                    </video>
-                    <div class="video-overlay"></div>
-                </div>
-            </div>
-
-            <!-- Steps Column -->
             <div class="steps-column">
                 <h2>How It Works</h2>
                 <p class="section-subtitle">Four simple steps to share your ride</p>

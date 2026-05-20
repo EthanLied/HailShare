@@ -580,65 +580,34 @@ a > .navbarItem:hover {
 }
 
 .how-it-works-container {
-    max-width: 1400px;
+    max-width: 980px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-}
-
-.video-column {
-    position: sticky;
-    top: 100px;
-    height: fit-content;
-}
-
-.sticky-video-wrapper {
-    position: relative;
     width: 100%;
-    padding-bottom: 75%;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-}
-
-.how-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.1);
-    pointer-events: none;
 }
 
 .steps-column h2 {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
     margin-bottom: 12px;
+    text-align: center;
 }
 
 .steps-column .section-subtitle {
-    text-align: left;
+    text-align: center;
     margin-bottom: 60px;
 }
 
 .step-item {
     display: flex;
     gap: 24px;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out forwards;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
 }
 
 .step-1 { animation-delay: 0.1s; }
@@ -681,17 +650,6 @@ a > .navbarItem:hover {
     color: #666;
     line-height: 1.6;
     margin: 0;
-}
-
-@media (max-width: 1024px) {
-    .how-it-works-container {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-
-    .video-column {
-        position: static;
-    }
 }
 
 /* ============ FEATURES SECTION ============ */
