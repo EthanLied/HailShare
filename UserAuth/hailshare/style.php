@@ -140,7 +140,6 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 4px solid #ccc;
   align-self: stretch;
   font-size: 20px;
   color: #000;
@@ -639,8 +638,8 @@ h2 {
 }
 
 .side-image {
-    width: 80%;
-    height: 80%;
+    width: 82%;
+    height: 82%;
     object-fit: contain;
     display: block;
     margin: auto;
