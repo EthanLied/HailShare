@@ -35,7 +35,7 @@
         <div class="navbarItem">
             <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()"> menu
             </span> <!-- "Onclick" triggers menu expansion / shrinking-->
-            <a href="">
+            <a href="../../Admin/Homepage/Homepage.php">
                 <h3>Hailshare</h3>
             </a>
         </div>
