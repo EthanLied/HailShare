@@ -19,7 +19,7 @@
     <div id="navbar">
         <div class="navbarItem">
             <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-            <a href="">
+            <a href="../../Admin/Homepage/Homepage.php">
                 <h3>HailShare</h3>
             </a>
         </div>
