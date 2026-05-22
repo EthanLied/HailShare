@@ -2,10 +2,7 @@
 // ============ PHP SESSION & ACCOUNT MANAGEMENT ============
 session_start();
 
-require_once __DIR__ . '/../sessionCookie.php';
 require_once __DIR__ . '/../Database/DBConnection.php';
-
-syncUserCookieToSession();
 
 if (!isset($_SESSION['admin_logged_in'])) {
     $_SESSION['admin_logged_in'] = true;

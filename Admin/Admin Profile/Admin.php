@@ -7,18 +7,13 @@ $db = new DatabaseConnection();
 
 $message = '';
 $message_type = 'success';
-$current_user_id = filter_input(INPUT_COOKIE, 'user_id', FILTER_VALIDATE_INT);
-if ($current_user_id === null || $current_user_id === false) {
-    $current_user_id = false;
-}
+$current_user_id = false;
 
-if (!$current_user_id || $current_user_id <= 0) {
-    foreach (['user_id', 'admin_user_id'] as $sessionKey) {
-        $session_user_id = filter_var($_SESSION[$sessionKey] ?? null, FILTER_VALIDATE_INT);
-        if ($session_user_id && $session_user_id > 0) {
-            $current_user_id = $session_user_id;
-            break;
-        }
+foreach (['user_id', 'admin_user_id'] as $sessionKey) {
+    $session_user_id = filter_var($_SESSION[$sessionKey] ?? null, FILTER_VALIDATE_INT);
+    if ($session_user_id && $session_user_id > 0) {
+        $current_user_id = $session_user_id;
+        break;
     }
 }
 
@@ -36,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'logout') {
         $db->close();
-        setcookie('user_id', '', time() - 3600, '/');
+        $_SESSION = [];
+        session_destroy();
         header('Location: ../Homepage/Homepage.php');
         exit();
     }
@@ -125,7 +121,6 @@ $security_questions = [
     <link rel="stylesheet" href="../../shadCNTemplate.css">
     <link rel="stylesheet" href="style.css?v=admin-sidebar-rail-align-4">
     <script src="script.js?v=db-profile-current-user-1" defer></script>
-    <script src="../cookieInterfaceJS.php" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>

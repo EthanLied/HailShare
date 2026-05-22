@@ -2,10 +2,6 @@
 // ============ PHP SESSION & ACCOUNT MODIFICATION ============
 session_start();
 
-require_once __DIR__ . '/../sessionCookie.php';
-
-syncUserCookieToSession();
-
 // Check admin authentication
 if (!isset($_SESSION['admin_logged_in'])) {
     $_SESSION['admin_logged_in'] = true;

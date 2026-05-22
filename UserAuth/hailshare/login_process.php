@@ -26,11 +26,10 @@ if ($result->num_rows > 0) {
     // Verify password
     if (password_verify($password, $user['password_hash'])) {
 
-        // Store login data for existing pages and the admin cookie-based profile.
+        // Store login data for existing pages and the admin session-based profile.
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['role_id'] = $user['role_id'];
-        setcookie('user_id', (string) $user['user_id'], time() + (86400 * 7), '/');
 
         // Redirect based on the role IDs used by the HailShare users table.
         // Customer = 1, Staff = 2, Admin = 3.
