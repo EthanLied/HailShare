@@ -52,8 +52,8 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account List - Hailshare Admin</title>
     <link rel="stylesheet" href="../../shadCNTemplate.css">
-    <link rel="stylesheet" href="style.css?v=admin-sidebar-rail-align-4">
-    <script src="script.js?v=admin-sidebar-rail-align-4" defer></script>
+    <link rel="stylesheet" href="style.css?v=mobile-account-cards-2">
+    <script src="script.js?v=mobile-account-cards-2" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
@@ -110,13 +110,14 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
                 <?php foreach ($page_accounts as $acc): ?>
                     <?php $status_color = $acc['status'] === 'active' ? 'green' : ($acc['status'] === 'suspended' ? 'orange' : 'red'); ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($acc['name']); ?></td>
-                        <td><?php echo htmlspecialchars($acc['type']); ?></td>
-                        <td><?php echo htmlspecialchars($acc['email']); ?></td>
-                        <td><span style="color: <?php echo $status_color; ?>;">&#9679; <?php echo htmlspecialchars(ucfirst($acc['status'])); ?></span></td>
-                        <td class="actions-column">
+                        <td data-label="Name"><?php echo htmlspecialchars($acc['name']); ?></td>
+                        <td data-label="Account Type"><?php echo htmlspecialchars($acc['type']); ?></td>
+                        <td data-label="Email"><?php echo htmlspecialchars($acc['email']); ?></td>
+                        <td data-label="Status"><span style="color: <?php echo $status_color; ?>;">&#9679; <?php echo htmlspecialchars(ucfirst($acc['status'])); ?></span></td>
+                        <td class="actions-column" data-label="Actions">
                             <a class="account-edit-link" href="modifyAccount.php?id=<?php echo urlencode($acc['id']); ?>" title="Edit account">
                                 <span class="material-symbols-outlined">edit</span>
+                                <span class="edit-link-text">Edit</span>
                             </a>
                         </td>
                     </tr>
@@ -124,6 +125,33 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
             <?php endif; ?>
         </tbody>
     </table>
+
+    <div class="mobile-account-list" aria-label="Accounts">
+        <?php if (empty($page_accounts)): ?>
+            <div class="mobile-account-card mobile-empty-card">No accounts found</div>
+        <?php else: ?>
+            <?php foreach ($page_accounts as $acc): ?>
+                <?php $status_color = $acc['status'] === 'active' ? 'green' : ($acc['status'] === 'suspended' ? 'orange' : 'red'); ?>
+                <article class="mobile-account-card">
+                    <div class="mobile-account-header">
+                        <div>
+                            <p class="mobile-account-name"><?php echo htmlspecialchars($acc['name']); ?></p>
+                            <p class="mobile-account-type"><?php echo htmlspecialchars($acc['type']); ?></p>
+                        </div>
+                        <span class="mobile-account-status" style="color: <?php echo $status_color; ?>;">&#9679; <?php echo htmlspecialchars(ucfirst($acc['status'])); ?></span>
+                    </div>
+                    <div class="mobile-account-detail">
+                        <span>Email</span>
+                        <strong><?php echo htmlspecialchars($acc['email']); ?></strong>
+                    </div>
+                    <a class="mobile-edit-button" href="modifyAccount.php?id=<?php echo urlencode($acc['id']); ?>">
+                        <span class="material-symbols-outlined">edit</span>
+                        <span>Edit</span>
+                    </a>
+                </article>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
 
     <div class="pagination-container">
         <button class="btnNormal" id="prevBtn" onclick="window.location.href='<?php echo htmlspecialchars(accountListUrl(['page' => max(1, $page - 1)])); ?>'" <?php echo $page <= 1 ? 'disabled' : ''; ?>>Previous</button>
