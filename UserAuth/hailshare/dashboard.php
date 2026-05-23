@@ -10,7 +10,7 @@ session_start();
 
 <body>
 
-<h1>Login Successfully</h1>
+<h1>Login Successfully!</h1>
 
 <p>Welcome <?php echo $_SESSION['email']; ?></p>
 
