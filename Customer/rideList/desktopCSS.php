@@ -1,7 +1,7 @@
 <?php header("Content-type: text/css"); ?>
 
 
-/* Removes default spacing*/
+/* Removes default spacing for the HTML struct*/
 *{
     padding: 0;
     margin: 0;
