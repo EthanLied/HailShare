@@ -26,10 +26,10 @@ $profile_url = '#';
 if ($current_user) {
     switch (intval($current_user['role_id'] ?? 0)) {
         case 1:
-            $profile_url = '/hailshare/Customer/rideList/index.php';
+            $profile_url = '/hailshare/Customer/myProfile/index.php';
             break;
         case 2:
-            $profile_url = '/hailshare/Staff/ride-list-staff/index.php';
+            $profile_url = '/hailshare/Staff/profile-staff/index.php';
             break;
         case 3:
             $profile_url = '/hailshare/Admin/Admin%20Profile/Admin.php';
