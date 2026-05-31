@@ -104,7 +104,6 @@ th{
     font-weight: 500;
 }
 
-/* ============ CARD COMPONENT ============ */
 .card {
     background-color: #ffffff;
     border: 1px solid #e5e5e5;
@@ -118,7 +117,6 @@ th{
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* ============ ADMIN BADGE ============ */
 .adminBadge {
     display: inline-flex;
     align-items: center;
@@ -133,7 +131,6 @@ th{
     margin-bottom: 16px;
 }
 
-/* ============ TABLE STYLES ============ */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -166,7 +163,6 @@ tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* ============ PAGINATION ============ */
 .pagination-container {
     display: flex;
     align-items: center;
@@ -191,7 +187,6 @@ tbody tr:last-child td {
     border-radius: 6px;
 }
 
-/* Remove purple focus outlines globally */
 #hamburgerMenuNavbarIcon,
 #hamburgerMenuNavbarIcon:focus {
     outline: none !important;
@@ -202,7 +197,6 @@ tbody tr:last-child td {
     outline: none !important;
 }
 
-/* ============ STICKY VIDEO ============ */
 .sticky-video {
     margin: 40px 0;
 }

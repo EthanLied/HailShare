@@ -1,6 +1,4 @@
 <?php
-// Admin-owned database helpers. Keep this file inside /Admin so the root
-// /Database folder can follow main without breaking the admin section.
 
 class DatabaseConnection {
     private $connection;

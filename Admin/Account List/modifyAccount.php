@@ -1,13 +1,12 @@
 <?php
-// ============ PHP SESSION & ACCOUNT MODIFICATION ============
 session_start();
 
-// Check admin authentication
+require_once __DIR__ . '/../sessionCookie.php';
+
+syncUserCookieToSession();
 if (!isset($_SESSION['admin_logged_in'])) {
     $_SESSION['admin_logged_in'] = true;
 }
-
-// Get account ID from URL parameter
 $account_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$account_id) {
     $account_id = filter_input(INPUT_GET, 'account_id', FILTER_VALIDATE_INT);
@@ -17,33 +16,26 @@ if (!$account_id) {
 }
 $message = '';
 $message_type = '';
-
-// ============ INCLUDE DATABASE CONNECTION ============
 require_once __DIR__ . '/../Database/DBConnection.php';
 $db = new DatabaseConnection();
-
-// Fetch account from database
 $current_account = null;
 if ($account_id && $account_id > 0) {
     $current_account = $db->getAccountById($account_id);
-    
+
     if ($current_account) {
-        // Format data for display
         $current_account['firstName'] = $current_account['first_name'] ?? '';
         $current_account['lastName'] = $current_account['last_name'] ?? '';
         $current_account['name'] = trim(($current_account['first_name'] ?? '') . ' ' . ($current_account['last_name'] ?? ''));
         $current_account['type'] = $db->getRoleName($current_account['role_id'] ?? 3);
         $current_account['status'] = $current_account['account_status'] ?? 'active';
         $current_account['phone'] = $current_account['phone_number'] ?? '';
-        
-        // Parse DOB
         if (isset($current_account['date_of_birth']) && $current_account['date_of_birth']) {
             $dob_parts = explode('-', $current_account['date_of_birth']);
             $current_account['dobDay'] = str_pad($dob_parts[2] ?? '1', 2, '0', STR_PAD_LEFT);
             $current_account['dobMonth'] = $dob_parts[1] ?? '01';
             $current_account['dobYear'] = $dob_parts[0] ?? '1990';
         }
-        
+
         $current_account['securityQuestion'] = $current_account['security_question'] ?? '';
         $current_account['securityAnswer'] = $current_account['security_question_answer'] ?? '';
     } else {
@@ -56,25 +48,20 @@ if (!$current_account && empty($message)) {
     $message = 'Account not found!';
     $message_type = 'error';
 }
-
-// Handle form submission - UPDATE operation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $current_account) {
-    // Validate input
-    $firstName = htmlspecialchars($_POST['firstName'] ?? '');
-    $lastName = htmlspecialchars($_POST['lastName'] ?? '');
-    $email = htmlspecialchars($_POST['email'] ?? '');
-    $phone = htmlspecialchars($_POST['phone'] ?? '');
-    $dobDay = htmlspecialchars($_POST['dobDay'] ?? '1');
-    $dobMonth = htmlspecialchars($_POST['dobMonth'] ?? '01');
-    $dobYear = htmlspecialchars($_POST['dobYear'] ?? '1990');
-    $accountType = htmlspecialchars($_POST['accountType'] ?? 'Customer');
-    $accountStatus = htmlspecialchars($_POST['accountStatus'] ?? 'active');
-    $securityQuestion = htmlspecialchars($_POST['securityQuestion'] ?? '');
-    $securityAnswer = htmlspecialchars($_POST['securityAnswer'] ?? '');
+    $firstName = trim($_POST['firstName'] ?? '');
+    $lastName = trim($_POST['lastName'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $phone = trim($_POST['phone'] ?? '');
+    $dobDay = trim($_POST['dobDay'] ?? '1');
+    $dobMonth = trim($_POST['dobMonth'] ?? '01');
+    $dobYear = trim($_POST['dobYear'] ?? '1990');
+    $accountType = trim($_POST['accountType'] ?? 'Customer');
+    $accountStatus = trim($_POST['accountStatus'] ?? 'active');
+    $securityQuestion = trim($_POST['securityQuestion'] ?? '');
+    $securityAnswer = trim($_POST['securityAnswer'] ?? '');
     $newPassword = $_POST['newPassword'] ?? '';
     $confirmPassword = $_POST['confirmPassword'] ?? '';
-    
-    // Validate required fields
     if (empty($firstName) || empty($lastName) || empty($email)) {
         $message = 'First name, last name, and email are required!';
         $message_type = 'error';
@@ -85,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $current_account) {
         $message = 'Password must be at least 8 characters long!';
         $message_type = 'error';
     } else {
-        // Prepare update data
         $update_data = [
             'first_name' => $firstName,
             'last_name' => $lastName,
@@ -97,18 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $current_account) {
             'security_question' => $securityQuestion,
             'security_question_answer' => $securityAnswer
         ];
-        
-        // Add password if provided
         if (!empty($newPassword)) {
             $update_data['password_hash'] = password_hash($newPassword, PASSWORD_BCRYPT);
         }
-        
-        // Update account in database
         if ($db->updateAccount($current_account['user_id'], $update_data)) {
             $message = 'Account updated successfully!';
             $message_type = 'success';
-            
-            // Update local account data for display
             $current_account['firstName'] = $firstName;
             $current_account['lastName'] = $lastName;
             $current_account['first_name'] = $firstName;
@@ -123,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $current_account) {
             $current_account['status'] = $accountStatus;
             $current_account['securityQuestion'] = $securityQuestion;
             $current_account['securityAnswer'] = $securityAnswer;
-            
+
             error_log('Account modified: ' . $email . ' at ' . date('Y-m-d H:i:s'));
         } else {
             $message = 'Failed to update account. Please try again.';
@@ -148,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $current_account) {
 <div id="navbar">
     <div class="navbarItem navbarHeader">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-        <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
+        <a href="../Homepage/index.php"><h3>Hailshare Admin</h3></a>
     </div>
     <div class="navbarSpacer"></div>
     <a href="AccountList.php">
@@ -166,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $current_account) {
                 <?php echo htmlspecialchars($message); ?>
             </div>
         <?php endif; ?>
-        
+
         <a href="AccountList.php" style="display: inline-block; margin-bottom: 20px;">
             <button class="btnNormal" style="display: flex; align-items: center; gap: 5px;">
                 <span class="material-symbols-outlined">chevron_left</span> Back to Account List

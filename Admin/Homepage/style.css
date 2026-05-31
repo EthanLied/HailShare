@@ -1,4 +1,4 @@
-/* ============ GLOBAL STYLES ============ */
+
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +17,6 @@ body {
     padding-top: 70px;
 }
 
-/* ============ TOP NAVIGATION BAR ============ */
 #topNav {
     position: fixed;
     top: 0;
@@ -218,7 +217,6 @@ body {
     }
 }
 
-/* ============ SIDEBAR + CONTENT (copy to all Admin style.css) ============ */
 #navbar, #navbar.expand, #navbar > a, #content, #navbar .navbarItem {
     transition: 0.3s cubic-bezier(.42, .94, .31, .99);
 }
@@ -332,7 +330,6 @@ a > .navbarItem:hover {
     }
 }
 
-/* ============ HERO SECTION ============ */
 .hero-section {
     position: relative;
     width: 100%;
@@ -496,7 +493,6 @@ a > .navbarItem:hover {
     }
 }
 
-/* ============ VALUE SECTION ============ */
 .value-section {
     padding: 100px 40px;
     background: white;
@@ -572,7 +568,6 @@ a > .navbarItem:hover {
     margin: 0;
 }
 
-/* ============ HOW IT WORKS SECTION ============ */
 .how-it-works {
     background: #fafafa;
     padding: 100px 40px;
@@ -652,7 +647,6 @@ a > .navbarItem:hover {
     margin: 0;
 }
 
-/* ============ FEATURES SECTION ============ */
 .features-section {
     background: white;
     padding: 100px 40px;
@@ -749,7 +743,6 @@ a > .navbarItem:hover {
     opacity: 0.78;
 }
 
-/* ============ STATS SECTION ============ */
 .stats-section {
     background: linear-gradient(135deg, #000 0%, #2a2a2a 100%);
     color: white;
@@ -807,7 +800,6 @@ a > .navbarItem:hover {
     margin: 0;
 }
 
-/* ============ FINAL CTA SECTION ============ */
 .final-cta-section {
     position: relative;
     height: 500px;
@@ -869,7 +861,6 @@ a > .navbarItem:hover {
     flex-wrap: wrap;
 }
 
-/* ============ FOOTER SECTION ============ */
 .footer-section {
     background: #1a1a1a;
     color: white;
@@ -924,7 +915,6 @@ a > .navbarItem:hover {
     font-size: 0.9rem;
 }
 
-/* ============ ANIMATIONS ============ */
 .fade-in-element {
     animation: fadeInUp 0.8s ease-out;
 }
@@ -954,7 +944,6 @@ a > .navbarItem:hover {
     transform: translateX(0);
 }
 
-/* Advanced reveal animation */
 @keyframes textReveal {
     from {
         opacity: 0;
@@ -966,7 +955,6 @@ a > .navbarItem:hover {
     }
 }
 
-/* Glow effect for CTAs */
 @keyframes buttonGlow {
     0%, 100% {
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
@@ -976,7 +964,6 @@ a > .navbarItem:hover {
     }
 }
 
-/* ============ RESPONSIVE STYLES FOR TOP NAV ============ */
 @media (max-width: 768px) {
     body {
         padding-top: 60px;
@@ -1055,7 +1042,6 @@ a > .navbarItem:hover {
     }
 }
 
-/* Smooth scale up on load */
 @keyframes scaleUp {
     from {
         transform: scale(0.95);
@@ -1067,7 +1053,6 @@ a > .navbarItem:hover {
     }
 }
 
-/* Floating animation */
 @keyframes float {
     0%, 100% {
         transform: translateY(0px);
@@ -1077,7 +1062,6 @@ a > .navbarItem:hover {
     }
 }
 
-/* Gradient animation */
 @keyframes gradientFlow {
     0% {
         background-position: 0% 50%;
@@ -1090,7 +1074,6 @@ a > .navbarItem:hover {
     }
 }
 
-/* Enhanced button hover */
 .cta-primary:active {
     transform: translateY(-4px);
     box-shadow: 0 16px 64px rgba(0, 0, 0, 0.4);
@@ -1101,19 +1084,16 @@ a > .navbarItem:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Smooth transitions for all interactive elements */
 button,
 a {
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Add subtle text shadow to hero */
 .hero-title,
 .hero-subtitle {
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Enhanced feature cards with backdrop blur on hover */
 .feature-card {
     backdrop-filter: blur(0px);
 }
@@ -1122,7 +1102,6 @@ a {
     backdrop-filter: blur(2px);
 }
 
-/* Smooth value card animations */
 .value-card {
     transform-origin: center;
 }
@@ -1131,7 +1110,6 @@ a {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
-/* Step item enhancement */
 .step-item {
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     padding: 20px;
@@ -1143,7 +1121,6 @@ a {
     transform: translateX(10px);
 }
 
-/* ============ RESPONSIVE DESIGN ============ */
 @media (max-width: 768px) {
     .hero-section {
         min-height: 720px;
@@ -1203,7 +1180,6 @@ a {
     }
 }
 
-/* No purple focus outlines */
 #navbar a,
 #navbar a:visited {
     text-decoration: none;
