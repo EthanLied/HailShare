@@ -5,11 +5,22 @@ require_once __DIR__ . '/../Database/DBConnection.php';
 
 $db = new DatabaseConnection();
 $dashboard_stats = $db->getDashboardStats();
-$cookie_user_id = filter_input(INPUT_COOKIE, 'user_id', FILTER_VALIDATE_INT);
-if ($cookie_user_id === null || $cookie_user_id === false) {
-    $cookie_user_id = isset($_COOKIE['user_id']) ? filter_var($_COOKIE['user_id'], FILTER_VALIDATE_INT) : false;
+$current_user_id = filter_input(INPUT_COOKIE, 'user_id', FILTER_VALIDATE_INT);
+if ($current_user_id === null || $current_user_id === false) {
+    $current_user_id = false;
 }
-$current_user = $cookie_user_id && $cookie_user_id > 0 ? $db->getAccountById($cookie_user_id) : null;
+
+if (!$current_user_id || $current_user_id <= 0) {
+    foreach (['user_id', 'admin_user_id'] as $sessionKey) {
+        $session_user_id = filter_var($_SESSION[$sessionKey] ?? null, FILTER_VALIDATE_INT);
+        if ($session_user_id && $session_user_id > 0) {
+            $current_user_id = $session_user_id;
+            break;
+        }
+    }
+}
+
+$current_user = $current_user_id && $current_user_id > 0 ? $db->getAccountById($current_user_id) : null;
 $profile_url = '#';
 
 if ($current_user) {
