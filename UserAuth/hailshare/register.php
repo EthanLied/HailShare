@@ -28,12 +28,12 @@ if ($type == "Customer") {
 
 $stmt = $conn->prepare("
 INSERT INTO users 
-(role_id, first_name, last_name, email, phone_number, password_hash, date_of_birth, security_question, security_question_answer, security_code)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+(role_id, first_name, last_name, email, phone_number, password_hash, date_of_birth, security_question, security_question_answer)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 ");
 
 $stmt->bind_param(
-    "isssssssss",
+    "issssssss",
     $role_id,
     $first,
     $last,
@@ -42,8 +42,7 @@ $stmt->bind_param(
     $password,
     $dob,
     $question,
-    $answer,
-    $code
+    $answer
 );
 
 if ($stmt->execute()) {

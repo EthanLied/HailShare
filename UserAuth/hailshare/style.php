@@ -644,3 +644,53 @@ h2 {
     display: block;
     margin: auto;
 }
+
+#sampleAccounts {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 10px 12px;
+    max-width: 380px;
+    margin-top: 50px;
+}
+
+.sampleAccountsTitle {
+    margin: 0 0 8px 0;
+    color: #343a40;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 6px;
+}
+
+.accountList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.accountCard {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 6px 8px;
+}
+
+.accountCardRole {
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.accountCardEmail,
+.accountCardPassword {
+    font-size: 10px;
+    color: #212529;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.accountCardEmail {
+    margin-top: 2px;
+}

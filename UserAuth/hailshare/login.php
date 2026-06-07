@@ -67,7 +67,34 @@
                             <a href="registration 1.php">I'm New Here</a> 
                             <a href="password-recovery.php">Forgot Password?</a> 
                         </div> 
-                    </div> 
+                        <div id="sampleAccounts">
+                        <p class="sampleAccountsTitle">Sample Accounts To Use</p>
+
+                        <div class="accountList">
+
+                            <div class="accountCard">
+                                <div class="accountCardEmail">📧 customer@gmail.com</div>
+                                <div class="accountCardPassword">🔑 Password</div>
+                            </div>
+
+                            <div class="accountCard">
+                                <div class="accountCardEmail">📧 customer2@gmail.com</div>
+                                <div class="accountCardPassword">🔑 Password</div>
+                            </div>
+
+                            <div class="accountCard">
+                                <div class="accountCardEmail">📧 staff@gmail.com</div>
+                                <div class="accountCardPassword">🔑 Password</div>
+                            </div>
+
+                            <div class="accountCard">
+                                <div class="accountCardEmail">📧 admin@gmail.com</div>
+                                <div class="accountCardPassword">🔑 Password</div>
+                            </div>
+
+                        </div>
+                    </div>
+                                        </div> 
                 </div> 
             </div> 
         </body> 

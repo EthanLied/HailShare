@@ -152,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $current_account) {
 <div id="navbar">
     <div class="navbarItem navbarHeader">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-        <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
+        <a href="../Homepage/index.php"><h3>Hailshare Admin</h3></a>
     </div>
     <div class="navbarSpacer"></div>
     <a href="AccountList.php">

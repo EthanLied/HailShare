@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'logout') {
         $db->close();
         setcookie('user_id', '', time() - 3600, '/');
-        header('Location: ../Homepage/Homepage.php');
+        header('Location: ../Homepage/index.php');
         exit();
     }
 
@@ -133,7 +133,7 @@ $security_questions = [
 <div id="navbar">
     <div class="navbarItem navbarHeader">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-        <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
+        <a href="../Homepage/index.php"><h3>Hailshare Admin</h3></a>
     </div>
     <div class="navbarSpacer"></div>
     <a href="../Account%20List/AccountList.php">

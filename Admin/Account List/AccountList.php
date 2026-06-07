@@ -64,7 +64,7 @@ error_log('Account list viewed at ' . date('Y-m-d H:i:s') . ' - Filter: ' . $fil
 <div id="navbar">
     <div class="navbarItem navbarHeader">
         <span class="material-symbols-outlined" id="hamburgerMenuNavbarIcon" onclick="toggleNavbar()">menu</span>
-        <a href="../Homepage/Homepage.php"><h3>Hailshare Admin</h3></a>
+        <a href="../Homepage/index.php"><h3>Hailshare Admin</h3></a>
     </div>
     <div class="navbarSpacer"></div>
     <a href="AccountList.php">

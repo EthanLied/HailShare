@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'logou
     $_SESSION = [];
     session_destroy();
     $db->close();
-    header('Location: Homepage.php');
+    header('Location: index.php');
     exit();
 }
 
@@ -83,11 +83,11 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
 <nav id="topNav">
     <div class="nav-container">
         <div class="nav-left">
-            <a href="Homepage.php" class="logo">
+            <a href="index.php" class="logo">
                 <h2>Hailshare</h2>
             </a>
             <div class="nav-links">
-                <a href="Homepage.php" class="nav-link">Home</a>
+                <a href="index.php" class="nav-link">Home</a>
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#how-it-works" class="nav-link">How It Works</a>
             </div>

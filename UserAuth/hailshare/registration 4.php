@@ -48,7 +48,7 @@
   </div>
 
   <div class="form-group" id="securityCodeGroup" style="display:none;">
-  <label>Security Code</label>
+  <label>Security Code (Security Code is 1234)</label>
   <input type="text" name="security_code" id="security_code">
 </div>
 

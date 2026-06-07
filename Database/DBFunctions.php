@@ -23,7 +23,7 @@ async function saveDB(){
     insertStatements = insertStatements.flat()
     
     // Sent to PHP
-    const saveResponse = await fetch('/hailshare/Database/DBsave.php', {
+    const saveResponse = await fetch('../..//Database/DBsave.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(insertStatements)
@@ -39,7 +39,7 @@ async function saveDB(){
 async function readDB(table){
 
     // Obtains DB Data
-    const response = await fetch(`/hailshare/Database/DBread.php?table=${table}`);
+    const response = await fetch(`../../Database/DBread.php?table=${table}`);
     const DBData = await response.json();
 
     return DBData
@@ -91,7 +91,7 @@ async function queryDB(query) {
     console.log("Query Passed: " + query)
 
     // Provides PHP with query
-    const response = await fetch('/hailshare/Database/queryDB.php', {
+    const response = await fetch('../..//Database/queryDB.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query })

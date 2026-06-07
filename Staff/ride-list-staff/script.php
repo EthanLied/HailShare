@@ -38,8 +38,6 @@ async function loadRides() {
             r.price,
             r.available_seats,
             r.status,
-            r.carplate_number,
-            r.vehicle_model,
             CONCAT(u.first_name, ' ', u.last_name) AS host_name,
             r.user_id AS host_id,
             (SELECT COUNT(*) FROM ride_participants rp
