@@ -67,8 +67,8 @@ error_log('Admin Dashboard visited at ' . date('Y-m-d H:i:s'));
 
     <link rel="stylesheet" href="../../shadCNTemplate.css">
 
-    <link rel="stylesheet" href="style.css?v=hero-preview-1">
-    <script src="script.js?v=hero-preview-1" defer></script>
+    <link rel="stylesheet" href="style.php?v=hero-preview-1">
+    <script src="script.php?v=hero-preview-1" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>

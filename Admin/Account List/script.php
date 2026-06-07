@@ -1,3 +1,5 @@
+<?php header("Content-type: application/javascript"); ?>
+
 function toggleNavbar() {
     const navbar = document.getElementById('navbar');
     const navbarItems = document.querySelectorAll('.navbarItem');

@@ -1,3 +1,5 @@
+<?php header("Content-type: application/javascript"); ?>
+
 function toggleNavbar() {}
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,3 +1,4 @@
+<?php header("Content-type: text/css"); ?>
 
 html, body {
     overflow-x: hidden;
@@ -26,7 +27,7 @@ html, body {
     border-right: solid 1px #ececec;
     user-select: none;
     padding-top: 10px;
-    outline: none;                
+    outline: none;
 }
 
 #navbar.expand {
@@ -167,25 +168,125 @@ a > .navbarItem:hover {
     }
 }
 
-label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="tel"],
-input[type="number"] {
-    width: 100%;
-    box-sizing: border-box;
-}
-
 select {
-    width: 100%;
     box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+    background-color: #f5f5f5;
+}
+
+th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #555;
+}
+
+tbody tr {
+    transition: background-color 0.2s;
+}
+
+tbody tr:hover {
+    background-color: #fafafa;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.actions-column {
+    width: 90px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.account-edit-link {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+td .material-symbols-outlined {
+    font-size: 20px;
+    cursor: pointer;
+    color: #0066cc;
+    transition: 0.2s;
+}
+
+td .material-symbols-outlined:hover {
+    color: #0052a3;
+    transform: scale(1.1);
+}
+
+td span[style*="color"] {
+    font-weight: 500;
+}
+
+.pagination-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.page-numbers button {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+#prevBtn, #nextBtn, #goBtn {
+    padding: 10px 20px;
+}
+
+#pageInput {
+    width: 70px;
+    padding: 8px 10px;
+}
+
+#pageInput::-webkit-inner-spin-button,
+#pageInput::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#pageInput[type=number] {
+    -moz-appearance: textfield;
 }
 
 #navbar a,
@@ -195,12 +296,7 @@ select {
     outline: none !important;
 }
 
-#navbar a #hamburgerMenuNavbarIcon,
-#navbar a #hamburgerMenuNavbarIcon:focus {
+#hamburgerMenuNavbarIcon,
+#hamburgerMenuNavbarIcon:focus {
     outline: none !important;
-}
-
-#content a {
-    text-decoration: none;
-    color: inherit;
 }
