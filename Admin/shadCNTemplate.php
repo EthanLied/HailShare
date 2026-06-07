@@ -1,3 +1,5 @@
+<?php header("Content-type: text/css"); ?>
+
 html, body {
     overflow-x: hidden;
 }

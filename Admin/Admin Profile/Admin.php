@@ -122,7 +122,7 @@ $security_questions = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Profile - Hailshare</title>
-    <link rel="stylesheet" href="../../shadCNTemplate.css">
+    <link rel="stylesheet" href="../shadCNTemplate.php">
     <link rel="stylesheet" href="style.php?v=admin-sidebar-rail-align-4">
     <script src="script.php?v=db-profile-current-user-1" defer></script>
     <script src="../cookieInterfaceJS.php" defer></script>
